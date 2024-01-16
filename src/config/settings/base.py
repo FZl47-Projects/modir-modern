@@ -35,6 +35,9 @@ INSTALLED_APPS = [
 
     # Apps
     'apps.account.apps.AccountConfig',
+
+    # Django modules
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +129,7 @@ MEDIA_ROOT = BASE_DIR / os.getenv('MEDIA_ROOT', 'static/media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# User model
+AUTH_USER_MODEL = 'account.User'
