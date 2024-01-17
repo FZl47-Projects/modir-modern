@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Apps
+    'apps.core.apps.CoreConfig',
     'apps.account.apps.AccountConfig',
 
     # Django modules
@@ -131,5 +132,18 @@ MEDIA_ROOT = BASE_DIR / os.getenv('MEDIA_ROOT', 'static/media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# User model
+# Auth user model
 AUTH_USER_MODEL = 'account.User'
+
+
+# Redis db config
+REDIS_CONFIG = {
+    'HOST': os.getenv('REDIS_HOST', 'localhost'),
+    'PORT': os.getenv('REDIS_PORT', '6379')
+}
+
+# SMS config
+SMS_CONFIG = {
+    'API_KEY': os.getenv('SMS_CONFIG_API_KEY'),
+    'ORIGINATOR': os.getenv('SMS_CONFIG_ORIGINATOR')
+}
