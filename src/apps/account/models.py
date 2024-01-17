@@ -5,6 +5,8 @@ from django.db import models
 
 from .enums import UserAccessEnum, UserGenderEnum
 from .managers import UserManager, AccessManager
+from .validators import validate_didit_type
+from apps.core.models import BaseModel
 from secrets import token_hex
 
 
@@ -23,6 +25,9 @@ class Access(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_title_label(self):
+        return self.get_title_display()
 
 
 # Custom User model
@@ -97,3 +102,28 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 # UserProfiles model
+class UserProfile(BaseModel):
+    GENDERS = UserGenderEnum
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name=_('User'))
+    melli_code = models.CharField(_('Melli code'), max_length=10, validators=[validate_didit_type], null=True, blank=True)
+    gender = models.CharField(_('Gender'), max_length=8, choices=GENDERS.choices, null=True, blank=True)
+    date_of_birth = models.DateField(_('Date of birth'), null=True, blank=True)
+    image = models.ImageField(_('Picture'), upload_to='images/profiles/', null=True, blank=True)
+
+    class Meta:
+        verbose_name = _('User profile')
+        verbose_name_plural = _('Users profile')
+
+    def __str__(self):
+        return f'{self.user}'
+
+    # def get_absolute_url(self):
+    #     return None
+
+    def get_gender_label(self):
+        return self.get_gender_display()
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url

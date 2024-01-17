@@ -1,12 +1,10 @@
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import Group
-from django.db import models as a_model
 from django.contrib import admin
-from django import forms
 
+from .models import User, Access, UserProfile
 from .forms import UserCreationForm
-from .models import User, Access
 
 
 # Unregister the Group model from admin.
@@ -48,3 +46,16 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('phone_number', 'last_name')
     ordering = ('phone_number',)
     filter_horizontal = ('accesses', 'user_permissions')
+    date_hierarchy = 'created_at'
+
+
+# Register UserProfile model admin
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'gender', 'melli_code')
+    list_display_links = ('id', 'user')
+
+    search_fields = ('user__phone_number',)
+    list_filter = ('gender',)
+    autocomplete_fields = ('user',)
+    date_hierarchy = 'created_at'

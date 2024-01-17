@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-29 21:49+0330\n"
+"POT-Creation-Date: 2024-01-17 15:41+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,178 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\config\settings\base.py:92
+#: .\apps\account\admin.py:31
+msgid "Personal info"
+msgstr "اطلاعات شخصی"
+
+#: .\apps\account\admin.py:32
+msgid "Verifications"
+msgstr "تاییدیه‌ ها"
+
+#: .\apps\account\admin.py:33
+msgid "Permissions"
+msgstr "مجوزها"
+
+#: .\apps\account\admin.py:34 .\apps\account\models.py:24
+#: .\apps\account\models.py:42
+msgid "Accesses"
+msgstr "دسترسی ها"
+
+#: .\apps\account\admin.py:35
+msgid "Dates"
+msgstr "تاریخ ها"
+
+#: .\apps\account\apps.py:8
+msgid "Account"
+msgstr "حساب ها"
+
+#: .\apps\account\enums.py:7 .\apps\account\models.py:60
+#: .\apps\account\models.py:108
+msgid "User"
+msgstr "کاربر"
+
+#: .\apps\account\enums.py:8 .\apps\account\models.py:44
+msgid "Admin"
+msgstr "ادمین"
+
+#: .\apps\account\enums.py:13
+msgid "Male"
+msgstr "مرد"
+
+#: .\apps\account\enums.py:14
+msgid "Female"
+msgstr "زن"
+
+#: .\apps\account\forms.py:15 .\apps\account\models.py:38
+msgid "Phone number"
+msgstr "شماره تلفن"
+
+#: .\apps\account\forms.py:16
+msgid "Password"
+msgstr "گذرواژه"
+
+#: .\apps\account\forms.py:17
+msgid "Password repeat"
+msgstr "تکرار گذرواژه"
+
+#: .\apps\account\forms.py:28
+msgid "Enter a valid phone number"
+msgstr "یک شماره تلفن معتبر وارد کنید"
+
+#: .\apps\account\forms.py:38
+msgid "Passwords are not match."
+msgstr "گذروازه یکسان نیست."
+
+#: .\apps\account\managers.py:22
+msgid "Entered phone number is not valid"
+msgstr "شماره تلفن وارد شده معتبر نیست"
+
+#: .\apps\account\managers.py:34
+msgid "Users must have a mobile number!"
+msgstr "کاربر باید یک شماره تلفن داشته باشد"
+
+#: .\apps\account\models.py:17
+msgid "Access title"
+msgstr "عنوان دسترسی"
+
+#: .\apps\account\models.py:18 .\apps\account\models.py:50
+#: .\apps\core\models.py:7
+msgid "Creation time"
+msgstr "زمان ایجاد"
+
+#: .\apps\account\models.py:23
+msgid "Access"
+msgstr "دسترسی"
+
+#: .\apps\account\models.py:39
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1845
+msgid "Email address"
+msgstr "آدرس الکترونیک"
+
+#: .\apps\account\models.py:40
+msgid "First name"
+msgstr "نام"
+
+#: .\apps\account\models.py:41
+msgid "Last name"
+msgstr "نام خانوادگی"
+
+#: .\apps\account\models.py:43
+msgid "Active"
+msgstr "فعال"
+
+#: .\apps\account\models.py:45
+msgid "Verify"
+msgstr "تایید شده"
+
+#: .\apps\account\models.py:48
+msgid "Secret token"
+msgstr "توکن"
+
+#: .\apps\account\models.py:51 .\apps\core\models.py:8
+msgid "Update time"
+msgstr "زمان ویرایش"
+
+#: .\apps\account\models.py:61
+msgid "Users"
+msgstr "کاربران"
+
+#: .\apps\account\models.py:88
+msgid "No name"
+msgstr "بدون نام"
+
+#: .\apps\account\models.py:109
+msgid "Gender"
+msgstr "جنسیت"
+
+#: .\apps\account\models.py:110
+msgid "Melli code"
+msgstr "کدملی"
+
+#: .\apps\account\models.py:111
+msgid "Date of birth"
+msgstr "تاریخ تولد"
+
+#: .\apps\account\models.py:112
+msgid "Picture"
+msgstr "تصویر"
+
+#: .\apps\account\models.py:115
+msgid "User profile"
+msgstr "پروفایل کاربر"
+
+#: .\apps\account\models.py:116
+msgid "Users profile"
+msgstr "پروفایل کاربران"
+
+#: .\apps\account\validators.py:7
+msgid "Entered value must be number"
+msgstr "مقدار وارد شده باید عدد باشد"
+
+#: .\apps\core\utils.py:58
+#, python-format
+msgid "%(minutes)s minutes ago."
+msgstr "%(minutes)s دقیقه قبل"
+
+#: .\apps\core\utils.py:60
+#, python-format
+msgid "%(hours)s hours ago."
+msgstr "%(hours)s ساعت قبل"
+
+#: .\apps\core\utils.py:62
+#, python-format
+msgid "%(days)s days ago."
+msgstr "%(days)s روز قبل"
+
+#: .\apps\core\utils.py:64
+msgid "Moments ago"
+msgstr "لحظاتی قبل"
+
+#: .\apps\core\utils.py:77
+msgid "Entered data is not correct."
+msgstr "داده وارد شده صحیح نیست."
+
+#: .\config\settings\base.py:98
 msgid "Persian"
 msgstr "فارسی"
 
@@ -315,10 +486,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1793
 msgid "Duration"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1845
-msgid "Email address"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1870
