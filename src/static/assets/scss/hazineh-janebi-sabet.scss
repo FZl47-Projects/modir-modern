@@ -1,0 +1,176 @@
+
+@import "./component";
+
+        #chartdiv {
+            width: 95%;
+            height: 410px;
+            padding: 20px;
+          }
+
+         #id-126{
+           g{fill: #06928F !important;
+            stroke: #458584 !important;} 
+         }
+        #id-163{
+            g{fill:#2D4866 !important;
+            stroke:#4f6f94 !important;
+           }
+        }
+        #id-199{
+
+            g{fill:#F0C10E !important;
+            stroke:#e8e880 !important;
+          }
+        }
+      #id-235{
+        g{fill:#0664AE !important;
+        stroke:#4191ce !important;
+      }
+     }
+      #id-235{
+        g{fill:#0664AE  !important;
+        stroke:#0664AE !important;
+       }
+      }
+      #id-271{
+       g{fill:#FF2D00 !important;
+        stroke:#c76e5a  !important;} 
+       
+    
+      }
+text{fill: rgb(255, 247, 247);
+    transform: translate(-157.62, -63.469);}
+    
+    polyline{
+        fill-opacity: 0;
+        stroke-opacity: 0.3;
+        stroke: rgb(255, 255, 255);
+        stroke-width: 2; 
+    }
+    .main-admin {
+      position: relative;
+      padding-bottom:200px;
+      .header-m-oprator {
+          margin: 0 20px;
+          background-color: transparent;
+          padding: 20px 0 0 0;
+          position: relative;
+          .title {
+            direction: rtl;
+              span {
+                  font-size: 10px;
+                  color: $color-text-secondary;
+              }
+          }
+          .back {
+              position: absolute;
+              top: 10px;
+              left: 10px;
+          }
+    }
+    .content-main-admin {
+      
+      } 
+        .content {
+            margin: 20px 20px;
+            @include flex-between;
+            flex-wrap: wrap;
+            .item-content {
+                @include flex-between;
+                padding: 15px 0;
+                position: relative;
+                color: $color-text-secondary;
+                font-weight: 300;
+                margin: 10px 0;
+                cursor: pointer;
+                direction: rtl !important;
+
+                .delete{
+                    color: $color-red;
+                    font-weight: 700;
+                }
+                &::after{
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 1.5px;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background-color: $color-text-secondary;
+                }
+                img{
+                    width: 8px;
+                }
+            }
+            .item-content-bime {
+              @include flex-between;
+              padding: 15px 0;
+              position: relative;
+              color: $color-text-secondary;
+              font-weight: 300;
+              margin: 10px 0;
+              cursor: pointer;
+              direction: rtl !important;
+
+              .delete{
+                  color: $color-red;
+                  font-weight: 700;
+              }
+              img{
+                  width: 8px;
+              }
+          }
+        }
+        .cost-last-month{
+            padding:20px;
+            .cost-last-month-item{
+                margin-bottom: 10px;
+            .title{
+                color: $color-text-secondary;
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+            input{
+                width: 100%;
+                background-color: $color-bg-five;
+                border-radius: 10px;
+                padding:10px 2px;
+                border: 1px solid $color-bg-six;
+                color: $color-text-secondary ;
+                &:focus {
+                    outline: none;
+                    &::placeholder {
+                      font-weight: 900;
+                    }
+                  }
+            }
+          }
+        }
+        
+        
+      }
+      .down{
+        background-color: #707070;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        .down-item{
+          background-color:rgb(78 78 78);          ;
+          padding: 10px;
+          display: flex;
+          justify-content: space-between;
+          direction: rtl;
+          color: #fff;
+          border-radius: 10px;
+
+        }
+      }
+
+
+
+

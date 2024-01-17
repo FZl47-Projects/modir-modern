@@ -1,0 +1,52 @@
+@import "./component";
+
+.food-category{
+    .content-pakage{
+    padding: 10PX;
+    border-radius: 10PX;
+    background-color: rgba(78, 78, 78, 0.07);
+    border: 1px solid rgb(154, 154, 154);
+    .name-pakage{
+        display: flex;
+        justify-content: space-between;
+        span{
+            color: rgb(165, 161, 161);
+        }
+    }
+    .eshterak-list{
+        background-color:rgba(68, 66, 66, 0.632);
+        color: #fff;
+        border-radius: 5px;
+        padding: 8px;
+        cursor: pointer;
+        outline: none;
+    }
+    .price{
+        display: flex;
+        justify-content: end;
+        align-items: flex-end;
+        p{
+            color:#FED304;
+        }
+        del{
+            color:#fff;
+        }
+    }
+    .des{
+        color: #fff;
+        width: 100%;
+        text-align: justify;
+        padding: 10px;
+    }
+
+    }
+    
+}
+.btnnahayi{
+    color: #FED304;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@import "./medias";

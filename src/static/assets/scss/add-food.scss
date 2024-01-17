@@ -1,0 +1,237 @@
+@import "./component";
+.modal-category1{
+    .inner-modal{
+        .item-material{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            .title{
+                color: #FFF;
+                width: 100%;
+                padding: 10px;
+                font-size: 13px;
+                text-align: center;
+            }
+            #Category-name{
+                
+                    border: 1px solid #FFF;
+                    border-radius: 50px;
+                    width: 100%;
+                    outline: none;
+                    padding: 10px;
+                    color: #FFF;
+                    ::placeholder{
+                        color: #FFF;
+                    }
+                    &:focus{
+                        border: 1px solid #FED304;
+                    }
+                    
+             
+               
+            }
+            
+        }
+        .btn-sabt{
+            color: #FED304;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+        }
+    }
+}
+
+.add-food-category{
+
+    .title-raw-material{
+        color:#FED304;
+        padding: 10px;
+    }
+    #add-category{
+      color: #fffffd;
+      border: 1px solid #FED304;
+      border-radius:5px;
+      padding: 5px;
+      margin-right: 10px;
+      margin-bottom:3px;
+      display: inline-block;
+      cursor: pointer;
+      
+  }
+    .material-btn{
+      display: flex;
+    flex-wrap: wrap;
+    padding: 5px 10px;
+      .material-btn-item {
+        border: 1px solid rgb(135, 135, 135);
+        padding: 5px;
+        border-radius: 10px;
+        color: #FFF;
+        background-color: transparent;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: right;
+        flex-direction: row-reverse;
+      &.active{
+       background-color: #FED304;
+  
+      }
+    }
+    }
+    
+
+    position: relative;
+    .input-name-food{
+        display: flex;
+        align-items: center;
+         margin: 10px 0;
+         position: relative;
+         padding:10px 5px;
+         border: 1px solid rgb(73, 70, 70);
+         background-color: rgb(105 101 101 / 45%);
+         border-radius: 5px;
+         cursor: pointer;
+        input{
+         color: aliceblue;
+         width: 100%;
+         text-align: right;
+         cursor: pointer;
+         &::placeholder {
+            font-weight: 900;
+            font-size: 15px;
+            color: aliceblue;
+          }
+         &:focus {
+            outline: none;
+            &::placeholder {
+              font-weight: 900;
+              font-size: 15px;
+              color: rgb(184, 155, 24);
+            }
+          }
+         
+        }
+       
+    }
+    padding: 10px 20px;
+        
+          .btn-edit{
+            padding: 0px 20px;
+            color: darkgoldenrod;
+            cursor: pointer;
+          }
+          label {
+            cursor: pointer;
+            margin-right: 3px;
+            color: aliceblue;
+            width: 50%;
+          }
+          &.error {
+            &::after {
+              background-color: $color-red;
+            }
+            small {
+              color: $color-red;
+            }
+          }
+          &.success {
+            &::after {
+              background-color: $color-green;
+            }
+            small {
+              color: $color-green;
+            }
+          }
+          input {
+            font-weight: 300;
+            color: $color-text-secondary;
+            margin-right: auto;
+            text-align: left;
+            width:30%;
+            cursor: pointer;
+            &::placeholder {
+              font-size: 12px;
+              font-weight: 300;
+              color: $color-text-secondary;
+            }
+    
+            &:focus {
+              outline: none;
+              &::placeholder {
+                font-weight: 900;
+              }
+            }
+          }
+
+    .uploade{
+        .uploade-items{
+            color: antiquewhite;
+            span{
+                cursor: pointer;
+            }
+            label{
+                cursor: pointer;
+
+            }
+        }
+    }
+    
+    
+}
+.modal-material-category{
+  .inner-modal{
+      .add-material-category{
+          .item-material{
+              .title{
+                  color: #FFF;
+              }
+              input{
+                  border: 1px solid #FFF;
+                  border-radius: 50px;
+                  width: 100%;
+                  outline: none;
+                  padding: 10px;
+                  color: #FFF;
+                  ::placeholder{
+                      color: #FFF;
+                  }
+                  &:focus{
+                      border: 1px solid #FED304;
+                  }
+                  
+              }
+          }
+          .btn-sabt{
+              color: #FED304;
+              text-align: center;
+              cursor: pointer;
+              font-size: 16px;
+              padding: 10px;
+          }
+      }
+      
+  }
+}
+
+.close-content{
+  display: flex;
+  justify-content: center;
+  .close{
+    background-color: #FED304;
+    padding: 2px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  
+}
+
+
+
+
+
+
+
+
+@import "./medias";

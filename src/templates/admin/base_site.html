@@ -1,0 +1,35 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrahead %}
+    <link rel="icon" href="{% static 'images/32x32.jpg' %}" type="img/x-icon" sizes="32x32">
+    <link rel="icon" href="{% static 'images/192x192.jpg' %}" type="img/x-icon" sizes="192x192">
+    <link rel="apple-touch-icon" href="{% static 'images/180-apple-touch-icon.jpg' %}" type="img/x-icon">
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url "admin:index" %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        @font-face {
+            font-family: vazir;
+            src: url({% static "fonts/Vazir.ttf" %});
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            font-family: vazir, sans-serif;
+        }
+    </style>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

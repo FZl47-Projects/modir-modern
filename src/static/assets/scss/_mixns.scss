@@ -1,0 +1,43 @@
+@import "./colors";
+@mixin  flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@mixin  flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+@mixin  centering-col {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+@mixin  centering-col-space {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-direction: column;
+}
+@mixin  flex-col-b {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+@mixin  centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin  content {
+    background-color: $color-bg-menu-admin;
+    border: 1px solid $color-bg-five;
+    padding: 10px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}

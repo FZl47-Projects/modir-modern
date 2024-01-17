@@ -1,0 +1,91 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.main-admin {
+    .content-main-admin {
+        .list-buy-category {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top:30px;
+            .parent-content{
+                position: relative;
+                margin-top:10px;
+                .content{
+                    background-color: rgba(0, 0, 0, 0.233);
+                    border-radius: 8px;
+                    border: 1px solid rgb(79, 77, 77);
+                    position: relative;
+                    .item-name{
+                        display: flex;
+                        align-items: center;
+                        padding:10px;
+                        input{
+                            background-color: rgba(48, 45, 45, 0.834);
+                            color:$color-text-primary;
+                            font-weight: 600;
+                            padding: 10px;
+                            border: 1px solid rgb(95, 93, 93);
+                            padding: 10px 5px;
+                            border-radius: 10px;
+                            &:focus {
+                            border: 1px solid #E1BA0A;
+                            outline: none;
+                            &::placeholder {
+                           font-weight: 900;
+                            }
+                                 }
+                        }
+                    }
+                    .item-meghdar{
+                        display: flex;
+                        align-items: center;
+                        padding:10px;
+                        input{
+                            background-color: rgba(48, 45, 45, 0.834);
+                            color:$color-text-primary;
+                            font-weight: 600;
+                            padding: 10px;
+                            border: 1px solid rgb(95, 93, 93);
+                            padding: 10px 5px;
+                            border-radius: 10px;
+                            &:focus {
+                            border: 1px solid #E1BA0A;
+                            outline: none;
+                            &::placeholder {
+                           font-weight: 900;
+                            }
+                                 }
+                        }
+                    }
+                    .item-factor{
+                        padding: 10px;
+                        input{
+                            background-color: rgba(48, 45, 45, 0.834);
+                            color:$color-text-primary;
+                            font-weight: 600;
+                            padding: 10px;
+                            padding: 10px 5px;
+                            border-radius: 10px;
+                            border: 1px solid rgb(95, 93, 93);
+                            &:focus {
+                            border: 1px solid #E1BA0A;
+                            outline: none;
+                            &::placeholder {
+                           font-weight: 900;
+                            }
+                                 }
+                        }
+
+                    }
+                   
+                }
+            }
+       
+        }
+    }
+}
+
+@import "./medias";

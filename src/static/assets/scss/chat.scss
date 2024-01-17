@@ -1,0 +1,155 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.call{
+    background-color: rgba(62, 62, 62, 0.885);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    z-index:1000 ;
+    .inner-call{
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+     width: 100%;
+     height: 100vh;
+     .social-media{
+       color: #fff;
+      
+       .etelaeiyeh{
+           color: #E1BA0A;
+           font-size: 20px;
+           margin: 10px 0;
+       }
+       .telegram{
+           color: #fff;
+           margin: 10px 0;
+           font-weight: 600;
+           font-size: 18px;
+       }
+       .instagram{
+        color: #fff;
+        margin: 10px 0;
+        font-weight: 600;
+        font-size: 18px;
+       }
+     }
+    }
+
+}
+.category{
+    padding: 40px 20px;
+    .message{
+        display: flex;
+        justify-content: end;
+        margin-bottom:20px;
+        .user{
+            text-align: center;
+            display: flex;
+            justify-content: end;
+            padding: 0px 10px;
+            flex-direction: column;
+           .name-user{
+               color: aliceblue;
+               margin-top: 10px;
+           }
+        }
+        .message-content{
+            background-color: rgb(105, 105, 104);
+            color: aliceblue;
+            padding: 10px 20px;
+            border-radius: 10px 10px 10px 0px;
+            position: relative;
+
+            &::after{
+                content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            border-left: 30px solid rgb(105, 105, 104);
+            border-bottom: 17px solid transparent;
+            border-top: 1px solid transparent;
+             position: absolute;
+               
+            }
+        }
+    }
+
+    .message-answer{
+        display: flex;
+        justify-content: start;
+        margin-bottom: 20px;
+        .name-user{
+            color: aliceblue;
+            margin-top: 10px;
+        }
+        .user{
+            text-align: center;
+            display: flex;
+            justify-content: end;
+            padding: 0px 10px;
+            flex-direction: column;
+        }
+        .message-content-answer{
+            background-color: #E1BA0A;
+            color: aliceblue;
+            padding: 10px 20px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-top-right-radius: 10px;
+            position: relative;
+
+            &::after{
+                content: "";
+                position: absolute;
+                bottom:-15px;
+                right:0;
+                border-right: 30px solid #E1BA0A;
+                border-bottom: 17px solid transparent;
+                border-top: 1px solid transparent;
+                position: absolute;
+               
+            }
+
+        }
+    }
+    .input-send-message{
+     width: 83%;
+     height: 50px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     padding: 0 10px;
+     
+       
+    
+        input{
+            background-color: #4e4e4e;
+            border-radius:15px;
+            width: 100%;
+            height:80%;
+            padding: 10px;
+            color: #fff;
+            &:focus{
+                outline: none;
+            }
+        }
+
+
+    }
+}
+
+
+
+
+
+@import "./medias";

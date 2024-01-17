@@ -1,0 +1,16 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+
+ .article{
+     padding: 10px 25px;
+     @include  flex-between;
+     justify-content: start;
+     flex-wrap: wrap;
+ }
+
+
+@import "./medias";

@@ -1,0 +1,170 @@
+@import "./component";
+.modal-new-employe{
+    .inner-modal{
+        .add-material-category{
+            .item-employe{
+                .title{
+                    color: #FFF;
+                }
+                input{
+                    border: 1px solid #FFF;
+                    border-radius: 50px;
+                    width: 100%;    
+                    outline: none;
+                    padding: 10px;
+                    color: #FFF;
+                    ::placeholder{
+                        color: #FFF;
+                    }
+                    &:focus{
+                        border: 1px solid #FED304;
+                    }
+                    
+                }
+            }
+            .btn-sabt{
+                color: #FED304;
+                text-align: center;
+                cursor: pointer;
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+        
+    }
+}
+.staff-salaries-category{
+    @include flex-between;
+   
+.inner-staff-salaries{
+    cursor: pointer;
+    @include  content;
+    .content{
+        margin: 0px !important;
+        @include flex-between;
+        .right{
+            display: flex;
+            flex-direction: column;
+      
+            .up{
+                display: flex;
+                align-items: center;
+                margin-bottom:50px;
+                .moshakhasat{
+                    color: aliceblue;
+                }
+             }
+             .down{
+                 margin-top: 20px;
+                 .mablagh-kol{
+                     color: $color-text-primary;
+                     margin-bottom: 10px;
+                 }
+                 input{
+                    background-color: transparent;
+                    width: 95%;
+                    border-radius: 5px;
+                    padding:5px;
+                    color: #fff;
+                    border: 1px solid rgb(65, 65, 65);
+                    cursor: pointer;  
+                    
+                   
+                    &:focus {
+                        border: 1px solid #E1BA0A;
+                        outline: none;
+                        &::placeholder {
+                          font-weight:300;
+                        }
+                      }
+                }
+             }
+        }
+        .left{
+            text-align: center;
+            .staff-item{
+                display: flex;
+                justify-content: end;
+                flex-direction: column;
+                align-items: center;
+                .title{
+                    color: aliceblue;
+                    margin-bottom: 10px;
+                    margin-top: 10px;
+                }
+                input{
+                    width: 95%;;
+                    background-color: transparent;
+                    border: 1px solid $color-bg-four;
+                    border-radius: 5px;
+                    padding:5px;
+                    color: #fff; 
+                    border: 1px solid rgb(65, 65, 65); 
+                    cursor: pointer;
+                    &:focus {
+                        border: 1px solid #E1BA0A;
+                        outline: none;
+                        &::placeholder {
+                          font-weight:300;
+                        }
+                      }
+                }
+            }
+        }
+        
+    }
+    .sabt{
+        @include centering;
+        margin-top: 20px;
+        .sabt-btn{
+            background-color: $color-body-primary;
+            padding:5px 10px;
+            border-radius:10px;
+            width: 100px;
+            text-align: center;
+            color: $color-primary;
+        }
+
+    }
+}
+    flex-wrap: wrap;
+    
+}
+.btnnahayi{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    .add-new{
+        color: #E1BA0A;
+        font-size:15px;
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import "./medias";

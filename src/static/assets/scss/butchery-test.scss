@@ -1,0 +1,72 @@
+@import "./component";
+.category-tables-butchery-test{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .tablee{
+        margin-bottom: 30px;
+        .title-table{
+            color: #FED304;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 10px;
+            &::before{
+                content: "";
+                display: block;
+                width: 70%;
+                height: 1px;
+                background-color: #b1b1b1;
+                position: absolute;
+                bottom:0;
+                left: 10%;
+            }
+        }
+         .row-table{
+             display: flex;
+             justify-content: center;
+             flex-wrap:nowrap;
+            
+          .border-l{
+            
+                border-left: 1px solid rgb(117, 116, 116);
+           
+          }
+          
+          .column-item{
+              color: #FFF;
+              text-align: center;
+              align-items: center;
+              display: flex;
+              justify-content: center;
+              input{
+                  width: 100%;
+                  color: #FFF;
+                  text-align: center;
+                  background-color: rgba(251, 248, 248, 0.034);
+                  border: 1px solid rgba(123, 123, 123, 0.2);
+                  outline: none;
+                  padding: 5px;
+                  border-radius: 4px;
+                 
+                  &:focus{
+                     border: 1px solid #FED304;
+                  }
+              }
+            
+          }
+             
+         }
+         .border-t{
+             border-top: 1px solid rgb(117, 116, 116);
+          }
+     }
+}
+
+
+    
+
+
+
+@import "./medias";

@@ -1,0 +1,158 @@
+
+/*---------------START 768PX----------------*/
+
+@media (max-width: 768px) {
+.print{
+    width:100%;
+   
+  }
+ 
+  .btn-test-ghasabi{
+     font-size: 10px;
+}
+.Raw-material-item{
+  text-align: center;
+  input{
+     font-size: 10px;
+  }
+}
+  .description{
+    font-size: 12px !important;
+  }
+  .logo-form{
+    display: block !important;
+  }
+  .logo-conent-form{
+    display: none !important;
+  }
+  .title-content-form{
+    display: none !important;
+  }
+
+  .forms-content{
+    background-color: rgba(30, 29, 29, 0.864);
+    height:75vh !important;
+    }
+    .form-content-responsive{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height:60vh !important;
+    }
+    .form-content-login{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+    .form-content-signup{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+    .right-form-responsive{
+      height:40vh !important;
+    }
+  .main-admin-food{
+    padding-bottom: 120px !important;
+  }
+  .main-admin{
+    margin-top: 0;
+}
+  .container-form{
+    margin: 0;
+  }
+    .menu-bottom {
+        display: flex;
+      }
+    .menu-fixed-right {
+        display: none;
+      }
+      .instruction{
+        flex-direction: column;
+      }
+      .main {
+        padding-bottom: 65px;
+       }
+       .content-form{
+         display: none;
+       }
+       .content-form-mobile{
+         display: block !important;
+       }
+       .title-instruction-des{
+        margin-bottom: 5px !important;
+       
+      }
+
+      .message-content-answer {
+      font-size: 11px;
+    }
+    .name-user {
+      font-size: 11px;
+  }
+    .message-content{
+    font-size: 11px;
+  }
+  .btn-bottom{
+    display:flex;
+    justify-content: center;
+  }
+  .main-admin{
+    padding-bottom: 60px !important;
+  }
+.weeks .test{
+   font-size: 10px;
+ }
+
+.upload-btnn{
+  position: fixed;
+  bottom:60px;
+  left: 0;
+}
+.main-admin-addfood{
+  padding-bottom: 85px !important;
+}
+.category{
+  .input-send-message{
+    width:100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom:60px;
+    left: 0;
+    padding: 0 10px;
+   }
+}
+}
+    
+/*---------------END 768PX----------------*/
+@media (max-width: 1071px) {
+
+ .num-dates ul li, .days ul li {
+    float: right;
+    list-style: none;
+    text-align: center;
+    margin-left: 11px;
+    width:35px;
+    height: 40px;
+    font-weight: bold;
+    
+}
+.days ul li {
+
+  font-size: 10px !important;
+  }
+}
+
+
