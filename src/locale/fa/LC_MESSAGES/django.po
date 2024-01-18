@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 15:41+0330\n"
+"POT-Creation-Date: 2024-01-18 02:54+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,24 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\apps\account\admin.py:31
+#: .\apps\account\admin.py:29
 msgid "Personal info"
 msgstr "اطلاعات شخصی"
 
-#: .\apps\account\admin.py:32
+#: .\apps\account\admin.py:30
 msgid "Verifications"
 msgstr "تاییدیه‌ ها"
 
-#: .\apps\account\admin.py:33
+#: .\apps\account\admin.py:31
 msgid "Permissions"
 msgstr "مجوزها"
 
-#: .\apps\account\admin.py:34 .\apps\account\models.py:24
+#: .\apps\account\admin.py:32 .\apps\account\models.py:24
 #: .\apps\account\models.py:42
 msgid "Accesses"
 msgstr "دسترسی ها"
 
-#: .\apps\account\admin.py:35
+#: .\apps\account\admin.py:33
 msgid "Dates"
 msgstr "تاریخ ها"
 
@@ -72,13 +72,17 @@ msgstr "گذرواژه"
 msgid "Password repeat"
 msgstr "تکرار گذرواژه"
 
-#: .\apps\account\forms.py:28
+#: .\apps\account\forms.py:28 .\apps\account\forms.py:63
 msgid "Enter a valid phone number"
 msgstr "یک شماره تلفن معتبر وارد کنید"
 
 #: .\apps\account\forms.py:38
 msgid "Passwords are not match."
 msgstr "گذروازه یکسان نیست."
+
+#: .\apps\account\forms.py:68
+msgid "Username or password is not correct"
+msgstr "نام کاربری یا رمزعبور نادرست است"
 
 #: .\apps\account\managers.py:22
 msgid "Entered phone number is not valid"
@@ -139,12 +143,12 @@ msgid "No name"
 msgstr "بدون نام"
 
 #: .\apps\account\models.py:109
-msgid "Gender"
-msgstr "جنسیت"
-
-#: .\apps\account\models.py:110
 msgid "Melli code"
 msgstr "کدملی"
+
+#: .\apps\account\models.py:110
+msgid "Gender"
+msgstr "جنسیت"
 
 #: .\apps\account\models.py:111
 msgid "Date of birth"
@@ -165,6 +169,26 @@ msgstr "پروفایل کاربران"
 #: .\apps\account\validators.py:7
 msgid "Entered value must be number"
 msgstr "مقدار وارد شده باید عدد باشد"
+
+#: .\apps\account\views.py:41
+msgid "Login successful"
+msgstr "ورود موفق"
+
+#: .\apps\account\views.py:77 .\apps\account\views.py:99
+msgid "There is an issue! please try again"
+msgstr "خطایی رخ داده است! لطفا مجدد تلاش کنید"
+
+#: .\apps\account\views.py:83
+msgid "Code sent to you"
+msgstr "کد تایید برای شما ارسال شد"
+
+#: .\apps\account\views.py:103
+msgid "Entered code is not correct"
+msgstr "کد وارد شده صحیح نیست."
+
+#: .\apps\account\views.py:115
+msgid "Register done successful"
+msgstr "ثبت نام با موفقیت انجام شد"
 
 #: .\apps\core\utils.py:58
 #, python-format
@@ -192,6 +216,14 @@ msgstr "داده وارد شده صحیح نیست."
 #: .\config\settings\base.py:98
 msgid "Persian"
 msgstr "فارسی"
+
+#: .\templates\admin\base_site.html:5
+msgid "Django site admin"
+msgstr ""
+
+#: .\templates\admin\base_site.html:14
+msgid "Django administration"
+msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15
 msgid "Messages"
@@ -366,7 +398,7 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\db\models\base.py:1425
 #, python-format
 msgid "%(model_name)s with this %(field_labels)s already exists."
-msgstr ""
+msgstr "%(model_name)s با این %(field_labels)s وجود دارد."
 
 #: .\venv\Lib\site-packages\django\db\models\constraints.py:17
 #, python-format
@@ -389,7 +421,7 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:131
 #, python-format
 msgid "%(model_name)s with this %(field_label)s already exists."
-msgstr ""
+msgstr "%(model_name)s با این %(field_label)s وجود دارد"
 
 #. Translators: The 'lookup_type' is one of 'date', 'year' or
 #. 'month'. Eg: "Title must be unique for pub_date year"
