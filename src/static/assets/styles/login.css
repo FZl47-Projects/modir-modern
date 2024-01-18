@@ -116,6 +116,15 @@ input {
   background-color: transparent;
 }
 
+
+.hover-text {
+  transition: all 0.2s;
+}
+
+.hover-text:hover {
+  scale: 103%;
+}
+
 /*COLOR BODY*/
 /*COLOR BODY*/
 /* COLOR WHITE*/
@@ -1927,11 +1936,6 @@ ul {
   -moz-transition: all 500ms;
   -ms-transition: all 500ms;
   -o-transition: all 500ms;
-}
-.contenttt .forms .form .btn-submit:hover {
-  background-color: #fff;
-  color: #fefefe;
-  border: 1px solid #fefefe;
 }
 
 /*---------------START 768PX----------------*/

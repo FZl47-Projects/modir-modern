@@ -1,0 +1,78 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | ورود{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-admin">
+
+        <main class="container-form">
+            <div class="form-content">
+                <div class="right-form col-12 col-md-6">
+                    <div class="logo-form d-none">
+                        <img src="{% static 'images/main-logo.png' %}" alt="Logo">
+                        <div class="title text-white mt-2">اصول رستوران‌داری</div>
+                    </div>
+                </div>
+
+                <div class="left-form col-12 col-md-6">
+                    <div class="forms-content form-content-login">
+                        <!-- Start Login form -->
+                        <div class="contenttt form-login active">
+                            <div class="logo-conent-form">
+                                <img src="{% static 'images/main-logo.png' %}" alt="Logo">
+                            </div>
+                            <div class="title-content-form">اصول رستوران داری</div>
+
+                            <div class="forms">
+                                <form method="POST" action="{% url 'account:login' %}" class="form form-login">
+                                    {% csrf_token %}
+                                    <h3 class="title">ورود</h3>
+                                    <div>
+                                        <div class="group-form">
+                                            {{ form.username }}
+                                            <label for="id_username">:شماره همراه</label>
+                                        </div>
+                                        <small></small>
+                                    </div>
+                                    <div>
+                                        <div class="group-form">
+                                            {{ form.password }}
+                                            <label for="id_password">:رمز عبور</label>
+                                        </div>
+                                        <small></small>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end align-items-center check">
+                                        <div class="mt-1">
+                                            <label for="id_remember_me" class="me-1">مرا به خاطر بسپار</label>
+                                            {{ form.remember_me }}
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn-submit mt-3">ورود</button>
+
+                                    <div class="d-flex justify-content-center align-items-center py-3 form-text-1">
+                                        <a href="#">رمز عبورم را فراموش کردم</a>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center py-3 form-text-2">
+                                        <a href="{% url 'account:register' %}" class="hover-text">همین حالا ثبت نام کنید</a>
+                                        <span>هنوز ثبت نام نکرده اید؟</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- .End Login form -->
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}

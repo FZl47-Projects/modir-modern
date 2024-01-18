@@ -23,7 +23,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('id', '__str__', 'email', 'first_name', 'last_name', 'is_active', 'is_verified')
     list_display_links = ('id', '__str__', 'email',)
     readonly_fields = ('created_at', 'last_login',)
-    list_filter = ('is_active', 'accesses',)
+    list_filter = ('is_active', 'is_admin', 'is_verified', 'accesses',)
     fieldsets = (
         (None, {'fields': ('phone_number', 'password',)}),
         (_('Personal info'), {'fields': ('email', 'first_name', 'last_name',)}),

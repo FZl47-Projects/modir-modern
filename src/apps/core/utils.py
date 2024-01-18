@@ -84,6 +84,18 @@ def validate_form(request, form):
     return False
 
 
+# Toast form errors utils
+def toast_form_errors(request, form):
+    errors = form.errors.items()
+    if not errors:
+        messages.error(request, _('Entered data is not correct.'))
+        return False
+
+    for field, message in errors:
+        for error in message:
+            messages.error(request, error)
+
+
 # Send SMS util
 def send_sms(phone_number, pattern, **kwargs):
     phone_number = get_coded_phone_number(phone_number)

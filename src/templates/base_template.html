@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'includes/head_references.html' %}
+
+    <!-- Extra styles or links -->
+    {% block styles %}
+    {% endblock %}
+
+    {% block extrahead %}
+    {% endblock %}
+</head>
+
+<body dir="rtl" class="{% block body_class %}{% endblock %}">
+    {% block content %}
+    {% endblock %}
+
+    <!-- Scripts -->
+    {% include 'includes/scripts.html' %}
+
+    <!-- Create notify for messages -->
+    <script>
+        {% for message in messages %}
+            Toast.fire({
+                icon: '{{ message.tags }}',
+                title: `{{ message }}`,
+            })
+        {% endfor %}
+    </script>
+
+    <!-- Extra js -->
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>
