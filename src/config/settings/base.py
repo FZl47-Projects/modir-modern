@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
     # Apps
     'apps.core.apps.CoreConfig',
+    'apps.public.apps.PublicConfig',
     'apps.account.apps.AccountConfig',
 
     # Django modules
