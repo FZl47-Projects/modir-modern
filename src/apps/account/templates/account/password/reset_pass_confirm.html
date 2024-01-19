@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %}مدیرمدرن | ثبت نام{% endblock %}
+{% block title %}مدیرمدرن | فراموشی رمزعبور{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
@@ -29,37 +29,21 @@
                             </div>
                             <div class="title-content-form">اصول رستوران داری</div>
 
-                            <div class="forms mt-2">
-                                <form method="POST" action="{% url 'account:register' %}" class="form form-login">
+                            <div class="forms mt-3">
+                                <form method="POST" action="{% url 'account:reset_pass_confirm' %}" class="form form-login">
                                     {% csrf_token %}
-                                    <h4 class="title">ثبت نام</h4>
+                                    <h5 class="title">تایید شماره همراه</h5>
                                     <div>
                                         <div class="group-form">
-                                            {{ form.phone_number }}
-                                            <label for="id_phone_number">:شماره همراه</label>
+                                            {{ form.code }}
+                                            <label for="id_code">:کد تایید</label>
                                         </div>
                                         <small></small>
                                     </div>
-                                    <div>
-                                        <div class="group-form">
-                                            {{ form.password1 }}
-                                            <label for="id_password1">:رمز عبور</label>
-                                        </div>
-                                        <small></small>
-                                    </div>
-                                    <div>
-                                        <div class="group-form">
-                                            {{ form.password2 }}
-                                            <label for="id_password2">:تکرار رمز عبور</label>
-                                        </div>
-                                        <small></small>
-                                    </div>
-
-                                    <button type="submit" class="btn-submit mt-3">ثبت نام</button>
+                                    <button type="submit" class="btn-submit mt-3">ارسال</button>
 
                                     <div class="d-flex justify-content-center align-items-center py-3 form-text-2 mt-2">
-                                        <a href="{% url 'account:login' %}" class="hover-text">وارد شوید</a>
-                                        <span>حساب کاربری دارید؟</span>
+                                        <a href="{% url 'account:login' %}" class="hover-text">لغو و بازگشت</a>
                                     </div>
                                 </form>
                             </div>
@@ -72,4 +56,7 @@
         </main>
 
     </div>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}

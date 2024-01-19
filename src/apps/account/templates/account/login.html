@@ -29,10 +29,10 @@
                             </div>
                             <div class="title-content-form">اصول رستوران داری</div>
 
-                            <div class="forms">
+                            <div class="forms mt-2">
                                 <form method="POST" action="{% url 'account:login' %}" class="form form-login">
                                     {% csrf_token %}
-                                    <h3 class="title">ورود</h3>
+                                    <h4 class="title">ورود</h4>
                                     <div>
                                         <div class="group-form">
                                             {{ form.username }}
@@ -57,7 +57,7 @@
                                     <button type="submit" class="btn-submit mt-3">ورود</button>
 
                                     <div class="d-flex justify-content-center align-items-center py-3 form-text-1">
-                                        <a href="#">رمز عبورم را فراموش کردم</a>
+                                        <a href="{% url 'account:get_phone_number' %}">رمز عبورم را فراموش کردم</a>
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center py-3 form-text-2">

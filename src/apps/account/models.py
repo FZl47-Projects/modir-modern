@@ -94,8 +94,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.token
 
     def clear_token(self, request):
-        if 'register_token' in request.session:
-            del request.session['register_token']
+        if 'secret_token' in request.session:
+            del request.session['secret_token']
 
         self.token = None
         self.save()

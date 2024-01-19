@@ -29,10 +29,10 @@
                             </div>
                             <div class="title-content-form">اصول رستوران داری</div>
 
-                            <div class="forms">
+                            <div class="forms mt-3">
                                 <form method="POST" action="{% url 'account:verify_phone' %}" class="form form-login">
                                     {% csrf_token %}
-                                    <h3 class="title">تایید موبایل</h3>
+                                    <h5 class="title">تایید موبایل</h5>
                                     <div>
                                         <div class="group-form">
                                             <input type="number" id="code" name="code" required>

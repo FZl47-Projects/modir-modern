@@ -87,3 +87,35 @@ class VerifyPhoneNumberForm(forms.Form):
             raise ValidationError(_('Entered code is not correct'), code='WRONG-DATA')
 
         return {'user': user}
+
+
+# GetPhoneNumber form
+class GetPhoneNumberForm(forms.Form):
+    phone_number = forms.CharField(max_length=11, widget=forms.TextInput(attrs={'placeholder': '09__'}))
+
+    def clean(self):
+        try:
+            if not check_phone_number(self.cleaned_data['phone_number']):
+                raise ValidationError(_('Enter a valid phone number'), code='BAD-PHONE-NUMBER')
+
+            user = User.objects.get(phone_number=self.cleaned_data['phone_number'])
+        except (User.DoesNotExist, TypeError, KeyError):
+            raise ValidationError(_('No user found with this phone number'))
+
+        return {'user': user}
+
+
+# ResetPass form
+class ResetPassForm(forms.Form):
+    password = forms.CharField(max_length=128, min_length=4, required=True, widget=forms.PasswordInput)
+    password2 = forms.CharField(max_length=128, min_length=4, required=True, widget=forms.PasswordInput)
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+            raise ValidationError(_('Passwords are not match.'))
+
+        return password2
