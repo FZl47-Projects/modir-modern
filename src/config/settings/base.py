@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'apps.core.apps.CoreConfig',
     'apps.public.apps.PublicConfig',
     'apps.account.apps.AccountConfig',
+    'apps.notification.apps.NotificationConfig',
 
     # Django modules
     'django_cleanup.apps.CleanupConfig',
