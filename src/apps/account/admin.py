@@ -55,6 +55,12 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'gender', 'melli_code')
     list_display_links = ('id', 'user')
 
+    fieldsets = (
+        (None, {'fields': ('user',)}),
+        (_('Personal info'), {'fields': ('melli_code', 'gender', 'date_of_birth')}),
+        (_('Place info'), {'fields': ('name', 'province', 'city', 'image')}),
+    )
+
     search_fields = ('user__phone_number',)
     list_filter = ('gender',)
     autocomplete_fields = ('user',)

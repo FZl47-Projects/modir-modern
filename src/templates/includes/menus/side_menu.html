@@ -8,14 +8,14 @@
     <div class="inner-menu-fixed-right">
         <div class="up-menu">
             <div class="profile">
-                <img src="{% static 'images/defaults/user-profile-3.webp' %}" class="rounded-circle mt-3 me-3" width="75" height="75"
+                <img src="{{ user.profile.get_image_url }}" class="rounded-circle mt-3 me-3" width="75" height="75"
                      alt="Profile picture" style="object-fit: cover;">
                 <div class="d-flex flex-column align-items-start mt-3 me-2">
                     <span class="mt-2">
-                        {{ user.get_full_name }}
+                        {{ user.profile.name }}
                     </span>
                     <small class="mt-1">
-                        کرمان، کرمان
+                        {{ user.profile.province|default:'' }}، {{ user.profile.city|default:'' }}
                     </small>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#">
+                    <a href="{% url 'account:profile_details' %}">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
                             <i class="bi bi-person-badge mt-2" style="font-size: 25px;"></i>
                         </span>

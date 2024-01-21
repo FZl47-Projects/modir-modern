@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from apps.core.utils import toast_form_errors, validate_form
+from apps.notification.models import Notification
 from .mixinx import LogoutRequiredMixin
 from .models import User, UserProfile
 from . import forms
@@ -79,14 +80,20 @@ class SendCodeView(LogoutRequiredMixin, View):
 
         token = request.session.get('secret_token')
         try:
-            User.objects.get(token=token)
+            user = User.objects.get(token=token)
         except User.DoesNotExist:
             messages.error(request, _('There is an issue! please try again'))
             return redirect('account:register')
 
-        # TODO: Send notification
-
+        Notification.objects.create(
+            type=Notification.TYPES.MOBILE_VERIFICATION_CODE,
+            title=_('Phone number verification code'),
+            kwargs={'code': code},
+            to_user=user,
+            send_notify=False  # TODO: Change it to True
+        )
         print(code)
+
         messages.info(request, _('Code sent to you'))
         return redirect(self.get_redirect_url())
 
@@ -204,3 +211,34 @@ class ResetPassCompleteView(LogoutRequiredMixin, FormView):
     def form_invalid(self, form):
         toast_form_errors(self.request, form)
         return super().form_invalid(form)
+
+
+# UserProfile view
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile.html'
+
+    def post(self, request):
+        form = forms.UpdateProfileForm(data=request.POST, files=request.FILES, instance=request.user.profile)
+        if validate_form(request, form):
+            form.save()
+
+            messages.success(request, _('Profile updated successfully'))
+            return redirect('account:profile_details')
+
+        return redirect('account:profile_details')
+
+
+# EditPassword view
+class EditPasswordView(LoginRequiredMixin, View):
+
+    def post(self, request):
+        if not request.user.check_password(request.POST.get('password1')):
+            messages.error(request, _('Password is not correct'))
+            return redirect('account:profile_details')
+
+        user = request.user
+        user.set_password(request.POST.get('password2'))
+        user.save()
+
+        messages.success(request, _('Password changed successfully'))
+        return redirect(reverse('account:login') + f'?next={reverse("account:profile_details")}')

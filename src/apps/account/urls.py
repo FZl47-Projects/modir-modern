@@ -16,4 +16,7 @@ urlpatterns = [
     path('password/reset/', views.GetPhoneNumberView.as_view(), name='get_phone_number'),
     path('password/reset/confirm/', views.ResetPassConfirmView.as_view(), name='reset_pass_confirm'),
     path('password/reset/complete/', views.ResetPassCompleteView.as_view(), name='reset_pass_complete'),
+    path('password/edit/', views.EditPasswordView.as_view(), name='edit_password'),
+
+    path('profile/details/', views.UserProfileView.as_view(), name='profile_details'),
 ]

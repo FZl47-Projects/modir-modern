@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext as _
+from django.templatetags.static import static
 from django.shortcuts import reverse
 from django.db import models
 
@@ -109,6 +110,9 @@ class UserProfile(BaseModel):
     melli_code = models.CharField(_('Melli code'), max_length=10, validators=[validate_didit_type], null=True, blank=True)
     gender = models.CharField(_('Gender'), max_length=8, choices=GENDERS.choices, null=True, blank=True)
     date_of_birth = models.DateField(_('Date of birth'), null=True, blank=True)
+    name = models.CharField(_('Name'), max_length=128, null=True, blank=True)
+    province = models.CharField(_('Province'), max_length=64, null=True, blank=True)
+    city = models.CharField(_('City'), max_length=64, null=True, blank=True)
     image = models.ImageField(_('Picture'), upload_to='images/profiles/', null=True, blank=True)
 
     class Meta:
@@ -127,3 +131,4 @@ class UserProfile(BaseModel):
     def get_image_url(self):
         if self.image:
             return self.image.url
+        return static('images/defaults/user-profile-3.webp')

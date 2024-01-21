@@ -1,0 +1,103 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | پروفایل{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <!-- Start Edit password modal -->
+    {% include 'account/components/edit_password.html' %}
+    <!-- Start Edit password modal -->
+
+    <div class="container-fluid col-md-10 pb-4">
+        <main class="main w-100 p-md-4 p-2">
+            <h5 class="fw-semibold text-white">پروفایل</h5>
+
+            <form method="POST" action="{% url 'account:profile_details' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between flex-wrap mt-5 profile-main ">
+                    <div class="d-flex align-items-end gap-2">
+                        <div class="rounded-circle profile-picture">
+                            <img src="{{ user.profile.get_image_url }}" id="profilePic" width="95" height="95"
+                                 alt="Profile picture">
+                        </div>
+                        <div class="py-2">
+                            <label for="profile_pic" class="btn btn-sm btn-light">تغییر تصویر</label>
+                            <input type="file" id="profile_pic" name="image" accept="image/png, image/jpeg" hidden="hidden"
+                                   onchange="displayImage(event)">
+                        </div>
+                    </div>
+                    <div class="d-flex py-2">
+                        <div class="d-flex flex-column justify-content-end">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editPassModal">تغییر رمز عبور</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 d-flex flex-wrap profile-main">
+                    <div class="text-white p-2 col-md-6 col-12">
+                        <label class="form-label w-100">
+                            شماره تلفن:
+                            <input type="text" name="phone_number" value="{{ user.phone_number }}" required
+                                   class="form-control mt-1">
+                        </label>
+                    </div>
+                    <div class="text-white p-2 col-md-6 col-12">
+                        <label class="form-label w-100">
+                            نام مجموعه:
+                            <input type="text" name="name" value="{{ user.profile.name|default:'' }}"
+                                   class="form-control mt-1">
+                        </label>
+                    </div>
+                    <div class="text-white p-2 col-md-6 col-12">
+                        <label class="form-label w-100">
+                            استان:
+                            <input type="text" name="province" value="{{ user.profile.province|default:'' }}"
+                                   class="form-control mt-1">
+                        </label>
+                    </div>
+                    <div class="text-white p-2 col-md-6 col-12">
+                        <label class="form-label w-100">
+                            شهر:
+                            <input type="text" name="city" value="{{ user.profile.city|default:'' }}"
+                                   class="form-control mt-1">
+                        </label>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end p-2 mt-2">
+                    <button type="submit" class="btn btn-success">ذخیره تغییرات</button>
+                </div>
+            </form>
+
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script>
+        // Set user profile picture after select
+        function displayImage(event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const selectedImage = document.getElementById('profilePic');
+                    selectedImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+{% endblock %}

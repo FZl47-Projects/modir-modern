@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django import forms
 
 from .utils import check_phone_number
-from .models import User
+from .models import User, UserProfile
 
 
 # Custom User creation form
@@ -119,3 +119,22 @@ class ResetPassForm(forms.Form):
             raise ValidationError(_('Passwords are not match.'))
 
         return password2
+
+
+# UpdateProfile form
+class UpdateProfileForm(forms.ModelForm):
+    phone_number = forms.CharField(max_length=11, required=True, widget=forms.TextInput)
+
+    class Meta:
+        model = UserProfile
+        fields = ('city', 'province', 'name', 'image')
+
+    def save(self, commit=True):
+        profile = super().save()
+        user = profile.user
+
+        user.phone_number = self.cleaned_data.get('phone_number')
+        if commit:
+            user.save()
+
+        return profile
