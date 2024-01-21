@@ -1,3 +1,4 @@
+from django.utils.translation import gettext as _
 from django.db import models
 
-# Create your models here.
+from apps.core.models import BaseModel

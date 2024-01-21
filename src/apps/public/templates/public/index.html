@@ -1,10 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_template.html' %}
+{% load static %}
 
-</body>
-</html>
+
+{% block title %}مدیرمدرن | خانه{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block body_class %}bg{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <div class="container-fluid col-md-10 pb-4">
+        <main class="main w-100">
+            <!-- Start top slider -->
+            <div class="p-2">
+                <div class="swiper top-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="#" title="دوره جامع کما">
+                                <img src="{% static 'images/defaults/slider-1.webp' %}" alt="">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" title="">
+                                <img src="{% static 'images/defaults/slider-2.webp' %}" alt="">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" title="">
+                                <img src="{% static 'images/defaults/slider-3.webp' %}" alt="">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" title="">
+                                <img src="{% static 'images/defaults/slider-4.webp' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <!-- .End top slider -->
+
+            <!-- Start packages section -->
+            <div class="mt-md-5 mt-3 px-md-4 px-3 py-2">
+                <h5 class="text-white fw-semibold">آخرین دوره‌های آموزشی</h5>
+                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
+
+                    <div class="package-box col-lg-3 col-12">
+                        <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                            <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
+                        </div>
+                        <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                            <h5 class="fw-semibold mt-1">دوره جامع کما</h5>
+                            <small>کاست کنترل، مهندسی منو و انبارداری را یکجا در این دوره دوره فرا بگیرید.</small>
+                        </div>
+                        <div class="w-100 p-2 mt-auto">
+                            <div class="d-flex gap-1 mb-3">
+                                <span>قیمت:</span>
+                                <div class="d-flex gap-1">
+                                    <span>۳,۵۰۰,۰۰۰</span>
+                                    <span>تومان</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                        </div>
+                    </div>
+                    <div class="package-box col-lg-3 col-12">
+                        <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                            <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
+                        </div>
+                        <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                            <h5 class="fw-semibold mt-1">دوره استخراج</h5>
+                            <small>از استخدام تا اخراج در کنار شما هستیم.</small>
+                        </div>
+                        <div class="w-100 p-2 mt-auto">
+                            <div class="d-flex gap-1 mb-3">
+                                <span>قیمت:</span>
+                                <div class="d-flex gap-1">
+                                    <span>۱,۵۰۰,۰۰۰</span>
+                                    <span>تومان</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                        </div>
+                    </div>
+                    <div class="package-box col-lg-3 col-12">
+                        <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                            <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
+                        </div>
+                        <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                            <h5 class="fw-semibold mt-1">دروه اصول میزبانی و تشریفات پذیرایی</h5>
+                            <small>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</small>
+                        </div>
+                        <div class="w-100 p-2 mt-auto">
+                            <div class="d-flex gap-1 mb-3">
+                                <span>قیمت:</span>
+                                <div class="d-flex gap-1">
+                                    <span>۲,۳۰۰,۰۰۰</span>
+                                    <span>تومان</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .End packages section -->
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script>
+        let swiper = new Swiper(".top-slider", {
+            spaceBetween: 10,
+            autoplay : {
+                delay: 5000,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+        });
+    </script>
+{% endblock %}

@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("Email address"), max_length=255, null=True, blank=True)
     first_name = models.CharField(_('First name'), max_length=128, null=True, blank=True)
     last_name = models.CharField(_('Last name'), max_length=128, null=True, blank=True)
-    accesses = models.ManyToManyField(verbose_name=_('Accesses'), to=Access, related_name='user')
+    accesses = models.ManyToManyField(verbose_name=_('Accesses'), to=Access, related_name='user', blank=True)
     is_active = models.BooleanField(_("Active"), default=True)
     is_admin = models.BooleanField(_("Admin"), default=False)
     is_verified = models.BooleanField(_('Verify'), default=False)
