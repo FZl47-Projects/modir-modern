@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-18 02:54+0330\n"
+"POT-Creation-Date: 2024-01-21 19:05+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,17 +72,35 @@ msgstr "گذرواژه"
 msgid "Password repeat"
 msgstr "تکرار گذرواژه"
 
-#: .\apps\account\forms.py:28 .\apps\account\forms.py:63
+#: .\apps\account\forms.py:28 .\apps\account\forms.py:64
+#: .\apps\account\forms.py:99
 msgid "Enter a valid phone number"
 msgstr "یک شماره تلفن معتبر وارد کنید"
 
-#: .\apps\account\forms.py:38
+#: .\apps\account\forms.py:38 .\apps\account\forms.py:119
 msgid "Passwords are not match."
 msgstr "گذروازه یکسان نیست."
 
-#: .\apps\account\forms.py:68
+#: .\apps\account\forms.py:54
+msgid "09__"
+msgstr "09__"
+
+#: .\apps\account\forms.py:69
 msgid "Username or password is not correct"
 msgstr "نام کاربری یا رمزعبور نادرست است"
+
+#: .\apps\account\forms.py:84 .\apps\account\views.py:85
+#: .\apps\account\views.py:199
+msgid "There is an issue! please try again"
+msgstr "خطایی رخ داده است! لطفا مجدد تلاش کنید"
+
+#: .\apps\account\forms.py:87
+msgid "Entered code is not correct"
+msgstr "کد وارد شده صحیح نیست."
+
+#: .\apps\account\forms.py:103
+msgid "No user found with this phone number"
+msgstr "کاربری با این شماره موبایل یافت نشد"
 
 #: .\apps\account\managers.py:22
 msgid "Entered phone number is not valid"
@@ -91,6 +109,10 @@ msgstr "شماره تلفن وارد شده معتبر نیست"
 #: .\apps\account\managers.py:34
 msgid "Users must have a mobile number!"
 msgstr "کاربر باید یک شماره تلفن داشته باشد"
+
+#: .\apps\account\mixinx.py:27
+msgid "You do not have permission to access this page!"
+msgstr "شما اجازه دسترسی به این صفحه را ندارید"
 
 #: .\apps\account\models.py:17
 msgid "Access title"
@@ -170,25 +192,25 @@ msgstr "پروفایل کاربران"
 msgid "Entered value must be number"
 msgstr "مقدار وارد شده باید عدد باشد"
 
-#: .\apps\account\views.py:41
+#: .\apps\account\views.py:43
 msgid "Login successful"
 msgstr "ورود موفق"
 
-#: .\apps\account\views.py:77 .\apps\account\views.py:99
-msgid "There is an issue! please try again"
-msgstr "خطایی رخ داده است! لطفا مجدد تلاش کنید"
+#: .\apps\account\views.py:90
+msgid "Phone number verification code"
+msgstr "کد تایید شماره موبایل"
 
-#: .\apps\account\views.py:83
+#: .\apps\account\views.py:96
 msgid "Code sent to you"
 msgstr "کد تایید برای شما ارسال شد"
 
-#: .\apps\account\views.py:103
-msgid "Entered code is not correct"
-msgstr "کد وارد شده صحیح نیست."
-
-#: .\apps\account\views.py:115
+#: .\apps\account\views.py:128
 msgid "Register done successful"
 msgstr "ثبت نام با موفقیت انجام شد"
+
+#: .\apps\account\views.py:207
+msgid "Password successfully reset"
+msgstr "گذرواژه با موفقیت تغییر کرد"
 
 #: .\apps\core\utils.py:58
 #, python-format
@@ -209,11 +231,55 @@ msgstr "%(days)s روز قبل"
 msgid "Moments ago"
 msgstr "لحظاتی قبل"
 
-#: .\apps\core\utils.py:77
+#: .\apps\core\utils.py:77 .\apps\core\utils.py:91
 msgid "Entered data is not correct."
 msgstr "داده وارد شده صحیح نیست."
 
-#: .\config\settings\base.py:98
+#: .\apps\notification\apps.py:8 .\apps\notification\models.py:29
+msgid "Notification"
+msgstr "اعلان"
+
+#: .\apps\notification\enums.py:7
+msgid "Mobile verification code"
+msgstr "کد تاییدیه موبایل"
+
+#: .\apps\notification\models.py:15
+msgid "Notif type"
+msgstr "نوع اعلان"
+
+#: .\apps\notification\models.py:16
+msgid "Notif title"
+msgstr "عنوان اعلان"
+
+#: .\apps\notification\models.py:17
+msgid "Notif description"
+msgstr "توضیح اعلان"
+
+#: .\apps\notification\models.py:21
+msgid "KeyWord args"
+msgstr "آرگومان‌‌های کلیدی"
+
+#: .\apps\notification\models.py:23
+msgid "Send Notify"
+msgstr "ارسال اعلان"
+
+#: .\apps\notification\models.py:24
+msgid "To user"
+msgstr "به کاربر"
+
+#: .\apps\notification\models.py:26
+msgid "Is showing"
+msgstr "نمایش دادن"
+
+#: .\apps\notification\models.py:30
+msgid "Notifications"
+msgstr "اعلان ها"
+
+#: .\apps\public\apps.py:8
+msgid "Public"
+msgstr "عمومی"
+
+#: .\config\settings\base.py:100
 msgid "Persian"
 msgstr "فارسی"
 
