@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # Apps
     'apps.core.apps.CoreConfig',
     'apps.public.apps.PublicConfig',
+    'apps.course.apps.CourseConfig',
     'apps.account.apps.AccountConfig',
     'apps.notification.apps.NotificationConfig',
 
