@@ -23,7 +23,8 @@
         <div class="content-menu mt-2">
             <ul class="list">
                 <li class="item-menu">
-                    <a href="{% url 'public:index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                    <a href="{% url 'public:index' %}"
+                       class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
                             <i class="bi bi-house mt-2" style="font-size: 25px;"></i>
                         </span>
@@ -31,7 +32,8 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="{% url 'account:profile_details' %}">
+                    <a href="{% url 'account:profile_details' %}"
+                       class="{% if request.resolver_match.url_name == 'profile_details' %}active{% endif %}">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
                             <i class="bi bi-person-badge mt-2" style="font-size: 25px;"></i>
                         </span>
@@ -41,7 +43,7 @@
                 <li class="item-menu">
                     <a href="#">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
-                            <i class="bi bi-journals mt-2" style="font-size: 23px;"></i>
+                            <i class="bi bi-mortarboard mt-2" style="font-size: 23px;"></i>
                         </span>
                         <span class="fw-semibold">آموزش ها</span>
                     </a>

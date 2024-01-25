@@ -122,8 +122,8 @@ class UserProfile(BaseModel):
     def __str__(self):
         return f'{self.user}'
 
-    # def get_absolute_url(self):
-    #     return None
+    def get_absolute_url(self):
+        return reverse('account:profile_details', self.pk)
 
     def get_gender_label(self):
         return self.get_gender_display()

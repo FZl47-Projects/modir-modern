@@ -24,7 +24,7 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <a href="#" title="دوره جامع کما">
-                                <img src="{% static 'images/defaults/slider-1.webp' %}" alt="">
+                                <img src="{% static 'images/defaults/slider-3.webp' %}" alt="">
                             </a>
                         </div>
                         <div class="swiper-slide">
@@ -34,7 +34,7 @@
                         </div>
                         <div class="swiper-slide">
                             <a href="#" title="">
-                                <img src="{% static 'images/defaults/slider-3.webp' %}" alt="">
+                                <img src="{% static 'images/defaults/slider-1.webp' %}" alt="">
                             </a>
                         </div>
                         <div class="swiper-slide">
@@ -51,65 +51,111 @@
             <!-- Start packages section -->
             <div class="mt-md-5 mt-3 px-md-4 px-3 py-2">
                 <h5 class="text-white fw-semibold">آخرین دوره‌های آموزشی</h5>
-                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
 
-                    <div class="package-box col-lg-3 col-12">
-                        <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
-                            <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
-                        </div>
-                        <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
-                            <h5 class="fw-semibold mt-1">دوره جامع کما</h5>
-                            <small>کاست کنترل، مهندسی منو و انبارداری را یکجا در این دوره دوره فرا بگیرید.</small>
-                        </div>
-                        <div class="w-100 p-2 mt-auto">
-                            <div class="d-flex gap-1 mb-3">
-                                <span>قیمت:</span>
-                                <div class="d-flex gap-1">
-                                    <span>۳,۵۰۰,۰۰۰</span>
-                                    <span>تومان</span>
-                                </div>
+                <div class="swiper package-slider mt-3">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide package-box">
+                            <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                                <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
                             </div>
-                            <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
-                        </div>
-                    </div>
-                    <div class="package-box col-lg-3 col-12">
-                        <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
-                            <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
-                        </div>
-                        <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
-                            <h5 class="fw-semibold mt-1">دوره استخراج</h5>
-                            <small>از استخدام تا اخراج در کنار شما هستیم.</small>
-                        </div>
-                        <div class="w-100 p-2 mt-auto">
-                            <div class="d-flex gap-1 mb-3">
-                                <span>قیمت:</span>
-                                <div class="d-flex gap-1">
-                                    <span>۱,۵۰۰,۰۰۰</span>
-                                    <span>تومان</span>
-                                </div>
+                            <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                                <h5 class="fw-semibold mt-1">دوره جامع کما</h5>
+                                <small>کاست کنترل، مهندسی منو و انبارداری را یکجا در این دوره دوره فرا بگیرید.</small>
                             </div>
-                            <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
-                        </div>
-                    </div>
-                    <div class="package-box col-lg-3 col-12">
-                        <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
-                            <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
-                        </div>
-                        <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
-                            <h5 class="fw-semibold mt-1">دروه اصول میزبانی و تشریفات پذیرایی</h5>
-                            <small>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</small>
-                        </div>
-                        <div class="w-100 p-2 mt-auto">
-                            <div class="d-flex gap-1 mb-3">
-                                <span>قیمت:</span>
-                                <div class="d-flex gap-1">
-                                    <span>۲,۳۰۰,۰۰۰</span>
-                                    <span>تومان</span>
+                            <div class="w-100 p-2 mt-auto">
+                                <div class="d-flex gap-1 mb-3">
+                                    <span>قیمت:</span>
+                                    <div class="d-flex gap-1">
+                                        <span class="fw-semibold">۳,۵۰۰,۰۰۰</span>
+                                        <span>تومان</span>
+                                    </div>
                                 </div>
+                                <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
                             </div>
-                            <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
                         </div>
+                        <div class="swiper-slide package-box">
+                            <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                                <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
+                            </div>
+                            <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                                <h5 class="fw-semibold mt-1">دوره استخراج</h5>
+                                <small>از استخدام تا اخراج در کنار شما هستیم.</small>
+                            </div>
+                            <div class="w-100 p-2 mt-auto">
+                                <div class="d-flex gap-1 mb-3">
+                                    <span>قیمت:</span>
+                                    <div class="d-flex gap-1">
+                                        <span>۱,۵۰۰,۰۰۰</span>
+                                        <span>تومان</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide package-box">
+                            <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                                <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
+                            </div>
+                            <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                                <h5 class="fw-semibold mt-1">دروه اصول میزبانی و تشریفات پذیرایی</h5>
+                                <small>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون.</small>
+                            </div>
+                            <div class="w-100 p-2 mt-auto">
+                                <div class="d-flex gap-1 mb-3">
+                                    <span>قیمت:</span>
+                                    <div class="d-flex gap-1">
+                                        <span>۲,۳۰۰,۰۰۰</span>
+                                        <span>تومان</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide package-box">
+                            <div class="package-tag">تخفیف</div>
+                            <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                                <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
+                            </div>
+                            <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                                <h5 class="fw-semibold mt-1">دوره جدید رستوران داری</h5>
+                                <small>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</small>
+                            </div>
+                            <div class="w-100 p-2 mt-auto">
+                                <div class="d-flex gap-1 mb-3">
+                                    <span>قیمت:</span>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <span class="text-danger fw-semibold">۳,۳۰۰,۰۰۰</span>
+                                        <span>تومان</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide package-box">
+                            <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                                <img src="{% static 'images/main-logo.png' %}" alt="ModireModern logo">
+                            </div>
+                            <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
+                                <h5 class="fw-semibold mt-1">دوره رستوران داری مدرن</h5>
+                                <small>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</small>
+                            </div>
+                            <div class="w-100 p-2 mt-auto">
+                                <div class="d-flex gap-1 mb-3">
+                                    <span>قیمت:</span>
+                                    <div class="d-flex gap-1">
+                                        <span class="fw-semibold">۱,۸۰۰,۰۰۰</span>
+                                        <span>تومان</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                            </div>
+                        </div>
+
                     </div>
+
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
             <!-- .End packages section -->
@@ -119,16 +165,5 @@
 
 {% block scripts %}
     <script src="{% static 'js/menu.js' %}"></script>
-    <script>
-        let swiper = new Swiper(".top-slider", {
-            spaceBetween: 10,
-            autoplay : {
-                delay: 5000,
-                disableOnInteraction: false
-            },
-            pagination: {
-                el: ".swiper-pagination",
-            },
-        });
-    </script>
+    <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
