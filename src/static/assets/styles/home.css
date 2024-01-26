@@ -151,7 +151,7 @@ input {
 
 .package-box {
   min-height: 400px;
-  max-height: 450px;
+  max-height: 410px;
   background-color: #f6f6f6;
   border-radius: 0.6rem;
   display: flex;
@@ -1664,9 +1664,18 @@ ul {
   }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1620px) {
   .top-slider {
     height: 560px;
+  }
+  .container-fluid {
+    width: 86.5%;
+  }
+}
+
+@media (min-width: 2240px) {
+  .container-fluid {
+    width: 87%;
   }
 }
 
