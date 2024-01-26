@@ -129,6 +129,78 @@ input {
   object-fit: cover;
 }
 
+.stats-main {
+  background-color: rgba(35, 35, 35, 0.35);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  width: 100%;
+}
+
+.stats-box {
+  min-width: 250px;
+  min-height: 90px;
+  position: relative;
+  font-size: 19px;
+  border-radius: 0.7rem;
+  padding: 0.95rem;
+}
+
+.stats-box-1 {
+  background-color: rgba(254, 211, 4, 0.47);
+  color: whitesmoke;
+}
+
+.stats-box-2 {
+  background-color: rgba(254, 4, 137, 0.47);
+  color: whitesmoke;
+}
+
+.stats-box-3 {
+  background-color: rgba(4, 37, 254, 0.47);
+  color: whitesmoke;
+}
+
+.stats-info-main {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 1rem;
+  top: auto;
+  font-weight: 600;
+  background-color: #1a1e21;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.stats-num {
+  font-size: 22px;
+}
+
+.stats-info {
+  font-size: 19px;
+}
+
+.stats-link {
+  width: max-content;
+  display: flex;
+  gap: 2px;
+  font-size: 9pt;
+  opacity: 85%;
+  transition: all 0.2s;
+}
+
+.stats-link:hover {
+  font-size: 9.5pt;
+  opacity: 100%;
+}
+
+.stats-link i {
+  margin-top: 2px;
+}
+
 /*COLOR BODY*/
 /*COLOR BODY*/
 /* COLOR WHITE*/

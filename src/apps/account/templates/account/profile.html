@@ -20,24 +20,24 @@
 
     <div class="container-fluid col-md-10 pb-4">
         <main class="main w-100 p-md-4 p-2">
-            <h5 class="fw-semibold text-white">پروفایل</h5>
+            <h5 class="fw-semibold text-white text-md-end text-center mt-md-0 mt-3">پروفایل</h5>
 
             <form method="POST" action="{% url 'account:profile_details' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="d-flex justify-content-between flex-wrap mt-5 profile-main ">
+                <div class="d-flex justify-content-between flex-wrap mt-md-5 mt-4 profile-main">
                     <div class="d-flex align-items-end gap-2">
                         <div class="rounded-circle profile-picture">
                             <img src="{{ user.profile.get_image_url }}" id="profilePic" width="95" height="95"
                                  alt="Profile picture">
                         </div>
                         <div class="py-2">
-                            <label for="profile_pic" class="btn btn-sm btn-light">تغییر تصویر</label>
+                            <label for="profile_pic" class="btn btn-sm fw-semibold btn-light">تغییر تصویر</label>
                             <input type="file" id="profile_pic" name="image" accept="image/png, image/jpeg" hidden="hidden"
                                    onchange="displayImage(event)">
                         </div>
                     </div>
                     <div class="d-flex py-2">
-                        <div class="d-flex flex-column justify-content-end">
+                        <div class="d-flex flex-column justify-content-end ms-1">
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editPassModal">تغییر رمز عبور</button>
                         </div>
                     </div>
@@ -76,6 +76,35 @@
                     <button type="submit" class="btn btn-success">ذخیره تغییرات</button>
                 </div>
             </form>
+
+            <!-- Start stats section -->
+            <h5 class="fw-semibold text-white text-end me-2 mt-md-3 mt-4">مدیر من</h5>
+            <div class="d-flex justify-content-md-start justify-content-center flex-wrap gap-4 mt-3 stats-main">
+                <div class="d-flex flex-column flex-grow-1 stats-box stats-box-1">
+                    <span>دوره‌های آموزشی من</span>
+                    <a href="#" class="text-white mt-2 stats-link">
+                        <span>مشاهده همه</span>
+                        <i class="bi bi-arrow-left" style="-webkit-text-stroke: 0.4pt;"></i>
+                    </a>
+                    <div class="stats-info-main stats-num convert-digits">0</div>
+                </div>
+                <div class="d-flex flex-grow-1 stats-box stats-box-2">
+                    <span>اشتراک باقی مانده</span>
+                    <div class="stats-info-main stats-info">
+                        <span class="convert-digits">33</span>
+                        <span class="me-1">روز</span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-grow-1 stats-box stats-box-3">
+                    <span>تیکت‌های ارسال شده</span>
+                    <a href="#" class="text-white mt-2 stats-link">
+                        <span>مشاهده همه</span>
+                        <i class="bi bi-arrow-left" style="-webkit-text-stroke: 0.4pt;"></i>
+                    </a>
+                    <div class="stats-info-main stats-num convert-digits">4</div>
+                </div>
+            </div>
+            <!-- .End stats section -->
 
         </main>
     </div>

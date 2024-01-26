@@ -1486,6 +1486,10 @@ ul {
 
 /*---------------START 768PX----------------*/
 @media (max-width: 768px) {
+  .package-box {
+    max-width: 320px;
+    gap: 10px;
+  }
   .print {
     width: 100%;
   }

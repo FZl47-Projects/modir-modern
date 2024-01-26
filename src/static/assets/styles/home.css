@@ -1526,6 +1526,10 @@ ul {
     height: auto;
     max-height: 16rem;
   }
+  .package-box {
+    min-height: 425px;
+    gap: 5px;
+  }
   .print {
     width: 100%;
   }

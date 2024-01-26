@@ -1,15 +1,16 @@
 
 .menu-toggle-btn {
     display: none;
-    right: 250px;
-    top: 20px;
+    position: fixed;
+    right: 20px;
+    top: 24px;
     z-index: 950;
 }
 
 .menu-toggle-icon {
     background-color: #868686;
-    font-size: 22px;
-    padding: 0.6rem 0.2rem 0 0.5rem;
+    font-size: 28px;
+    padding: 0.7rem 0.2rem 0 0.5rem;
     border-radius: 6px 0 0 6px;
     -webkit-text-stroke: 0.5pt;
 }
@@ -187,13 +188,14 @@
         top: 0;
         right: -300px;
         z-index: 950;
-        transition: right 0.3s;
+        transition: all 0.25s;
     }
     .menu-toggle-btn {
         display: block;
+        position: fixed;
         right: 0;
-        top: 15px;
-        transition: right 0.23s;
+        top: 16px;
+        transition: all 0.23s;
     }
     .top-slider {
         margin-top: 20px;
