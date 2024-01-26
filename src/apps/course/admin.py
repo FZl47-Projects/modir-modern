@@ -47,7 +47,7 @@ class CourseAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('title', 'short_des', 'instructor', 'type', 'description')}),
         (_('Price info'), {'fields': ('price', 'discount', 'selling_price')}),
-        (_('Additional info'), {'fields': ('image', 'duration', 'is_active')})
+        (_('Additional info'), {'fields': ('image', 'duration', 'pinned', 'is_active')})
     )
 
     @admin.display(description=_('Selling price(Rial)'))

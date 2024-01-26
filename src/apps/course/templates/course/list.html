@@ -19,7 +19,19 @@
         <main class="main w-100 p-md-4 p-2">
             <h5 class="fw-semibold text-white">دوره های آموزشی</h5>
 
-            <div class="d-flex justify-content-lg-start justify-content-center flex-wrap gap-3 mt-4">
+            <!-- Start filter section -->
+            <div class="d-flex align-items-center gap-3 mt-4">
+                <div class="text-white">دسته بندی: </div>
+                <a href="{% url 'course:course_list' %}" class="btn btn-sm btn-secondary fw-semibold
+                    {% if not request.GET.type %}opacity-100{% else %}opacity-50{% endif %}"
+                   style="min-width: 50px;">همه</a>
+                <a href="{% url 'course:course_list' %}?type=free" class="btn btn-sm btn-secondary
+                    {% if request.GET.type == 'free' %}opacity-100{% else %}opacity-50{% endif %} fw-semibold"
+                   style="min-width: 50px;">رایگان</a>
+            </div>
+            <!-- .End filter section -->
+
+            <div class="d-flex justify-content-lg-start justify-content-center flex-wrap gap-3 mt-5">
 
                 {% for obj in object_list %}
                     <div class="package-box">
@@ -37,20 +49,22 @@
                             <div class="d-flex gap-1 mb-3">
                                 <span>قیمت:</span>
                                 <div class="d-flex gap-1 align-items-center">
-                                    {% if obj.discount %}
-                                        <span class="text-danger fw-semibold convert-digits">{{ obj.selling_price|convert_rial|intcomma }}</span>
+                                    {% if not obj.selling_price %}
+                                        <span class="text-success fw-semibold">رایگان</span>
                                     {% else %}
-                                        <span class="fw-semibold convert-digits">{{ obj.selling_price|convert_rial|intcomma }}</span>
+                                        <span class="fw-semibold convert-digits {% if obj.discount %}text-danger{% endif %}">
+                                            {{ obj.selling_price|convert_rial|intcomma }}
+                                        </span>
+                                        <span>تومان</span>
                                     {% endif %}
-                                    <span>تومان</span>
                                 </div>
                             </div>
                             <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
                         </div>
                     </div>
                 {% empty %}
-                    <div class="d-flex justify-content-center">
-                        <span class="fw-bold text-danger">دوره ای یافت نشد</span>
+                    <div class="w-100 d-flex justify-content-center">
+                        <span class="fw-bold text-danger h4">دوره ای یافت نشد</span>
                     </div>
                 {% endfor %}
 
