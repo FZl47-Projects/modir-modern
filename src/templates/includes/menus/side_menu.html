@@ -41,6 +41,14 @@
                     </a>
                 </li>
                 <li class="item-menu">
+                    <a href="#">
+                        <span class="d-flex align-items-center" style="margin-right: 12px;">
+                            <i class="bi bi-ticket-detailed mt-2" style="font-size: 24px;"></i>
+                        </span>
+                        <span class="fw-semibold me-1">تیکت‌ ها</span>
+                    </a>
+                </li>
+                <li class="item-menu">
                     <a href="{% url 'course:course_list' %}"
                        class="{% if request.resolver_match.url_name == 'course_list' %}active{% endif %}">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
@@ -60,35 +68,43 @@
                 <li class="item-menu">
                     <a href="#">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
-                            <i class="bi bi-box-seam mt-2" style="font-size: 24px;"></i>
+                            <i class="bi bi-cup-hot mt-2" style="font-size: 24px;"></i>
                         </span>
-                        <span class="fw-semibold me-1">مواد اولیه</span>
+                        <span class="fw-semibold me-1">رستوران من</span>
                     </a>
                 </li>
-                <li class="item-menu">
-                    <a href="#">
-                        <span class="d-flex align-items-center" style="margin-right: 12px;">
-                            <i class="bi bi-ui-checks-grid mt-2" style="font-size: 24px;"></i>
-                        </span>
-                        <span class="fw-semibold">رسپی غذاها</span>
-                    </a>
-                </li>
-                <li class="item-menu">
-                    <a href="#">
-                        <span class="d-flex align-items-center" style="margin-right: 10px;">
-                            <i class="bi bi-clipboard-check mt-2" style="font-size: 25px;"></i>
-                        </span>
-                        <span class="fw-semibold me-1">آماده سازی ها</span>
-                    </a>
-                </li>
-                <li class="item-menu">
-                    <a href="#">
-                        <span class="d-flex align-items-center" style="margin-right: 10px;">
-                            <i class="bi bi-card-list mt-2" style="font-size: 25px;"></i>
-                        </span>
-                        <span class="fw-semibold">فرم مهندسی منو</span>
-                    </a>
-                </li>
+{#                <li class="item-menu">#}
+{#                    <a href="#">#}
+{#                        <span class="d-flex align-items-center" style="margin-right: 12px;">#}
+{#                            <i class="bi bi-box-seam mt-2" style="font-size: 24px;"></i>#}
+{#                        </span>#}
+{#                        <span class="fw-semibold me-1">مواد اولیه</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="item-menu">#}
+{#                    <a href="#">#}
+{#                        <span class="d-flex align-items-center" style="margin-right: 12px;">#}
+{#                            <i class="bi bi-ui-checks-grid mt-2" style="font-size: 24px;"></i>#}
+{#                        </span>#}
+{#                        <span class="fw-semibold">رسپی غذاها</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="item-menu">#}
+{#                    <a href="#">#}
+{#                        <span class="d-flex align-items-center" style="margin-right: 10px;">#}
+{#                            <i class="bi bi-clipboard-check mt-2" style="font-size: 25px;"></i>#}
+{#                        </span>#}
+{#                        <span class="fw-semibold me-1">آماده سازی ها</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="item-menu">#}
+{#                    <a href="#">#}
+{#                        <span class="d-flex align-items-center" style="margin-right: 10px;">#}
+{#                            <i class="bi bi-card-list mt-2" style="font-size: 25px;"></i>#}
+{#                        </span>#}
+{#                        <span class="fw-semibold">فرم مهندسی منو</span>#}
+{#                    </a>#}
+{#                </li>#}
                 <li class="item-menu">
                     <a href="{% url 'account:logout' %}">
                         <span class="d-flex align-items-center" style="margin-right: 10px;">

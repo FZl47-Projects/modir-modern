@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-26 10:33+0330\n"
+"POT-Creation-Date: 2024-01-26 13:51+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,8 +144,8 @@ msgstr "نام"
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: .\apps\account\models.py:44 .\apps\course\models.py:53
-#: .\apps\course\models.py:84
+#: .\apps\account\models.py:44 .\apps\course\models.py:55
+#: .\apps\course\models.py:89
 msgid "Active"
 msgstr "فعال"
 
@@ -264,24 +264,24 @@ msgstr "لحظاتی قبل"
 msgid "Entered data is not correct."
 msgstr "داده وارد شده صحیح نیست."
 
-#: .\apps\course\admin.py:16
+#: .\apps\course\admin.py:18
 msgid "Media links"
 msgstr "آدرس‌ رسانه‌ها"
 
-#: .\apps\course\admin.py:38
+#: .\apps\course\admin.py:49
 msgid "Price info"
 msgstr "اطلاعات قیمت"
 
-#: .\apps\course\admin.py:39
+#: .\apps\course\admin.py:50
 msgid "Additional info"
 msgstr "اطلاعات تکمیلی"
 
-#: .\apps\course\admin.py:42
+#: .\apps\course\admin.py:53
 msgid "Selling price(Rial)"
 msgstr "قیمت فروش (ریال)"
 
-#: .\apps\course\apps.py:8 .\apps\course\models.py:56
-#: .\apps\course\models.py:80 .\apps\course\models.py:101
+#: .\apps\course\apps.py:8 .\apps\course\models.py:58
+#: .\apps\course\models.py:85 .\apps\course\models.py:106
 msgid "Course"
 msgstr "دوره"
 
@@ -333,7 +333,7 @@ msgstr "مدرسین"
 msgid "Title"
 msgstr "عنوان"
 
-#: .\apps\course\models.py:43 .\apps\course\models.py:81
+#: .\apps\course\models.py:43 .\apps\course\models.py:86
 msgid "No title"
 msgstr "بدون عنوان"
 
@@ -349,7 +349,7 @@ msgstr "توضیحات"
 msgid "Course type"
 msgstr "نوع دوره"
 
-#: .\apps\course\models.py:48 .\apps\course\models.py:83
+#: .\apps\course\models.py:48 .\apps\course\models.py:88
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1793
 msgid "Duration"
 msgstr "مدت زمان"
@@ -375,43 +375,47 @@ msgstr "قیمت فروش"
 msgid "Image"
 msgstr "تصویر"
 
-#: .\apps\course\models.py:57
+#: .\apps\course\models.py:54
+msgid "Pinned"
+msgstr "پین شده"
+
+#: .\apps\course\models.py:59
 msgid "Courses"
 msgstr "دوره ها"
 
-#: .\apps\course\models.py:81
+#: .\apps\course\models.py:86
 msgid "Session title"
 msgstr "عنوان جلسه"
 
-#: .\apps\course\models.py:82
+#: .\apps\course\models.py:87
 msgid "Video file"
 msgstr "فایل ویدیو"
 
-#: .\apps\course\models.py:83
+#: .\apps\course\models.py:88
 msgid "Seconds"
 msgstr "ثانیه"
 
-#: .\apps\course\models.py:87
+#: .\apps\course\models.py:92
 msgid "Course session"
 msgstr "جلسه دوره"
 
-#: .\apps\course\models.py:88
+#: .\apps\course\models.py:93
 msgid "Course sessions"
 msgstr "جلسات دوره"
 
-#: .\apps\course\models.py:102
+#: .\apps\course\models.py:107
 msgid "Question title"
 msgstr "عنوان سوًال"
 
-#: .\apps\course\models.py:103
+#: .\apps\course\models.py:108
 msgid "Answer"
 msgstr "پاسخ"
 
-#: .\apps\course\models.py:106
+#: .\apps\course\models.py:111
 msgid "Frequently asked question"
 msgstr "سوال متداول"
 
-#: .\apps\course\models.py:107
+#: .\apps\course\models.py:112
 msgid "Frequently asked questions"
 msgstr "سوالات متداول"
 
