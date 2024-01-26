@@ -41,7 +41,8 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#">
+                    <a href="{% url 'course:course_list' %}"
+                       class="{% if request.resolver_match.url_name == 'course_list' %}active{% endif %}">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
                             <i class="bi bi-mortarboard mt-2" style="font-size: 23px;"></i>
                         </span>
