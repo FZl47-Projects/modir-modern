@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-21 22:34+0330\n"
+"POT-Creation-Date: 2024-01-26 10:33+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,8 +40,6 @@ msgid "Dates"
 msgstr "تاریخ ها"
 
 #: .\apps\account\admin.py:61
-#, fuzzy
-#| msgid "Personal info"
 msgid "Place info"
 msgstr "اطلاعات شخصی"
 
@@ -146,7 +144,8 @@ msgstr "نام"
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: .\apps\account\models.py:44
+#: .\apps\account\models.py:44 .\apps\course\models.py:53
+#: .\apps\course\models.py:84
 msgid "Active"
 msgstr "فعال"
 
@@ -166,7 +165,7 @@ msgstr "زمان ویرایش"
 msgid "Users"
 msgstr "کاربران"
 
-#: .\apps\account\models.py:89
+#: .\apps\account\models.py:89 .\apps\course\models.py:11
 msgid "No name"
 msgstr "بدون نام"
 
@@ -265,6 +264,157 @@ msgstr "لحظاتی قبل"
 msgid "Entered data is not correct."
 msgstr "داده وارد شده صحیح نیست."
 
+#: .\apps\course\admin.py:16
+msgid "Media links"
+msgstr "آدرس‌ رسانه‌ها"
+
+#: .\apps\course\admin.py:38
+msgid "Price info"
+msgstr "اطلاعات قیمت"
+
+#: .\apps\course\admin.py:39
+msgid "Additional info"
+msgstr "اطلاعات تکمیلی"
+
+#: .\apps\course\admin.py:42
+msgid "Selling price(Rial)"
+msgstr "قیمت فروش (ریال)"
+
+#: .\apps\course\apps.py:8 .\apps\course\models.py:56
+#: .\apps\course\models.py:80 .\apps\course\models.py:101
+msgid "Course"
+msgstr "دوره"
+
+#: .\apps\course\enums.py:7
+msgid "Free"
+msgstr "رایگان"
+
+#: .\apps\course\enums.py:8
+msgid "Cash"
+msgstr "نقدی"
+
+#: .\apps\course\models.py:11
+msgid "Instructor name"
+msgstr "نام مدرس"
+
+#: .\apps\course\models.py:12
+msgid "Biography"
+msgstr "معرفی کوتاه"
+
+#: .\apps\course\models.py:13
+msgid "Profile pic"
+msgstr "تصویر پروفایل"
+
+#: .\apps\course\models.py:16
+msgid "Linkedin url"
+msgstr "آدرس لینکدین"
+
+#: .\apps\course\models.py:17
+msgid "Instagram url"
+msgstr "آدرس اینستاگرام"
+
+#: .\apps\course\models.py:18
+msgid "X/Twitter url"
+msgstr "آدرس توییتر/x"
+
+#: .\apps\course\models.py:19
+msgid "Website url"
+msgstr "آدرس وبسایت"
+
+#: .\apps\course\models.py:22 .\apps\course\models.py:47
+msgid "Instructor"
+msgstr "مدرس"
+
+#: .\apps\course\models.py:23
+msgid "Instructors"
+msgstr "مدرسین"
+
+#: .\apps\course\models.py:43
+msgid "Title"
+msgstr "عنوان"
+
+#: .\apps\course\models.py:43 .\apps\course\models.py:81
+msgid "No title"
+msgstr "بدون عنوان"
+
+#: .\apps\course\models.py:44
+msgid "Short description"
+msgstr "توضیح کوتاه"
+
+#: .\apps\course\models.py:45
+msgid "Description"
+msgstr "توضیحات"
+
+#: .\apps\course\models.py:46
+msgid "Course type"
+msgstr "نوع دوره"
+
+#: .\apps\course\models.py:48 .\apps\course\models.py:83
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1793
+msgid "Duration"
+msgstr "مدت زمان"
+
+#: .\apps\course\models.py:48
+msgid "2h, 30m"
+msgstr "۲ ساعت و ۳۰ دقیقه"
+
+#: .\apps\course\models.py:49
+msgid "Price"
+msgstr "قیمت"
+
+#: .\apps\course\models.py:50
+msgid "Discount"
+msgstr "تخفیف"
+
+#: .\apps\course\models.py:51
+msgid "Selling price"
+msgstr "قیمت فروش"
+
+#: .\apps\course\models.py:52
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
+msgid "Image"
+msgstr "تصویر"
+
+#: .\apps\course\models.py:57
+msgid "Courses"
+msgstr "دوره ها"
+
+#: .\apps\course\models.py:81
+msgid "Session title"
+msgstr "عنوان جلسه"
+
+#: .\apps\course\models.py:82
+msgid "Video file"
+msgstr "فایل ویدیو"
+
+#: .\apps\course\models.py:83
+msgid "Seconds"
+msgstr "ثانیه"
+
+#: .\apps\course\models.py:87
+msgid "Course session"
+msgstr "جلسه دوره"
+
+#: .\apps\course\models.py:88
+msgid "Course sessions"
+msgstr "جلسات دوره"
+
+#: .\apps\course\models.py:102
+msgid "Question title"
+msgstr "عنوان سوًال"
+
+#: .\apps\course\models.py:103
+msgid "Answer"
+msgstr "پاسخ"
+
+#: .\apps\course\models.py:106
+msgid "Frequently asked question"
+msgstr "سوال متداول"
+
+#: .\apps\course\models.py:107
+msgid "Frequently asked questions"
+msgstr "سوالات متداول"
+
 #: .\apps\notification\apps.py:8 .\apps\notification\models.py:29
 msgid "Notification"
 msgstr "اعلان"
@@ -309,7 +459,7 @@ msgstr "اعلان ها"
 msgid "Public"
 msgstr "عمومی"
 
-#: .\config\settings\base.py:100
+#: .\config\settings\base.py:101
 msgid "Persian"
 msgstr "فارسی"
 
@@ -612,10 +762,6 @@ msgid ""
 "uuuuuu] format."
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1793
-msgid "Duration"
-msgstr ""
-
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1870
 msgid "File path"
 msgstr ""
@@ -722,10 +868,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\files.py:232
 msgid "File"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
-msgid "Image"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\json.py:26
