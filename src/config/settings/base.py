@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.public.apps.PublicConfig',
     'apps.course.apps.CourseConfig',
     'apps.account.apps.AccountConfig',
+    'apps.subscription.apps.SubscriptionConfig',
     'apps.notification.apps.NotificationConfig',
 
     # Django modules
