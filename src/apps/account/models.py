@@ -8,6 +8,7 @@ from .enums import UserAccessEnum, UserGenderEnum
 from .managers import UserManager, AccessManager
 from .validators import validate_didit_type
 from apps.core.models import BaseModel
+from datetime import datetime
 from secrets import token_hex
 
 
@@ -100,6 +101,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         self.token = None
         self.save()
+
+    def get_subscription_time(self):
+        subscriptions = self.subscriptions.filter(is_active=True)
+        remaining_days = sum([(sub.expire_date - datetime.now().date()).days for sub in subscriptions])
+
+        return remaining_days
 
 
 # UserProfiles model

@@ -1,0 +1,23 @@
+<div class="modal fade" tabindex="-1" id="confirmPurchaseModal" aria-labelledby="purchaseConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="POST" action="#" class="modal-content text-white border-white border-1 rounded-3"
+              style="background-color: #2d2c2c;">
+            {% csrf_token %}
+            <div class="modal-header align-items-center">
+                <h5 class="modal-title fw-semibold h4">خرید اشتراک</h5>
+                <i role="button" class="bi bi-x-lg text-white" data-bs-dismiss="modal" aria-label="Close"></i>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="-1" name="pk" id="subscriptionId">
+                <p class="fw-semibold text-white">
+                    تهیه اشتراک
+                    <span id="subscriptionTitle" class="text-warning fw-semibold"></span>
+                    مدیر مدرن
+                </p>
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="submit" class="w-100 btn btn-success fw-semibold">ثبت و پرداخت</button>
+            </div>
+        </form>
+    </div>
+</div>
