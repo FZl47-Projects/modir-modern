@@ -9,7 +9,8 @@ urlpatterns = [
     path('account/', include('apps.account.urls', namespace='account')),
     path('', include('apps.public.urls', namespace='public')),
     path('course/', include('apps.course.urls', namespace='course')),
-    path('subscription/', include('apps.subscription.urls', namespace='subscription'))
+    path('ticketing/', include('apps.ticket.urls', namespace='ticket')),
+    path('subscription/', include('apps.subscription.urls', namespace='subscription')),
 ]
 
 

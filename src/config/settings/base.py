@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # Apps
     'apps.core.apps.CoreConfig',
     'apps.public.apps.PublicConfig',
+    'apps.ticket.apps.TicketConfig',
     'apps.course.apps.CourseConfig',
     'apps.account.apps.AccountConfig',
     'apps.subscription.apps.SubscriptionConfig',

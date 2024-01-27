@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-27 16:02+0330\n"
+"POT-Creation-Date: 2024-01-27 19:40+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,7 +269,7 @@ msgstr "داده وارد شده صحیح نیست."
 msgid "Media links"
 msgstr "آدرس‌ رسانه‌ها"
 
-#: .\apps\course\admin.py:49
+#: .\apps\course\admin.py:49 .\apps\subscription\admin.py:19
 msgid "Price info"
 msgstr "اطلاعات قیمت"
 
@@ -277,7 +277,7 @@ msgstr "اطلاعات قیمت"
 msgid "Additional info"
 msgstr "اطلاعات تکمیلی"
 
-#: .\apps\course\admin.py:53 .\apps\subscription\admin.py:19
+#: .\apps\course\admin.py:53 .\apps\subscription\admin.py:25
 msgid "Selling price(Rial)"
 msgstr "قیمت فروش (ریال)"
 
@@ -464,7 +464,11 @@ msgstr "اعلان ها"
 msgid "Public"
 msgstr "عمومی"
 
-#: .\apps\subscription\admin.py:33 .\apps\subscription\models.py:42
+#: .\apps\subscription\admin.py:20
+msgid "Status info"
+msgstr "اطلاعات وضعیت"
+
+#: .\apps\subscription\admin.py:39 .\apps\subscription\models.py:42
 msgid "Expire date"
 msgstr "تاریخ انقضا"
 
@@ -513,7 +517,11 @@ msgstr "مشترک"
 msgid "Subscribers"
 msgstr "مشترکین"
 
-#: .\config\settings\base.py:102
+#: .\apps\ticket\apps.py:8
+msgid "Ticket"
+msgstr "تیکت"
+
+#: .\config\settings\base.py:103
 msgid "Persian"
 msgstr "فارسی"
 
