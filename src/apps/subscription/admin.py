@@ -14,6 +14,12 @@ class SubscriptionAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     readonly_fields = ('selling_price',)
 
+    fieldsets = (
+        (None, {'fields': ('type',)}),
+        (_('Price info'), {'fields': ('price', 'discount', 'selling_price')}),
+        (_('Status info'), {'fields': ('promo', 'is_active')})
+    )
+
     formfield_overrides = {models.PositiveIntegerField: {"widget": forms.NumberInput(attrs={"size": "30"})}}
 
     @admin.display(description=_('Selling price(Rial)'))
@@ -26,7 +32,7 @@ class SubscriptionAdmin(admin.ModelAdmin):
 class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'subscription', 'get_expire_date', 'is_active')
     list_display_links = ('id', 'user')
-    readonly_fields = ('created_at', 'expire_date',)
+    readonly_fields = ('created_at',)
     list_filter = ('is_active', 'subscription__type')
     search_fields = ('user__phone_number',)
 

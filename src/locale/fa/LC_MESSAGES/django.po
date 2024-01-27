@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-26 15:08+0330\n"
+"POT-Creation-Date: 2024-01-27 16:02+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,8 @@ msgstr "تاییدیه‌ ها"
 msgid "Permissions"
 msgstr "مجوزها"
 
-#: .\apps\account\admin.py:32 .\apps\account\models.py:25
-#: .\apps\account\models.py:43
+#: .\apps\account\admin.py:32 .\apps\account\models.py:26
+#: .\apps\account\models.py:44
 msgid "Accesses"
 msgstr "دسترسی ها"
 
@@ -47,12 +47,12 @@ msgstr "اطلاعات شخصی"
 msgid "Account"
 msgstr "حساب ها"
 
-#: .\apps\account\enums.py:7 .\apps\account\models.py:61
-#: .\apps\account\models.py:109
+#: .\apps\account\enums.py:7 .\apps\account\models.py:62
+#: .\apps\account\models.py:116 .\apps\subscription\models.py:40
 msgid "User"
 msgstr "کاربر"
 
-#: .\apps\account\enums.py:8 .\apps\account\models.py:45
+#: .\apps\account\enums.py:8 .\apps\account\models.py:46
 msgid "Admin"
 msgstr "ادمین"
 
@@ -64,7 +64,7 @@ msgstr "مرد"
 msgid "Female"
 msgstr "زن"
 
-#: .\apps\account\forms.py:15 .\apps\account\models.py:39
+#: .\apps\account\forms.py:15 .\apps\account\models.py:40
 msgid "Phone number"
 msgstr "شماره تلفن"
 
@@ -118,90 +118,91 @@ msgstr "کاربر باید یک شماره تلفن داشته باشد"
 msgid "You do not have permission to access this page!"
 msgstr "شما اجازه دسترسی به این صفحه را ندارید"
 
-#: .\apps\account\models.py:18
+#: .\apps\account\models.py:19
 msgid "Access title"
 msgstr "عنوان دسترسی"
 
-#: .\apps\account\models.py:19 .\apps\account\models.py:51
+#: .\apps\account\models.py:20 .\apps\account\models.py:52
 #: .\apps\core\models.py:7
 msgid "Creation time"
 msgstr "زمان ایجاد"
 
-#: .\apps\account\models.py:24
+#: .\apps\account\models.py:25
 msgid "Access"
 msgstr "دسترسی"
 
-#: .\apps\account\models.py:40
+#: .\apps\account\models.py:41
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1845
 msgid "Email address"
 msgstr "آدرس الکترونیک"
 
-#: .\apps\account\models.py:41
+#: .\apps\account\models.py:42
 msgid "First name"
 msgstr "نام"
 
-#: .\apps\account\models.py:42
+#: .\apps\account\models.py:43
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: .\apps\account\models.py:44 .\apps\course\models.py:55
-#: .\apps\course\models.py:89
+#: .\apps\account\models.py:45 .\apps\course\models.py:55
+#: .\apps\course\models.py:89 .\apps\subscription\models.py:21
+#: .\apps\subscription\models.py:43
 msgid "Active"
 msgstr "فعال"
 
-#: .\apps\account\models.py:46
+#: .\apps\account\models.py:47
 msgid "Verify"
 msgstr "تایید شده"
 
-#: .\apps\account\models.py:49
+#: .\apps\account\models.py:50
 msgid "Secret token"
 msgstr "توکن"
 
-#: .\apps\account\models.py:52 .\apps\core\models.py:8
+#: .\apps\account\models.py:53 .\apps\core\models.py:8
 msgid "Update time"
 msgstr "زمان ویرایش"
 
-#: .\apps\account\models.py:62
+#: .\apps\account\models.py:63
 msgid "Users"
 msgstr "کاربران"
 
-#: .\apps\account\models.py:89 .\apps\course\models.py:11
+#: .\apps\account\models.py:90 .\apps\course\models.py:11
 msgid "No name"
 msgstr "بدون نام"
 
-#: .\apps\account\models.py:110
+#: .\apps\account\models.py:117
 msgid "Melli code"
 msgstr "کدملی"
 
-#: .\apps\account\models.py:111
+#: .\apps\account\models.py:118
 msgid "Gender"
 msgstr "جنسیت"
 
-#: .\apps\account\models.py:112
+#: .\apps\account\models.py:119
 msgid "Date of birth"
 msgstr "تاریخ تولد"
 
-#: .\apps\account\models.py:113
+#: .\apps\account\models.py:120
 msgid "Name"
 msgstr "نام مجموعه"
 
-#: .\apps\account\models.py:114
+#: .\apps\account\models.py:121
 msgid "Province"
 msgstr "استان"
 
-#: .\apps\account\models.py:115
+#: .\apps\account\models.py:122
 msgid "City"
 msgstr "شهر"
 
-#: .\apps\account\models.py:116
+#: .\apps\account\models.py:123
 msgid "Picture"
 msgstr "تصویر"
 
-#: .\apps\account\models.py:119
+#: .\apps\account\models.py:126
 msgid "User profile"
 msgstr "پروفایل کاربر"
 
-#: .\apps\account\models.py:120
+#: .\apps\account\models.py:127
 msgid "Users profile"
 msgstr "پروفایل کاربران"
 
@@ -276,7 +277,7 @@ msgstr "اطلاعات قیمت"
 msgid "Additional info"
 msgstr "اطلاعات تکمیلی"
 
-#: .\apps\course\admin.py:53
+#: .\apps\course\admin.py:53 .\apps\subscription\admin.py:19
 msgid "Selling price(Rial)"
 msgstr "قیمت فروش (ریال)"
 
@@ -358,15 +359,15 @@ msgstr "مدت زمان"
 msgid "2h, 30m"
 msgstr "۲ ساعت و ۳۰ دقیقه"
 
-#: .\apps\course\models.py:49
+#: .\apps\course\models.py:49 .\apps\subscription\models.py:17
 msgid "Price"
 msgstr "قیمت"
 
-#: .\apps\course\models.py:50
+#: .\apps\course\models.py:50 .\apps\subscription\models.py:18
 msgid "Discount"
 msgstr "تخفیف"
 
-#: .\apps\course\models.py:51
+#: .\apps\course\models.py:51 .\apps\subscription\models.py:19
 msgid "Selling price"
 msgstr "قیمت فروش"
 
@@ -463,9 +464,54 @@ msgstr "اعلان ها"
 msgid "Public"
 msgstr "عمومی"
 
-#: .\apps\subscription\apps.py:8
+#: .\apps\subscription\admin.py:33 .\apps\subscription\models.py:42
+msgid "Expire date"
+msgstr "تاریخ انقضا"
+
+#: .\apps\subscription\apps.py:8 .\apps\subscription\models.py:24
+#: .\apps\subscription\models.py:41
 msgid "Subscription"
 msgstr "اشتراک"
+
+#: .\apps\subscription\enums.py:7
+msgid "One month"
+msgstr "یک ماه"
+
+#: .\apps\subscription\enums.py:8
+msgid "Two months"
+msgstr "دو ماه"
+
+#: .\apps\subscription\enums.py:9
+msgid "Three months"
+msgstr "سه ماه"
+
+#: .\apps\subscription\enums.py:10
+msgid "Six months"
+msgstr "شش ماه"
+
+#: .\apps\subscription\enums.py:11
+msgid "Twelve months"
+msgstr "دوازده ماه"
+
+#: .\apps\subscription\models.py:16
+msgid "Subscription type"
+msgstr "نوع اشتراک"
+
+#: .\apps\subscription\models.py:20
+msgid "Promo"
+msgstr "ویژه"
+
+#: .\apps\subscription\models.py:25
+msgid "Subscriptions"
+msgstr "اشتراک ها"
+
+#: .\apps\subscription\models.py:46
+msgid "Subscriber"
+msgstr "مشترک"
+
+#: .\apps\subscription\models.py:47
+msgid "Subscribers"
+msgstr "مشترکین"
 
 #: .\config\settings\base.py:102
 msgid "Persian"
@@ -515,20 +561,20 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\core\validators.py:22
 msgid "Enter a valid value."
-msgstr ""
+msgstr "یک مقدار معتبر وارد کنید."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:104
 #: .\venv\Lib\site-packages\django\forms\fields.py:752
 msgid "Enter a valid URL."
-msgstr ""
+msgstr "یک آدرس معتبر وارد کنید."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:165
 msgid "Enter a valid integer."
-msgstr ""
+msgstr "یک عدد صحیح معتبر وارد کنید."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:176
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "یک آدرس ایمیل معتبر وارد کنید"
 
 #. Translators: "letters" means latin letters: a-z and A-Z.
 #: .\venv\Lib\site-packages\django\core\validators.py:259
