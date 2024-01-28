@@ -1,0 +1,101 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% load filters %}
+
+
+{% block title %}مدیرمدرن | تیکت ها{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/tickets.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <div class="container-fluid col-md-10 pb-1">
+        <main class="main w-100 p-md-4 p-2">
+            <h5 class="fw-semibold text-white text-md-end text-center mt-3">تیکت ها</h5>
+
+            <div class="d-flex gap-5 mt-md-4 mt-3">
+                <!-- Start tickets section -->
+                <div class="d-flex flex-column p-2 ticket-main">
+                    <div class="rounded-3 mb-3">
+                        <a href="{% url 'ticket:create_ticket' %}" class="btn btn-warning w-100 fw-semibold">تیکت جدید</a>
+                    </div>
+
+                    <div class="ticket-self-box">
+                        {% for obj in tickets %}
+                            <a href="{{ obj.get_absolute_url }}" title="مشاهده" class="d-flex flex-column rounded-3 ticket-box">
+                                <div class="ticket-tag {% if obj.status == 'open' %}bg-success{% else %}bg-danger{% endif %}">
+                                    <small class="text-white">{{ obj.get_status_display }}</small>
+                                </div>
+                                <div class="text-white ticket-box-head">
+                                    <h5>{{ obj.title }}</h5>
+                                </div>
+                                <div class="d-flex gap-4 py-2 px-3 text-white ticket-box-body">
+                                    <div class="d-flex flex-column">
+                                        <small class="opacity-75">شناسه</small>
+                                        <span class="fw-semibold">{{ obj.id }}</span>
+                                    </div>
+                                    <div class="d-flex flex-column me-1">
+                                        <small class="opacity-75">فعالیت</small>
+                                        <span class="fw-semibold datetime-convert">{{ obj.get_created_date }}</span>
+                                    </div>
+                                    <div class="d-flex flex-column me-1">
+                                        <small class="opacity-75">نوع</small>
+                                        <span class="fw-semibold">{{ obj.get_type_label|truncatechars:11 }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        {% empty %}
+                            <div class="w-100"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- .End tickets section -->
+
+                <!-- Start ticket messages section -->
+                <div class="d-flex flex-column gap-4 text-white w-100 ticket-detail-main">
+                    <span class="fw-semibold h5">ارسال تیکت جدید</span>
+
+                    <form method="POST" action="{% url 'ticket:create_ticket' %}" enctype="multipart/form-data"
+                          class="d-flex flex-wrap gap-2 text-white w-100">
+                        {% csrf_token %}
+                        <label class="form-label flex-grow-1">
+                            <span>عنوان تیکت</span>
+                            <input type="text" name="title" placeholder="عنوان تیکت را وارد کنید" required class="form-control mt-1">
+                        </label>
+                        <label class="form-label flex-grow-1">
+                            <span>نوع تیکت</span>
+                            <select name="type" id="id_type" class="form-select mt-1">
+                                <option value="general" selected>مشکل عمومی/پیشنهاد</option>
+                                <option value="technical">مشکل فنی</option>
+                            </select>
+                        </label>
+                        <label class="form-label w-100 mt-2">
+                            <span class="me-1">متن تیکت</span>
+                            <textarea name="text"  placeholder="متن تیکت را وارد کنید" rows="5" required
+                                      maxlength="512" class="form-control mt-1"></textarea>
+                        </label>
+                        <label class="form-label w-100 mt-1">
+                            <span class="me-1">فایل مرتبط</span>
+                            <input type="file" name="file" accept="image/jpeg, image/png" class="form-control mt-1">
+                        </label>
+                        <button type="submit" class="btn btn-warning fw-semibold w-100 mt-4">ثبت تیکت</button>
+                    </form>
+                </div>
+                <!-- .End ticket messages section -->
+
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script>
+    </script>
+{% endblock %}

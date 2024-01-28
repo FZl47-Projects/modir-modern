@@ -97,11 +97,11 @@
                 </div>
                 <div class="d-flex flex-column flex-grow-1 stats-box stats-box-3">
                     <span>تیکت‌های ارسال شده</span>
-                    <a href="#" class="text-white mt-2 stats-link">
+                    <a href="{% url 'ticket:ticket_list' %}" class="text-white mt-2 stats-link">
                         <span>مشاهده همه</span>
                         <i class="bi bi-arrow-left" style="-webkit-text-stroke: 0.4pt;"></i>
                     </a>
-                    <div class="stats-info-main stats-num convert-digits">4</div>
+                    <div class="stats-info-main stats-num convert-digits">{{ user.get_tickets_count }}</div>
                 </div>
             </div>
             <!-- .End stats section -->

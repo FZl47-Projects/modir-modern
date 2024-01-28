@@ -108,6 +108,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         return remaining_days
 
+    def get_tickets_count(self):
+        return self.tickets.all().count() or 0
+
 
 # UserProfiles model
 class UserProfile(BaseModel):

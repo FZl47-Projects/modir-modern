@@ -1,0 +1,112 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% load filters %}
+
+
+{% block title %}مدیرمدرن | تیکت ها{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/tickets.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <div class="container-fluid col-md-10 pb-1">
+        <main class="main w-100 p-md-4 p-2">
+            <h5 class="fw-semibold text-white text-md-end text-center mt-3">تیکت ها</h5>
+
+            <div class="d-flex gap-5 mt-md-4 mt-3">
+                <!-- Start tickets section -->
+                <div class="d-md-flex d-none flex-column p-2 ticket-main">
+                    <div class="rounded-3 mb-3">
+                        <a href="{% url 'ticket:create_ticket' %}" class="btn btn-warning w-100 fw-semibold">تیکت جدید</a>
+                    </div>
+
+                    <div class="ticket-self-box">
+                        {% for obj in tickets %}
+                            <a href="{{ obj.get_absolute_url }}" title="مشاهده" class="d-flex flex-column rounded-3 ticket-box
+                                {% if obj == ticket %}ticket-box-selected{% endif %}">
+                                <div class="ticket-tag {% if obj.status == 'open' %}bg-success{% else %}bg-danger{% endif %}">
+                                    <small class="text-white">{{ obj.get_status_display }}</small>
+                                </div>
+                                <div class="text-white ticket-box-head">
+                                    <h5>{{ obj.title }}</h5>
+                                </div>
+                                <div class="d-flex gap-4 py-2 px-3 text-white ticket-box-body">
+                                    <div class="d-flex flex-column">
+                                        <small class="opacity-75">شناسه</small>
+                                        <span class="fw-semibold">{{ obj.id }}</span>
+                                    </div>
+                                    <div class="d-flex flex-column me-1">
+                                        <small class="opacity-75">فعالیت</small>
+                                        <span class="fw-semibold datetime-convert">{{ obj.get_created_date }}</span>
+                                    </div>
+                                    <div class="d-flex flex-column me-1">
+                                        <small class="opacity-75">نوع</small>
+                                        <span class="fw-semibold">{{ obj.get_type_label|truncatechars:11 }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        {% empty %}
+                            <div class="w-100"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- .End tickets section -->
+
+                <!-- Start ticket messages section -->
+                <div class="d-flex flex-column gap-4 text-white w-100 mt-md-0 mt-2 ticket-detail-main ticket-message-main">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-semibold h5">{{ ticket.title }}</span>
+                        <a href="{% url 'ticket:ticket_list' %}" class="btn btn-danger bi bi-x-lg pb-0 d-md-none d-block"></a>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2 mt-2 w-100 h-100">
+                        <div class="d-flex flex-column gap-4 ticket-message-all">
+                            {% for obj in ticket.get_messages %}
+                                <div class="d-flex flex-column gap-3 ticket-message-body {% if obj.user != request.user %}ticket-left{% endif %}">
+                                    <div class="d-flex flex-column text-white">
+                                        <span>{{ obj.user.profile.name|default:'مدیر سایت' }}</span>
+                                        <small class="opacity-75 datetime-convert xs-text">
+                                            {{ obj.get_created_date }}
+                                        </small>
+                                    </div>
+                                    <div class="d-flex flex-column gap-1 text-white">
+                                        <small>{{ obj.text }}</small>
+                                        {% if obj.file %}
+                                            <img src="{{ obj.file.url }}" alt="{{ obj.ticket.title }}">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if ticket.status == 'open' %}
+                            <form method="POST" action="{% url 'ticket:ticket_create_message' ticket.pk %}" class="d-flex flex-column w-100 ticket-message-send">
+                                {% csrf_token %}
+                                <label class="form-label">
+                                    <small>متن پیام</small>
+                                    <textarea name="text" rows="3" placeholder="متن خود را وارد کنید" class="form-control mt-1"></textarea>
+                                </label>
+                                <button type="submit" class="btn btn-sm btn-warning align-self-end fw-semibold mt-1">ارسال</button>
+                            </form>
+                        {% else %}
+                            <div class="w-100 text-center ticket-message-send">
+                                <span class="fw-semibold h5">این تیکت بسته شده است</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- .End ticket messages section -->
+
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

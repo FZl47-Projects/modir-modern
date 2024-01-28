@@ -141,7 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'
 
 # Login url
-LOGIN_URL = 'account/login/'
+LOGIN_URL = '/account/login/'
 
 
 # Redis db config
