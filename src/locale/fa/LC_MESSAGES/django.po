@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-27 19:40+0330\n"
+"POT-Creation-Date: 2024-01-28 21:49+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,7 @@ msgstr "حساب ها"
 
 #: .\apps\account\enums.py:7 .\apps\account\models.py:62
 #: .\apps\account\models.py:116 .\apps\subscription\models.py:40
+#: .\apps\ticket\models.py:16 .\apps\ticket\models.py:49
 msgid "User"
 msgstr "کاربر"
 
@@ -123,7 +124,8 @@ msgid "Access title"
 msgstr "عنوان دسترسی"
 
 #: .\apps\account\models.py:20 .\apps\account\models.py:52
-#: .\apps\core\models.py:7
+#: .\apps\core\models.py:7 .\apps\ticket\models.py:22
+#: .\apps\ticket\models.py:53
 msgid "Creation time"
 msgstr "زمان ایجاد"
 
@@ -146,7 +148,7 @@ msgstr "نام خانوادگی"
 
 #: .\apps\account\models.py:45 .\apps\course\models.py:55
 #: .\apps\course\models.py:89 .\apps\subscription\models.py:21
-#: .\apps\subscription\models.py:43
+#: .\apps\subscription\models.py:43 .\apps\ticket\models.py:20
 msgid "Active"
 msgstr "فعال"
 
@@ -159,6 +161,7 @@ msgid "Secret token"
 msgstr "توکن"
 
 #: .\apps\account\models.py:53 .\apps\core\models.py:8
+#: .\apps\ticket\models.py:23 .\apps\ticket\models.py:54
 msgid "Update time"
 msgstr "زمان ویرایش"
 
@@ -330,11 +333,12 @@ msgstr "مدرس"
 msgid "Instructors"
 msgstr "مدرسین"
 
-#: .\apps\course\models.py:43
+#: .\apps\course\models.py:43 .\apps\ticket\models.py:17
 msgid "Title"
 msgstr "عنوان"
 
 #: .\apps\course\models.py:43 .\apps\course\models.py:86
+#: .\apps\ticket\models.py:17
 msgid "No title"
 msgstr "بدون عنوان"
 
@@ -517,9 +521,63 @@ msgstr "مشترک"
 msgid "Subscribers"
 msgstr "مشترکین"
 
-#: .\apps\ticket\apps.py:8
+#: .\apps\ticket\apps.py:8 .\apps\ticket\models.py:26
+#: .\apps\ticket\models.py:48
 msgid "Ticket"
 msgstr "تیکت"
+
+#: .\apps\ticket\enums.py:7
+msgid "General problem"
+msgstr "مشکل عمومی/پیشنهاد"
+
+#: .\apps\ticket\enums.py:8
+msgid "Technical problem"
+msgstr "مشکل فنی"
+
+#: .\apps\ticket\enums.py:13
+msgid "Open"
+msgstr "باز"
+
+#: .\apps\ticket\enums.py:14
+msgid "Closed"
+msgstr "بسته شده"
+
+#: .\apps\ticket\models.py:18
+msgid "Type"
+msgstr "نوع"
+
+#: .\apps\ticket\models.py:19
+msgid "Status"
+msgstr "وضعیت"
+
+#: .\apps\ticket\models.py:27
+msgid "Tickets"
+msgstr "تیکت‌ها"
+
+#: .\apps\ticket\models.py:50
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2373
+msgid "Text"
+msgstr "متن"
+
+#: .\apps\ticket\models.py:51
+msgid "Related file"
+msgstr "فایل مرتبط"
+
+#: .\apps\ticket\models.py:57
+msgid "Ticket message"
+msgstr "پیام تیکت"
+
+#: .\apps\ticket\models.py:58
+msgid "Ticket messages"
+msgstr "پیام‌های تیکت"
+
+#: .\apps\ticket\views.py:44
+msgid "Ticket sent successfully"
+msgstr "تیکت با موفقیت ارسال شد"
+
+#: .\apps\ticket\views.py:79
+msgid "Message sent successfully"
+msgstr "پیام با موفقیت شد"
 
 #: .\config\settings\base.py:103
 msgid "Persian"
@@ -887,10 +945,6 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2337
 #, python-format
 msgid "Slug (up to %(max_length)s)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2373
-msgid "Text"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2448
