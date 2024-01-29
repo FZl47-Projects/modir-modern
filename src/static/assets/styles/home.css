@@ -184,6 +184,40 @@ input {
   font-size: 15px;
 }
 
+.static-banner {
+  width: 100%;
+  position: relative;
+  background: linear-gradient(76.02deg,#35a6c8 33.32%,#007295 71.55%),radial-gradient(21.29% 87.33% at 50% 50.67%,#7cf2f6 0,#35a6c8 100%);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  transition: all 0.3s;
+}
+
+.static-banner:hover {
+  box-shadow: 0 0 6px rgb(255, 255, 255);
+  scale: 100.5%;
+}
+
+.static-banner-text {
+  transition: all 0.3s;
+}
+
+.static-banner:hover > .static-banner-text {
+  scale: 106%;
+  text-shadow: 0 0 10px rgba(245, 245, 245, 0.5);
+}
+
+.static-banner-logo {
+  width: 100px;
+  height: 50px;
+}
+
+.static-banner .banner-btn {
+  padding: 1rem 2rem;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 /*COLOR BODY*/
 /*COLOR BODY*/
 /* COLOR WHITE*/
