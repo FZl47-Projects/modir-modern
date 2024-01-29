@@ -60,7 +60,7 @@
                 </li>
                 <li class="item-menu">
                     <a href="{% url 'subscription:subscription_list' %}"
-                       class="{% if request.resolver_match.url_name == 'subscription_list' %}active{% endif %}">
+                       class="{% if request.resolver_match.app_name == 'subscription' %}active{% endif %}">
                         <span class="d-flex align-items-center" style="margin-right: 13px;">
                             <i class="bi bi-patch-check mt-2" style="font-size: 23px;"></i>
                         </span>
@@ -68,12 +68,48 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="#">
+                    <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
                             <i class="bi bi-cup-hot mt-2" style="font-size: 24px;"></i>
                         </span>
                         <span class="fw-semibold me-1">رستوران من</span>
                     </a>
+                    <div class="collapse" id="collapseExample">
+                        <ul class="menu-sub-item pe-3">
+                            <li class="item-menu">
+                                <a href="#">
+                                    <span class="d-flex align-items-center" style="margin-right: 12px;">
+                                        <i class="bi bi-box2 mt-2" style="font-size: 19px;"></i>
+                                    </span>
+                                    <span class="fw-semibold me-1">مواد اولیه</span>
+                                </a>
+                            </li>
+                            <li class="item-menu">
+                                <a href="#">
+                                    <span class="d-flex align-items-center" style="margin-right: 12px;">
+                                        <i class="bi bi-receipt mt-2" style="font-size: 19px;"></i>
+                                    </span>
+                                    <span class="fw-semibold me-1">رسپی غذاها</span>
+                                </a>
+                            </li>
+                            <li class="item-menu">
+                                <a href="#">
+                                    <span class="d-flex align-items-center" style="margin-right: 12px;">
+                                        <i class="bi bi-bag-check mt-2" style="font-size: 19px;"></i>
+                                    </span>
+                                    <span class="fw-semibold me-1 mt-1">آماده سازی‌ها</span>
+                                </a>
+                            </li>
+                            <li class="item-menu">
+                                <a href="#">
+                                    <span class="d-flex align-items-center" style="margin-right: 12px;">
+                                        <i class="bi bi-journal-richtext mt-2" style="font-size: 20px;"></i>
+                                    </span>
+                                    <span class="fw-semibold me-1">مهندسی منو</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 {#                <li class="item-menu">#}
                 {#                    <a href="#">#}

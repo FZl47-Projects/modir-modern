@@ -23,6 +23,11 @@
     z-index: 950;
 }
 
+.menu-sub-item {
+    background: linear-gradient(76.02deg, rgba(0, 0, 0, 0) 33.32%, rgba(77, 77, 77, 0.25) 71.55%);
+    margin-top: -5px;
+}
+
 .menu-fixed-right .inner-menu-fixed-right {
     background-color: #2b2a29;
     display: flex;
