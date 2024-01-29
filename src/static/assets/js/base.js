@@ -131,16 +131,6 @@ function numberWithCommas(x) {
 
 // ---
 
-let container_select_choices = document.querySelectorAll('.container-select-choices')
-
-$('.container-select-choices input[type="radio"]').on('change', function (e) {
-    let inp = e.currentTarget
-    let choices = inp.parentNode.parentNode
-    choices.setAttribute('choice-val', inp.value)
-
-});
-
-
 let BtnRequestUnit = document.querySelectorAll(".btn-request-unit");
 let Modal_RequestUnit = document.querySelectorAll(".modal-request-unit");
 let overalyRequestUnit = document.querySelectorAll(".modal-request-unit .inner-modal");
@@ -164,4 +154,11 @@ document.querySelectorAll('.price-el').forEach((el) => {
     let p = el.innerText
     el.setAttribute('price-val', p)
     el.innerHTML = numberWithCommas(p)
+})
+
+// full size element
+document.querySelectorAll('.click-full-size').forEach(function (el) {
+    el.addEventListener('click', function () {
+        this.requestFullscreen();
+    })
 })

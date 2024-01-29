@@ -1564,6 +1564,9 @@ ul {
     min-height: 425px;
     gap: 5px;
   }
+  .responsive-text {
+    font-size: 10px;
+  }
   .print {
     width: 100%;
   }

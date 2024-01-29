@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View, TemplateView
-from django.shortcuts import redirect, reverse
 
 from apps.course.models import Course
+from .models import IndexVideo, TopBanner
 
 
 # Render Index view
@@ -12,7 +12,9 @@ class IndexView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'courses': Course.objects.filter(is_active=True).order_by('-id')[:5]
+            'courses': Course.objects.filter(is_active=True).order_by('-id')[:6],
+            'banners': TopBanner.objects.filter(is_active=True),
+            'index_video': IndexVideo.objects.last(),
         })
 
         return context

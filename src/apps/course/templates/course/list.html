@@ -51,11 +51,17 @@
                                 <div class="d-flex gap-1 align-items-center">
                                     {% if not obj.selling_price %}
                                         <span class="text-success fw-semibold">رایگان</span>
-                                    {% else %}
-                                        <span class="fw-semibold convert-digits {% if obj.discount %}text-danger{% endif %}">
+                                    {% elif obj.discount %}
+                                        <s class="small convert-digits">{{ obj.price|convert_rial|intcomma }}</s>
+                                        <span class="fw-semibold convert-digits text-danger">
                                             {{ obj.selling_price|convert_rial|intcomma }}
                                         </span>
-                                        <span>تومان</span>
+                                        <small>تومان</small>
+                                    {% else %}
+                                        <span class="fw-semibold convert-digits">
+                                            {{ obj.selling_price|convert_rial|intcomma }}
+                                        </span>
+                                        <small>تومان</small>
                                     {% endif %}
                                 </div>
                             </div>

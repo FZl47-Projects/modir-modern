@@ -17,32 +17,48 @@
     {% include 'includes/menus/side_menu.html' %}
     <!-- .End Sidebar menu -->
 
+    <!-- Start Static banner related modal -->
+    <div class="modal fade" tabindex="-1" id="indexVideoModal" aria-labelledby="indexVideoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-white border-white border-1 rounded-3" style="background-color: #2d2c2c;">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-semibold h4">{{ index_video.title }}</h5>
+                    <i role="button" type="button" class="bi bi-x-lg mt-2" style="-webkit-text-stroke: 0.5pt;"
+                       data-bs-dismiss="modal" aria-label="Close"></i>
+                </div>
+                <div class="modal-body">
+                    <div class="rounded-3 border-2 border-white">
+                        <video class="w-100 rounded-4" style="max-height: 450px;" controls>
+                            <source src="{{ index_video.get_video_url }}">
+                        </video>
+                    </div>
+                    <p class="text-white mt-md-3 mt-2 px-3 responsive-text">
+                        {{ index_video.description|safe }}
+                    </p>
+                </div>
+                <!--
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-danger fw-semibold" data-bs-dismiss="modal" aria-label="Close">بستن</button>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    <!-- .End Static banner related modal -->
+
     <div class="container-fluid col-md-10 pb-4">
         <main class="main w-100">
             <!-- Start top slider -->
             <div class="p-2">
                 <div class="swiper top-slider">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="#" title="دوره اصول میزبانی و تشریفات پذیرایی">
-                                <img src="{% static 'images/defaults/slider-3.webp' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" title="">
-                                <img src="{% static 'images/defaults/slider-2.webp' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" title="">
-                                <img src="{% static 'images/defaults/slider-1.webp' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" title="">
-                                <img src="{% static 'images/defaults/slider-4.webp' %}" alt="">
-                            </a>
-                        </div>
+                        {% for obj in banners %}
+                            <div class="swiper-slide">
+                                <a href="{{ obj.link|default:'#' }}" title="{{ obj.title }}">
+                                    <img src="{{ obj.get_image_url }}" alt="{{ obj.title }}">
+                                </a>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -51,7 +67,8 @@
 
             <!-- Start static banner -->
             <div class="w-100 mt-4 px-md-3 px-2 py-2">
-                <a role="button" data-bs-toggle="modal" data-bs-target="#" class="d-flex justify-content-between align-items-center static-banner">
+                <a role="button" data-bs-toggle="modal" data-bs-target="#indexVideoModal"
+                   class="d-flex justify-content-between align-items-center static-banner">
                     <div class="d-flex flex-column align-items-start text-white mt-2 static-banner-text">
                         <span class="fw-semibold h5">آموزش اپلیکیشن مدیر مدرن</span>
                         <small class="text-white">
@@ -71,7 +88,6 @@
 
                 <div class="swiper package-slider mt-3">
                     <div class="swiper-wrapper">
-
                         {% for obj in courses %}
                             <div class="swiper-slide package-box">
                                 {% if obj.discount %}
@@ -90,11 +106,17 @@
                                         <div class="d-flex gap-1 align-items-center">
                                             {% if not obj.selling_price %}
                                                 <span class="fw-semibold text-success">رایگان</span>
-                                            {% else %}
-                                                <span class="fw-semibold convert-digits {% if obj.discount %}text-danger{% endif %}">
+                                            {% elif obj.discount %}
+                                                <s class="small convert-digits">{{ obj.price|convert_rial|intcomma }}</s>
+                                                <span class="fw-semibold convert-digits text-danger">
                                                     {{ obj.selling_price|convert_rial|intcomma }}
                                                 </span>
-                                                <span>تومان</span>
+                                                <small>تومان</small>
+                                            {% else %}
+                                                <span class="fw-semibold convert-digits">
+                                                    {{ obj.selling_price|convert_rial|intcomma }}
+                                                </span>
+                                                <small>تومان</small>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -102,7 +124,6 @@
                                 </div>
                             </div>
                         {% endfor %}
-
                     </div>
 
                     <div class="swiper-button-prev"></div>
