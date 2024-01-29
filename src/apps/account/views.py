@@ -90,9 +90,8 @@ class SendCodeView(LogoutRequiredMixin, View):
             title=_('Phone number verification code'),
             kwargs={'code': code},
             to_user=user,
-            send_notify=False  # TODO: Change it to True
+            send_notify=True
         )
-        print(code)
 
         messages.info(request, _('Code sent to you'))
         return redirect(self.get_redirect_url())

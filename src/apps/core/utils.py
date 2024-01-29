@@ -4,8 +4,9 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import datetime
 
-from ippanel import Client
+from threading import Thread
 from os.path import splitext
+from ippanel import Client
 
 
 # Get time in format
@@ -105,14 +106,13 @@ def send_sms(phone_number, pattern, **kwargs):
     sms = Client(settings.SMS_CONFIG['API_KEY'])
 
     # Send sms via ippanel module
-    message_id = sms.send_pattern(
+    t1 = Thread(target=sms.send_pattern, args=(
         pattern,  # pattern code
         settings.SMS_CONFIG['ORIGINATOR'],  # originator
         phone_number,  # recipient
         kwargs,  # pattern values
-    )
-
-    # TODO: Send above data async
+    ))
+    t1.start()
 
 
 # Remove first character from str
