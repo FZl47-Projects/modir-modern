@@ -70,7 +70,7 @@
                             {% for obj in ticket.get_messages %}
                                 <div class="d-flex flex-column gap-3 ticket-message-body {% if obj.user != request.user %}ticket-left{% endif %}">
                                     <div class="d-flex flex-column text-white">
-                                        <span>{{ obj.user.profile.name|default:'مدیر سایت' }}</span>
+                                        <span>{{ obj.user.profile.place_name|default:'مدیر سایت' }}</span>
                                         <small class="opacity-75 datetime-convert xs-text">
                                             {{ obj.get_created_date }}
                                         </small>

@@ -1567,6 +1567,9 @@ ul {
   .responsive-text {
     font-size: 10px;
   }
+  .static-banner {
+    padding: 1.35rem;
+  }
   .print {
     width: 100%;
   }
