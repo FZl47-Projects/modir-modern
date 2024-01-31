@@ -9,7 +9,7 @@ from django.contrib import messages
 from apps.core.utils import toast_form_errors, validate_form
 from apps.notification.models import Notification
 from .mixinx import LogoutRequiredMixin
-from .models import User, UserProfile
+from .models import User
 from . import forms
 from random import randint
 

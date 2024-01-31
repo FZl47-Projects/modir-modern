@@ -12,7 +12,7 @@
                      alt="Profile picture" style="object-fit: cover;">
                 <div class="d-flex flex-column align-items-start mt-3 me-2">
                     <span class="mt-2">
-                        {{ user.profile.name|default:'بدون عنوان' }}
+                        {{ user.profile.place_name|default:'بدون عنوان' }}
                     </span>
                     <small class="mt-1">
                         {{ user.profile.province|default:'' }}، {{ user.profile.city|default:'' }}
@@ -74,10 +74,11 @@
                         </span>
                         <span class="fw-semibold me-1">رستوران من</span>
                     </a>
-                    <div class="collapse" id="collapseExample">
+                    <div class="{% if request.resolver_match.app_name == 'restaurant' %}collapsed{% else %}collapse{% endif %}" id="collapseExample">
                         <ul class="menu-sub-item pe-3">
                             <li class="item-menu">
-                                <a href="#">
+                                <a href="{% url 'restaurant:raw_materials' %}"
+                                   class="{% if request.resolver_match.url_name == 'raw_materials' %}active{% endif %}">
                                     <span class="d-flex align-items-center" style="margin-right: 12px;">
                                         <i class="bi bi-box2 mt-2" style="font-size: 19px;"></i>
                                     </span>

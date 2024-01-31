@@ -120,7 +120,7 @@ class UserProfile(BaseModel):
     melli_code = models.CharField(_('Melli code'), max_length=10, validators=[validate_didit_type], null=True, blank=True)
     gender = models.CharField(_('Gender'), max_length=8, choices=GENDERS.choices, null=True, blank=True)
     date_of_birth = models.DateField(_('Date of birth'), null=True, blank=True)
-    name = models.CharField(_('Name'), max_length=128, null=True, blank=True)
+    place_name = models.CharField(_('Place name'), max_length=128, null=True, blank=True)
     province = models.CharField(_('Province'), max_length=64, null=True, blank=True)
     city = models.CharField(_('City'), max_length=64, null=True, blank=True)
     image = models.ImageField(_('Picture'), upload_to='images/profiles/', null=True, blank=True)

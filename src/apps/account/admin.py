@@ -58,7 +58,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('user',)}),
         (_('Personal info'), {'fields': ('melli_code', 'gender', 'date_of_birth')}),
-        (_('Place info'), {'fields': ('name', 'province', 'city', 'image')}),
+        (_('Place info'), {'fields': ('place_name', 'province', 'city', 'image')}),
     )
 
     search_fields = ('user__phone_number',)

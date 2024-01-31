@@ -127,7 +127,7 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('city', 'province', 'name', 'image')
+        fields = ('city', 'province', 'place_name', 'image')
 
     def save(self, commit=True):
         profile = super().save()

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-29 17:25+0330\n"
+"POT-Creation-Date: 2024-01-31 14:11+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,8 +48,9 @@ msgid "Account"
 msgstr "حساب ها"
 
 #: .\apps\account\enums.py:7 .\apps\account\models.py:62
-#: .\apps\account\models.py:119 .\apps\subscription\models.py:40
-#: .\apps\ticket\models.py:16 .\apps\ticket\models.py:49
+#: .\apps\account\models.py:119 .\apps\restaurant\models.py:11
+#: .\apps\subscription\models.py:40 .\apps\ticket\models.py:16
+#: .\apps\ticket\models.py:49
 msgid "User"
 msgstr "کاربر"
 
@@ -148,7 +149,8 @@ msgstr "نام خانوادگی"
 
 #: .\apps\account\models.py:45 .\apps\course\models.py:55
 #: .\apps\course\models.py:89 .\apps\public\models.py:12
-#: .\apps\public\models.py:33 .\apps\subscription\models.py:21
+#: .\apps\public\models.py:33 .\apps\restaurant\models.py:13
+#: .\apps\restaurant\models.py:27 .\apps\subscription\models.py:21
 #: .\apps\subscription\models.py:43 .\apps\ticket\models.py:20
 msgid "Active"
 msgstr "فعال"
@@ -187,7 +189,7 @@ msgid "Date of birth"
 msgstr "تاریخ تولد"
 
 #: .\apps\account\models.py:123
-msgid "Name"
+msgid "Place name"
 msgstr "نام مجموعه"
 
 #: .\apps\account\models.py:124
@@ -335,12 +337,14 @@ msgid "Instructors"
 msgstr "مدرسین"
 
 #: .\apps\course\models.py:43 .\apps\public\models.py:9
-#: .\apps\public\models.py:29 .\apps\ticket\models.py:17
+#: .\apps\public\models.py:29 .\apps\restaurant\models.py:12
+#: .\apps\restaurant\models.py:26 .\apps\ticket\models.py:17
 msgid "Title"
 msgstr "عنوان"
 
 #: .\apps\course\models.py:43 .\apps\course\models.py:86
-#: .\apps\public\models.py:29 .\apps\ticket\models.py:17
+#: .\apps\public\models.py:29 .\apps\restaurant\models.py:12
+#: .\apps\ticket\models.py:17
 msgid "No title"
 msgstr "بدون عنوان"
 
@@ -498,6 +502,27 @@ msgstr "ویدیو صفحه اصلی"
 msgid "Index Video"
 msgstr "ویدیو صفحه اصلی"
 
+#: .\apps\restaurant\apps.py:8 .\apps\restaurant\models.py:16
+#: .\apps\restaurant\models.py:25
+msgid "Restaurant"
+msgstr "رستوران"
+
+#: .\apps\restaurant\models.py:17
+msgid "Restaurants"
+msgstr "رستوران ها"
+
+#: .\apps\restaurant\models.py:26
+msgid "Test category"
+msgstr "دسته تست"
+
+#: .\apps\restaurant\models.py:30
+msgid "Raw materials category"
+msgstr "دسته بندی مواد اولیه"
+
+#: .\apps\restaurant\models.py:31
+msgid "Raw materials categories"
+msgstr "دسته بندی‌های مواد اولیه"
+
 #: .\apps\subscription\admin.py:20
 msgid "Status info"
 msgstr "اطلاعات وضعیت"
@@ -609,7 +634,7 @@ msgstr "تیکت با موفقیت ارسال شد"
 msgid "Message sent successfully"
 msgstr "پیام با موفقیت شد"
 
-#: .\config\settings\base.py:103
+#: .\config\settings\base.py:104
 msgid "Persian"
 msgstr "فارسی"
 
@@ -1811,3 +1836,6 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:248
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Name"
+#~ msgstr "نام مجموعه"

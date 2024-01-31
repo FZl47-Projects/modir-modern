@@ -1,0 +1,83 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% load filters %}
+
+
+{% block title %}مدیرمدرن | مواد اولیه{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/raw-materials.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <!-- Start add category modal -->
+    <div class="modal fade" tabindex="-1" id="addCategory" aria-labelledby="addCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form method="POST" action="{% url 'restaurant:add_material_category' %}" style="background-color: #2d2c2c;"
+                  class="modal-content text-white border-white border-1 rounded-3">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title fw-semibold h4">افزودن دسته بندی</h5>
+                    <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                          style="-webkit-text-stroke: 0.5pt;"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column form-group">
+                        <label class="form-label" style="font-size: 14px;">
+                            عنوان دسته
+                            <input type="text" name="title" class="form form-control mt-1"
+                                   style="background-color: #fafafa;" required>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- .End add category modal -->
+
+    <div class="container-fluid col-md-10 pb-4">
+        <main class="main w-100 p-md-4 p-2">
+            <h5 class="fw-semibold text-white text-md-end text-center mt-3">لیست مواد اولیه</h5>
+
+            <div class="swiper category-slider mt-md-3 mt-4">
+                <div class="d-flex align-items-center gap-2 category-text">
+                    <small class="text-white">دسته‌ها: </small>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addCategory" class="btn btn-light category-add-btn">
+                        <span class="btn-icon">+</span>
+                    </button>
+                </div>
+
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="{% url 'restaurant:raw_materials' %}" class="btn category-btn
+                            {% if not request.GET.filter %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                            همه
+                        </a>
+                    </div>
+                    {% for obj in restaurant.get_material_categories %}
+                        <div class="swiper-slide">
+                            <a href="?filter={{ obj.title }}" class="btn category-btn
+                                {% if request.GET.filter == obj.title %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                                {{ obj.title }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script src="{% static 'js/raw-materials.js' %}"></script>
+{% endblock %}
