@@ -36,24 +36,19 @@
                         {{ index_video.description|safe }}
                     </p>
                 </div>
-                <!--
-                <div class="modal-footer border-top-0">
-                    <button type="button" class="btn btn-danger fw-semibold" data-bs-dismiss="modal" aria-label="Close">بستن</button>
-                </div>
-                -->
             </div>
         </div>
     </div>
     <!-- .End Static banner related modal -->
 
-    <div class="container-fluid col-md-10 pb-4">
+    <div class="container-fluid col-md-10 col-12 pb-4">
         <main class="main w-100">
             <!-- Start top slider -->
             <div class="p-2">
                 <div class="swiper top-slider">
                     <div class="swiper-wrapper">
                         {% for obj in banners %}
-                            <div class="swiper-slide">
+                            <div class="swiper-slide rounded-3">
                                 <a href="{{ obj.link|default:'#' }}" title="{{ obj.title }}">
                                     <img src="{{ obj.get_image_url }}" alt="{{ obj.title }}">
                                 </a>
@@ -75,7 +70,7 @@
                             <span>کلیک کنید</span>
                         </small>
                     </div>
-                    <div>
+                    <div class="static-banner-img">
                         <img src="{% static 'images/main-logo.png' %}" alt="" class="static-banner-logo">
                     </div>
                 </a>

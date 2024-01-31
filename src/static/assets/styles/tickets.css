@@ -97,9 +97,6 @@ video {
   max-width: 100%;
 }
 
-.container-fluid {
-  max-width: 1900px;
-}
 .container-fluid.container-admin {
   margin: 0 auto;
   max-width: 1200px;
@@ -1746,8 +1743,6 @@ ul {
 }
 
 @media (min-width: 1624px) {
-  .container-fluid {
-    width: 86.5%;
-  }
+
 }
 /*# sourceMappingURL=home.css.map */

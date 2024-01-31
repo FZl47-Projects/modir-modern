@@ -53,6 +53,7 @@ body {
 
 body {
   background-color: #343434;
+  display: flex;
 }
 body::-webkit-scrollbar {
   height: 15px;
@@ -98,7 +99,7 @@ video {
 }
 
 .container-fluid {
-  max-width: 1900px;
+
 }
 .container-fluid.container-admin {
   margin: 0 auto;
@@ -192,16 +193,20 @@ input {
   padding: 2rem;
   transition: all 0.3s;
 }
-
 .static-banner:hover {
-  box-shadow: 0 0 6px rgb(255, 255, 255);
-  scale: 100.5%;
+  box-shadow: 0 0 0 3px rgba(245, 245, 245, 0.4);
+}
+
+.static-banner-img {
+  transition: all 0.3s;
+}
+.static-banner:hover > .static-banner-img {
+  scale: 106%;
 }
 
 .static-banner-text {
   transition: all 0.3s;
 }
-
 .static-banner:hover > .static-banner-text {
   scale: 106%;
   text-shadow: 0 0 10px rgba(245, 245, 245, 0.5);
@@ -1712,15 +1717,9 @@ ul {
   .top-slider {
     height: 560px;
   }
-  .container-fluid {
-    width: 86.5%;
-  }
 }
 
 @media (min-width: 2240px) {
-  .container-fluid {
-    width: 87%;
-  }
 }
 
 /*# sourceMappingURL=home.css.map */

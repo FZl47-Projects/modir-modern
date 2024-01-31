@@ -97,9 +97,6 @@ video {
   max-width: 100%;
 }
 
-.container-fluid {
-  max-width: 1900px;
-}
 .container-fluid.container-admin {
   margin: 0 auto;
   max-width: 1200px;
@@ -112,6 +109,10 @@ button {
 input {
   border: none;
   background-color: transparent;
+}
+
+.package-title:hover {
+  color: #0a53be;
 }
 
 .package-box {
@@ -1630,10 +1631,7 @@ ul {
 
 @media (min-width: 1624px) {
   .package-box {
-    max-width: 300px;
-  }
-  .container-fluid {
-    width: 86.5%;
+    max-width: 290px;
   }
 }
 /*# sourceMappingURL=home.css.map */
