@@ -14,7 +14,7 @@ class CoursesListView(LoginRequiredMixin, ListView):
     def filter(self, objects):
         q = self.request.GET.get('type')
         if q:
-            objects = objects.filter(type=q)
+            objects = objects.filter(payment_type=q)
         return objects
 
     def get_queryset(self):

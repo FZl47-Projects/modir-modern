@@ -46,7 +46,7 @@ class CourseAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('title', 'short_des', 'instructor', 'type', 'description')}),
-        (_('Price info'), {'fields': ('price', 'discount', 'selling_price')}),
+        (_('Price info'), {'fields': ('payment_type', 'price', 'discount', 'selling_price')}),
         (_('Additional info'), {'fields': ('image', 'duration', 'pinned', 'is_active')})
     )
 

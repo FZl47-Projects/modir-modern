@@ -1675,4 +1675,11 @@ ul {
     font-size: 10px !important;
   }
 }
+
+@media (min-width: 1624px) {
+  .container-fluid {
+    width: 86.5%;
+  }
+}
+
 /*# sourceMappingURL=home.css.map */
