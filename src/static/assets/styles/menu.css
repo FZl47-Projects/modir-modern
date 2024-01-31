@@ -4,7 +4,7 @@
     position: fixed;
     right: 20px;
     top: 24px;
-    z-index: 950;
+    z-index: -2;
 }
 
 .menu-toggle-icon {
@@ -15,12 +15,25 @@
     -webkit-text-stroke: 0.5pt;
 }
 
+.menu-toggle-btn-close {
+    display: none;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #e3e3e3;
+    font-size: 15px;
+}
+
+.menu-toggle-btn-close:hover {
+    color: white;
+}
+
 .menu-fixed-right {
     background-color: #2b2a29;
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 950;
+    z-index: 10;
 }
 
 .menu-sub-item {
@@ -189,10 +202,8 @@
 
 @media (max-width: 768px) {
     .menu-fixed-right {
-        position: fixed;
         top: 0;
         right: -300px;
-        z-index: 950;
         transition: all 0.25s;
     }
     .menu-toggle-btn {
@@ -202,8 +213,12 @@
         top: 16px;
         transition: all 0.23s;
     }
-    .top-slider {
-        margin-top: 20px;
-        margin-right: 3px;
+    .menu-toggle-btn-close {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        color: #e3e3e3;
+        font-size: 15px;
     }
 }
