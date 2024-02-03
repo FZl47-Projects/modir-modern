@@ -1,0 +1,36 @@
+<div class="modal fade" tabindex="-1" id="editMaterial" aria-labelledby="editMaterialLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="POST" id="editMaterialForm" action=""
+              class="modal-content bg-modal text-white border-white border-1 rounded-3">
+            {% csrf_token %}
+            <div class="modal-header">
+                <span class="modal-title fw-semibold h5">ویرایش آیتم</span>
+                <span role="button" class="bi bi-x-lg mt-1 ms-1" data-bs-dismiss="modal" aria-label="Close"
+                      style="-webkit-text-stroke: 0.5pt;"></span>
+            </div>
+            <div class="modal-body">
+                <div id="inputs">
+                    <label class="form-label w-100 mt-1">
+                        <span>عنوان ماده اولیه</span>
+                        <input type="text" name="title" value="None" class="form-control mt-1" required>
+                    </label>
+                    <label class="form-label w-100 mt-1">
+                        <span>قیمت به ازای هر واحد <small>(تومان)</small></span>
+                        <input type="number" name="price" value="0" class="form-control mt-1" required>
+                    </label>
+                    <label class="form-label w-100 mt-1">
+                        <span>دسته بندی</span>
+                        <select name="category" class="form-select mt-1" required>
+                            {% for obj in restaurant.get_material_categories %}
+                                <option value="{{ obj.id }}">{{ obj.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="submit" class="btn btn-success fw-semibold">ذخیره تغییرات</button>
+            </div>
+        </form>
+    </div>
+</div>

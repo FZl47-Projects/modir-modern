@@ -119,6 +119,7 @@ input {
 
 .category-slider {
   position: relative;
+  text-outline: 20px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -141,6 +142,91 @@ input {
 
 .category-add-btn:hover {
   box-shadow: 0 0 0 3px rgba(245, 245, 245, 0.75);
+}
+
+.category-slider .swiper-button-prev {
+  margin-right: 80px;
+}
+
+.category-slider .swiper-button-next {
+  margin-left: -10px;
+}
+
+.category-slider .swiper-button-prev, .category-slider .swiper-button-next {
+  border-radius: 0.3rem;
+  color: white;
+  padding: 0 0.5rem;
+  scale: 65%;
+  -webkit-text-stroke: 0.2pt;
+}
+
+.category-slider .swiper-button-disabled {
+  opacity: 30%;
+}
+
+/* Materials table */
+table thead th {
+  font-weight: 600;
+}
+
+.bg-head {
+  background-color: #fcb500;
+}
+
+.fr-input {
+  max-width: 220px;
+  text-align: center;
+}
+
+.ed-btn {
+  padding: 5px 6px 1px 6px;
+}
+
+.cs-btn {
+  border: 1px solid #b67300;
+}
+
+
+/* Pagination buttons styles */
+.page-prev-btn, .page-next-btn {
+  font-size: 18px;
+  -webkit-text-stroke: 0.6pt;
+  background-color: #00b2ff;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.page-next-btn {
+  padding: 7px 8px 0 7px;
+}
+
+.page-prev-btn {
+  padding: 7px 7px 0 8px;
+}
+
+.page-prev-btn:hover, .page-next-btn:hover {
+  background-color: #0098d9;
+}
+
+.page-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00b2ff;
+  border-radius: 6px;
+  width: 35px;
+  height: 35px;
+  padding-top: 5px;
+  text-align: center;
+  transition: all 0.25s;
+}
+
+.page-num:hover {
+  background-color: #0071a1;
+}
+
+.pagination-inner .active {
+  background-color: #00b2ff;
 }
 
 /*COLOR BODY*/
@@ -1478,10 +1564,54 @@ ul {
   position: relative;
 }
 
+.f-input {
+  background-color: #fafafa;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fs-13 {
+  font-size: 13px;
+}
+
+.bg-modal {
+  background-color: #2d2c2c;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: rgba(79, 79, 79, 0);
+  border-radius: 2rem;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: rgb(122, 122, 122);
+  border-radius: 2rem;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: rgb(100, 100, 100);
+  border-radius: 2rem;
+}
+
+.modal-body::-webkit-scrollbar-thumb:active {
+  background: rgb(68, 68, 68);
+  border-radius: 10px;
+}
+
 /*---------------START 768PX----------------*/
 @media (max-width: 768px) {
   .category-btn {
     width: 120px;
+  }
+  .category-slider .swiper-button-prev, .category-slider .swiper-button-next {
+    scale: 50%;
+    -webkit-text-stroke: 0.4pt;
   }
   .print {
     width: 100%;
@@ -1606,6 +1736,12 @@ ul {
   }
 }
 /*---------------END 768PX----------------*/
+
+@media (max-width: 340px) {
+  .category-btn {
+    width: 100px;
+  }
+}
 @media (max-width: 1071px) {
   .num-dates ul li, .days ul li {
     float: right;

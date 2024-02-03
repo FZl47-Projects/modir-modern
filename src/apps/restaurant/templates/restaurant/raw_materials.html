@@ -16,37 +16,30 @@
     <!-- .End Sidebar menu -->
 
     <!-- Start add category modal -->
-    <div class="modal fade" tabindex="-1" id="addCategory" aria-labelledby="addCategoryLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form method="POST" action="{% url 'restaurant:add_material_category' %}" style="background-color: #2d2c2c;"
-                  class="modal-content text-white border-white border-1 rounded-3">
-                {% csrf_token %}
-                <div class="modal-header">
-                    <h5 class="modal-title fw-semibold h4">افزودن دسته بندی</h5>
-                    <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
-                          style="-webkit-text-stroke: 0.5pt;"></span>
-                </div>
-                <div class="modal-body">
-                    <div class="d-flex flex-column form-group">
-                        <label class="form-label" style="font-size: 14px;">
-                            عنوان دسته
-                            <input type="text" name="title" class="form form-control mt-1"
-                                   style="background-color: #fafafa;" required>
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer border-top-0">
-                    <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    {% include 'restaurant/components/raw_material/add_category.html' %}
     <!-- .End add category modal -->
+
+    <!-- Start delete category modal -->
+    {% include 'restaurant/components/raw_material/delete_category.html' %}
+    <!-- .End delete category modal -->
+
+    <!-- Start add raw material modal -->
+    {% include 'restaurant/components/raw_material/add_materials.html' %}
+    <!-- .End add raw material modal -->
+
+    <!-- Start edit raw material modal -->
+    {% include 'restaurant/components/raw_material/edit_material.html' %}
+    <!-- .End edit raw material modal -->
+
+        <!-- Start delete raw material modal -->
+    {% include 'restaurant/components/raw_material/delete_material.html' %}
+    <!-- .End delete raw material modal -->
 
     <div class="container-fluid col-md-10 pb-4">
         <main class="main w-100 p-md-4 p-2">
             <h5 class="fw-semibold text-white text-md-end text-center mt-3">لیست مواد اولیه</h5>
 
+            <!-- Start categories filter section -->
             <div class="swiper category-slider mt-md-3 mt-4">
                 <div class="d-flex align-items-center gap-2 category-text">
                     <small class="text-white">دسته‌ها: </small>
@@ -54,7 +47,6 @@
                         <span class="btn-icon">+</span>
                     </button>
                 </div>
-
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <a href="{% url 'restaurant:raw_materials' %}" class="btn category-btn
@@ -71,6 +63,120 @@
                         </div>
                     {% endfor %}
                 </div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <!-- .End categories filter section -->
+
+            <!-- Start materials table -->
+            <div class="d-flex justify-content-between flex-wrap gap-2 mt-5 px-1">
+                <div>
+                    {% if request.GET.filter %}
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteCategory" data-title="{{ request.GET.filter }}"
+                                class="btn btn-sm btn-danger fw-semibold">
+                            حذف دسته بندی
+                        </button>
+                    {% endif %}
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addRawMaterial" class="btn btn-sm btn-light fw-semibold">
+                        افزودن مواد
+                    </button>
+                </div>
+                <div>
+{#                    <form method="GET" action="{% url 'restaurant:raw_materials' %}"></form>#}
+{#                    <label class="form-label">#}
+{#                        <input type="text" name="q" placeholder="عنوان" class="form-control form-control-sm">#}
+{#                    </label>#}
+                </div>
+            </div>
+            <div class="table-responsive px-1 mt-2">
+                <table class="table table-hover overflow-hidden rounded-1">
+                    <thead class="text-center">
+                        <tr class="bg-head">
+                            <th>#</th>
+                            <th>عنوان</th>
+                            <th class="text-nowrap">
+                                <span>قیمت</span>
+                                <small>(به ازای هر واحد)</small>
+                            </th>
+                            <th>کنترل</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center table-light">
+                        {% for obj in page_obj %}
+                            <tr id="material-{{ obj.id }}">
+                               <td>
+                                   <span class="convert-digits fw-semibold">{{ forloop.counter }}</span>
+                               </td>
+                               <td>
+                                   <span class="text-nowrap obj-title">{{ obj.title }}</span>
+                               </td>
+                               <td>
+                                   <div class="text-nowrap">
+                                       <span class="convert-digits">{{ obj.price|intcomma }}</span>
+                                       <small>ت</small>
+                                   </div>
+                               </td>
+                               <td>
+                                   <a href="#" class="btn btn-sm btn-outline-secondary text-nowrap" title="فرم افت محصول">
+                                       فرم افت
+                                   </a>
+                               </td>
+                               <td>
+                                   <div class="d-flex justify-content-center gap-1">
+                                       <button type="button" data-bs-toggle="modal" data-bs-target="#editMaterial"
+                                               data-pk="{{ obj.pk }}" data-category="{{ obj.category.id }}"
+                                               data-price="{{ obj.price }}" data-title="{{ obj.title }}"
+                                               class="bi bi-pencil btn btn-sm btn-success ed-btn" title="ویرایش">
+                                       </button>
+
+                                       <button type="button" data-bs-toggle="modal" data-bs-target="#deleteMaterial"
+                                               data-pk="{{ obj.pk }}" data-title="{{ obj.title }}"
+                                               class="bi bi-trash3-fill btn btn-sm btn-danger ed-btn" title="حذف">
+                                       </button>
+                                   </div>
+                               </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Start pagination section -->
+                <div class="d-flex justify-content-center align-items-center text-white mt-5">
+                    {% if page_obj.has_other_pages %}
+                        <ul class="d-flex align-items-end gap-2 pagination-inner">
+                            {% if page_obj.has_previous %}
+                                <li>
+                                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}">
+                                        <i class="bi bi-chevron-right page-next-btn"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}" class="page-num">
+                                        <span class="fw-semibold">{{ page_obj.previous_page_number }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a class="page-num active">
+                                    <span class="fw-semibold">{{ page_obj.number }}</span>
+                                </a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li>
+                                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}" class="page-num">
+                                        <span class="fw-semibold">{{ page_obj.next_page_number }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}">
+                                        <i class="bi bi-chevron-left page-next-btn"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <!-- .End pagination section -->
 
             </div>
         </main>

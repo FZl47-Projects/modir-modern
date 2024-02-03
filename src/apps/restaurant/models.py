@@ -17,7 +17,7 @@ class Restaurant(BaseModel):
         verbose_name_plural = _('Restaurants')
 
     def __str__(self):
-        return f'{self.user} - {self.title}'
+        return f'{self.user} - {self.user.profile.place_name}'
 
     def get_material_categories(self):
         return self.raw_material_categories.filter(is_active=True)
@@ -35,3 +35,22 @@ class RawMaterialCategory(BaseModel):
 
     def __str__(self):
         return f'{self.restaurant} - {self.title}'
+
+    def get_materials(self):
+        return self.raw_materials.all()
+
+
+# RawMaterials model
+class RawMaterial(BaseModel):
+    category = models.ForeignKey(RawMaterialCategory, on_delete=models.CASCADE, related_name='raw_materials', verbose_name=_('Category'))
+    title = models.CharField(_('Title'), max_length=128)
+    price = models.PositiveIntegerField(_('Price'), default=0, help_text=_('Per a unit'))
+    # TODO: Add extra fields
+
+    class Meta:
+        verbose_name = _('Raw material')
+        verbose_name_plural = _('Raw materials')
+
+    def __str__(self):
+        return self.title
+
