@@ -5,6 +5,7 @@ from django import forms
 
 from .utils import check_phone_number
 from .models import User, UserProfile
+from persian_tools import digits
 
 
 # Custom User creation form
@@ -23,6 +24,7 @@ class UserCreationForm(forms.ModelForm):
     def clean_phone_number(self):
         # Check phone number format
         phone_number = self.cleaned_data.get('phone_number')
+        phone_number = digits.convert_to_en(phone_number)
 
         if not check_phone_number(phone_number):
             raise ValidationError(_('Enter a valid phone number'))
@@ -58,6 +60,7 @@ class LoginForm(forms.Form):
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
+        username = digits.convert_to_en(username)
 
         # Check username format (username is phone number here)
         if not check_phone_number(username):
