@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'apps.notification.apps.NotificationConfig',
 
     # Django modules
+    'django_q',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -101,11 +102,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGES = [
-    ("fa", _("Persian")),
+    ('fa', _("Persian")),
 ]
 
 LOCALE_PATHS = [
-    BASE_DIR / os.getenv('LOCALE_PATHS', 'locale')
+    BASE_DIR / os.getenv('LOCALE_PATHS', 'locale'),
+    BASE_DIR / os.getenv('DJANGO_Q_LOCALE_PATH', 'locale/django_q')
 ]
 
 LANGUAGE_CODE = 'fa'
@@ -155,4 +157,17 @@ REDIS_CONFIG = {
 SMS_CONFIG = {
     'API_KEY': os.getenv('SMS_CONFIG_API_KEY'),
     'ORIGINATOR': os.getenv('SMS_CONFIG_ORIGINATOR')
+}
+
+
+# Django-q donfig
+Q_CLUSTER = {
+    'name': 'django-q',
+    'workers': 4,
+    'recycle': 500,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'orm': 'default',
 }
