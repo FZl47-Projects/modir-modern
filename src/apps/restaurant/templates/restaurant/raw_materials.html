@@ -112,12 +112,12 @@
                                </td>
                                <td>
                                    <div class="text-nowrap">
-                                       <span class="convert-digits">{{ obj.price|intcomma }}</span>
+                                       <span class="convert-digits">{{ obj.raw_usable_quantity_cost|intcomma }}</span>
                                        <small>ت</small>
                                    </div>
                                </td>
                                <td>
-                                   <a href="#" class="btn btn-sm btn-outline-secondary text-nowrap" title="فرم افت محصول">
+                                   <a href="{{ obj.get_reduce_form_url }}" class="btn btn-sm btn-outline-secondary text-nowrap" title="فرم افت محصول">
                                        فرم افت
                                    </a>
                                </td>
@@ -128,7 +128,6 @@
                                                data-price="{{ obj.price }}" data-title="{{ obj.title }}"
                                                class="bi bi-pencil btn btn-sm btn-success ed-btn" title="ویرایش">
                                        </button>
-
                                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteMaterial"
                                                data-pk="{{ obj.pk }}" data-title="{{ obj.title }}"
                                                class="bi bi-trash3-fill btn btn-sm btn-danger ed-btn" title="حذف">

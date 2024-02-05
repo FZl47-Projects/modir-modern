@@ -1,6 +1,6 @@
-from django.views.generic import TemplateView, FormView, DetailView, View
+from django.views.generic import TemplateView, FormView, View
+from django.shortcuts import redirect, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import gettext as _
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
@@ -157,3 +157,32 @@ class DeleteRawMaterialView(LoginRequiredMixin, View):
 
         messages.success(self.request, _("Item deleted successfully"))
         return redirect('restaurant:raw_materials')
+
+
+# Render ReduceForm view
+class MaterialReduceFormView(LoginRequiredMixin, FormView):
+    template_name = 'restaurant/reduce_form.html'
+    model = RawMaterial
+    form_class = forms.ReduceRawMaterialForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = RawMaterial.objects.filter(category__restaurant__user=self.request.user)
+        context['object'] = get_object_or_404(queryset, pk=self.kwargs.get('pk'))
+
+        return context
+
+    def get_success_url(self):
+        return reverse('restaurant:raw_materials_reduce_form', args=[self.kwargs.get('pk')])
+
+    def get_form(self, form_class=None):
+        data = self.request.POST.copy()
+        instance = get_object_or_404(RawMaterial, pk=self.kwargs.get('pk'))
+
+        return forms.ReduceRawMaterialForm(data=data, instance=instance)
+
+    def form_valid(self, form):
+        form.save(commit=False)
+        messages.success(self.request, _('Items saved successfully. You can see results down below'))
+
+        return super().form_valid(form)

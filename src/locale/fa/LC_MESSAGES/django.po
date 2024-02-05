@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-04 00:15+0330\n"
+"POT-Creation-Date: 2024-02-05 04:04+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "حساب ها"
 
 #: .\apps\account\enums.py:7 .\apps\account\models.py:62
 #: .\apps\account\models.py:119 .\apps\course\models.py:148
-#: .\apps\restaurant\models.py:11 .\apps\subscription\models.py:40
+#: .\apps\restaurant\models.py:12 .\apps\subscription\models.py:40
 #: .\apps\ticket\models.py:16 .\apps\ticket\models.py:49
 msgid "User"
 msgstr "کاربر"
@@ -150,7 +150,7 @@ msgstr "نام خانوادگی"
 #: .\apps\account\models.py:45 .\apps\course\models.py:62
 #: .\apps\course\models.py:117 .\apps\course\models.py:152
 #: .\apps\public\models.py:12 .\apps\public\models.py:33
-#: .\apps\restaurant\models.py:13 .\apps\restaurant\models.py:30
+#: .\apps\restaurant\models.py:14 .\apps\restaurant\models.py:31
 #: .\apps\subscription\models.py:21 .\apps\subscription\models.py:43
 #: .\apps\ticket\models.py:20
 msgid "Active"
@@ -351,15 +351,15 @@ msgid "Instructors"
 msgstr "مدرسین"
 
 #: .\apps\course\models.py:48 .\apps\public\models.py:9
-#: .\apps\public\models.py:29 .\apps\restaurant\models.py:12
-#: .\apps\restaurant\models.py:29 .\apps\restaurant\models.py:46
+#: .\apps\public\models.py:29 .\apps\restaurant\models.py:13
+#: .\apps\restaurant\models.py:30 .\apps\restaurant\models.py:49
 #: .\apps\ticket\models.py:17
 msgid "Title"
 msgstr "عنوان"
 
 #: .\apps\course\models.py:48 .\apps\course\models.py:96
 #: .\apps\course\models.py:113 .\apps\public\models.py:29
-#: .\apps\restaurant\models.py:12 .\apps\ticket\models.py:17
+#: .\apps\restaurant\models.py:13 .\apps\ticket\models.py:17
 msgid "No title"
 msgstr "بدون عنوان"
 
@@ -392,7 +392,7 @@ msgstr "۲ ساعت و ۳۰ دقیقه"
 msgid "Payment type"
 msgstr "نوع پرداخت"
 
-#: .\apps\course\models.py:56 .\apps\restaurant\models.py:47
+#: .\apps\course\models.py:56 .\apps\restaurant\models.py:50
 #: .\apps\subscription\models.py:17
 msgid "Price"
 msgstr "قیمت"
@@ -558,8 +558,8 @@ msgstr "ویدیو صفحه اصلی"
 msgid "Index Video"
 msgstr "ویدیو صفحه اصلی"
 
-#: .\apps\restaurant\apps.py:8 .\apps\restaurant\models.py:16
-#: .\apps\restaurant\models.py:28
+#: .\apps\restaurant\apps.py:8 .\apps\restaurant\models.py:17
+#: .\apps\restaurant\models.py:29
 msgid "Restaurant"
 msgstr "رستوران"
 
@@ -567,35 +567,95 @@ msgstr "رستوران"
 msgid "This category is already exists"
 msgstr "این دسته بندی وجود دارد"
 
-#: .\apps\restaurant\models.py:17
+#: .\apps\restaurant\models.py:18
 msgid "Restaurants"
 msgstr "رستوران ها"
 
-#: .\apps\restaurant\models.py:29
+#: .\apps\restaurant\models.py:30
 msgid "Test category"
 msgstr "دسته تست"
 
-#: .\apps\restaurant\models.py:33
+#: .\apps\restaurant\models.py:34
 msgid "Raw materials category"
 msgstr "دسته بندی مواد اولیه"
 
-#: .\apps\restaurant\models.py:34
+#: .\apps\restaurant\models.py:35
 msgid "Raw materials categories"
 msgstr "دسته بندی‌های مواد اولیه"
 
-#: .\apps\restaurant\models.py:45
+#: .\apps\restaurant\models.py:46
 msgid "Category"
 msgstr "دسته"
 
-#: .\apps\restaurant\models.py:47
-msgid "Per a unit"
+#: .\apps\restaurant\models.py:50
+msgid "Per unit"
 msgstr "به ازای هر واحد"
 
 #: .\apps\restaurant\models.py:51
+msgid "Use for"
+msgstr "استفاده برای"
+
+#: .\apps\restaurant\models.py:52
+msgid "Standard quantity per raw press"
+msgstr "مقدار استاندارد در هر پرس خام"
+
+#: .\apps\restaurant\models.py:53
+msgid "Standard quantity per baked press"
+msgstr "مقدار استاندارد در هر پرس پخته"
+
+#: .\apps\restaurant\models.py:54
+msgid "Delivery weight"
+msgstr "وزن تحویلی"
+
+#: .\apps\restaurant\models.py:57
+msgid "Weight loss due to cleaning(usable)"
+msgstr "وزن کاهش یافته در اثر تمیز کردن (قابل استفاده)"
+
+#: .\apps\restaurant\models.py:58
+msgid "Weight loss due to cleaning(unusable)"
+msgstr "وزن کاهش یافته در اثر تمیز کردن (غیرقابل استفاده)"
+
+#: .\apps\restaurant\models.py:59
+msgid "Edible cleaned weight"
+msgstr "وزن تمیز شده (قابل خوراک)"
+
+#: .\apps\restaurant\models.py:62
+msgid "Weight loss due to baking"
+msgstr "کاهش وزن در خلال پخت"
+
+#: .\apps\restaurant\models.py:63
+msgid "Salable weight(usable)"
+msgstr "وزن قابل فروش (قابل استفاده)"
+
+#: .\apps\restaurant\models.py:66
+msgid "Cost of raw usable quantity"
+msgstr "هزینه مقدار قابل استفاده خام"
+
+#: .\apps\restaurant\models.py:67
+msgid "Cost of baked usable quantity"
+msgstr "هزینه مقدار قابل استفاده پخته شده"
+
+#: .\apps\restaurant\models.py:68
+msgid "Cost of raw usable quantity per press"
+msgstr "هزینه مقدار قابل استفاده خام در هر پرس"
+
+#: .\apps\restaurant\models.py:69
+msgid "Cost of baked usable quantity per press"
+msgstr "هزینه مقدار قابل استفاده پخته شده در هر پرس"
+
+#: .\apps\restaurant\models.py:70
+msgid "Number of raw use"
+msgstr "تعداد مورد استفاده خام"
+
+#: .\apps\restaurant\models.py:71
+msgid "Number of baked use"
+msgstr "تعداد مورد استفاده پخته"
+
+#: .\apps\restaurant\models.py:74
 msgid "Raw material"
 msgstr "ماده اولیه"
 
-#: .\apps\restaurant\models.py:52
+#: .\apps\restaurant\models.py:75
 msgid "Raw materials"
 msgstr "مواد اولیه"
 
@@ -620,6 +680,10 @@ msgstr "آیتم با موفقیت تغییر کرد"
 #: .\apps\restaurant\views\materials.py:158
 msgid "Item deleted successfully"
 msgstr "آیتم با موفقیت حذف شد"
+
+#: .\apps\restaurant\views\materials.py:186
+msgid "Items saved successfully. You can see results down below"
+msgstr "موارد با موفقیت ثبت شد. اکنون می‌توانید نتایج را در زیر مشاهده فرمایید"
 
 #: .\apps\subscription\admin.py:20
 msgid "Status info"

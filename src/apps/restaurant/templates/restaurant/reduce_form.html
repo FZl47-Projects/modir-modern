@@ -1,0 +1,329 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% load filters %}
+
+
+{% block title %}مدیرمدرن | تست افت محصول{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/butchery-test.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <div class="container-fluid col-md-10 pb-4">
+        <main class="main w-100 p-md-4 p-2">
+            <div class="d-flex justify-content-between align-items-start mt-md-1 mt-4">
+                <span class="fw-semibold text-white h5">
+                    فرم افت
+                    <span class="text-warning">{{ object.title }}</span>
+                </span>
+                <div>
+                    <a href="{% url 'restaurant:raw_materials' %}" class="btn btn-sm btn-danger">بازگشت به لیست</a>
+                </div>
+            </div>
+
+            <form method="POST" action="{% url 'restaurant:raw_materials_reduce_form' object.pk %}" class="category-tables-butchery-test">
+                {% csrf_token %}
+                <section class="tablee col-12 col-md-9">
+                    <div class="title-table">مشخصات عمومی محصول</div>
+
+                    <div class="row-table">
+                        <label for="title" class="col-6 p-2 column-item border-l">
+                            نام مواد اولیه
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="title" class="ps-2"
+                                   value="{{ object.title }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item"></div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="use_for" class="col-6 p-2 column-item border-l">
+                            مورد استفاده در محصول
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="use_for" name="use_for" class="inputs ps-2"
+                                   value="{{ object.use_for|default:'' }}">
+                        </div>
+                        <div class="col-1 p-2 column-item"></div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="quantity_raw_press" class="col-6 p-2 column-item border-l">
+                            مقدار استاندارد در هر پرس خام
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="number" id="quantity_raw_press" name="quantity_raw_press" class="inputs pe-3"
+                                   value="{{ object.quantity_raw_press }}" step="any">
+                        </div>
+                        <div class="col-1 p-2 column-item">kg</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="quantity_baked_press" class="col-6 p-2 column-item border-l">
+                            مقدار استاندارد در هر پرس پخته
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="number" id="quantity_baked_press" name="quantity_baked_press" class="inputs pe-3"
+                                   value="{{ object.quantity_baked_press }}" step="any">
+                        </div>
+                        <div class="col-1 p-2 column-item" id="Raw-material-price">kg</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="price" class="col-6 p-2 column-item border-l">
+                            قیمت خریداری شده (در هر کیلوگرم/عدد)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="price" class="ps-3"
+                                   value="{{ object.price|intcomma }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">تومان</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="raw_usable_quantity_cost_match" class="col-6 p-2 column-item border-l">
+                            قیمت در هر کیلوگرم/عدد
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="raw_usable_quantity_cost_match" class="ps-3"
+                                   value="{{ object.raw_usable_quantity_cost|intcomma }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">تومان</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="delivery_weight" class="col-6 p-2 column-item border-l">
+                            وزن تحویلی (وزن صادره از انبار)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="number" id="delivery_weight" name="delivery_weight" class="inputs pe-3"
+                                   value="{{ object.delivery_weight|default:'' }}" step="any" required>
+                        </div>
+                        <div class="col-1 p-2 column-item">kg</div>
+                    </div>
+                </section>
+
+                <section class="tablee col-12 col-md-9">
+                    <div class="title-table">افت وزنی محصول حین تمیز کردن</div>
+
+                    <div class="row-table">
+                        <label for="delivery_weight_match" class="col-4 p-2 column-item border-l">
+                            وزن صادره از انبار
+                        </label>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="delivery_weight_match" class="ps-3"
+                                   value="{{ object.delivery_weight }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item border-l">kg</div>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" disabled id="delivery_weight_percent" value="100">
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="weight_loss_cleaning_unusable" class="col-4 p-2 column-item border-l">
+                            کاهش وزن در اثر تمیز کردن (بدون استفاده)
+                        </label>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="number" id="weight_loss_cleaning_unusable" name="weight_loss_cleaning_unusable"
+                                   class="inputs pe-3" step="any"
+                                   value="{{ object.weight_loss_cleaning_unusable }}">
+                        </div>
+                        <div class="col-1 p-2 column-item border-l">kg</div>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="weight_loss_cleaning_unusable_percent" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="weight_loss_cleaning_usable" class="col-4 p-2 column-item border-l">
+                            کاهش وزن در اثر تمیز کردن (قابل استفاده)
+                        </label>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="number" id="weight_loss_cleaning_usable" name="weight_loss_cleaning_usable"
+                                   class="inputs pe-3" step="any"
+                                   value="{{ object.weight_loss_cleaning_usable }}">
+                        </div>
+                        <div class="col-1 p-2 column-item border-l">kg</div>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="weight_loss_cleaning_usable_percent" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="edible_cleaned_weight" class="col-4 p-2 column-item border-l">
+                            وزن تمیز شده (قابل استفاده)
+                        </label>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="edible_cleaned_weight" name="edible_cleaned_weight" class="ps-3"
+                                   value="{{ object.edible_cleaned_weight }}" step="any" readonly>
+                        </div>
+                        <div class="col-1 p-2 column-item border-l">kg</div>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="edible_cleaned_weight_percent" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+                </section>
+
+                <section class="tablee col-12 col-md-9">
+                    <div class="title-table">افت وزنی محصول در خلال پخت</div>
+
+                    <div class="row-table">
+                        <label for="edible_cleaned_weight_match" class="col-4 p-2 column-item border-l">
+                            وزن تمیز شده (قابل خوراک)
+                        </label>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="number" id="edible_cleaned_weight_match" class="pe-3"
+                                   value="{{ object.edible_cleaned_weight }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item border-l">kg</div>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="edible_cleaned_weight_match_percent" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="weight_loss_baking" class="col-4 p-2 column-item border-l">
+                            افت وزن در خلال پخت
+                        </label>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="number" id="weight_loss_baking" name="weight_loss_baking" class="inputs pe-3"
+                                   value="{{ object.weight_loss_baking }}" step="any">
+                        </div>
+                        <div class="col-1 p-2 column-item border-l">kg</div>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="weight_loss_baking_percent" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="salable_weight" class="col-4 p-2 column-item border-l">
+                            وزن قابل فروش (پخته شده)
+                        </label>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="salable_weight" name="salable_weight" class="pe-3"
+                                   value="{{ object.salable_weight }}" readonly>
+                        </div>
+                        <div class="col-1 p-2 column-item border-l">kg</div>
+                        <div class="col-3 p-2 column-item border-l">
+                            <input type="text" id="salable_weight_percent" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+                </section>
+
+                <section class="tablee col-12 col-md-9">
+                    <div class="title-table">نسبت های محاسباتی تست بازده</div>
+
+                    <div class="row-table">
+                        <label for="edible_cleaned_weight_percent_match" class="col-6 p-2 column-item border-l">
+                            نسبت مقدار قابل خوراک به وزن اصلی (درصد)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="edible_cleaned_weight_percent_match" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="salable_weight_percent_match" class="col-6 p-2 column-item border-l">
+                            نسبت مقدار پخته شده به وزن اصلی (درصد)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="salable_weight_percent_match" value="0" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">%</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="raw_usable_quantity_cost" class="col-6 p-2 column-item border-l">
+                            هزینه مقدار قابل استفاده خام (هر کیلوگرم/عدد)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="raw_usable_quantity_cost"
+                                   value="{{ object.raw_usable_quantity_cost|intcomma }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">تومان</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="baked_usable_quantity_cost" class="col-6 p-2 column-item border-l">
+                            هزینه مقدار قابل استفاده پخته (هر کیلوگرم/عدد)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="baked_usable_quantity_cost"
+                                   value="{{ object.baked_usable_quantity_cost|intcomma }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">تومان</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="raw_usable_quantity_cost_per_press" class="col-6 p-2 column-item  border-l">
+                            هزینه مقدار قابل استفاده خام هر پرس
+                        </label>
+                        <div class="col-5 p-2 column-item  border-l">
+                            <input type="text" id="raw_usable_quantity_cost_per_press"
+                                   value="{{ object.raw_usable_quantity_cost_per_press|intcomma }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item">تومان</div>
+                    </div>
+
+                    <div class="row-table border-t">
+                       <label for="baked_usable_quantity_cost_per_press" class="col-6 p-2 column-item border-l">
+                           هزینه مقدار قابل استفاده پخته هر پرس
+                       </label>
+                       <div class="col-5 p-2 column-item border-l">
+                           <input type="text" id="baked_usable_quantity_cost_per_press"
+                                  value="{{ object.baked_usable_quantity_cost_per_press|intcomma }}" disabled>
+                       </div>
+                       <div class="col-1 p-2 column-item">تومان</div>
+                   </div>
+
+                    <div class="row-table border-t">
+                        <label for="number_of_raw_use" class="col-6 p-2 column-item border-l">
+                            تعداد مورد استفاده(خام)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="number_of_raw_use"
+                                   value="{{ object.number_of_raw_use }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item"></div>
+                    </div>
+
+                    <div class="row-table border-t">
+                        <label for="number_of_baked_use" class="col-6 p-2 column-item border-l">
+                            تعداد مورد استفاده(پخته)
+                        </label>
+                        <div class="col-5 p-2 column-item border-l">
+                            <input type="text" id="number_of_baked_use"
+                                   value="{{ object.number_of_baked_use }}" disabled>
+                        </div>
+                        <div class="col-1 p-2 column-item"></div>
+                    </div>
+                </section>
+
+                <div class="d-flex justify-content-center w-100 mt-4">
+                    <button type="submit" class="btn btn-success fw-semibold w-25">ثبت تغییرات و محاسبه</button>
+                </div>
+            </form>
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script src="{% static 'js/butchery-test.js' %}"></script>
+{% endblock %}

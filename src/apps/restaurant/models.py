@@ -1,5 +1,6 @@
 from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
+from django.shortcuts import reverse
 from django.db import models
 
 from apps.core.models import BaseModel
@@ -43,9 +44,31 @@ class RawMaterialCategory(BaseModel):
 # RawMaterials model
 class RawMaterial(BaseModel):
     category = models.ForeignKey(RawMaterialCategory, on_delete=models.CASCADE, related_name='raw_materials', verbose_name=_('Category'))
+
+    # Common info
     title = models.CharField(_('Title'), max_length=128)
-    price = models.PositiveIntegerField(_('Price'), default=0, help_text=_('Per a unit'))
-    # TODO: Add extra fields
+    price = models.PositiveIntegerField(_('Price'), default=0, help_text=_('Per unit'))
+    use_for = models.CharField(_('Use for'), max_length=128, null=True, blank=True)
+    quantity_raw_press = models.DecimalField(_('Standard quantity per raw press'), max_digits=5, decimal_places=3, default=0)
+    quantity_baked_press = models.DecimalField(_('Standard quantity per baked press'), max_digits=5, decimal_places=3, default=0)
+    delivery_weight = models.DecimalField(_('Delivery weight'), max_digits=5, decimal_places=2, default=0)
+
+    # Weight loss during cleaning info
+    weight_loss_cleaning_usable = models.DecimalField(_('Weight loss due to cleaning(usable)'), max_digits=4, decimal_places=2, default=0)
+    weight_loss_cleaning_unusable = models.DecimalField(_('Weight loss due to cleaning(unusable)'), max_digits=4, decimal_places=2, default=0)
+    edible_cleaned_weight = models.DecimalField(_('Edible cleaned weight'), max_digits=5, decimal_places=2, default=0)
+
+    # Weight loss during baking info
+    weight_loss_baking = models.DecimalField(_('Weight loss due to baking'), max_digits=4, decimal_places=2, default=0)
+    salable_weight = models.DecimalField(_('Salable weight(usable)'), max_digits=5, decimal_places=2, default=0)
+
+    # Computational ratios of yield test
+    raw_usable_quantity_cost = models.PositiveIntegerField(_('Cost of raw usable quantity'), default=0)
+    baked_usable_quantity_cost = models.PositiveIntegerField(_('Cost of baked usable quantity'), default=0)
+    raw_usable_quantity_cost_per_press = models.PositiveIntegerField(_('Cost of raw usable quantity per press'), default=0)
+    baked_usable_quantity_cost_per_press = models.PositiveIntegerField(_('Cost of baked usable quantity per press'), default=0)
+    number_of_raw_use = models.PositiveIntegerField(_('Number of raw use'), default=0)
+    number_of_baked_use = models.PositiveIntegerField(_('Number of baked use'), default=0)
 
     class Meta:
         verbose_name = _('Raw material')
@@ -53,4 +76,11 @@ class RawMaterial(BaseModel):
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.raw_usable_quantity_cost:
+            self.raw_usable_quantity_cost = self.price
+        super().save(*args, **kwargs)
 
+    def get_reduce_form_url(self):
+        return reverse('restaurant:raw_materials_reduce_form', args=[self.pk])
