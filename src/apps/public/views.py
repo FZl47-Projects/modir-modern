@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import View, TemplateView
+from django.views.generic import TemplateView
 
 from apps.course.models import Course
 from .models import IndexVideo, TopBanner
@@ -14,7 +14,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
         context.update({
             'courses': Course.objects.filter(is_active=True).order_by('-id')[:6],
             'banners': TopBanner.objects.filter(is_active=True),
-            'index_video': IndexVideo.objects.last(),
+            'index_videos': IndexVideo.objects.filter(is_active=True),
         })
 
         return context

@@ -223,6 +223,25 @@ input {
   font-weight: 600;
 }
 
+.btn-collapse i {
+  -webkit-text-stroke: 0.6pt;
+  transition: all 0.3s;
+}
+
+.btn-collapse:hover > i, .btn-collapse:active > i {
+  transform: rotate(-90deg) translate(3px, 2px);
+}
+
+.mt-cs {
+  margin-top: -6px;
+}
+
+.p-cs {
+  border-radius: 0.25rem;
+  padding: 5px 7px 2px 7px;
+  margin-left: 1px;
+}
+
 /*COLOR BODY*/
 /*COLOR BODY*/
 /* COLOR WHITE*/

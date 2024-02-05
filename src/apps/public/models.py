@@ -34,7 +34,7 @@ class IndexVideo(BaseModel):
 
     class Meta:
         verbose_name = _('Index video')
-        verbose_name_plural = _('Index Video')
+        verbose_name_plural = _('Index Videos')
 
     def __str__(self):
         return f'{self.title} - {self.get_video_url()}'

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-05 04:04+0330\n"
+"POT-Creation-Date: 2024-02-05 18:13+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -555,8 +555,24 @@ msgid "Index video"
 msgstr "ویدیو صفحه اصلی"
 
 #: .\apps\public\models.py:37
-msgid "Index Video"
-msgstr "ویدیو صفحه اصلی"
+msgid "Index Videos"
+msgstr "ویدیوهای صفحه اصلی"
+
+#: .\apps\restaurant\admin.py:33
+msgid "Common info"
+msgstr "اطلاعات عمومی"
+
+#: .\apps\restaurant\admin.py:34
+msgid "Weight loss during cleaning"
+msgstr "وزن کاهش یافته در اثر تمیز کردن"
+
+#: .\apps\restaurant\admin.py:35
+msgid "Weight loss during baking"
+msgstr "کاهش وزن در خلال پخت"
+
+#: .\apps\restaurant\admin.py:36
+msgid "Computational ratios of yield"
+msgstr "نسبت های محاسباتی تست بازده"
 
 #: .\apps\restaurant\apps.py:8 .\apps\restaurant\models.py:17
 #: .\apps\restaurant\models.py:29
@@ -664,24 +680,24 @@ msgid "Category successfully deleted"
 msgstr "دسته بندی با موفقیت حذف گردید"
 
 #: .\apps\restaurant\views\materials.py:83
-#: .\apps\restaurant\views\materials.py:115
-#: .\apps\restaurant\views\materials.py:144
+#: .\apps\restaurant\views\materials.py:117
+#: .\apps\restaurant\views\materials.py:146
 msgid "There is an issue. please try again"
 msgstr "خطایی رخ داده است! لطفا مجدد تلاش کنید"
 
-#: .\apps\restaurant\views\materials.py:112
+#: .\apps\restaurant\views\materials.py:114
 msgid "Raw materials added successfully"
 msgstr "مواد اولیه افزوده شدند"
 
-#: .\apps\restaurant\views\materials.py:140
+#: .\apps\restaurant\views\materials.py:142
 msgid "Item successfully modified"
 msgstr "آیتم با موفقیت تغییر کرد"
 
-#: .\apps\restaurant\views\materials.py:158
+#: .\apps\restaurant\views\materials.py:160
 msgid "Item deleted successfully"
 msgstr "آیتم با موفقیت حذف شد"
 
-#: .\apps\restaurant\views\materials.py:186
+#: .\apps\restaurant\views\materials.py:188
 msgid "Items saved successfully. You can see results down below"
 msgstr "موارد با موفقیت ثبت شد. اکنون می‌توانید نتایج را در زیر مشاهده فرمایید"
 
@@ -796,7 +812,7 @@ msgstr "تیکت با موفقیت ارسال شد"
 msgid "Message sent successfully"
 msgstr "پیام با موفقیت شد"
 
-#: .\config\settings\base.py:104
+#: .\config\settings\base.py:105
 msgid "Persian"
 msgstr "فارسی"
 
