@@ -25,7 +25,7 @@ class AddMaterialCategoryForm(forms.ModelForm):
 class RawMaterialForm(forms.ModelForm):
     class Meta:
         model = RawMaterial
-        fields = ('category', 'title', 'price')
+        fields = ('category', 'title', 'use_for', 'price')
 
 
 # ReduceRawMaterial form

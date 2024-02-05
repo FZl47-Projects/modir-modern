@@ -84,3 +84,6 @@ class RawMaterial(BaseModel):
 
     def get_reduce_form_url(self):
         return reverse('restaurant:raw_materials_reduce_form', args=[self.pk])
+
+    def get_use_for(self):
+        return f'({self.use_for})' if self.use_for else ''

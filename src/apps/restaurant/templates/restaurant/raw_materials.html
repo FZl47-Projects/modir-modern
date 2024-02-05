@@ -108,7 +108,10 @@
                                    <span class="convert-digits fw-semibold">{{ forloop.counter }}</span>
                                </td>
                                <td>
-                                   <span class="text-nowrap obj-title">{{ obj.title }}</span>
+                                   <span class="text-nowrap obj-title">
+                                       {{ obj.title }}
+                                       <small class="text-secondary">{{ obj.get_use_for }}</small>
+                                   </span>
                                </td>
                                <td>
                                    <div class="text-nowrap">
@@ -125,7 +128,7 @@
                                    <div class="d-flex justify-content-center gap-1">
                                        <button type="button" data-bs-toggle="modal" data-bs-target="#editMaterial"
                                                data-pk="{{ obj.pk }}" data-category="{{ obj.category.id }}"
-                                               data-price="{{ obj.price }}" data-title="{{ obj.title }}"
+                                               data-price="{{ obj.price }}" data-title="{{ obj.title }}" data-use="{{ obj.use_for }}"
                                                class="bi bi-pencil btn btn-sm btn-success ed-btn" title="ویرایش">
                                        </button>
                                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteMaterial"

@@ -95,12 +95,14 @@ class AddRawMaterialView(LoginRequiredMixin, FormView):
         post = self.request.POST.copy()
         try:
             titles = post.getlist('title', [])
+            uses = post.getlist('use_for', [])
             prices = post.getlist('price', [])
             categories = post.getlist('category', [])
 
             for index, item in enumerate(titles):
                 data = {
                     'title': item,
+                    'use_for': uses[index],
                     'price': prices[index],
                     'category': categories[index]
                 }

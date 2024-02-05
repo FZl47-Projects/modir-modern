@@ -78,11 +78,13 @@ $('#editMaterial').on('show.bs.modal', function (event) {
 
     let pk = button.data('pk');
     let title = button.data('title');
+    let use_for = button.data('use');
     let price = button.data('price');
     let category = button.data('category');
 
     modal.find('.modal-dialog #editMaterialForm').attr('action', `/restaurant/materials/${pk}/edit/`)
-    modal.find('.modal-body input[type=text]').val(title);
+    modal.find('.modal-body input[name=title]').val(title);
+    modal.find('.modal-body input[name=use_for]').val(use_for);
     modal.find('.modal-body input[type=number]').val(price);
     modal.find('.modal-body select').val(category);
 })
@@ -100,6 +102,10 @@ function createNewSection() {
         <label class="form-label fs-13 flex-grow-1">
             عنوان ماده اولیه
             <input type="text" name="title" class="form form-control f-input mt-1" required>
+        </label>
+        <label class="form-label fs-13 flex-grow-1">
+            مورد استفاده
+            <input type="text" name="use_for" class="form form-control f-input mt-1">
         </label>
         <label class="form-label fs-13 flex-grow-1">
             <span>
