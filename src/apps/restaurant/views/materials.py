@@ -6,9 +6,9 @@ from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages
 
+from apps.subscription.mixinx import SubscriptionRequiredMixin
 from apps.core.utils import toast_form_errors
 from ..models import (Restaurant, RawMaterialCategory, RawMaterial)
-from ..mixins import SubscriptionRequiredMixin
 from .. import forms
 
 
