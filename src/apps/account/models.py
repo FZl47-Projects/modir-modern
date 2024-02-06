@@ -108,6 +108,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         return remaining_days
 
+    def has_subscription(self):
+        return self.subscriptions.filter(is_active=True).exists()
+
     def get_tickets_count(self):
         return self.tickets.all().count() or 0
 

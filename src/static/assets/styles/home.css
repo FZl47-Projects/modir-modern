@@ -185,6 +185,11 @@ input {
   font-size: 15px;
 }
 
+.package-title:hover {
+  color: #0c63e4;
+}
+
+/* Static banner styles */
 .static-banner {
   width: 100%;
   position: relative;

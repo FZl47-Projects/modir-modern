@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-05 18:13+0330\n"
+"POT-Creation-Date: 2024-02-06 11:38+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgid "Account"
 msgstr "حساب ها"
 
 #: .\apps\account\enums.py:7 .\apps\account\models.py:62
-#: .\apps\account\models.py:119 .\apps\course\models.py:148
+#: .\apps\account\models.py:122 .\apps\course\models.py:148
 #: .\apps\restaurant\models.py:12 .\apps\subscription\models.py:40
 #: .\apps\ticket\models.py:16 .\apps\ticket\models.py:49
 msgid "User"
@@ -177,39 +177,39 @@ msgstr "کاربران"
 msgid "No name"
 msgstr "بدون نام"
 
-#: .\apps\account\models.py:120
+#: .\apps\account\models.py:123
 msgid "Melli code"
 msgstr "کدملی"
 
-#: .\apps\account\models.py:121
+#: .\apps\account\models.py:124
 msgid "Gender"
 msgstr "جنسیت"
 
-#: .\apps\account\models.py:122
+#: .\apps\account\models.py:125
 msgid "Date of birth"
 msgstr "تاریخ تولد"
 
-#: .\apps\account\models.py:123
+#: .\apps\account\models.py:126
 msgid "Place name"
 msgstr "نام مجموعه"
 
-#: .\apps\account\models.py:124
+#: .\apps\account\models.py:127
 msgid "Province"
 msgstr "استان"
 
-#: .\apps\account\models.py:125
+#: .\apps\account\models.py:128
 msgid "City"
 msgstr "شهر"
 
-#: .\apps\account\models.py:126
+#: .\apps\account\models.py:129
 msgid "Picture"
 msgstr "تصویر"
 
-#: .\apps\account\models.py:129
+#: .\apps\account\models.py:132
 msgid "User profile"
 msgstr "پروفایل کاربر"
 
-#: .\apps\account\models.py:130
+#: .\apps\account\models.py:133
 msgid "Users profile"
 msgstr "پروفایل کاربران"
 
@@ -582,6 +582,10 @@ msgstr "رستوران"
 #: .\apps\restaurant\forms.py:19
 msgid "This category is already exists"
 msgstr "این دسته بندی وجود دارد"
+
+#: .\apps\restaurant\mixins.py:15
+msgid "You need to purchase subscription to use this service."
+msgstr "شما برای استفاده از این بخش نیازمند تهیه اشتراک هستید."
 
 #: .\apps\restaurant\models.py:18
 msgid "Restaurants"

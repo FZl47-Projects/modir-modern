@@ -167,7 +167,6 @@ Q_CLUSTER = {
     'recycle': 500,
     'timeout': 60,
     'compress': True,
-    'save_limit': 250,
     'queue_limit': 500,
     'orm': 'default',
 }

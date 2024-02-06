@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from apps.core.utils import toast_form_errors
-from apps.restaurant.models import (Restaurant, RawMaterialCategory, RawMaterial)
+from ..models import (Restaurant, RawMaterialCategory, RawMaterial)
+from ..mixins import SubscriptionRequiredMixin
 from .. import forms
 
 
@@ -16,7 +17,6 @@ class RawMaterialsListView(LoginRequiredMixin, TemplateView):
     template_name = 'restaurant/raw_materials.html'
 
     def filter(self, objects):
-        # TODO: Add search for materials
         cat_filter = self.request.GET.get('filter')
         if cat_filter:
             objects = objects.filter(category__title=cat_filter)
@@ -44,7 +44,7 @@ class RawMaterialsListView(LoginRequiredMixin, TemplateView):
 
 
 # Add MaterialCategory view
-class AddMaterialCategoryView(LoginRequiredMixin, FormView):
+class AddMaterialCategoryView(SubscriptionRequiredMixin, FormView):
     template_name = 'restaurant/raw_materials.html'
     form_class = forms.AddMaterialCategoryForm
     success_url = reverse_lazy('restaurant:raw_materials')
@@ -68,7 +68,7 @@ class AddMaterialCategoryView(LoginRequiredMixin, FormView):
 
 
 # Delete MaterialCategory view
-class DeleteMaterialCategoryView(LoginRequiredMixin, View):
+class DeleteMaterialCategoryView(SubscriptionRequiredMixin, View):
     """ Delete raw material category based on pk """
     def post(self, request):
         title = request.POST.get('title')
@@ -86,7 +86,7 @@ class DeleteMaterialCategoryView(LoginRequiredMixin, View):
 
 
 # Add RawMaterial view
-class AddRawMaterialView(LoginRequiredMixin, FormView):
+class AddRawMaterialView(SubscriptionRequiredMixin, FormView):
     template_name = 'restaurant/raw_materials.html'
     form_class = forms.RawMaterialForm
     success_url = reverse_lazy('restaurant:raw_materials')
@@ -120,7 +120,7 @@ class AddRawMaterialView(LoginRequiredMixin, FormView):
 
 
 # Edit RawMaterial view
-class EditRawMaterialView(LoginRequiredMixin, FormView):
+class EditRawMaterialView(SubscriptionRequiredMixin, FormView):
     template_name = 'restaurant/raw_materials.html'
     form_class = forms.RawMaterialForm
     success_url = reverse_lazy('restaurant:raw_materials')
@@ -148,7 +148,7 @@ class EditRawMaterialView(LoginRequiredMixin, FormView):
 
 
 # Delete RawMaterial view
-class DeleteRawMaterialView(LoginRequiredMixin, View):
+class DeleteRawMaterialView(SubscriptionRequiredMixin, View):
     """ Delete raw material objects based on pk """
     def post(self, request):
         pk = self.request.POST.get('pk')
@@ -162,7 +162,7 @@ class DeleteRawMaterialView(LoginRequiredMixin, View):
 
 
 # Render ReduceForm view
-class MaterialReduceFormView(LoginRequiredMixin, FormView):
+class MaterialReduceFormView(SubscriptionRequiredMixin, FormView):
     template_name = 'restaurant/reduce_form.html'
     model = RawMaterial
     form_class = forms.ReduceRawMaterialForm
