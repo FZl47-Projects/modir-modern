@@ -1,9 +1,10 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 
 app_name = 'course'
 
 urlpatterns = [
-    path('list/', views.CoursesListView.as_view(), name='course_list'),
+    path('', views.CoursesListView.as_view(), name='course_list'),
+    re_path(r'(?P<slug>[-\w]+)/', views.CourseDetailView.as_view(), name='course_detail'),
 ]

@@ -42,10 +42,11 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     list_filter = ('is_active', 'type')
     readonly_fields = ('selling_price',)
+    prepopulated_fields = {'slug': ('title',)}
     inlines = [SessionInline, FAQInline]
 
     fieldsets = (
-        (None, {'fields': ('title', 'short_des', 'instructor', 'type', 'description')}),
+        (None, {'fields': ('title', 'slug', 'short_des', 'instructor', 'type', 'description')}),
         (_('Price info'), {'fields': ('payment_type', 'price', 'discount', 'selling_price')}),
         (_('Additional info'), {'fields': ('image', 'duration', 'pinned', 'is_active')})
     )

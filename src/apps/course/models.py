@@ -1,10 +1,13 @@
 from django.utils.translation import gettext as _
+from django.contrib.auth import get_user_model
 from django.templatetags.static import static
 from django.shortcuts import reverse
 from django.db import models
 
 from .enums import CoursePaymentTypeEnum, CourseTypeEnum
+from .utils import course_video_path
 from apps.core.models import BaseModel
+User = get_user_model()
 
 
 # Instructors model
@@ -43,6 +46,7 @@ class Course(BaseModel):
     PaymentTypes = CoursePaymentTypeEnum
 
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
+    slug = models.SlugField(_('Slug'), max_length=255, null=True, blank=True, allow_unicode=True)
     short_des = models.CharField(_('Short description'), max_length=255, null=True, blank=True)
     description = models.TextField(_('Description'), null=True, blank=True)
     type = models.CharField(_('Course type'), max_length=32, choices=Types.choices, default=Types.OFFLINE)
@@ -71,36 +75,53 @@ class Course(BaseModel):
     def get_image_url(self):
         if self.image:
             return self.image.url
-        return static('images/logo-yellow.png')
+        return static('images/main-logo.png')
 
     def get_type_label(self):
         return self.get_type_display()
 
     def get_absolute_url(self):
-        return reverse('course:course_list')  # TODO: Add specific url
+        return reverse('course:course_detail', args=[self.slug])
 
-    def get_sessions(self):
-        self.sessions.filter(is_active=True)
+    def get_episode_count(self):
+        return self.episodes.filter(is_active=True).count() or 0
 
-    def get_sessions_count(self):
-        return self.sessions.all().count() or 0
+    def get_comments(self):
+        return self.comments.all()
 
 
 # Course's sessions model
 class Session(BaseModel):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sessions', verbose_name=_('Course'))
     title = models.CharField(_('Session title'), max_length=255, default=_('No title'))
-    file = models.FileField(_('Video file'), upload_to='files/video/courses/')
-    duration = models.PositiveIntegerField(_('Duration'), default=0, help_text=_('Seconds'))
-    is_active = models.BooleanField(_('Active'), default=True)
 
     class Meta:
         verbose_name = _('Course session')
         verbose_name_plural = _('Course sessions')
-        ordering = ('-id',)
 
     def __str__(self):
-        return self.course
+        return f'{self.course} - {self.title}'
+
+    def get_episodes(self):
+        return self.episodes.objects.filter(is_active=True)
+
+
+# Session's episodes model
+class Episode(BaseModel):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='episodes', verbose_name=_('Course'))
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='episodes', verbose_name=_('Session'))
+    title = models.CharField(_('Episode title'), max_length=255, default=_('No title'))
+    number = models.PositiveSmallIntegerField(_('Episode number'))
+    file = models.FileField(_('Video file'), upload_to=course_video_path)
+    duration = models.PositiveSmallIntegerField(_('Duration'), default=0, help_text=_('Minutes'))
+    is_active = models.BooleanField(_('Active'), default=True)
+
+    class Meta:
+        verbose_name = _('Episode')
+        verbose_name_plural = _('Episodes')
+
+    def __str__(self):
+        return f'{self.session} - {self.title}'
 
     def get_file_url(self):
         if self.file:
@@ -119,3 +140,20 @@ class FAQ(BaseModel):
 
     def __str__(self):
         return f'{self.course} - {self.question}'
+
+
+# Course Comments model
+class Comment(BaseModel):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Course'))
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='course_comments', verbose_name=_('User'), null=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+    text = models.TextField(max_length=512)
+    is_verified = models.BooleanField(_('Verified'), default=False)
+    is_active = models.BooleanField(_('Active'), default=True)
+
+    class Meta:
+        verbose_name = _('Course comment')
+        verbose_name_plural = _('Course comments')
+
+    def __str__(self):
+        return f'{self.user} - {self.course}'

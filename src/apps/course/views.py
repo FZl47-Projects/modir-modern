@@ -1,6 +1,5 @@
-from django.views.generic import View, TemplateView, ListView, DetailView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.translation import gettext as _
 from django.contrib import messages
 
 from .models import Course
@@ -19,5 +18,10 @@ class CoursesListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = Course.objects.filter(is_active=True)
-
         return self.filter(queryset)
+
+
+# Render CourseDetail view
+class CourseDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'course/details.html'
+    model = Course
