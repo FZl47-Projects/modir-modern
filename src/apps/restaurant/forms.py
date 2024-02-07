@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from django import forms
 
-from .models import (RawMaterialCategory, RawMaterial)
+from .models import (RawMaterialCategory, RawMaterial, RecipesCategory, Recipe, RecipeMaterial)
 
 
 # AddMaterialCategory form
@@ -51,3 +51,27 @@ class ReduceRawMaterialForm(forms.ModelForm):
 
         obj.save()
         return obj
+
+
+# -------------------------------------------------------------------
+
+
+# Add RecipesCategory form
+class RecipesCategoryForm(forms.ModelForm):
+    class Meta:
+        model = RecipesCategory
+        fields = ('restaurant', 'title')
+
+
+# Recipe form
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ('title', 'category', 'preparation')
+
+
+# AddRecipeMaterial form
+class AddRecipeMaterialForm(forms.ModelForm):
+    class Meta:
+        model = RecipeMaterial
+        fields = ('recipe', 'raw_material', 'amount')

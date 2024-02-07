@@ -9,30 +9,32 @@
             </div>
             <div class="modal-body">
                 <div id="materialsSection">
-                    <div class="d-flex flex-wrap gap-2 border-bottom border-1 border-light mt-1 form-group">
-                        <label class="form-label fs-13 flex-grow-1">
-                            عنوان ماده اولیه
-                            <input type="text" name="title" class="form form-control f-input mt-1" required>
-                        </label>
-                        <label class="form-label fs-13 flex-grow-1">
-                            مورد استفاده
-                            <input type="text" name="use_for" class="form form-control f-input mt-1">
-                        </label>
-                        <label class="form-label fs-13 flex-grow-1">
-                            <span>
-                                قیمت به ازای هر واحد
-                                <small>(تومان)</small>
-                            </span>
-                            <input type="number" name="price" minlength="0" class="form form-control f-input mt-1" required>
-                        </label>
-                        <label class="form-label fs-13 flex-grow-1">
-                            دسته بندی
-                            <select class="form-select f-input mt-1" name="category" required>
-                                {% for obj in restaurant.get_material_categories %}
-                                    <option value="{{ obj.id }}">{{ obj.title }}</option>
-                                {% endfor %}
-                            </select>
-                        </label>
+                    <div class="d-flex gap-1 border-bottom border-1 border-light mt-1 form-group">
+                        <div class="d-flex flex-wrap gap-2 w-100">
+                            <label class="form-label fs-13 flex-grow-1">
+                                عنوان ماده اولیه
+                                <input type="text" name="title" class="form form-control f-input mt-1" required>
+                            </label>
+                            <label class="form-label fs-13 flex-grow-1">
+                                مورد استفاده
+                                <input type="text" name="use_for" class="form form-control f-input mt-1">
+                            </label>
+                            <label class="form-label fs-13 flex-grow-1">
+                                <span>
+                                    قیمت به ازای هر واحد
+                                    <small>(تومان)</small>
+                                </span>
+                                <input type="number" name="price" minlength="0" class="form form-control f-input mt-1" required>
+                            </label>
+                            <label class="form-label fs-13 flex-grow-1">
+                                دسته بندی
+                                <select class="form-select f-input mt-1" name="category" required>
+                                    {% for obj in restaurant.get_material_categories %}
+                                        <option value="{{ obj.id }}">{{ obj.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="w-100 mt-3">

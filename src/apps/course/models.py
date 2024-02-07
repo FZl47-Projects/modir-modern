@@ -75,7 +75,7 @@ class Course(BaseModel):
     def get_image_url(self):
         if self.image:
             return self.image.url
-        return static('images/main-logo.png')
+        return static('images/logo-white.png')
 
     def get_type_label(self):
         return self.get_type_display()

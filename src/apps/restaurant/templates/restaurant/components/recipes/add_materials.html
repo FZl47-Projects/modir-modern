@@ -1,0 +1,42 @@
+<div class="modal fade" tabindex="-1" id="addMaterials" aria-labelledby="addMaterialsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen w-100">
+        <form method="POST" action="{% url 'restaurant:add_recipe_materials' %}"
+              class="modal-content bg-modal text-white border-white border-1 rounded-3">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ object.pk }}">
+            <div class="modal-header">
+                <h5 class="modal-title fw-semibold h4">فرم افزودن مواد</h5>
+                <span role="button" class="bi bi-x-lg mt-1 ms-1" data-bs-dismiss="modal" aria-label="Close"
+                      style="-webkit-text-stroke: 0.5pt;"></span>
+            </div>
+            <div class="modal-body">
+                <div id="materialsSection">
+                    <div class="d-flex align-items-end gap-1 border-bottom border-1 border-light mt-1 mb-4">
+                        <div class="d-flex flex-wrap gap-2 flex-grow-1 form-group">
+                            <label class="form-label fs-13 flex-grow-1">
+                                عنوان ماده اولیه
+                                <select class="form-select f-input mt-1 select-inputs" name="raw_material" required>
+                                    {% for obj in raw_materials %}
+                                        <option value="{{ obj.id }}">{{ obj }}</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                            <label class="form-label fs-13 flex-grow-1">
+                                مقدار (کیلوگرم/عدد)
+                                <input type="number" name="amount" step="any" required class="form form-control f-input mt-1">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 mt-3">
+                    <button type="button" class="btn btn-outline-secondary fw-semibold w-100" onclick="createAddSection()">
+                        جدید +
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="submit" class="btn btn-success fw-semibold w-100">ثبت مواد</button>
+            </div>
+        </form>
+    </div>
+</div>

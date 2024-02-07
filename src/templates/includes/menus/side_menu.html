@@ -89,7 +89,8 @@
                                 </a>
                             </li>
                             <li class="item-menu">
-                                <a href="#">
+                                <a href="{% url 'restaurant:recipes' %}"
+                                   class="{% if request.resolver_match.url_name == 'recipes' or request.resolver_match.url_name == 'recipe_details' %}active{% endif %}">
                                     <span class="d-flex align-items-center" style="margin-right: 12px;">
                                         <i class="bi bi-receipt mt-2" style="font-size: 19px;"></i>
                                     </span>

@@ -1,0 +1,126 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | رسپی غذاها{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/recipes.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <!-- Start add category modal -->
+    {% include 'restaurant/components/recipes/add_category.html' %}
+    <!-- .End add category modal -->
+
+    <!-- Start delete category modal -->
+    {% include 'restaurant/components/recipes/delete_category.html' %}
+    <!-- .End delete category modal -->
+
+    <!-- Start add recipe modal -->
+    {% include 'restaurant/components/recipes/add_recipe.html' %}
+    <!-- .End add recipe modal -->
+
+    <!-- Start delete recipe modal -->
+    {% include 'restaurant/components/recipes/delete_recipe.html' %}
+    <!-- .End delete recipe modal -->
+
+    <div class="container-fluid col-md-10 pb-4">
+        <main class="main w-100 p-md-4 p-2">
+            <h5 class="fw-semibold text-white text-md-end text-center mt-3">لیست رسپی غذاها</h5>
+
+            <!-- Start categories filter section -->
+            <div class="swiper category-slider mt-md-3 mt-4">
+                <div class="d-flex align-items-center gap-2 category-text">
+                    <small class="text-white">دسته‌ها: </small>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addCategory" class="btn btn-light category-add-btn">
+                        <span class="btn-icon">+</span>
+                    </button>
+                </div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="{% url 'restaurant:recipes' %}" class="btn category-btn
+                            {% if not request.GET.filter %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                            همه
+                        </a>
+                    </div>
+                    {% for obj in restaurant.get_recipes_categories %}
+                        <div class="swiper-slide">
+                            <a href="?filter={{ obj.title }}" class="btn category-btn
+                                {% if request.GET.filter == obj.title %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                                {{ obj.title }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <!-- .End categories filter section -->
+
+            <!-- Start recipes section -->
+            <div class="d-flex justify-content-between align-items-start border-bottom border-1 w-100 mt-md-5 mt-4">
+                <div class="d-flex align-items-center flex-wrap gap-1">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addRecipe"
+                            class="btn btn-sm btn-light fw-semibold">
+                        افزودن رسپی
+                    </button>
+                    {% if request.GET.filter %}
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteCategory" data-title="{{ request.GET.filter }}"
+                                class="btn btn-sm btn-danger fw-semibold">
+                            حذف دسته بندی
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="d-flex">
+                    <form method="GET" action="" class="d-flex align-items-start">
+                        <label class="form-label">
+                            <input type="hidden" name="filter" value="{{ request.GET.filter }}">
+                            <input type="text" name="q" placeholder="عنوان..." value="{{ request.GET.q }}"
+                                   class="form-control form-control-sm">
+                        </label>
+                        <button type="submit" class="bi bi-search btn btn-sm btn-success btn-search"></button>
+                    </form>
+                </div>
+            </div>
+            <div class="d-flex justify-content-md-start justify-content-center gap-3 recipe-section">
+                {% for obj in objects %}
+                    <div class="recipe-main">
+                        <a href="{{ obj.get_absolute_url }}" class="d-flex justify-content-center align-items-center recipe-img">
+                            <img src="{{ obj.get_image_url }}" alt="Logo">
+                        </a>
+                        <div class="d-flex flex-column gap-1 mt-2 py-2 pe-3 ps-2">
+                            <div class="recipe-title">
+                                <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center gap-2 recipe-footer">
+                                <span class="d-flex align-items-center gap-1">
+                                    <small>قیمت تمام شده:</small>
+                                    <span class="convert-digits">{{ obj.final_price|default:0 }}</span>
+                                    <small>تومان</small>
+                                </span>
+                                <span class="recipe-btn">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleteRecipe"
+                                            data-pk="{{ obj.pk }}" data-title="{{ obj.title }}"
+                                            class="bi bi-trash3 btn btn-sm btn-danger">
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- .End recipes section -->
+
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script src="{% static 'js/recipes.js' %}"></script>
+{% endblock %}

@@ -52,25 +52,6 @@ $('#deleteMaterial').on('show.bs.modal', function (event) {
 // ------------------------- Add data to delete material modal -------------------------- //
 
 
-// $.ajax({
-//     url: `/restaurant/materials/${pk}/`,
-//     type: 'GET',
-//     success: function (data) {
-//         let title = data['obj']['title'];
-//         let price = data['obj']['price'];
-//         let category = data['obj']['category'];
-//
-//         modal.find('.modal-header #headerTitle').text(`ویرایش ${title}`);
-//         modal.find('.modal-body input[type=text]').val(title);
-//         modal.find('.modal-body input[type=number]').val(price);
-//         modal.find('.modal-body select').val(category);
-//     },
-//     error: function (error) {
-//         console.error('Error:', error);
-//     }
-// });
-
-
 // ---------------------------- Add data to edit material modal -------------------------- //
 $('#editMaterial').on('show.bs.modal', function (event) {
     let button = $(event.relatedTarget);
@@ -97,27 +78,30 @@ function createNewSection() {
     const firstSelect = parentDiv.firstElementChild.querySelector('select');
 
     const newDiv = document.createElement('div');
-    newDiv.className = 'd-flex flex-wrap gap-2 border-bottom border-1 border-light mt-5 form-group';
+    newDiv.className = 'd-flex align-items-end gap-1 border-bottom border-1 border-light mt-5 form-group';
     newDiv.innerHTML = `
-        <label class="form-label fs-13 flex-grow-1">
-            عنوان ماده اولیه
-            <input type="text" name="title" class="form form-control f-input mt-1" required>
-        </label>
-        <label class="form-label fs-13 flex-grow-1">
-            مورد استفاده
-            <input type="text" name="use_for" class="form form-control f-input mt-1">
-        </label>
-        <label class="form-label fs-13 flex-grow-1">
-            <span>
-                قیمت به ازای هر واحد
-                <small>(تومان)</small>
-            </span>
-            <input type="number" name="price" minlength="0" class="form form-control f-input mt-1" required>
-        </label>
-        <label class="form-label fs-13 flex-grow-1 select-part">
-            دسته بندی
-            
-        </label>
+        <div class="d-flex align-items-end flex-wrap gap-2 w-100">
+            <label class="form-label fs-13 flex-grow-1">
+                عنوان ماده اولیه
+                <input type="text" name="title" class="form form-control f-input mt-1" required>
+            </label>
+            <label class="form-label fs-13 flex-grow-1">
+                مورد استفاده
+                <input type="text" name="use_for" class="form form-control f-input mt-1">
+            </label>
+            <label class="form-label fs-13 flex-grow-1">
+                <span>
+                    قیمت به ازای هر واحد
+                    <small>(تومان)</small>
+                </span>
+                <input type="number" name="price" minlength="0" class="form form-control f-input mt-1" required>
+            </label>
+            <label class="form-label fs-13 flex-grow-1 select-part">
+                دسته بندی
+                
+            </label>
+            <button type="button" class="btn btn-danger fw-semibold mb-2" onclick="removeSection(this)">x</button>
+        </div>
     `;
 
     const selectClone = firstSelect.cloneNode(true);
@@ -126,3 +110,11 @@ function createNewSection() {
     parentDiv.appendChild(newDiv);
 }
 // ------------------------- Create new add material form section -------------------------- //
+
+
+// ---------------------------- Remove section by given id -------------------------- //
+function removeSection(e) {
+    let parent = e.parentElement.parentElement;
+    parent.remove();
+}
+// ------------------------- Remove section by given id -------------------------- //

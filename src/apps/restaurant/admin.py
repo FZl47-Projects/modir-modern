@@ -38,3 +38,17 @@ class RawMaterialAdmin(admin.ModelAdmin):
             'number_of_raw_use', 'number_of_baked_use',
         )}),
     )
+
+
+# ------------------------------------------
+
+
+# Register RecipeCategory model admin
+admin.site.register(models.RecipesCategory)
+
+
+# Register Recipe model admin
+admin.site.register(models.Recipe)
+
+# Register RecipeCategory model admin
+admin.site.register(models.RecipeMaterial)

@@ -1,5 +1,6 @@
 from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
+from django.templatetags.static import static
 from django.shortcuts import reverse
 from django.db import models
 
@@ -22,6 +23,9 @@ class Restaurant(BaseModel):
 
     def get_material_categories(self):
         return self.raw_material_categories.filter(is_active=True)
+
+    def get_recipes_categories(self):
+        return self.recipes_categories.all()
 
 
 # RawMaterialCategories model
@@ -75,7 +79,7 @@ class RawMaterial(BaseModel):
         verbose_name_plural = _('Raw materials')
 
     def __str__(self):
-        return self.title
+        return f'{self.title} {self.get_use_for()}'
     
     def save(self, *args, **kwargs):
         if not self.raw_usable_quantity_cost:
@@ -87,3 +91,72 @@ class RawMaterial(BaseModel):
 
     def get_use_for(self):
         return f'({self.use_for})' if self.use_for else ''
+
+
+# ------------------------------------------------------------------------------------
+
+
+# RecipesCategories model
+class RecipesCategory(BaseModel):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='recipes_categories', verbose_name=_('Restaurant'))
+    title = models.CharField(_('Title'), max_length=128, default=_('No title'))
+
+    class Meta:
+        verbose_name = _('Food recipes category')
+        verbose_name_plural = _('Food recipes categories')
+
+    def __str__(self):
+        return f'{self.restaurant} - {self.title}'
+
+    def get_recipes(self):
+        return self.recipes.filter(is_active=True)
+
+
+# Recipes model
+class Recipe(BaseModel):
+    category = models.ForeignKey(RecipesCategory, on_delete=models.CASCADE, related_name='recipes', verbose_name=_('Category'))
+    title = models.CharField(_('Title'), max_length=128, default=_('No title'))
+    preparation = models.TextField(_('How to prepare'), null=True, blank=True)
+    image = models.ImageField(_('Image'), upload_to='images/recipes/', null=True, blank=True)
+    is_material = models.BooleanField(_('Is material'), default=False)
+    is_active = models.BooleanField(_('Active'), default=True)
+
+    class Meta:
+        verbose_name = _('Food recipe')
+        verbose_name_plural = _('Food recipes')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('restaurant:recipe_details', args=[self.pk])
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return static('images/logo-yellow.png')
+
+    def get_materials(self):
+        return self.materials.all()
+
+
+# RecipeMaterials model
+class RecipeMaterial(BaseModel):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='materials', verbose_name=_('Recipe'))
+    raw_material = models.ForeignKey(RawMaterial, on_delete=models.SET_NULL, related_name='recipe_materials', verbose_name=_('Raw material'), null=True, blank=True)
+    amount = models.DecimalField(_('Amount'), max_digits=7, decimal_places=3, default=0)
+    final_price = models.PositiveIntegerField(_('Final price'), default=0)
+
+    class Meta:
+        verbose_name = _('Recipe material')
+        verbose_name_plural = _('Recipe materials')
+
+    def __str__(self):
+        return f'{self.recipe} - {self.raw_material}'
+
+    def save(self, *args, **kwargs):
+        self.final_price = int(self.amount * self.raw_material.raw_usable_quantity_cost)
+        super().save(*args, **kwargs)
+
+    def get_base_price(self):
+        return self.raw_material.raw_usable_quantity_cost or 0
