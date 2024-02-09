@@ -69,9 +69,38 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = ('title', 'category', 'preparation')
 
+    def save(self, commit=True):
+        obj = super().save(commit)
+        obj.save()
+
+        return obj
+
 
 # AddRecipeMaterial form
 class AddRecipeMaterialForm(forms.ModelForm):
+    class Meta:
+        model = RecipeMaterial
+        fields = ('recipe', 'raw_material', 'prepared_material', 'amount')
+
+
+# -----------------------------------------
+
+# Preparation form
+class PreparationForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ('category', 'title', 'preparation', 'is_material')
+
+    def save(self, commit=True):
+        obj = super().save(commit)
+        obj.is_material = True
+        obj.save()
+
+        return obj
+
+
+# AddPreparationMaterial form
+class AddPreparationMaterialForm(forms.ModelForm):
     class Meta:
         model = RecipeMaterial
         fields = ('recipe', 'raw_material', 'amount')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 01:37+0330\n"
+"POT-Creation-Date: 2024-02-09 22:50+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,7 +151,7 @@ msgstr "نام خانوادگی"
 #: .\apps\course\models.py:117 .\apps\course\models.py:152
 #: .\apps\public\models.py:12 .\apps\public\models.py:33
 #: .\apps\restaurant\models.py:15 .\apps\restaurant\models.py:35
-#: .\apps\restaurant\models.py:122 .\apps\subscription\models.py:21
+#: .\apps\restaurant\models.py:123 .\apps\subscription\models.py:21
 #: .\apps\subscription\models.py:43 .\apps\ticket\models.py:20
 msgid "Active"
 msgstr "فعال"
@@ -408,7 +408,7 @@ msgid "Selling price"
 msgstr "قیمت فروش"
 
 #: .\apps\course\models.py:59 .\apps\public\models.py:11
-#: .\apps\restaurant\models.py:120
+#: .\apps\restaurant\models.py:121
 #: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
 msgid "Image"
 msgstr "تصویر"
@@ -670,7 +670,7 @@ msgstr "تعداد مورد استفاده خام"
 msgid "Number of baked use"
 msgstr "تعداد مورد استفاده پخته"
 
-#: .\apps\restaurant\models.py:78 .\apps\restaurant\models.py:146
+#: .\apps\restaurant\models.py:78 .\apps\restaurant\models.py:160
 msgid "Raw material"
 msgstr "ماده اولیه"
 
@@ -690,47 +690,55 @@ msgstr "دسته‌های رسپی غذا"
 msgid "How to prepare"
 msgstr "طرز تهیه"
 
-#: .\apps\restaurant\models.py:121
-msgid "Is material"
-msgstr "ماده است"
-
-#: .\apps\restaurant\models.py:125
-msgid "Food recipe"
-msgstr "رسپی غذا"
-
-#: .\apps\restaurant\models.py:126
-msgid "Food recipes"
-msgstr "رسپی‌های غذاها"
-
-#: .\apps\restaurant\models.py:145
-msgid "Recipe"
-msgstr "رسپی"
-
-#: .\apps\restaurant\models.py:147
-msgid "Amount"
-msgstr "مقدار"
-
-#: .\apps\restaurant\models.py:148
+#: .\apps\restaurant\models.py:120 .\apps\restaurant\models.py:163
 msgid "Final price"
 msgstr "قیمت نهایی"
 
-#: .\apps\restaurant\models.py:151
+#: .\apps\restaurant\models.py:122
+msgid "Is material"
+msgstr "ماده است"
+
+#: .\apps\restaurant\models.py:126
+msgid "Food recipe"
+msgstr "رسپی غذا"
+
+#: .\apps\restaurant\models.py:127
+msgid "Food recipes"
+msgstr "رسپی‌های غذاها"
+
+#: .\apps\restaurant\models.py:159
+msgid "Recipe"
+msgstr "رسپی"
+
+#: .\apps\restaurant\models.py:161
+#, fuzzy
+#| msgid "Recipe material"
+msgid "Prepared material"
+msgstr "ماده رسپی"
+
+#: .\apps\restaurant\models.py:162
+msgid "Amount"
+msgstr "مقدار"
+
+#: .\apps\restaurant\models.py:166
 msgid "Recipe material"
 msgstr "ماده رسپی"
 
-#: .\apps\restaurant\models.py:152
+#: .\apps\restaurant\models.py:167
 msgid "Recipe materials"
 msgstr "مواد رسپی"
 
 #: .\apps\restaurant\views\materials.py:80
-#: .\apps\restaurant\views\recipes.py:75
+#: .\apps\restaurant\views\recipes.py:84
 msgid "Category successfully deleted"
 msgstr "دسته بندی با موفقیت حذف گردید"
 
 #: .\apps\restaurant\views\materials.py:83
 #: .\apps\restaurant\views\materials.py:117
 #: .\apps\restaurant\views\materials.py:146
-#: .\apps\restaurant\views\recipes.py:78 .\apps\restaurant\views\recipes.py:92
+#: .\apps\restaurant\views\preparations.py:56
+#: .\apps\restaurant\views\preparations.py:142
+#: .\apps\restaurant\views\recipes.py:87 .\apps\restaurant\views\recipes.py:102
 #: .\apps\restaurant\views\recipes.py:193
 msgid "There is an issue. please try again"
 msgstr "خطایی رخ داده است! لطفا مجدد تلاش کنید"
@@ -751,29 +759,37 @@ msgstr "آیتم با موفقیت حذف شد"
 msgid "Items saved successfully. You can see results down below"
 msgstr "موارد با موفقیت ثبت شد. اکنون می‌توانید نتایج را در زیر مشاهده فرمایید"
 
-#: .\apps\restaurant\views\recipes.py:60
-msgid "Category successfully added"
-msgstr "دسته بندی با موفقیت اضافه شد"
+#: .\apps\restaurant\views\preparations.py:61
+msgid "Item successfully added"
+msgstr "آیتم با موفقیت افزوده شد"
 
-#: .\apps\restaurant\views\recipes.py:97
-msgid "Recipe successfully added"
-msgstr "رسپی با موفقیت اضافه شد"
+#: .\apps\restaurant\views\preparations.py:73
+#: .\apps\restaurant\views\preparations.py:157
+#: .\apps\restaurant\views\recipes.py:208
+msgid "Item successfully deleted"
+msgstr "آیتم با موفقیت حذف گردید"
 
-#: .\apps\restaurant\views\recipes.py:109
-msgid "Recipe successfully deleted"
-msgstr "رسپی با موفقیت حذف گردید"
-
-#: .\apps\restaurant\views\recipes.py:151
+#: .\apps\restaurant\views\preparations.py:115
+#: .\apps\restaurant\views\recipes.py:162
 msgid "Changes committed successfully"
 msgstr "تغییرات با موفقیت ثبت شد"
 
+#: .\apps\restaurant\views\preparations.py:139
 #: .\apps\restaurant\views\recipes.py:190
 msgid "Materials added successfully"
 msgstr "مواد با موفقیت افزوده شدند"
 
-#: .\apps\restaurant\views\recipes.py:208
-msgid "Item successfully deleted"
-msgstr "آیتم با موفقیت حذف گردید"
+#: .\apps\restaurant\views\recipes.py:64
+msgid "Category successfully added"
+msgstr "دسته بندی با موفقیت اضافه شد"
+
+#: .\apps\restaurant\views\recipes.py:107
+msgid "Recipe successfully added"
+msgstr "رسپی با موفقیت اضافه شد"
+
+#: .\apps\restaurant\views\recipes.py:119
+msgid "Recipe successfully deleted"
+msgstr "رسپی با موفقیت حذف گردید"
 
 #: .\apps\subscription\admin.py:20
 msgid "Status info"

@@ -114,9 +114,10 @@ class RecipesCategory(BaseModel):
 
 # Recipes model
 class Recipe(BaseModel):
-    category = models.ForeignKey(RecipesCategory, on_delete=models.CASCADE, related_name='recipes', verbose_name=_('Category'))
+    category = models.ForeignKey(RecipesCategory, on_delete=models.CASCADE, related_name='recipes', verbose_name=_('Category'), null=True, blank=True)
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
     preparation = models.TextField(_('How to prepare'), null=True, blank=True)
+    final_price = models.PositiveIntegerField(_('Final price'), default=0)
     image = models.ImageField(_('Image'), upload_to='images/recipes/', null=True, blank=True)
     is_material = models.BooleanField(_('Is material'), default=False)
     is_active = models.BooleanField(_('Active'), default=True)
@@ -131,6 +132,9 @@ class Recipe(BaseModel):
     def get_absolute_url(self):
         return reverse('restaurant:recipe_details', args=[self.pk])
 
+    def get_preparation_url(self):
+        return reverse('restaurant:preparation_details', args=[self.pk])
+
     def get_image_url(self):
         if self.image:
             return self.image.url
@@ -139,11 +143,22 @@ class Recipe(BaseModel):
     def get_materials(self):
         return self.materials.all()
 
+    def get_prepared_materials(self):
+        return self.prepared_materials.all()
+
+    def calc_final_price(self):
+        materials = self.materials.all()
+        self.final_price = sum(map(lambda m: m.calc_final_price(), materials))
+        self.save()
+
+        return self.final_price
+
 
 # RecipeMaterials model
 class RecipeMaterial(BaseModel):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='materials', verbose_name=_('Recipe'))
-    raw_material = models.ForeignKey(RawMaterial, on_delete=models.SET_NULL, related_name='recipe_materials', verbose_name=_('Raw material'), null=True, blank=True)
+    raw_material = models.ForeignKey(RawMaterial, on_delete=models.CASCADE, related_name='recipe_materials', verbose_name=_('Raw material'), null=True, blank=True)
+    prepared_material = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='prepared_materials', verbose_name=_('Prepared material'), null=True, blank=True)
     amount = models.DecimalField(_('Amount'), max_digits=7, decimal_places=3, default=0)
     final_price = models.PositiveIntegerField(_('Final price'), default=0)
 
@@ -152,11 +167,28 @@ class RecipeMaterial(BaseModel):
         verbose_name_plural = _('Recipe materials')
 
     def __str__(self):
-        return f'{self.recipe} - {self.raw_material}'
+        return f'{self.recipe} - {self.raw_material or self.prepared_material}'
 
     def save(self, *args, **kwargs):
-        self.final_price = int(self.amount * self.raw_material.raw_usable_quantity_cost)
+        self.calc_final_price(save=False)
         super().save(*args, **kwargs)
 
+    def calc_final_price(self, save=True):
+        if self.prepared_material:
+            self.final_price = int(self.amount * self.prepared_material.final_price)
+        else:
+            self.final_price = int(self.amount * self.raw_material.raw_usable_quantity_cost)
+
+        if save:
+            self.save()
+
+        return self.final_price
+
     def get_base_price(self):
-        return self.raw_material.raw_usable_quantity_cost or 0
+        if self.prepared_material:
+            return self.prepared_material.final_price
+        elif self.raw_material:
+            return self.raw_material.raw_usable_quantity_cost
+
+    def get_material_title(self):
+        return self.prepared_material or self.raw_material

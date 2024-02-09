@@ -3,10 +3,11 @@ from django.shortcuts import redirect, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
+from django.http import JsonResponse
 from django.contrib import messages
 
 from apps.subscription.mixinx import SubscriptionRequiredMixin
-from apps.core.utils import toast_form_errors
+from persian_tools import digits, separator
 from ..models import (Restaurant, RawMaterial, RecipesCategory, Recipe, RecipeMaterial)
 from .. import forms
 
@@ -31,7 +32,7 @@ class FoodsRecipesView(LoginRequiredMixin, TemplateView):
         restaurant = Restaurant.objects.get(user=self.request.user)
 
         # Get recipes and filter them
-        objects = Recipe.objects.filter(category__restaurant=restaurant, is_material=False)
+        objects = Recipe.objects.filter(category__restaurant=restaurant, is_material=False).order_by('created_at')
         objects = self.filter(objects)
 
         context.update({
@@ -46,7 +47,10 @@ class FoodsRecipesView(LoginRequiredMixin, TemplateView):
 class AddRecipesCategoryView(SubscriptionRequiredMixin, FormView):
     template_name = 'restaurant/foods_recipes.html'
     form_class = forms.RecipesCategoryForm
-    success_url = reverse_lazy('restaurant:recipes')
+
+    def get_success_url(self):
+        referer_url = self.request.META.get('HTTP_REFERER') or reverse('restaurant:recipes')
+        return referer_url
 
     def get_form(self, form_class=None):
         data = self.request.POST.copy()
@@ -69,15 +73,21 @@ class DeleteRecipeCategoryView(SubscriptionRequiredMixin, View):
 
         try:
             restaurant = Restaurant.objects.get(user=request.user)
-            obj = RecipesCategory.objects.get(restaurant=restaurant, title=title)
-            obj.delete()
+            category = RecipesCategory.objects.get(restaurant=restaurant, title=title)
+            recipes = Recipe.objects.filter(category=category)
+
+            category.delete()
+
+            for recipe in recipes:
+                recipe.calc_final_price()
 
             messages.success(request, _('Category successfully deleted'))
 
         except (RecipesCategory.DoesNotExist, Restaurant.DoesNotExist, Restaurant.MultipleObjectsReturned):
             messages.error(request, _('There is an issue. please try again'))
 
-        return redirect('restaurant:recipes')
+        referer_url = request.META.get('HTTP_REFERER') or reverse('restaurant:recipes')
+        return redirect(referer_url)
 
 
 # Add Recipe view
@@ -120,7 +130,8 @@ class RecipeDetailsView(SubscriptionRequiredMixin, DetailView):
         restaurant = Restaurant.objects.get(user=self.request.user)
         context.update({
             'restaurant': restaurant,
-            'raw_materials': RawMaterial.objects.filter(category__restaurant=restaurant)
+            'raw_materials': RawMaterial.objects.filter(category__restaurant=restaurant),
+            'prepared_materials': Recipe.objects.filter(category__restaurant=restaurant, is_material=True)
         })
 
         return context
@@ -154,45 +165,34 @@ class EditRecipeView(SubscriptionRequiredMixin, FormView):
 
 
 # Add RecipeMaterials view
-class AddRecipeMaterialsView(SubscriptionRequiredMixin, FormView):
-    template_name = 'restaurant/recipe_details.html'
-    form_class = forms.AddRecipeMaterialForm
+class AddRecipeMaterialsView(SubscriptionRequiredMixin, View):
+    """ Add recipe materials one by one with django form. """
 
-    def get_success_url(self):
-        return reverse('restaurant:recipe_details', args=[self.request.POST.get('pk')])
-
-    def get_form(self, form_class=None):
-        data = self.request.POST.copy()
-        data.update({'recipe': get_object_or_404(Recipe, pk=data.get('pk'), category__restaurant__user=self.request.user)})
-        form_class = forms.AddRecipeMaterialForm(data=data)
-
-        return form_class
-
-    def form_valid(self, form):
-        post = self.request.POST.copy()
-        recipe = form.cleaned_data.get('recipe')
+    def post(self, request):
+        post = request.POST.copy()
+        recipe = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=post.get('pk'))
 
         try:
             materials = post.getlist('raw_material', [])
+            prepared_materials = post.getlist('prepared_material', [])
             amount = post.getlist('amount', [])
 
             for index, item in enumerate(materials):
-                data = {
-                    'recipe': recipe,
-                    'raw_material': materials[index],
-                    'amount': amount[index],
-                }
+                if item == 'null':
+                    data = {'recipe': recipe, 'prepared_material': prepared_materials[index], 'amount': amount[index]}
+                else:
+                    data = {'recipe': recipe, 'raw_material': item, 'amount': amount[index]}
 
                 form = forms.AddRecipeMaterialForm(data=data)
                 if form.is_valid():
                     form.save()
 
-            messages.success(self.request, _('Materials added successfully'))
+            messages.success(request, _('Materials added successfully'))
 
         except (IndexError, TypeError):
-            messages.error(self.request, _('There is an issue. please try again'))
+            messages.error(request, _('There is an issue. please try again'))
 
-        return super().form_valid(form)
+        return redirect(reverse('restaurant:recipe_details', args=[request.POST.get('pk')]))
 
 
 # Delete RecipeMaterial view
@@ -202,9 +202,19 @@ class DeleteRecipeMaterialView(SubscriptionRequiredMixin, View):
         material_id = request.POST.get('id')
         recipe = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=pk)
 
-        obj = get_object_or_404(RecipeMaterial, recipe=recipe, id=material_id)
-        obj.delete()
+        material = get_object_or_404(RecipeMaterial, recipe=recipe, id=material_id)
+        material.delete()
 
         messages.success(request, _('Item successfully deleted'))
-
         return redirect('restaurant:recipe_details', recipe.pk)
+
+
+# Get RecipeFinalPrice view
+class GetRecipeFinalPriceView(SubscriptionRequiredMixin, View):
+    """ Return final price of recipe based on given id. """
+
+    def get(self, request, pk):
+        recipe = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=pk)
+        final_price = digits.convert_to_fa(recipe.calc_final_price())
+
+        return JsonResponse({'price': separator.add(final_price)}, status=200)

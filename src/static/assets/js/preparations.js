@@ -1,4 +1,3 @@
-// ------------------------ Category swiper (top slider) ---------------------------- //
 let categorySwiper= new Swiper(".category-slider", {
     spaceBetween: 2,
     slidesPerView: 2,
@@ -39,22 +38,22 @@ $('#deleteCategory').on('show.bs.modal', function (event) {
 // ------------------------- Add data to delete category modal -------------------------- //
 
 
-// ---------------------------- Add data to delete material modal -------------------------- //
-$('#deleteRecipe').on('show.bs.modal', function (event) {
+// ---------------------------- Add data to delete preparation modal -------------------------- //
+$('#deletePreparation').on('show.bs.modal', function (event) {
     let button = $(event.relatedTarget);
     let pk = button.data('pk');
     let title = button.data('title');
 
     let modal = $(this);
-    modal.find('.modal-body #recipeId').val(pk);
-    modal.find('.modal-body #recipeTitle').text(title);
+    modal.find('.modal-body #foodId').val(pk);
+    modal.find('.modal-body #foodTitle').text(title);
 })
-// ------------------------- Add data to delete material modal -------------------------- //
+// ------------------------- Add data to delete preparation modal -------------------------- //
 
 
 function getFinalPrice(e, pk){
     $.ajax({
-        url: `/restaurant/recipes/${pk}/get-price/`,
+        url: `/restaurant/preparations/${pk}/get-price/`,
         type: 'GET',
         success: function (data) {
             e.innerHTML = data['price'];

@@ -34,14 +34,18 @@ $('#deleteMaterial').on('show.bs.modal', function (event) {
 // ---------------------------- Create new 'add recipe food form' section -------------------------- //
 function createAddSection() {
     const parentDiv = document.getElementById('materialsSection');
-    const firstSelect = parentDiv.firstElementChild.firstElementChild.querySelector('select');
+    const firstSelect = parentDiv.firstElementChild.firstElementChild.querySelector('select[name=raw_material]');
+    const secondSelect = parentDiv.firstElementChild.firstElementChild.querySelector('select[name=prepared_material]');
 
     const newDiv = document.createElement('div');
-    newDiv.className = 'd-flex align-items-end gap-1 border-bottom border-1 border-light mt-1 mb-4';
+    newDiv.className = 'd-flex align-items-end gap-1 border-bottom border-1 border-light mt-1 mb-4 form-child';
     newDiv.innerHTML = `
         <div class="d-flex flex-wrap gap-2 flex-grow-1 form-group">
-            <label class="form-label fs-13 flex-grow-1 select-part">
+            <label class="form-label fs-13 flex-grow-1 material-select">
                 عنوان ماده اولیه
+            </label>
+            <label class="form-label fs-13 flex-grow-1 prepared-select">
+                ماده اولیه آماده شده
             </label>
             <label class="form-label fs-13 flex-grow-1">
                 مقدار (کیلوگرم/عدد)
@@ -51,8 +55,12 @@ function createAddSection() {
         <button type="button" class="btn btn-danger fw-semibold mb-2" onclick="removeSection(this)">x</button>
     `;
 
-    const selectClone = firstSelect.cloneNode(true);
-    newDiv.querySelector('.select-part').appendChild(selectClone);
+    const firstSelectClone = firstSelect.cloneNode(true);
+    const secondSelectClone = secondSelect.cloneNode(true);
+
+    newDiv.querySelector('.material-select').appendChild(firstSelectClone);
+    newDiv.querySelector('.prepared-select').appendChild(secondSelectClone);
+
     parentDiv.appendChild(newDiv);
 
     addSelect2();
@@ -66,6 +74,41 @@ function removeSection(e) {
     parent.remove();
 }
 // ------------------------- Remove section by given id -------------------------- //
+
+
+// ------------------------
+document.getElementById('addMaterialsForm').addEventListener('submit', function (e){
+    e.preventDefault();
+    let submit_status = true;
+    const forms = this.querySelectorAll('.form-child');
+
+    forms.forEach((item, index) => {
+        let raw_material_select = item.querySelector('select[name=raw_material]').value;
+        let prepared_material_select = item.querySelector('select[name=prepared_material]').value;
+
+        console.log(raw_material_select, prepared_material_select)
+
+        if (submit_status) {
+            if (raw_material_select === 'null' && prepared_material_select === 'null') {
+                Toast.fire({
+                    icon: 'info',
+                    title: `لطفا یک ماده اولیه یا ماده اولیه ساخته شده انتخاب کنید`,
+                });
+                submit_status = false;
+            } else if (raw_material_select !== 'null' && prepared_material_select !== 'null') {
+                Toast.fire({
+                    icon: 'info',
+                    title: `صرفا یک ماده اولیه یا ماده اولیه ساخته شده انتخاب کنید`,
+                });
+                submit_status = false;
+            }
+        }
+    });
+
+    if(submit_status) {
+        this.submit();
+    }
+})
 
 
 function addSelect2(){

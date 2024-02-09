@@ -1,6 +1,6 @@
 <div class="modal fade" tabindex="-1" id="addMaterials" aria-labelledby="addMaterialsLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen w-100">
-        <form method="POST" action="{% url 'restaurant:add_recipe_materials' %}" id="addMaterialsForm"
+        <form method="POST" action="{% url 'restaurant:add_preparation_materials' %}"
               class="modal-content bg-modal text-white border-white border-1 rounded-3">
             {% csrf_token %}
             <input type="hidden" name="pk" value="{{ object.pk }}">
@@ -11,23 +11,13 @@
             </div>
             <div class="modal-body">
                 <div id="materialsSection">
-                    <div class="d-flex align-items-end gap-1 border-bottom border-1 border-light mt-1 mb-4 form-child">
+                    <div class="d-flex align-items-end gap-1 border-bottom border-1 border-light mt-1 mb-4">
                         <div class="d-flex flex-wrap gap-2 flex-grow-1 form-group">
                             <label class="form-label fs-13 flex-grow-1">
                                 عنوان ماده اولیه
-                                <select class="form-select f-input mt-1 select-inputs" name="raw_material">
-                                    <option value="null">---</option>
+                                <select class="form-select f-input mt-1 select-inputs" name="raw_material" required>
                                     {% for obj in raw_materials %}
-                                        <option value="{{ obj.pk }}">{{ obj }}</option>
-                                    {% endfor %}
-                                </select>
-                            </label>
-                            <label class="form-label fs-13 flex-grow-1">
-                                ماده اولیه آماده شده
-                                <select class="form-select f-input mt-1 select-inputs" name="prepared_material">
-                                    <option value="null">---</option>
-                                    {% for obj in prepared_materials %}
-                                        <option value="{{ obj.pk }}">{{ obj }}</option>
+                                        <option value="{{ obj.id }}">{{ obj }}</option>
                                     {% endfor %}
                                 </select>
                             </label>

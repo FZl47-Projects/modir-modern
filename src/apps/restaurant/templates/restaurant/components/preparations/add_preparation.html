@@ -1,0 +1,33 @@
+<div class="modal fade" tabindex="-1" id="addPreparation" aria-labelledby="addPreparationLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="POST" action="{% url 'restaurant:add_preparation' %}" style="background-color: #2d2c2c;"
+              class="modal-content text-white border-white border-1 rounded-3">
+            {% csrf_token %}
+            <div class="modal-header">
+                <h5 class="modal-title fw-semibold h4">افزودن غدای جدید</h5>
+                <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                      style="-webkit-text-stroke: 0.5pt;"></span>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-column form-group">
+                    <label class="form-label" style="font-size: 14px;">
+                        عنوان محصول
+                        <input type="text" name="title" class="form form-control mt-1"
+                               style="background-color: #fafafa;" required>
+                    </label>
+                    <label class="form-label" style="font-size: 14px;">
+                        دسته بندی
+                        <select name="category" class="form-select mt-1" required>
+                            {% for obj in restaurant.get_recipes_categories %}
+                                <option value="{{ obj.id }}">{{ obj.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+            </div>
+        </form>
+    </div>
+</div>
