@@ -19,7 +19,7 @@
                         دسته بندی
                         <select name="category" class="form-select mt-1" required>
                             {% for obj in restaurant.get_recipes_categories %}
-                                <option value="{{ obj.id }}">{{ obj.title }}</option>
+                                <option value="{{ obj.id }}" {% if obj.title == request.GET.filter %}selected{% endif %}>{{ obj.title }}</option>
                             {% endfor %}
                         </select>
                     </label>

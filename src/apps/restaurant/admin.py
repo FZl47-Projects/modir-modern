@@ -6,11 +6,15 @@ from . import models
 # Register Restaurants admin
 @admin.register(models.Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'title', 'created_at')
+    list_display = ('id', 'user', 'get_place_name', 'title', 'created_at')
     list_display_links = ('id', 'user')
     list_filter = ('is_active',)
     readonly_fields = ('created_at', 'updated_at')
-    search_fields = ('user__phone_number',)
+    search_fields = ('user__phone_number', 'user__profile__place_name')
+
+    @admin.display(description=_('Place name'))
+    def get_place_name(self, obj):
+        return obj.user.profile.place_name
 
 
 # Register RawMaterialCategories admin
@@ -44,11 +48,27 @@ class RawMaterialAdmin(admin.ModelAdmin):
 
 
 # Register RecipeCategory model admin
-admin.site.register(models.RecipesCategory)
+@admin.register(models.RecipesCategory)
+class RecipeCategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'restaurant', 'title', 'created_at')
+    list_display_links = ('id', 'restaurant', 'title')
+    readonly_fields = ('created_at', 'updated_at')
+    search_fields = ('restaurant__user__profile__place_name', 'restaurant__user__phone_number')
+
+
+# Register RecipeCategory as inline admin
+class RecipeMaterialInline(admin.StackedInline):
+    model = models.RecipeMaterial
+    fk_name = 'recipe'
+    readonly_fields = ('final_price',)
+    extra = 0
 
 
 # Register Recipe model admin
-admin.site.register(models.Recipe)
-
-# Register RecipeCategory model admin
-admin.site.register(models.RecipeMaterial)
+@admin.register(models.Recipe)
+class RecipeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'category', 'final_price', 'is_material')
+    list_display_links = ('id', 'title',)
+    list_filter = ('is_material', 'is_active')
+    readonly_fields = ('final_price', 'created_at', 'updated_at')
+    inlines = [RecipeMaterialInline]

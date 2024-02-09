@@ -221,6 +221,48 @@ input {
   padding: 5px 6px 1px 6px;
 }
 
+/* Pagination buttons styles */
+.page-prev-btn, .page-next-btn {
+  font-size: 18px;
+  -webkit-text-stroke: 0.6pt;
+  background-color: #00b2ff;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.page-next-btn {
+  padding: 7px 8px 0 7px;
+}
+
+.page-prev-btn {
+  padding: 7px 7px 0 8px;
+}
+
+.page-prev-btn:hover, .page-next-btn:hover {
+  background-color: #0098d9;
+}
+
+.page-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00b2ff;
+  border-radius: 6px;
+  width: 35px;
+  height: 35px;
+  padding-top: 5px;
+  text-align: center;
+  transition: all 0.25s;
+}
+
+.page-num:hover {
+  background-color: #0071a1;
+}
+
+.pagination-inner .active {
+  background-color: #00b2ff;
+}
+
 /*COLOR BODY*/
 /*COLOR BODY*/
 /* COLOR WHITE*/

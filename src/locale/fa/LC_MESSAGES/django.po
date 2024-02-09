@@ -684,7 +684,7 @@ msgstr "دسته رسپی غذا"
 
 #: .\apps\restaurant\models.py:106
 msgid "Food recipes categories"
-msgstr "دسته‌های رسپی غذا"
+msgstr "دسته بندی‌های رسپی غذا"
 
 #: .\apps\restaurant\models.py:119
 msgid "How to prepare"
@@ -711,10 +711,8 @@ msgid "Recipe"
 msgstr "رسپی"
 
 #: .\apps\restaurant\models.py:161
-#, fuzzy
-#| msgid "Recipe material"
 msgid "Prepared material"
-msgstr "ماده رسپی"
+msgstr "ماده آماده شده"
 
 #: .\apps\restaurant\models.py:162
 msgid "Amount"
@@ -2114,3 +2112,8 @@ msgstr ""
 
 #~ msgid "Name"
 #~ msgstr "نام مجموعه"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "لطفا خطای زیر را درست کنید."
+msgstr[1] "لطفا خطاهای زیر را درست کنید."

@@ -2,6 +2,7 @@ from django.views.generic import TemplateView, FormView, DetailView, View
 from django.shortcuts import redirect, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext as _
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.contrib import messages
@@ -27,6 +28,11 @@ class FoodsRecipesView(LoginRequiredMixin, TemplateView):
 
         return objects
 
+    def pagination(self, objects):
+        page_number = self.request.GET.get('page')
+        paginator = Paginator(objects, 15)
+        return paginator.get_page(page_number)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         restaurant = Restaurant.objects.get(user=self.request.user)
@@ -34,10 +40,11 @@ class FoodsRecipesView(LoginRequiredMixin, TemplateView):
         # Get recipes and filter them
         objects = Recipe.objects.filter(category__restaurant=restaurant, is_material=False).order_by('created_at')
         objects = self.filter(objects)
+        page_obj = self.pagination(objects)
 
         context.update({
             'restaurant': restaurant,
-            'objects': objects,
+            'page_obj': page_obj,
         })
 
         return context
