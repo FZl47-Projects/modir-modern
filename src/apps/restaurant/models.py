@@ -82,9 +82,24 @@ class RawMaterial(BaseModel):
         return f'{self.title} {self.get_use_for()}'
     
     def save(self, *args, **kwargs):
-        if not self.raw_usable_quantity_cost:
-            self.raw_usable_quantity_cost = self.price
+        self.calculate_results()
         super().save(*args, **kwargs)
+
+    def calculate_results(self):
+        """ Calculate obj usable thins and save them. """
+        if self.delivery_weight and self.edible_cleaned_weight:
+            self.raw_usable_quantity_cost = (self.price * self.delivery_weight) / self.edible_cleaned_weight
+        else:
+            self.raw_usable_quantity_cost = self.price
+
+        if self.delivery_weight and self.salable_weight:
+            self.baked_usable_quantity_cost = (self.price * self.delivery_weight) / self.salable_weight
+
+        self.raw_usable_quantity_cost_per_press = self.raw_usable_quantity_cost * self.quantity_raw_press
+        self.baked_usable_quantity_cost_per_press = self.raw_usable_quantity_cost * self.quantity_baked_press
+
+        self.number_of_raw_use = self.edible_cleaned_weight / self.quantity_raw_press if self.quantity_raw_press else 0
+        self.number_of_baked_use = self.salable_weight / self.quantity_baked_press if self.quantity_baked_press else 0
 
     def get_reduce_form_url(self):
         return reverse('restaurant:raw_materials_reduce_form', args=[self.pk])

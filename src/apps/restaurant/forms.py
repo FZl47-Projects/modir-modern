@@ -38,16 +38,8 @@ class ReduceRawMaterialForm(forms.ModelForm):
 
     def save(self, commit=True):
         obj = super().save(commit)
-
         # Calculate the rest fields and save them
-        obj.raw_usable_quantity_cost = (obj.price * obj.delivery_weight) / obj.edible_cleaned_weight if obj.delivery_weight else 0
-        obj.baked_usable_quantity_cost = (obj.price * obj.delivery_weight) / obj.salable_weight if obj.delivery_weight else 0
-
-        obj.raw_usable_quantity_cost_per_press = obj.raw_usable_quantity_cost * obj.quantity_raw_press
-        obj.baked_usable_quantity_cost_per_press = obj.raw_usable_quantity_cost * obj.quantity_baked_press
-
-        obj.number_of_raw_use = obj.edible_cleaned_weight / obj.quantity_raw_press if obj.quantity_raw_press else 0
-        obj.number_of_baked_use = obj.salable_weight / obj.quantity_baked_press if obj.quantity_baked_press else 0
+        obj.calculate_results()
 
         obj.save()
         return obj

@@ -123,7 +123,7 @@
                                    <div class="d-flex justify-content-center gap-1">
                                        <button type="button" data-bs-toggle="modal" data-bs-target="#editMaterial"
                                                data-pk="{{ obj.pk }}" data-category="{{ obj.category.id }}"
-                                               data-price="{{ obj.price }}" data-title="{{ obj.title }}" data-use="{{ obj.use_for }}"
+                                               data-price="{{ obj.price }}" data-title="{{ obj.title }}" data-use="{{ obj.use_for|default:'' }}"
                                                class="bi bi-pencil btn btn-sm btn-success ed-btn" title="ویرایش">
                                        </button>
                                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteMaterial"
