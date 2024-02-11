@@ -96,3 +96,19 @@ class AddPreparationMaterialForm(forms.ModelForm):
     class Meta:
         model = RecipeMaterial
         fields = ('recipe', 'raw_material', 'amount')
+
+
+# ----------------------------------------------
+
+# Update Recipe form
+class UpdateRecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ('factor', 'menu_price', 'number_sold')
+
+    def save(self, commit=True):
+        obj = super().save(commit)
+        obj.calculate_results(save=False)
+        obj.save()
+
+        return obj

@@ -19,3 +19,17 @@ def intcomma(value):
     if value:
         return '{:,}'.format(value)
     return 0
+
+
+# Return Suggested price
+@register.filter
+def suggested_price(value):
+    if value:
+        return int(value * 1.5)
+
+
+# Return Sales share percentage
+@register.filter
+def sales_percentage(obj, total):
+    if total:
+        return (obj.number_sold / total) * 100

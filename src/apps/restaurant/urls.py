@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    materials, recipes, preparations
+    materials, recipes, preparations, menu
 )
 
 
@@ -34,4 +34,8 @@ urlpatterns = [
     path('preparations/material/add/', preparations.AddPreparationMaterialsView.as_view(), name='add_preparation_materials'),
     path('preparatoins/<int:pk>/material/delete/', preparations.DeletePreparationMaterialView.as_view(), name='delete_preparation_material'),
     path('preparations/<int:pk>/get-price/', preparations.GetPreparationFinalPriceView.as_view(), name='get_preparation_final_price'),
+
+    path('menu/', menu.MenuEngineeringView.as_view(), name='menu_engineering'),
+    path('menu/services-fee/update/', menu.UpdateServicesFeeView.as_view(), name='update_services_fee'),
+    path('menu/recipe/<int:pk>/update/', menu.UpdateRecipeView.as_view(), name='update_recipe'),
 ]

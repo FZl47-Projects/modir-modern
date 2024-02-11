@@ -1,0 +1,348 @@
+{% extends 'base_template.html' %}
+{% load templatetags %}
+{% load filters %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | فرم مهندسی منو{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/menu-engineering.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <div class="container-fluid col-md-10 pb-4">
+        <main class="main w-100 p-md-4 p-2">
+            <h5 class="fw-semibold text-white text-md-end text-center mt-3">فرم مهندسی منو</h5>
+
+            <!-- Start categories filter section -->
+            <div class="swiper category-slider mt-md-3 mt-4 print-obj">
+                <div class="d-flex align-items-center gap-2 category-text">
+                    <small class="text-white">دسته‌ها: </small>
+                </div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="{% url 'restaurant:menu_engineering' %}" class="btn category-btn
+                            {% if not request.GET.filter %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                            همه
+                        </a>
+                    </div>
+                    {% for obj in restaurant.get_recipes_categories %}
+                        <div class="swiper-slide">
+                            <a href="?filter={{ obj.title }}" class="btn category-btn
+                                {% if request.GET.filter == obj.title %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                                {{ obj.title }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <!-- .End categories filter section -->
+
+            <!-- Start materials table -->
+            <div class="d-flex justify-content-between flex-wrap gap-2 mt-5">
+                <div class="d-flex align-items-end gap-2">
+                    <div class="d-flex" style="margin-bottom: -7px;">
+                        <form method="POST" action="{% url 'restaurant:update_services_fee' %}?filter={{ request.GET.filter }}">
+                            {% csrf_token %}
+                            <label class="form-label">
+                                <span class="text-white">
+                                    هزینه خدمات
+                                    <small>(درصد)</small>
+                                </span>
+                                <input type="number" name="services_fee" value="{{ restaurant.services_fee }}"
+                                       class="form-control form-control-sm fw-semibold">
+                            </label>
+                            <button type="submit" class="bi bi-check-lg btn btn-sm btn-success btn-icon print-obj"></button>
+                        </form>
+                    </div>
+                    <div class="d-flex print-obj">
+                        <button type="button" onclick="printPage()" class="bi bi-printer btn btn-sm btn-primary btn-icon"></button>
+                    </div>
+                </div>
+                <div class="d-flex gap-2">
+                    <div></div>
+                </div>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-hover overflow-hidden table-bordered rounded-1">
+                    <caption class="bg-white text-end fw-semibold px-4">
+                        <div class="d-flex align-items-center gap-4">
+                            <span>
+                                <span>میانگین سود هر آیتم: </span>
+                                <span class="me-1 convert-digits">{{ objects.each_item_profit_avg|intcomma }}</span>
+                            </span>
+                            <span>
+                                <span>درصد سهم هر آیتم: </span>
+                                <span class="me-1 convert-digits">
+                                    {{ each_item_percentage_share|floatformat:2 }}
+                                </span>
+                            </span>
+                        </div>
+                    </caption>
+                    <thead class="text-center">
+                        <tr class="bg-head">
+                            <th>#</th>
+                            <th>عنوان</th>
+                            <th>
+                                <span>قیمت تمام شده</span>
+                            </th>
+                            <th>
+                                <span>هزینه خدمات</span>
+                            </th>
+                            <th>
+                                <span>ضریب عامل</span>
+                            </th>
+                            <th>
+                                <span>قیمت تمام شده با ضریب</span>
+                            </th>
+                            <th>
+                                <span>قیمت پیشنهادی</span>
+                            </th>
+                            <th>
+                                <span>قیمت درج در منو</span>
+                            </th>
+                            <th>
+                                <span>سود هر آیتم</span>
+                            </th>
+                            <th>
+                                <span>فود کاست</span>
+                            </th>
+                            <th>
+                                <span>تعداد فروخته شده</span>
+                            </th>
+                            <th>
+                                <span>سهم فروش</span>
+                            </th>
+                            <th>
+                                <span>فروش کل</span>
+                            </th>
+                            <th>
+                                <span>هزینه کل آیتم</span>
+                            </th>
+                            <th>
+                                <span>سود کل آیتم</span>
+                            </th>
+                            <th>
+                                <span>درجه بندی</span>
+                            </th>
+                            <th>
+                                <span>توضیح</span>
+                            </th>
+                            <th class="print-obj">
+                                <span>ذخیره</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center table-light">
+                        {% for obj in page_obj %}
+                            <form method="POST" action="{% url 'restaurant:update_recipe' obj.pk %}?filter={{ request.GET.filter }}&page={{ request.GET.page }}"
+                                  class="recipe-row-form" id="RecipeForm-{{ obj.pk }}">
+                                {% csrf_token %}
+                                <tr style="vertical-align: middle;">
+                                    <td>
+                                        <span class="fw-semibold">{{ forloop.counter }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ obj.title }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">{{ obj.final_price|intcomma }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">{{ obj.service_price|intcomma }}</span>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="number" name="factor" value="{{ obj.factor }}" step="any" required
+                                                class="form-control form-control-sm text-center pe-md-3 fw-semibold table-input-sm">
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj.price_with_factor|intcomma }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj.final_price|suggested_price|intcomma }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="number" name="menu_price" value="{{ obj.menu_price }}"
+                                                class="form-control form-control-sm fw-semibold table-input">
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj.item_profit|intcomma }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj.food_cost }}<small>%</small>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="number" name="number_sold" value="{{ obj.number_sold }}"
+                                                class="form-control form-control-sm text-center pe-md-3 fw-semibold table-input">
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj|sales_percentage:objects.total_number_sold|floatformat:2 }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj.total_sales|intcomma }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj.total_cost|intcomma }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="convert-digits">
+                                            {{ obj.total_profit|intcomma }}
+                                        </span>
+                                    </td>
+
+                                    {# Add rating part with conclusion template tag #}
+                                    {% rate_item obj objects.total_number_sold objects.each_item_profit_avg each_item_percentage_share %}
+                                    {# Add rating part with conclusion template tag #}
+
+                                    <td class="print-obj">
+                                        <button type="submit" class="bi bi-check-lg btn btn-sm btn-success mt-1"
+                                                style="-webkit-text-stroke: 0.4pt; padding: 5px 6px 1px 6px;" title="ذخیره"></button>
+                                    </td>
+                                </tr>
+                            </form>
+                        {% endfor %}
+                        <tr style="vertical-align: middle;" id="totalsRow">
+                            <td>
+                                <span class="fw-semibold">#</span>
+                            </td>
+                            <td>
+                                <span class="text-danger">مجموع</span>
+                            </td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_final_price|intcomma }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_service_price|intcomma }}
+                                </span>
+                            </td>
+                            <td>
+                                <span>-</span>
+                            </td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_price_with_factor|intcomma }}
+                                </span>
+                            </td>
+                            <td>-</td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_menu_price|intcomma }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_item_profit|intcomma }}
+                                </span>
+                            </td>
+                            <td>-</td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_number_sold|intcomma }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-danger">
+                                    ۱۰۰<small>%</small>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_total_sales|intcomma }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_total_cost|intcomma }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-danger convert-digits">
+                                    {{ objects.total_total_profit|intcomma }}
+                                </span>
+                            </td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="print-obj">
+                                -
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Start pagination section -->
+                <div class="d-flex justify-content-center align-items-center text-white mt-5">
+                    {% if page_obj.has_other_pages %}
+                        <ul class="d-flex align-items-end gap-2 pagination-inner">
+                            {% if page_obj.has_previous %}
+                                <li>
+                                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}">
+                                        <i class="bi bi-chevron-right page-next-btn"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}" class="page-num">
+                                        <span class="fw-semibold">{{ page_obj.previous_page_number }}</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a class="page-num active">
+                                    <span class="fw-semibold">{{ page_obj.number }}</span>
+                                </a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li>
+                                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}" class="page-num">
+                                        <span class="fw-semibold">{{ page_obj.next_page_number }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}">
+                                        <i class="bi bi-chevron-left page-next-btn"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <!-- .End pagination section -->
+
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+    <script src="{% static 'js/menu-engineering.js' %}"></script>
+{% endblock %}

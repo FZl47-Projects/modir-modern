@@ -118,3 +118,27 @@ function addSelect2(){
     });
 }
 addSelect2();
+
+
+// --------------- Print recipe page ----------------------
+function printPage() {
+    let sideMenu = document.getElementById('SideMenu');
+    let printObjs = document.querySelectorAll('.print-obj');
+    let container = document.querySelector('.container-fluid');
+
+    printObjs.forEach((item, index) => {
+       item.classList.add('d-none');
+    });
+
+    sideMenu.style.display = 'none';
+    container.classList.replace('col-md-10', 'col-12');
+
+    window.print();
+
+    sideMenu.style.display = 'block';
+    container.classList.replace('col-12', 'col-md-10');
+
+    printObjs.forEach((item, index) => {
+       item.classList.remove('d-none');
+    });
+}

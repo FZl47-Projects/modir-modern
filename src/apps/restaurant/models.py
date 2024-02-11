@@ -12,6 +12,7 @@ User = get_user_model()
 class Restaurant(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='restaurants', verbose_name=_('User'))
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
+    services_fee = models.PositiveSmallIntegerField(_('Services fee'), default=5)
     is_active = models.BooleanField(_('Active'), default=True)
 
     class Meta:
@@ -132,7 +133,19 @@ class Recipe(BaseModel):
     category = models.ForeignKey(RecipesCategory, on_delete=models.CASCADE, related_name='recipes', verbose_name=_('Category'), null=True, blank=True)
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
     preparation = models.TextField(_('How to prepare'), null=True, blank=True)
+
     final_price = models.PositiveIntegerField(_('Final price'), default=0)
+    factor = models.DecimalField(_('Factor coefficient'), max_digits=3, decimal_places=1, default=1.5)  # User input
+    service_price = models.PositiveIntegerField(_('Services price'), default=0)  # final_price * (services_fee / 100)
+    price_with_factor = models.PositiveIntegerField(_('Final price with factor'), default=0)  # final_price * factor
+    menu_price = models.PositiveIntegerField(_('Menu price'), default=0)  # User input
+    item_profit = models.IntegerField(_('Item profit'), default=0)  # menu_price - servie_price - final_price
+    food_cost = models.IntegerField(_('Food cost'), default=0)  # (final_price / menu_price) * 100
+    number_sold = models.PositiveIntegerField(_('Number sold'), default=0)  # User input
+    total_sales = models.BigIntegerField(_('Total sales'), default=0)  # number_sold * menu_price
+    total_cost = models.BigIntegerField(_('Total cost'), default=0)  # number_sold * final_price
+    total_profit = models.BigIntegerField(_('Total profit'), default=0)  # number_sold * item_profit
+
     image = models.ImageField(_('Image'), upload_to='images/recipes/', null=True, blank=True)
     is_material = models.BooleanField(_('Is material'), default=False)
     is_active = models.BooleanField(_('Active'), default=True)
@@ -161,12 +174,35 @@ class Recipe(BaseModel):
     def get_prepared_materials(self):
         return self.prepared_materials.all()
 
-    def calc_final_price(self):
+    def calc_final_price(self, calc_others=True):
         materials = self.materials.all()
-        self.final_price = sum(map(lambda m: m.calc_final_price(), materials))
-        self.save()
+        price = sum(map(lambda m: m.calc_final_price(), materials))
 
-        return self.final_price
+        # Save if final price has changed
+        if self.final_price != price:
+            self.final_price = price
+
+            # Calculate other things if it's allowed
+            if calc_others:
+                self.calculate_results(save=False)
+            self.save()
+
+        return price
+
+    def calculate_results(self, save=True):
+        self.calc_final_price(calc_others=False)
+
+        self.service_price = self.final_price * (self.category.restaurant.services_fee / 100)  # Calculate services_price
+        self.price_with_factor = int(self.final_price * self.factor)  # Calculate price_with_factor
+        if self.menu_price:
+            self.item_profit = self.menu_price - self.service_price - self.final_price  # Calculate item_profit
+            self.food_cost = (self.final_price / self.menu_price) * 100  # Calculate food_cost
+            self.total_sales = self.number_sold * self.menu_price  # Calculate total_sales
+            self.total_cost = self.number_sold * self.final_price  # Calculate total_cost
+            self.total_profit = self.number_sold * self.item_profit  # Calculate total_profit
+
+        if save:
+            self.save()
 
 
 # RecipeMaterials model
@@ -188,17 +224,6 @@ class RecipeMaterial(BaseModel):
         self.calc_final_price(save=False)
         super().save(*args, **kwargs)
 
-    def calc_final_price(self, save=True):
-        if self.prepared_material:
-            self.final_price = int(self.amount * self.prepared_material.final_price)
-        else:
-            self.final_price = int(self.amount * self.raw_material.raw_usable_quantity_cost)
-
-        if save:
-            self.save()
-
-        return self.final_price
-
     def get_base_price(self):
         if self.prepared_material:
             return self.prepared_material.final_price
@@ -207,3 +232,15 @@ class RecipeMaterial(BaseModel):
 
     def get_material_title(self):
         return self.prepared_material or self.raw_material
+
+    def calc_final_price(self, save=True):
+        if self.prepared_material:
+            final_price = int(self.amount * self.prepared_material.final_price)
+        else:
+            final_price = int(self.amount * self.raw_material.raw_usable_quantity_cost)
+
+        if save and final_price != self.final_price:
+            self.final_price = final_price
+            self.save()
+
+        return final_price

@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="menu-fixed-right menu overflow-auto col-md-2">
+<nav class="menu-fixed-right menu overflow-auto col-md-2" id="SideMenu">
     <div class="menu-toggle-btn menu">
         <i role="button" class="bi bi-list menu-toggle-icon"></i>
     </div>
@@ -107,7 +107,8 @@
                                 </a>
                             </li>
                             <li class="item-menu">
-                                <a href="#">
+                                <a href="{% url 'restaurant:menu_engineering' %}"
+                                   class="{% if request.resolver_match.url_name == 'menu_engineering' %}active{% endif %}">
                                     <span class="d-flex align-items-center" style="margin-right: 12px;">
                                         <i class="bi bi-journal-richtext mt-2" style="font-size: 20px;"></i>
                                     </span>
