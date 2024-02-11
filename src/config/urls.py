@@ -6,6 +6,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('froala-editor/', include('froala_editor.urls')),
     path('account/', include('apps.account.urls', namespace='account')),
     path('', include('apps.public.urls', namespace='public')),
     path('course/', include('apps.course.urls', namespace='course')),

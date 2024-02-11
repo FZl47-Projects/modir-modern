@@ -22,6 +22,9 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED', 'http://127.0.0.1').split(',')
 
+# Force read the X-Forwarded host
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -45,6 +48,8 @@ INSTALLED_APPS = [
 
     # Django modules
     'django_q',
+    'froala_editor',
+    'azbankgateways',
     'django_cleanup.apps.CleanupConfig',
 ]
 
