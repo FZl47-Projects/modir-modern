@@ -15,4 +15,4 @@ class SubscriptionRequiredMixin:
         messages.error(request, _('You need to purchase subscription to use this service.'))
 
         referer_url = request.META.get('HTTP_REFERER')
-        return redirect(referer_url)
+        return redirect(referer_url) if referer_url else redirect('public:index')

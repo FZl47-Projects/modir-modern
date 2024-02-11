@@ -1,6 +1,6 @@
 <div class="modal fade" tabindex="-1" id="confirmPurchaseModal" aria-labelledby="purchaseConfirmModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form method="POST" action="#" class="modal-content text-white border-white border-1 rounded-3"
+        <form method="POST" action="{% url 'subscription:create_order' %}" class="modal-content text-white border-white border-1 rounded-3"
               style="background-color: #2d2c2c;">
             {% csrf_token %}
             <div class="modal-header align-items-center">

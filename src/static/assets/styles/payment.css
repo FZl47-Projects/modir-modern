@@ -1,0 +1,199 @@
+/* ----------------------------- YEKANBAKH ----------------------------- */
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/YEKANBAKH-MEDIUM.eot");
+  src: url("../fonts/YEKANBAKH-MEDIUM.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-MEDIUM.woff") format("woff"), url("../fonts/YEKANBAKH-MEDIUM.woff2") format("woff2"), url("../fonts/YEKANBAKH-MEDIUM.TTF") format("truetype");
+}
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/YEKANBAKH-REGULAR.eot");
+  src: url("../fonts/YEKANBAKH-REGULAR.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-REGULAR.woff") format("woff"), url("../fonts/YEKANBAKH-REGULAR.woff2") format("woff2"), url("../fonts/YEKANBAKH-REGULAR.TTF") format("truetype");
+}
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/YEKANBAKH-BOLD.eot");
+  src: url("../fonts/YEKANBAKH-BOLD.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-BOLD.woff") format("woff"), url("../fonts/YEKANBAKH-BOLD.woff2") format("woff2"), url("../fonts/YEKANBAKH-BOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/YEKANBAKH-LIGHT.eot");
+  src: url("../fonts/YEKANBAKH-LIGHT.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-LIGHT.woff") format("woff"), url("../fonts/YEKANBAKH-LIGHT.woff2") format("woff2"), url("../fonts/YEKANBAKH-LIGHT.TTF") format("truetype");
+}
+/*COLOR BODY*/
+/*COLOR BODY*/
+/* COLOR WHITE*/
+/* COLOR WHITE*/
+/*START COLOR TEXT*/
+/*END COLOR TEXT*/
+/*START BG COLORS*/
+/*END BG COLORS*/
+/*START BORDER COLOR*/
+/*END BORDER COLOR*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  font-family: YEKANBAKH;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+body {
+  background-color: #343434;
+}
+body::-webkit-scrollbar {
+  height: 15px;
+  width: 15px;
+  background-color: #c1c1c1;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #fff;
+  border: 2px solid #c1c1c1;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #fefefe;
+  border: 2px solid #fff;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+
+.container-fluid.container-admin {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+button {
+  border: none;
+}
+
+input {
+  border: none;
+  background-color: transparent;
+}
+
+/*COLOR BODY*/
+/* COLOR WHITE*/
+.content {
+  padding: 10px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  margin: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(8, 7, 7, 0.1803921569);
+  border: 2px solid #5c5757;
+}
+.content .title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 2px solid #5c5757;
+  color: aliceblue;
+  cursor: pointer;
+}
+.content .title-row div {
+  text-align: center;
+  font-weight: 700;
+  color: white;
+}
+.content .user-list-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-height: calc(100vh - 200px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.content .user-list-content::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+  background-color: transparent;
+}
+.content .user-list-content::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.content .user-list-content::-webkit-scrollbar-thumb {
+  background: #ebebeb;
+  width: 10px;
+  height: 10px;
+}
+.content .user-list-content::-webkit-scrollbar-thumb:hover {
+  background: #fefefe;
+}
+.content .user-list-content .item-buy-product .condition-1 {
+  color: #FED304;
+  font-weight: 700;
+  font-size: 14px;
+}
+.content .user-list-content .item-buy-product .condition-1 span {
+  font-size: 12px;
+  font-weight: 300;
+  color: white;
+}
+
+.container-fluid {
+  padding: 0 0 0 0;
+  margin-left: 3px;
+}
+
+ul {
+  padding: 0 !important;
+}
+
+.check-icon {
+  font-size: 90px;
+  padding: 47px 54px 10px 50px;
+  -webkit-text-stroke: 1pt;
+  scale: 130%;
+}
+
+.icon-failed {
+  font-size: 80px;
+  padding: 46px 50px 10px 50px;
+  -webkit-text-stroke: 1pt;
+  scale: 130%;
+}

@@ -30,10 +30,10 @@ class SubscriptionAdmin(admin.ModelAdmin):
 # Register Subscribers model admin
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'subscription', 'get_expire_date', 'is_active')
+    list_display = ('id', 'user', 'get_expire_date', 'is_active')
     list_display_links = ('id', 'user')
     readonly_fields = ('created_at',)
-    list_filter = ('is_active', 'subscription__type')
+    list_filter = ('is_active',)
     search_fields = ('user__phone_number',)
 
     @admin.display(description=_('Expire date'))

@@ -49,7 +49,7 @@ class Course(BaseModel):
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
     slug = models.SlugField(_('Slug'), max_length=255, null=True, blank=True, allow_unicode=True)
     short_des = models.CharField(_('Short description'), max_length=255, null=True, blank=True)
-    description = FroalaField(options={'verbose_name': _('Description'), 'toolbarInline': False, 'direction': 'rtl'})
+    description = FroalaField(options={'verbose_name': _('Description'), 'toolbarInline': False, 'direction': 'rtl'}, default='')
     type = models.CharField(_('Course type'), max_length=32, choices=Types.choices, default=Types.OFFLINE)
     instructor = models.ForeignKey(Instructor, on_delete=models.SET_NULL, verbose_name=_('Instructor'), related_name='courses', null=True)
     duration = models.CharField(_('Duration'), max_length=128, help_text=_('2h, 30m'))

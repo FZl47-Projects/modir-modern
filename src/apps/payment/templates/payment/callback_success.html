@@ -1,0 +1,37 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block title %}مدیرمدرن | خرید موفق{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/payment.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Sidebar menu -->
+    {% include 'includes/menus/side_menu.html' %}
+    <!-- .End Sidebar menu -->
+
+    <div class="container-fluid col-md-10 pb-4">
+        <main class="main w-100 p-md-4 p-2">
+            <div class="d-flex flex-column align-items-center w-100 mt-5">
+                <div class="d-flex bg-success rounded-circle">
+                    <i class="bi bi-check-lg text-white check-icon"></i>
+                </div>
+                <h4 class="fw-semibold text-white mt-3 ms-2">پرداخت موفق</h4>
+                <div class="d-flex flex-column align-items-center w-100 mt-4">
+                    <h6 class="fw-semibold text-white">آیتم خریداری شده برای شما فعال گردید. با تشکر از انتخاب شما.</h6>
+
+                    <a href="{% url 'account:profile_details' %}" class="btn btn-outline-light fw-semibold mt-5" style="min-width: 15rem;">
+                        رفتن به صفحه پروفایل
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

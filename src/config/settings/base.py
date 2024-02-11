@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.public.apps.PublicConfig',
     'apps.ticket.apps.TicketConfig',
     'apps.course.apps.CourseConfig',
+    'apps.payment.apps.PaymentConfig',
     'apps.account.apps.AccountConfig',
     'apps.restaurant.apps.RestaurantConfig',
     'apps.subscription.apps.SubscriptionConfig',
@@ -112,7 +113,8 @@ LANGUAGES = [
 
 LOCALE_PATHS = [
     BASE_DIR / os.getenv('LOCALE_PATHS', 'locale'),
-    BASE_DIR / os.getenv('DJANGO_Q_LOCALE_PATH', 'locale/django_q')
+    os.getenv('DJANGO_Q_LOCALE_PATH', BASE_DIR / 'locale/django_q'),
+    os.getenv('IRANIAN_BANK_GATEWAY_LOCALE', BASE_DIR / 'locale/az_bank_locale')
 ]
 
 LANGUAGE_CODE = 'fa'

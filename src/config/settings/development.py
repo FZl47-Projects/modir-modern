@@ -33,6 +33,10 @@ AZ_IRANIAN_BANK_GATEWAYS = {
            'METHOD': 'POST',  # GET or POST
            'SANDBOX': 1,  # 0 disable, 1 active
        },
+       'ZARINPAL': {
+           'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+           'SANDBOX': 1,  # 0 disable, 1 active
+       },
    },
    'IS_SAMPLE_FORM_ENABLE': True,  # Optional(default is False)
    'DEFAULT': 'ZARINPAL',  # Required
@@ -40,5 +44,6 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'TRACKING_CODE_QUERY_PARAM': 'tc',  # Optional
    'TRACKING_CODE_LENGTH': 16,  # Optional
    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader',  # Optional
-   'BANK_PRIORITIES': ['IDPAY']
+   'IS_SAFE_GET_GATEWAY_PAYMENT': True,
+   'BANK_PRIORITIES': ['ZARINPAL', 'IDPAY']
 }

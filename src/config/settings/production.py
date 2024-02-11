@@ -36,7 +36,7 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'GATEWAYS': {
        'ZARINPAL': {
            'MERCHANT_CODE': getenv('ZARINPAL_MERCHANT_CODE'),
-           'SANDBOX': 1,  # 0 disable, 1 active
+           'SANDBOX': 0,  # 0 disable, 1 active
        },
    },
    'IS_SAMPLE_FORM_ENABLE': False,  # Optional(default is False)
@@ -45,5 +45,5 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'TRACKING_CODE_QUERY_PARAM': 'tc',  # Optional
    'TRACKING_CODE_LENGTH': 16,  # Optional
    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader',  # Optional
-   'BANK_PRIORITIES': ['ZARINPAL']
+   'IS_SAFE_GET_GATEWAY_PAYMENT': True,
 }

@@ -103,13 +103,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.save()
 
     def get_subscription_time(self):
-        subscriptions = self.subscriptions.filter(is_active=True)
-        remaining_days = sum([(sub.expire_date - datetime.now().date()).days for sub in subscriptions])
+        today = datetime.today().date()
+        remaining_days = (self.subscription.expire_date - today).days
 
         return remaining_days
 
     def has_subscription(self):
-        return self.subscriptions.filter(is_active=True).exists()
+        try:
+            return self.subscription.is_active
+        except models.ObjectDoesNotExist:
+            return False
 
     def get_tickets_count(self):
         return self.tickets.all().count() or 0

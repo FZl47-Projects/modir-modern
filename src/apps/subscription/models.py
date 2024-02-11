@@ -37,10 +37,9 @@ class Subscription(BaseModel):
 
 # Subscribers model
 class Subscriber(BaseModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriptions', verbose_name=_('User'))
-    subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, related_name='subscribers', verbose_name=_('Subscription'), null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscription', verbose_name=_('User'))
     expire_date = models.DateField(_('Expire date'), null=True, blank=True)
-    is_active = models.BooleanField(_('Active'), default=True)
+    is_active = models.BooleanField(_('Active'), default=False)
 
     class Meta:
         verbose_name = _('Subscriber')
@@ -48,12 +47,16 @@ class Subscriber(BaseModel):
         ordering = ('-id',)
 
     def __str__(self):
-        return f'{self.user} - {self.subscription}'
+        return f'{self.user} - {self.get_expire_date()}'
 
-    def save(self, *args, **kwargs):
-        if not self.expire_date:
-            self.expire_date = datetime.now().date() + timedelta(int(self.subscription.type * 30))
-        super().save(*args, **kwargs)
+    def add_time(self, subscription: Subscription):
+        if self.is_active and self.expire_date:
+            self.expire_date += timedelta(days=subscription.type * 30)
+        else:
+            self.expire_date = datetime.now() + timedelta(days=subscription.type * 30)
+            self.is_active = True
+
+        self.save()
 
     def get_expire_date(self):
         return self.expire_date.strftime('%Y-%m-%d') or ''
