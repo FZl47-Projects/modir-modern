@@ -51,6 +51,9 @@ class CourseAdmin(admin.ModelAdmin):
         (_('Additional info'), {'fields': ('image', 'duration', 'pinned', 'is_active')})
     )
 
+    # Change formfield attributes(widget:size)
+    formfield_overrides = {models.CharField: {"widget": forms.TextInput(attrs={"size": "96"})}}
+
     @admin.display(description=_('Selling price(Rial)'))
     def get_selling_price(self, obj):
         return '{:,}'.format(obj.selling_price)

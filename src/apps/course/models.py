@@ -6,6 +6,7 @@ from django.db import models
 
 from .enums import CoursePaymentTypeEnum, CourseTypeEnum
 from .utils import course_video_path
+from froala_editor.fields import FroalaField
 from apps.core.models import BaseModel
 User = get_user_model()
 
@@ -48,10 +49,10 @@ class Course(BaseModel):
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
     slug = models.SlugField(_('Slug'), max_length=255, null=True, blank=True, allow_unicode=True)
     short_des = models.CharField(_('Short description'), max_length=255, null=True, blank=True)
-    description = models.TextField(_('Description'), null=True, blank=True)
+    description = FroalaField(options={'verbose_name': _('Description'), 'toolbarInline': False, 'direction': 'rtl'})
     type = models.CharField(_('Course type'), max_length=32, choices=Types.choices, default=Types.OFFLINE)
     instructor = models.ForeignKey(Instructor, on_delete=models.SET_NULL, verbose_name=_('Instructor'), related_name='courses', null=True)
-    duration = models.CharField(_('Duration'), max_length=255, help_text=_('2h, 30m'))
+    duration = models.CharField(_('Duration'), max_length=128, help_text=_('2h, 30m'))
     payment_type = models.CharField(_('Payment type'), max_length=32, choices=PaymentTypes.choices, default=PaymentTypes.CASH)
     price = models.PositiveBigIntegerField(_('Price'), default=0)
     discount = models.IntegerField(_('Discount'), default=0)
