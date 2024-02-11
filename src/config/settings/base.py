@@ -154,24 +154,13 @@ LOGIN_URL = '/account/login/'
 
 # Redis db config
 REDIS_CONFIG = {
-    'HOST': os.getenv('REDIS_HOST', 'localhost'),
-    'PORT': os.getenv('REDIS_PORT', '6379')
+    'active': int(os.getenv('REDIS_ACTIVE', 0)),  # 1 redis is connected, 0 not connected
+    'host': os.getenv('REDIS_HOST', 'localhost'),
+    'port': int(os.getenv('REDIS_PORT', 6379))
 }
 
 # SMS config
 SMS_CONFIG = {
     'API_KEY': os.getenv('SMS_CONFIG_API_KEY'),
     'ORIGINATOR': os.getenv('SMS_CONFIG_ORIGINATOR')
-}
-
-
-# Django-q donfig
-Q_CLUSTER = {
-    'name': 'django-q',
-    'workers': 4,
-    'recycle': 500,
-    'timeout': 60,
-    'compress': True,
-    'queue_limit': 500,
-    'orm': 'default',
 }

@@ -2,7 +2,7 @@ from .base import *
 from os import getenv
 
 
-PRODUCTION = getenv('PRODUCTION', False)
+PRODUCTION = int(getenv('PRODUCTION', 0))
 
 if PRODUCTION:
     from .production import *
