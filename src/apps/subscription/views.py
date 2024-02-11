@@ -1,8 +1,10 @@
 from azbankgateways import models as bank_models, default_settings as settings
-from django.views.generic import View, ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, reverse
+from django.utils.translation import gettext as _
+from django.views.generic import View, ListView
 from django.shortcuts import redirect
+from django.contrib import messages
 from django.http import Http404
 
 from apps.payment.models import Order, OrderItem
@@ -18,6 +20,13 @@ class SubscriptionListView(LoginRequiredMixin, ListView):
 
 # Create SubscriptionOrder view
 class CreateSubscriptionOrderView(LoginRequiredMixin, View):
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.get_subscription_time() >= 300:
+            messages.info(self.request, _('You cannot active more than 300 days!'))
+            return redirect('subscription:subscription_list')
+
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self, request):
         subscription_pk = request.POST.get('pk')
         obj = get_object_or_404(Subscription, pk=subscription_pk)

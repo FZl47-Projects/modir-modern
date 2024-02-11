@@ -103,10 +103,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.save()
 
     def get_subscription_time(self):
-        today = datetime.today().date()
-        remaining_days = (self.subscription.expire_date - today).days
+        if self.has_subscription():
+            today = datetime.today().date()
+            return (self.subscription.expire_date - today).days
 
-        return remaining_days
+        return 0
 
     def has_subscription(self):
         try:
