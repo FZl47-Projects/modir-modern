@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-x+vz&75#eh@b7_2ge&fvz8djefh5rlx!rf%60-#8xq%41d88n$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', True)
+DEBUG = int(os.getenv('DEBUG', 1))
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
@@ -133,7 +133,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.getenv('STATIC_ROOT')
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static/assets/',
+    os.getenv('STATICFILES_DIRS', BASE_DIR / 'static/assets/'),
 ]
 
 # Media files (Images, Videos, docs)
