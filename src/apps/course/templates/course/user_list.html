@@ -3,7 +3,7 @@
 {% load filters %}
 
 
-{% block title %}مدیرمدرن | لیست دوره‌ها{% endblock %}
+{% block title %}مدیرمدرن | دوره‌های من{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'styles/course.css' %}">
@@ -17,27 +17,11 @@
 
     <div class="container-fluid col-md-10 pb-4">
         <main class="main w-100 p-md-4 p-2">
-            <h5 class="fw-semibold text-white text-md-end text-center mt-3">دوره های آموزشی</h5>
-
-            <!-- Start filter section -->
-            <div class="d-flex align-items-center gap-2 mt-md-4 mt-5">
-                <div class="text-white">دسته بندی: </div>
-                <a href="{% url 'course:course_list' %}" class="btn btn-sm btn-secondary fw-semibold
-                    {% if not request.GET.type %}opacity-100{% else %}opacity-50{% endif %}"
-                   style="min-width: 60px;">همه</a>
-                <a href="?type=free" class="btn btn-sm btn-secondary
-                    {% if request.GET.type == 'free' %}opacity-100{% else %}opacity-50{% endif %} fw-semibold"
-                   style="min-width: 60px;">رایگان</a>
-            </div>
-            <!-- .End filter section -->
+            <h5 class="fw-semibold text-white text-md-end text-center mt-3">دوره های آموزشی خریداری شده</h5>
 
             <div class="d-flex justify-content-lg-start justify-content-center flex-wrap gap-3 mt-md-5 mt-4">
-
                 {% for obj in object_list %}
                     <div class="package-box">
-                        {% if obj.discount %}
-                            <div class="package-tag">تخفیف</div>
-                        {% endif %}
                         <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
                             {% if obj.cover_image %}
                                 <img src="{{ obj.cover_image }}" alt="ModireModern logo">

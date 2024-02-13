@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from .models import Course
+from .models import Course, UserCourse
 
 
 # Render CoursesList view
@@ -25,3 +25,19 @@ class CoursesListView(LoginRequiredMixin, ListView):
 class CourseDetailView(LoginRequiredMixin, DetailView):
     template_name = 'course/details.html'
     model = Course
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['has_course'] = UserCourse.objects.filter(course=self.object, user=self.request.user).exists()
+
+        return context
+
+
+# Render UserCourseList view
+class UserCourseListView(LoginRequiredMixin, ListView):
+    template_name = 'course/user_list.html'
+    model = Course
+
+    def get_queryset(self):
+        queryset = Course.objects.filter(user_courses__user=self.request.user)
+        return queryset

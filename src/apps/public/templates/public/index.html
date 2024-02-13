@@ -108,7 +108,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="d-flex flex-column gap-1 text-dark px-2 py-1">
-                                    <a href="#" class="fw-semibold mt-1 h5 package-title">{{ obj.title }}</a>
+                                    <a href="{{ obj.get_absolute_url }}" class="fw-semibold mt-1 h5 package-title">{{ obj.title }}</a>
                                     <small>{{ obj.short_des|truncatechars:150 }}</small>
                                 </div>
                                 <div class="w-100 p-2 mt-auto">
@@ -131,7 +131,7 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                    <a href="#" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
+                                    <a href="{{ obj.get_absolute_url }}" class="btn btn-danger w-100 fw-semibold">مشاهده دوره</a>
                                 </div>
                             </div>
                         {% endfor %}

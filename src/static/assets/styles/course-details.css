@@ -144,6 +144,7 @@ input {
 .course .short-des-box {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 1rem 0.85rem 1rem 0.85rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .course .des-box {
@@ -170,13 +171,37 @@ input {
   height: max-content;
 }
 
+.btn-collapse i {
+  transition: all 0.3s;
+}
+
+.btn-collapse:hover > i, .btn-collapse:active > i {
+  transform: rotate(-90deg) translate(3px, 2px);
+}
+
+.course-episode {
+  transition: all 0.3s ease;
+}
+
+.course-episode:hover {
+  box-shadow: 0 0 3px 1px rgba(245, 245, 245, 1);
+}
+
 .i-stroke {
   -webkit-text-stroke: 0.5pt;
+}
+
+.i-collab {
+  color: white;
+  padding: 6px 7px 0 7px;
+  font-size: 16px;
+  -webkit-text-stroke: 0.2pt;
 }
 
 .text-hover:hover {
   color: #737373;
 }
+
 /*---------------START 768PX----------------*/
 @media (max-width: 768px) {
 }

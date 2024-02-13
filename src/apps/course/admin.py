@@ -3,7 +3,10 @@ from django.contrib import admin
 from django.db import models
 from django import forms
 
-from . models import Instructor, Course, Session, Episode, FAQ
+from . models import (
+    Instructor, Course, Session, Episode,
+    FAQ, UserCourse
+)
 
 
 # Register Instructors model admin
@@ -63,3 +66,16 @@ class CourseAdmin(admin.ModelAdmin):
     @admin.display(description=_('Selling price(Rial)'))
     def get_selling_price(self, obj):
         return '{:,}'.format(obj.selling_price)
+
+
+# Register UserCourse model admin
+@admin.register(UserCourse)
+class UserCourseAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'get_place_name', 'course')
+    list_display_links = ('id', 'user')
+    search_fields = ('user__phone_number', 'user__profile__place_name')
+    list_filter = ('course',)
+
+    @admin.display(description=_('Place name'))
+    def get_place_name(self, obj):
+        return obj.user.profile.place_name

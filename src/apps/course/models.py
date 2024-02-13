@@ -93,6 +93,12 @@ class Course(BaseModel):
     def get_episode_count(self):
         return self.episodes.filter(is_active=True).count() or 0
 
+    def get_sessions(self):
+        return self.sessions.all()
+
+    def get_faqs(self):
+        return self.faqs.all()
+
     def get_comments(self):
         return self.comments.all()
 
@@ -110,7 +116,7 @@ class Session(BaseModel):
         return f'{self.course} - {self.title}'
 
     def get_episodes(self):
-        return self.episodes.objects.filter(is_active=True)
+        return self.episodes.filter(is_active=True).order_by('number')
 
 
 # Session's episodes model
@@ -161,6 +167,20 @@ class Comment(BaseModel):
     class Meta:
         verbose_name = _('Course comment')
         verbose_name_plural = _('Course comments')
+
+    def __str__(self):
+        return f'{self.user} - {self.course}'
+
+
+# UserCourses model
+class UserCourse(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='courses', verbose_name=_('User'))
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='user_courses', verbose_name=_('Course'))
+    is_finished = models.BooleanField(_('Is finished'), default=False)
+
+    class Meta:
+        verbose_name = _('User course')
+        verbose_name_plural = _('User courses')
 
     def __str__(self):
         return f'{self.user} - {self.course}'

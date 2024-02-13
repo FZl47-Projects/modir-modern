@@ -82,11 +82,11 @@
             <div class="d-flex justify-content-md-start justify-content-center flex-wrap gap-4 mt-3 stats-main">
                 <div class="d-flex flex-column flex-grow-1 stats-box stats-box-1">
                     <span>دوره‌های آموزشی من</span>
-                    <a href="#" class="text-white mt-2 stats-link">
+                    <a href="{% url 'course:user_course_list' %}" class="text-white mt-2 stats-link">
                         <span>مشاهده همه</span>
                         <i class="bi bi-arrow-left" style="-webkit-text-stroke: 0.4pt;"></i>
                     </a>
-                    <div class="stats-info-main stats-num convert-digits">0</div>
+                    <div class="stats-info-main stats-num convert-digits">{{ user.courses.all.count }}</div>
                 </div>
                 <div class="d-flex flex-grow-1 stats-box stats-box-2">
                     <span>اشتراک باقی مانده</span>

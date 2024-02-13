@@ -118,6 +118,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_tickets_count(self):
         return self.tickets.all().count() or 0
 
+    def get_courses(self):
+        return self.courses.all()
+
 
 # UserProfiles model
 class UserProfile(BaseModel):

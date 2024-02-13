@@ -27,14 +27,14 @@
                                 <source src="{{ object.get_intro_video_url }}">
                             </video>
                         {% elif object.introduction_image %}
-                            <video class="w-100 rounded-3 d-none" id="courseVideo" controls>
+                            <video id="courseVideo" class="w-100 rounded-3 d-none" controls>
                                 <source src="">
                             </video>
                             <div class="img-box">
                                 <img src="{{ object.get_thumbnail_url }}" alt="{{ object.title }}">
                             </div>
                         {% else %}
-                            <video class="w-100 rounded-3" id="courseVideo" controls>
+                            <video id="courseVideo" class="w-100 rounded-3" controls>
                                 <source src="">
                             </video>
                         {% endif %}
@@ -57,10 +57,17 @@
                                     <small class="mt-1">تومان</small>
                                 {% endif %}
                             </div>
-                            <form method="POST" action="" class="d-flex">
-                                <input type="hidden" name="pk" value="{{ object.pk }}">
-                                <button type="submit" class="btn btn-success fw-semibold px-md-5">خرید دوره</button>
-                            </form>
+
+                            {% if has_course %}
+                                <div class="d-flex">
+                                    <a href="#courseEpisodes" class="btn btn-primary fw-semibold px-md-5">مشاهده دوره</a>
+                                </div>
+                            {% else %}
+                                <form method="POST" action="" class="d-flex">
+                                    <input type="hidden" name="pk" value="{{ object.pk }}">
+                                    <button type="submit" class="btn btn-success fw-semibold px-md-5">خرید دوره</button>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
                     <!-- .End Course short description -->
@@ -105,13 +112,96 @@
                             <span class="convert-digits">0 نفر</span>
                         </div>
                         <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
-                            <i class="bi bi-dash i-stroke" style="font-size: 32px;"></i>
-                            <small>----</small>
-                            <span>----</span>
+                            <i class="bi bi-stack i-stroke" style="font-size: 32px;"></i>
+                            <small>تعداد جلسات:</small>
+                            <span class="convert-digits">{{ object.get_episode_count }}</span>
                         </div>
                     </div>
                 </div>
                 <!-- .End Course info -->
+            </div>
+
+            <!-- Start course episodes section -->
+            {% if has_course %}
+                <div class="d-flex flex-column col-lg-9 col-12 mt-lg-5 mt-4 pe-1" id="courseEpisodes">
+                    <h5 class="text-white fw-semibold">سر فصل های دوره</h5>
+                    <div class="d-flex flex-column gap-2">
+                        {% for session in object.get_sessions %}
+                            <div>
+                                <a href="#session{{ session.id }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="session{{ session.id }}"
+                                        class="d-flex justify-content-between w-100 btn btn-secondary btn-collapse px-3 pt-3 pb-2 mt-1">
+                                    <span class="fw-semibold h5">{{ session.title }}</span>
+                                    <i class="bi bi-chevron-left mt-1 i-stroke"></i>
+                                </a>
+                                <div class="d-flex flex-column w-100 px-1">
+                                    <div id="session{{ session.id }}" class="collapse">
+                                        <div class="card-body d-flex flex-column gap-1 w-100 rounded-1 mt-1">
+                                            {% for episode in session.get_episodes %}
+                                                <div class="d-flex justify-content-between bg-light rounded-1 w-100 px-3 py-2 course-episode">
+                                                    <span class="mt-1">{{ episode.title }}</span>
+                                                    <button type="button" data-url="{{ episode.get_file_url }}" onclick="setVidUrl(this)"
+                                                            class="btn btn-sm btn-success">مشاهده</button>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="d-flex flex-column col-lg-9 col-12 mt-lg-5 mt-4 pe-1" id="courseEpisodes">
+                    <h5 class="text-white fw-semibold">سر فصل های دوره</h5>
+                    <div class="d-flex flex-column gap-2">
+                        {% for session in object.get_sessions %}
+                            <div>
+                                <a href="#session{{ session.id }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="session{{ session.id }}"
+                                        class="d-flex justify-content-between w-100 btn btn-secondary btn-collapse px-3 pt-3 pb-2 mt-1">
+                                    <span class="fw-semibold h5">{{ session.title }}</span>
+                                    <i class="bi bi-chevron-left mt-1 i-stroke"></i>
+                                </a>
+                                <div class="d-flex flex-column w-100 px-1">
+                                    <div id="session{{ session.id }}" class="collapse">
+                                        <div class="card-body d-flex flex-column gap-1 w-100 rounded-1 mt-1">
+                                            {% for episode in session.get_episodes %}
+                                                <div class="d-flex justify-content-between bg-light rounded-1 w-100 px-3 py-2 course-episode">
+                                                    <span class="mt-1">{{ episode.title }}</span>
+                                                    <a href="#" class="bi bi-person-lock bg-danger rounded-2 i-collab"></a>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <!-- .End course episodes section -->
+
+            <div class="d-flex flex-column col-lg-9 col-12 mt-lg-5 mt-4 pe-1">
+                <h5 class="text-white fw-semibold">سوالات متداول</h5>
+                <div class="d-flex flex-column gap-2">
+                    {% for faq in object.get_faqs %}
+                        <div>
+                            <a href="#faqCollapse{{ faq.id }}" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="faqCollapse{{ faq.id }}"
+                                    class="d-flex justify-content-between w-100 btn btn-secondary btn-collapse px-3 pt-3 pb-2 mt-1">
+                                <span class="fw-semibold h5">{{ faq.question }}</span>
+                                <i class="bi bi-chevron-left mt-1 i-stroke"></i>
+                            </a>
+                            <div class="d-flex flex-column w-100 px-1">
+                                <div id="faqCollapse{{ faq.id }}" class="collapse">
+                                    <div class="card-body d-flex flex-column gap-1 w-100 rounded-1 mt-1">
+                                        <p class="py-1 text-white">
+                                            {{ faq.answer }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
 
         </main>

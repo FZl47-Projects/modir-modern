@@ -27,16 +27,8 @@
   src: url("../fonts/YEKANBAKH-LIGHT.eot");
   src: url("../fonts/YEKANBAKH-LIGHT.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-LIGHT.woff") format("woff"), url("../fonts/YEKANBAKH-LIGHT.woff2") format("woff2"), url("../fonts/YEKANBAKH-LIGHT.TTF") format("truetype");
 }
-/*COLOR BODY*/
-/*COLOR BODY*/
-/* COLOR WHITE*/
-/* COLOR WHITE*/
-/*START COLOR TEXT*/
-/*END COLOR TEXT*/
-/*START BG COLORS*/
-/*END BG COLORS*/
-/*START BORDER COLOR*/
-/*END BORDER COLOR*/
+
+
 * {
   margin: 0;
   padding: 0;
@@ -46,7 +38,7 @@
 html,
 body {
   overflow-x: hidden;
-  font-family: YEKANBAKH;
+  font-family: YEKANBAKH, sans-serif;
   font-size: 14px;
   font-weight: 300;
 }
