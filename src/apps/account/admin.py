@@ -20,8 +20,8 @@ class UserAdmin(BaseUserAdmin):
     # The form to add user instances
     add_form = UserCreationForm
 
-    list_display = ('id', '__str__', 'email', 'first_name', 'last_name', 'is_active', 'is_verified')
-    list_display_links = ('id', '__str__', 'email',)
+    list_display = ('id', '__str__', 'first_name', 'last_name', 'is_active', 'is_verified')
+    list_display_links = ('id', '__str__',)
     readonly_fields = ('created_at', 'last_login',)
     list_filter = ('is_active', 'is_admin', 'is_verified', 'accesses',)
     fieldsets = (
@@ -52,8 +52,12 @@ class UserAdmin(BaseUserAdmin):
 # Register UserProfile model admin
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'gender', 'melli_code')
+    list_display = ('id', 'user', 'place_name', 'gender')
     list_display_links = ('id', 'user')
+    search_fields = ('user__phone_number', 'place_name')
+    list_filter = ('gender',)
+    autocomplete_fields = ('user',)
+    date_hierarchy = 'created_at'
 
     fieldsets = (
         (None, {'fields': ('user',)}),
@@ -61,7 +65,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         (_('Place info'), {'fields': ('place_name', 'province', 'city', 'image')}),
     )
 
-    search_fields = ('user__phone_number',)
-    list_filter = ('gender',)
-    autocomplete_fields = ('user',)
-    date_hierarchy = 'created_at'
+    @admin.display(description=_('Place name'))
+    def get_place_name(self, obj):
+        return obj.user.profile.place_name

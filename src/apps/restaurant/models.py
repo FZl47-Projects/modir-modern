@@ -10,7 +10,7 @@ User = get_user_model()
 
 # MyRestaurant model
 class Restaurant(BaseModel):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='restaurants', verbose_name=_('User'))
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='restaurants', verbose_name=_('User'))
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
     services_fee = models.PositiveSmallIntegerField(_('Services fee'), default=5)
     is_active = models.BooleanField(_('Active'), default=True)

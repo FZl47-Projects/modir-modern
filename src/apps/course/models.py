@@ -4,8 +4,8 @@ from django.templatetags.static import static
 from django.shortcuts import reverse
 from django.db import models
 
+from .utils import course_video_path, introduction_video_path, course_images_path
 from .enums import CoursePaymentTypeEnum, CourseTypeEnum
-from .utils import course_video_path
 from froala_editor.fields import FroalaField
 from apps.core.models import BaseModel
 User = get_user_model()
@@ -57,7 +57,10 @@ class Course(BaseModel):
     price = models.PositiveBigIntegerField(_('Price'), default=0)
     discount = models.IntegerField(_('Discount'), default=0)
     selling_price = models.PositiveBigIntegerField(_('Selling price'), default=0)
-    image = models.ImageField(_('Image'), upload_to='images/courses/', null=True, blank=True)
+
+    introduction_video = models.FileField(_('Introduction video'), upload_to=introduction_video_path, null=True, blank=True)
+    introduction_image = models.ImageField(_('Introduction image'), upload_to=course_images_path, null=True, blank=True)
+    cover_image = models.ImageField(_('Image'), upload_to=course_images_path, null=True, blank=True)
 
     pinned = models.BooleanField(_('Pinned'), default=False)
     is_active = models.BooleanField(_('Active'), default=True)
@@ -73,16 +76,19 @@ class Course(BaseModel):
         self.selling_price = int(self.price - (self.price * (self.discount / 100)))
         super().save(*args, **kwargs)
 
-    def get_image_url(self):
-        if self.image:
-            return self.image.url
-        return static('images/logo-white.png')
-
     def get_type_label(self):
         return self.get_type_display()
 
     def get_absolute_url(self):
         return reverse('course:course_detail', args=[self.slug])
+
+    def get_thumbnail_url(self):
+        if self.introduction_image:
+            return self.introduction_image.url
+
+    def get_intro_video_url(self):
+        if self.introduction_video:
+            return self.introduction_video.url
 
     def get_episode_count(self):
         return self.episodes.filter(is_active=True).count() or 0

@@ -16,14 +16,109 @@
     <!-- .End Sidebar menu -->
 
     <div class="container-fluid col-md-10 pb-4">
-        <main class="main w-100 p-md-4 p-2">
-            <div class="">
+        <main class="main w-100 p-md-2 p-2 mt-2">
 
+            <div class="d-flex flex-lg-nowrap flex-wrap gap-md-3 gap-4 w-100 course">
+                <div class="d-flex flex-column col-lg-9 col-12 main-box">
+                    <!-- Start Course video -->
+                    <div class="d-flex w-100 vid-box" id="courseVideoSection">
+                        {% if object.introduction_video %}
+                            <video id="courseVideo" controls preload="metadata" poster="{{ object.get_thumbnail_url }}" class="w-100 rounded-3">
+                                <source src="{{ object.get_intro_video_url }}">
+                            </video>
+                        {% elif object.introduction_image %}
+                            <video class="w-100 rounded-3 d-none" id="courseVideo" controls>
+                                <source src="">
+                            </video>
+                            <div class="img-box">
+                                <img src="{{ object.get_thumbnail_url }}" alt="{{ object.title }}">
+                            </div>
+                        {% else %}
+                            <video class="w-100 rounded-3" id="courseVideo" controls>
+                                <source src="">
+                            </video>
+                        {% endif %}
+                    </div>
+                    <!-- .End Course video -->
+
+                    <!-- Start Course short description -->
+                    <div class="d-flex flex-column short-des-box">
+                        <h4 class="text-white fw-semibold">{{ object.title }}</h4>
+                        <p class="text-white mt-2">{{ object.short_des }}</p>
+                        <div class="d-flex justify-content-between flex-wrap gap-2 mt-4">
+                            <div class="d-flex align-items-center gap-1 text-white">
+                                <span>قیمت دوره: </span>
+                                {% if object.discount %}
+                                    <small class="convert-digits mt-1"><s>{{ object.price|convert_rial|intcomma }}</s></small>
+                                    <span class="text-danger fs-5 mt-1 convert-digits">{{ object.selling_price|convert_rial|intcomma }}</span>
+                                    <small class="mt-1">تومان</small>
+                                {% else %}
+                                    <span class="convert-digits fs-5 mt-1">{{ object.price|convert_rial|intcomma }}</span>
+                                    <small class="mt-1">تومان</small>
+                                {% endif %}
+                            </div>
+                            <form method="POST" action="" class="d-flex">
+                                <input type="hidden" name="pk" value="{{ object.pk }}">
+                                <button type="submit" class="btn btn-success fw-semibold px-md-5">خرید دوره</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- .End Course short description -->
+
+                    <!-- Start Course description -->
+                    <div class="d-flex flex-column des-box">
+                        <p class="text-white">{{ object.description|safe }}</p>
+                    </div>
+                    <!-- .End Course description -->
+                </div>
+
+                <!-- Start Course info -->
+                <div class="mt-md-0 px-2 info-box">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
+                            <i class="bi bi-clock i-stroke" style="font-size: 30px;"></i>
+                            <small>مدت دوره:</small>
+                            <span>{{ object.duration }}</span>
+                        </div>
+                        <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
+                            <i class="bi bi-mortarboard i-stroke" style="font-size: 32px;"></i>
+                            <small>نوع دوره:</small>
+                            <span>{{ object.get_type_label }}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
+                            <i class="bi bi-person-video3 i-stroke" style="font-size: 32px;"></i>
+                            <small>مدرس دوره:</small>
+                            <a href="#" class="text-hover">{{ object.instructor }}</a>
+                        </div>
+                        <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
+                            <i class="bi bi-calendar-event i-stroke" style="font-size: 30px;"></i>
+                            <small>تاریخ شروع:</small>
+                            <span class="datetime-convert">{{ object.get_created_date }}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
+                            <i class="bi bi-people i-stroke" style="font-size: 32px;"></i>
+                            <small>دانشجویان:</small>
+                            <span class="convert-digits">0 نفر</span>
+                        </div>
+                        <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
+                            <i class="bi bi-dash i-stroke" style="font-size: 32px;"></i>
+                            <small>----</small>
+                            <span>----</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- .End Course info -->
             </div>
+
         </main>
     </div>
 {% endblock %}
 
 {% block scripts %}
     <script src="{% static 'js/menu.js' %}"></script>
+    <script src="{% static 'js/course.js' %}"></script>
 {% endblock %}

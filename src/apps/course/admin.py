@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db import models
 from django import forms
 
-from . models import Instructor, Course, Session, FAQ
+from . models import Instructor, Course, Session, Episode, FAQ
 
 
 # Register Instructors model admin
@@ -25,6 +25,12 @@ class SessionInline(admin.StackedInline):
     extra = 0
 
 
+# Register Episodes as Inline
+class EpisodeInline(admin.StackedInline):
+    model = Episode
+    extra = 0
+
+
 # Register FAQ as Inline
 class FAQInline(admin.StackedInline):
     model = FAQ
@@ -43,12 +49,12 @@ class CourseAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'type')
     readonly_fields = ('selling_price',)
     prepopulated_fields = {'slug': ('title',)}
-    inlines = [SessionInline, FAQInline]
+    inlines = [SessionInline, EpisodeInline, FAQInline]
 
     fieldsets = (
         (None, {'fields': ('title', 'slug', 'short_des', 'instructor', 'type', 'description')}),
         (_('Price info'), {'fields': ('payment_type', 'price', 'discount', 'selling_price')}),
-        (_('Additional info'), {'fields': ('image', 'duration', 'pinned', 'is_active')})
+        (_('Additional info'), {'fields': ('introduction_video', 'introduction_image', 'cover_image', 'duration', 'pinned', 'is_active')})
     )
 
     # Change formfield attributes(widget:size)

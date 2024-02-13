@@ -200,6 +200,12 @@
     -o-border-radius: 5px 5px 0 0;
 }
 
+ul {
+  list-style: none;
+  padding: 0 !important;
+}
+
+
 @media (max-width: 768px) {
     .menu-fixed-right {
         top: 0;

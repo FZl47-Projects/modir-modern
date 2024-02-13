@@ -41,7 +41,7 @@ msgstr "تاریخ ها"
 
 #: .\apps\account\admin.py:61
 msgid "Place info"
-msgstr "اطلاعات شخصی"
+msgstr "اطلاعات مجموعه"
 
 #: .\apps\account\apps.py:8
 msgid "Account"
