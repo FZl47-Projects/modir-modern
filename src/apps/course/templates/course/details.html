@@ -63,7 +63,8 @@
                                     <a href="#courseEpisodes" class="btn btn-primary fw-semibold px-md-5">مشاهده دوره</a>
                                 </div>
                             {% else %}
-                                <form method="POST" action="" class="d-flex">
+                                <form method="POST" action="{% url 'course:purchase_course' %}" class="d-flex">
+                                    {% csrf_token %}
                                     <input type="hidden" name="pk" value="{{ object.pk }}">
                                     <button type="submit" class="btn btn-success fw-semibold px-md-5">خرید دوره</button>
                                 </form>
