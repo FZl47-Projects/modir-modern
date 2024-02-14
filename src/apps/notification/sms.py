@@ -10,7 +10,7 @@ class NotificationUser:
 
     @classmethod
     def subscription_end_warning(cls, notification, phone_number):
-        pattern = None  # TODO: Add pattern code from ippanel
+        pattern = '4qkv8ckgt5332k6'
         send_sms(phone_number, pattern, days=notification.kwargs['days'])
 
 
