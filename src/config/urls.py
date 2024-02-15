@@ -8,7 +8,7 @@ from azbankgateways.urls import az_bank_gateways_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('froala-editor/', include('froala_editor.urls')),
+    path('tinymce/', include('tinymce.urls')),
     path('bankgateways/', az_bank_gateways_urls()),
     path('account/', include('apps.account.urls', namespace='account')),
     path('', include('apps.public.urls', namespace='public')),

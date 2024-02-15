@@ -110,11 +110,11 @@
                                 {% if obj.discount %}
                                     <div class="package-tag">تخفیف</div>
                                 {% endif %}
-                                <div class="w-100 bg-dark d-flex flex-column p-5 package-pic">
+                                <div class="w-100 bg-dark d-flex flex-column package-pic">
                                     {% if obj.cover_image %}
-                                        <img src="{{ obj.cover_image.url }}" alt="ModireModern logo">
+                                        <img src="{{ obj.cover_image.url }}" class="set-pic" alt="ModireModern logo">
                                     {% else %}
-                                        <img src="{% static 'images/logo-white.png' %}" alt="ModireModern logo">
+                                        <img src="{% static 'images/logo-white.png' %}" class="default-pic" alt="ModireModern logo">
                                     {% endif %}
                                 </div>
                                 <div class="d-flex flex-column gap-1 text-dark px-2 py-1">

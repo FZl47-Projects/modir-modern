@@ -48,7 +48,9 @@
                         <div class="d-flex justify-content-between flex-wrap gap-2 mt-4">
                             <div class="d-flex align-items-center gap-1 text-white">
                                 <span>قیمت دوره: </span>
-                                {% if object.discount %}
+                                {% if object.payment_type == 'free' %}
+                                    <span>رایگان</span>
+                                {% elif object.discount %}
                                     <small class="convert-digits mt-1"><s>{{ object.price|convert_rial|intcomma }}</s></small>
                                     <span class="text-danger fs-5 mt-1 convert-digits">{{ object.selling_price|convert_rial|intcomma }}</span>
                                     <small class="mt-1">تومان</small>

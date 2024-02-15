@@ -312,7 +312,7 @@ msgstr "حضوری"
 
 #: .\apps\course\enums.py:14
 msgid "Online"
-msgstr "مجازی"
+msgstr "سمینار"
 
 #: .\apps\course\enums.py:15
 msgid "Offline"

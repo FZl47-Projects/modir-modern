@@ -147,7 +147,7 @@ msgstr "در حال توقف"
 
 #: management/commands/qcluster.py:9
 msgid "Starts a Django Q Cluster."
-msgstr "Démarre un cluster Django Q."
+msgstr ""
 
 #: management/commands/qinfo.py:11
 msgid "General information over all clusters."

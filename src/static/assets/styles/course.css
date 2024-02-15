@@ -27,16 +27,7 @@
   src: url("../fonts/YEKANBAKH-LIGHT.eot");
   src: url("../fonts/YEKANBAKH-LIGHT.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-LIGHT.woff") format("woff"), url("../fonts/YEKANBAKH-LIGHT.woff2") format("woff2"), url("../fonts/YEKANBAKH-LIGHT.TTF") format("truetype");
 }
-/*COLOR BODY*/
-/*COLOR BODY*/
-/* COLOR WHITE*/
-/* COLOR WHITE*/
-/*START COLOR TEXT*/
-/*END COLOR TEXT*/
-/*START BG COLORS*/
-/*END BG COLORS*/
-/*START BORDER COLOR*/
-/*END BORDER COLOR*/
+
 * {
   margin: 0;
   padding: 0;
@@ -130,11 +121,18 @@ input {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.package-pic img {
+.package-pic .set-pic {
+  height: 230px;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.package-pic .default-pic {
+  min-height: 230px;
+  padding: 3.25rem 2rem;
   transition: all 0.3s;
 }
 
-.package-pic:hover > img {
+.package-pic:hover > .default-pic {
   scale: 105%;
 }
 

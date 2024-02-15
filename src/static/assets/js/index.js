@@ -44,15 +44,18 @@ const bannerBtnSuccess = topBanner.querySelector('.btn-success');
 const bannerBtnDanger = topBanner.querySelector('.btn-danger');
 let deferredPrompt = null;
 
-// if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
-//   topBanner.style.display = 'block';
-// }
+
+function showPwaBlock() {
+    if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+        topBanner.style.display = 'block';
+    }
+}
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
 
-    topBanner.style.display = 'block';
+    showPwaBlock();
 })
 
 bannerBtnDanger.addEventListener('click', function () {

@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'apps.notification.apps.NotificationConfig',
 
     # Django modules
+    'tinymce',
     'django_q',
-    'froala_editor',
     'azbankgateways',
     'django_cleanup.apps.CleanupConfig',
 ]

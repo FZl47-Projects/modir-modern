@@ -32,7 +32,10 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['has_course'] = UserCourse.objects.filter(course=self.object, user=self.request.user).exists()
+        if self.object.payment_type == 'free' or UserCourse.objects.filter(course=self.object, user=self.request.user).exists():
+            context['has_course'] = True
+        else:
+            context['has_course'] = False
 
         return context
 

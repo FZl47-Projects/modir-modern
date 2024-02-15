@@ -157,11 +157,18 @@ input {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.package-pic img {
+.package-pic .set-pic {
+  height: 230px;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.package-pic .default-pic {
+  min-height: 200px;
+  padding: 2.85rem 2rem;
   transition: all 0.3s;
 }
 
-.package-pic:hover > img {
+.package-pic:hover > .default-pic {
   scale: 105%;
 }
 

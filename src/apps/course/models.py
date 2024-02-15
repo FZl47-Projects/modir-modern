@@ -6,8 +6,8 @@ from django.db import models
 
 from .utils import course_video_path, introduction_video_path, course_images_path
 from .enums import CoursePaymentTypeEnum, CourseTypeEnum
-from froala_editor.fields import FroalaField
 from apps.core.models import BaseModel
+from tinymce.models import HTMLField
 User = get_user_model()
 
 
@@ -49,7 +49,7 @@ class Course(BaseModel):
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
     slug = models.SlugField(_('Slug'), max_length=255, null=True, blank=True, allow_unicode=True)
     short_des = models.CharField(_('Short description'), max_length=255, null=True, blank=True)
-    description = FroalaField(options={'verbose_name': _('Description'), 'toolbarInline': False, 'direction': 'rtl'}, default='')
+    description = HTMLField(verbose_name=_('Description'), default='')
     type = models.CharField(_('Course type'), max_length=32, choices=Types.choices, default=Types.OFFLINE)
     instructor = models.ForeignKey(Instructor, on_delete=models.SET_NULL, verbose_name=_('Instructor'), related_name='courses', null=True)
     duration = models.CharField(_('Duration'), max_length=128, help_text=_('2h, 30m'))
@@ -126,7 +126,7 @@ class Episode(BaseModel):
     title = models.CharField(_('Episode title'), max_length=255, default=_('No title'))
     number = models.PositiveSmallIntegerField(_('Episode number'))
     file = models.FileField(_('Video file'), upload_to=course_video_path)
-    duration = models.PositiveSmallIntegerField(_('Duration'), default=0, help_text=_('Minutes'))
+    duration = models.PositiveSmallIntegerField(_('Duration'), default=0, null=True, blank=True, help_text=_('Minutes'))
     is_active = models.BooleanField(_('Active'), default=True)
 
     class Meta:
