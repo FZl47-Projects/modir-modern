@@ -8,6 +8,7 @@
 {% block styles %}
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
     <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/addtohomescreen.css' %}">
 {% endblock %}
 
 {% block body_class %}bg{% endblock %}
@@ -149,4 +150,15 @@
 {% block scripts %}
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'vendors/addtohomescreen.js' %}"></script>
+    <script>
+        // Run addToHomeScreen notif if on phone
+        if (
+            (('standalone' in window.navigator) && window.navigator.standalone)  // ios
+            ||
+            (!window.matchMedia('(display-mode: standalone)').matches) // android
+        ) {
+            addToHomescreen();
+        }
+    </script>
 {% endblock %}

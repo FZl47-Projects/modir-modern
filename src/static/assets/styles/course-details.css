@@ -179,6 +179,10 @@ input {
   transform: rotate(-90deg) translate(3px, 2px);
 }
 
+.btn-collapse:active > i , .btn-collapse:visited > i {
+  transform: rotate(-90deg) translate(3px, 2px);
+}
+
 .course-episode {
   transition: all 0.3s ease;
 }
