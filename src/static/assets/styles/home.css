@@ -248,6 +248,8 @@ input {
 
 .top-banner {
   display: none;
+  position: fixed;
+  bottom: 0;
   z-index: 1000;
   border-radius: 0 0 0.5rem 0.5rem;
   padding: 1.5rem 1rem;

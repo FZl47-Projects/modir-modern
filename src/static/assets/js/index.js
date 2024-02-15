@@ -45,6 +45,10 @@ const bannerBtnDanger = topBanner.querySelector('.btn-danger');
 let deferredPrompt = null;
 
 
+function isPwaInstalled() {
+  return window.matchMedia('(display-mode: standalone)').matches;
+}
+
 function showPwaBlock() {
     if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
         topBanner.style.display = 'block';
@@ -67,6 +71,7 @@ bannerBtnSuccess.addEventListener('click', async function () {
     deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
             console.log('User accepted');
+            topBanner.style.display = 'none';
         }
         deferredPrompt = null;
     });
