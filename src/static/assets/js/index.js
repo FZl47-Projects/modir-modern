@@ -39,15 +39,11 @@ let packageSwiper = new Swiper(".package-slider", {
 
 
 // Top static banner events
-const topBanner = document.querySelector('.top-banner');
+const topBanner = document.querySelector('.bottom-banner');
 const bannerBtnSuccess = topBanner.querySelector('.btn-success');
 const bannerBtnDanger = topBanner.querySelector('.btn-danger');
 let deferredPrompt = null;
 
-
-function isPwaInstalled() {
-  return window.matchMedia('(display-mode: standalone)').matches;
-}
 
 function showPwaBlock() {
     if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
