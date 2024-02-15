@@ -36,3 +36,35 @@ let packageSwiper = new Swiper(".package-slider", {
         prevEl: '.swiper-button-prev'
     }
 });
+
+
+// Top static banner events
+const topBanner = document.querySelector('.top-banner');
+const bannerBtnSuccess = topBanner.querySelector('.btn-success');
+const bannerBtnDanger = topBanner.querySelector('.btn-danger');
+let deferredPrompt = null;
+
+// if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+//   topBanner.style.display = 'block';
+// }
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    topBanner.style.display = 'block';
+})
+
+bannerBtnDanger.addEventListener('click', function () {
+    topBanner.style.display = 'none';
+})
+
+bannerBtnSuccess.addEventListener('click', async function () {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted');
+        }
+        deferredPrompt = null;
+    });
+})
