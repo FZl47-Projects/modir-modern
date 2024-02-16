@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404, reverse, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Sum, F, PositiveIntegerField, FloatField
+from django.db.models import Sum, F, PositiveIntegerField
 from django.views.generic import TemplateView, View, FormView
 from django.utils.translation import gettext as _
 from django.db.models.functions import Cast
 from django.core.paginator import Paginator
-from django.urls import reverse_lazy
 from django.contrib import messages
 
 from apps.subscription.mixinx import SubscriptionRequiredMixin

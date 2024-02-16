@@ -142,7 +142,7 @@
                                             {% for episode in session.get_episodes %}
                                                 <div class="d-flex justify-content-between bg-light rounded-1 w-100 px-3 py-2 course-episode">
                                                     <span class="mt-1">{{ episode.title }}</span>
-                                                    <button type="button" data-url="{{ episode.get_file_url }}" onclick="setVidUrl(this)"
+                                                    <button type="button" data-url="{{ episode.file_url }}" onclick="setVidUrl(this)"
                                                             class="btn btn-sm btn-success">مشاهده</button>
                                                 </div>
                                             {% endfor %}

@@ -63,7 +63,7 @@
                         </form>
                     </div>
                     <div class="d-flex print-obj">
-                        <button type="button" onclick="printPage()" class="bi bi-printer btn btn-sm btn-primary btn-icon"></button>
+                        <button type="button" onclick="printThis()" class="bi bi-printer btn btn-sm btn-primary btn-icon"></button>
                     </div>
                 </div>
                 <div class="d-flex gap-2">
@@ -160,7 +160,7 @@
                                     </td>
                                     <td>
                                         <label>
-                                            <input type="number" name="factor" value="{{ obj.factor }}" step="any" required
+                                            <input type="number" name="factor" value="{{ obj.factor }}" step="0.1" required
                                                 class="form-control form-control-sm text-center pe-md-3 fw-semibold table-input-sm">
                                         </label>
                                     </td>

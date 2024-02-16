@@ -22,6 +22,15 @@ class InstructorAdmin(admin.ModelAdmin):
     )
 
 
+# Register Sessions model admin
+@admin.register(Session)
+class SessionAdmin(admin.ModelAdmin):
+    search_fields = ['course__title']
+
+    def has_module_permission(self, request):
+        return False
+
+
 # Register Sessions as Inline
 class SessionInline(admin.StackedInline):
     model = Session
@@ -32,6 +41,8 @@ class SessionInline(admin.StackedInline):
 class EpisodeInline(admin.StackedInline):
     model = Episode
     extra = 0
+    fields = ['session', 'title', 'number', 'file_url']
+    autocomplete_fields = ['session']
 
 
 # Register FAQ as Inline
@@ -57,7 +68,7 @@ class CourseAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('title', 'slug', 'short_des', 'instructor', 'type', 'description')}),
         (_('Price info'), {'fields': ('payment_type', 'price', 'discount', 'selling_price')}),
-        (_('Additional info'), {'fields': ('introduction_video', 'introduction_image', 'cover_image', 'duration', 'pinned', 'is_active')})
+        (_('Additional info'), {'fields': ('introduction_video', 'introduction_image', 'cover_image', 'duration', 'is_active')})
     )
 
     # Change formfield attributes(widget:size)

@@ -27,9 +27,9 @@ let categorySwiper= new Swiper(".category-slider", {
 // ------------------------ Category slider (swiper) ---------------------------- //
 
 
-// ------------------------- Print cost menu page ------------------------------- //
-function printPage() {
-    let sideMenu = document.getElementById('SideMenu');
+// ------------------------- Print menu engineering page ------------------------------- //
+function printThis() {
+    let menu = document.getElementById('SideMenu');
     let printObjs = document.querySelectorAll('.print-obj');
     let container = document.querySelector('.container-fluid');
 
@@ -37,18 +37,19 @@ function printPage() {
        item.classList.add('d-none');
     });
 
-    sideMenu.style.display = 'none';
+    menu.style.display = 'none';
     container.classList.replace('col-md-10', 'col-12');
 
     window.print();
 
-    sideMenu.style.display = 'block';
+    menu.style.display = 'block';
     container.classList.replace('col-12', 'col-md-10');
 
     printObjs.forEach((item, index) => {
        item.classList.remove('d-none');
     });
 }
+// ------------------------- Print menu engineering page ------------------------------- //
 
 
 // --------------------------- Submit form with ajax and get results -------------------- //
@@ -70,3 +71,4 @@ function submitFormAjax(e) {
         }
     });
 }
+// --------------------------- Submit form with ajax and get results -------------------- //

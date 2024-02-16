@@ -125,7 +125,8 @@ class Episode(BaseModel):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='episodes', verbose_name=_('Session'))
     title = models.CharField(_('Episode title'), max_length=255, default=_('No title'))
     number = models.PositiveSmallIntegerField(_('Episode number'))
-    file = models.FileField(_('Video file'), upload_to=course_video_path)
+    file = models.FileField(_('Video file'), upload_to=course_video_path, null=True, blank=True)
+    file_url = models.URLField(_('Video url'), null=True, blank=True)
     duration = models.PositiveSmallIntegerField(_('Duration'), default=0, null=True, blank=True, help_text=_('Minutes'))
     is_active = models.BooleanField(_('Active'), default=True)
 
