@@ -29,7 +29,8 @@ class IndexVideo(BaseModel):
     title = models.CharField(_('Title'), max_length=255, default=_('No title'))
     description = models.TextField(_('Description'), max_length=512, null=True, blank=True)
     cover = models.ImageField(_('Video cover'), upload_to='images/index/', null=True, blank=True)
-    video = models.FileField(_('Video'), upload_to='images/index/')
+    video = models.FileField(_('Video'), upload_to='images/index/', null=True, blank=True)
+    video_url = models.URLField(_('Video url'), default='')
     is_active = models.BooleanField(_('Active'), default=True)
 
     class Meta:
@@ -37,12 +38,8 @@ class IndexVideo(BaseModel):
         verbose_name_plural = _('Index Videos')
 
     def __str__(self):
-        return f'{self.title} - {self.get_video_url()}'
+        return f'{self.title}'
 
     def get_cover_url(self):
         if self.cover:
             return self.cover.url
-
-    def get_video_url(self):
-        if self.video:
-            return self.video.url

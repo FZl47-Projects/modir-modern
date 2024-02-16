@@ -16,4 +16,4 @@ class IndexVideoAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'is_active')
     list_display_links = ('id', 'title')
     list_filter = ('is_active',)
-    fields = ('title', 'video', 'description', 'is_active')
+    fields = ('title', 'video_url', 'description', 'is_active')
