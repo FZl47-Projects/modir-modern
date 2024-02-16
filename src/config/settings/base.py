@@ -23,8 +23,9 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED', 'http://127.0.0.1').split(',')
 
 # Force read the X-Forwarded host
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+if DEBUG:
+    USE_X_FORWARDED_HOST = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -140,6 +141,16 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / os.getenv('MEDIA_ROOT', 'static/media')
+
+
+# Production whitenoise
+if int(os.getenv('ENABLE_WHITENOISE', default=0)):
+    # Insert Whitenoise Middleware and set as StaticFileStorage
+    MIDDLEWARE += [
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+    ]
+    STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

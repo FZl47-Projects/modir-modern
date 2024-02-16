@@ -52,7 +52,7 @@ class UserAdmin(BaseUserAdmin):
 # Register UserProfile model admin
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'place_name', 'gender')
+    list_display = ('id', 'user', 'place_name', 'province')
     list_display_links = ('id', 'user')
     search_fields = ('user__phone_number', 'place_name')
     list_filter = ('gender',)
