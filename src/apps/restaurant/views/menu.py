@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, reverse, redirect
+from django.views.generic import TemplateView, View, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, F, PositiveIntegerField
-from django.views.generic import TemplateView, View, FormView
+from django.db.utils import DataError, DatabaseError
 from django.utils.translation import gettext as _
 from django.db.models.functions import Cast
 from django.core.paginator import Paginator
@@ -37,23 +38,43 @@ class MenuEngineeringView(LoginRequiredMixin, TemplateView):
         objects = self.filter(objects)
         page_obj = self.pagination(objects)
 
-        context.update({
-            'restaurant': restaurant,
-            'page_obj': page_obj,
-            'objects': objects.aggregate(
-                total_final_price=Sum('final_price'),
-                total_service_price=Sum('service_price'),
-                total_price_with_factor=Sum('price_with_factor'),
-                total_menu_price=Sum('menu_price'),
-                total_item_profit=Sum('item_profit'),
-                total_number_sold=Sum('number_sold'),
-                total_total_sales=Sum('total_sales'),
-                total_total_cost=Sum('total_cost'),
-                total_total_profit=Sum('total_profit'),
-                each_item_profit_avg=Sum('total_profit') / Sum('number_sold') if Sum('number_sold') else 1,
-            ),
-            'each_item_percentage_share': 0.7 / (objects.count() or 1),
-        })
+        try:
+            context.update({
+                'restaurant': restaurant,
+                'page_obj': page_obj,
+                'objects': objects.aggregate(
+                    total_final_price=Sum('final_price'),
+                    total_service_price=Sum('service_price'),
+                    total_price_with_factor=Sum('price_with_factor'),
+                    total_menu_price=Sum('menu_price'),
+                    total_item_profit=Sum('item_profit'),
+                    total_number_sold=Sum('number_sold'),
+                    total_total_sales=Sum('total_sales'),
+                    total_total_cost=Sum('total_cost'),
+                    total_total_profit=Sum('total_profit'),
+                    each_item_profit_avg=Sum('total_profit') / Sum('number_sold'),
+                ),
+                'each_item_percentage_share': 0.7 / (objects.count() or 1),
+            })
+        except (DataError, DatabaseError):
+            context.update({
+                'restaurant': restaurant,
+                'page_obj': page_obj,
+                'objects': objects.aggregate(
+                    total_final_price=Sum('final_price'),
+                    total_service_price=Sum('service_price'),
+                    total_price_with_factor=Sum('price_with_factor'),
+                    total_menu_price=Sum('menu_price'),
+                    total_item_profit=Sum('item_profit'),
+                    total_number_sold=Sum('number_sold'),
+                    total_total_sales=Sum('total_sales'),
+                    total_total_cost=Sum('total_cost'),
+                    total_total_profit=Sum('total_profit'),
+                    each_item_profit_avg=Sum('total_profit') / 1,
+                ),
+                'each_item_percentage_share': 0.7 / (objects.count() or 1),
+            })
+
         return context
 
 
