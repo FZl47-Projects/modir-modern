@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, reverse, redirect
+from django.views.generic import TemplateView, View, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, F, PositiveIntegerField
-from django.views.generic import TemplateView, View, FormView
+from django.db.utils import DataError, DatabaseError
 from django.utils.translation import gettext as _
 from django.db.models.functions import Cast
 from django.core.paginator import Paginator
@@ -55,7 +56,7 @@ class MenuEngineeringView(LoginRequiredMixin, TemplateView):
                 ),
                 'each_item_percentage_share': 0.7 / (objects.count() or 1),
             })
-        except ZeroDivisionError:
+        except (DataError, DatabaseError):
             context.update({
                 'restaurant': restaurant,
                 'page_obj': page_obj,
