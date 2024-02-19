@@ -28,6 +28,9 @@ class Restaurant(BaseModel):
     def get_recipes_categories(self):
         return self.recipes_categories.all()
 
+    def get_prepared_material_categories(self):
+        return self.prepared_material_categories.all()
+
 
 # RawMaterialCategories model
 class RawMaterialCategory(BaseModel):
@@ -128,9 +131,26 @@ class RecipesCategory(BaseModel):
         return self.recipes.filter(is_active=True)
 
 
+# PreparedMaterialCategories model
+class PreparedMaterialCategory(BaseModel):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='prepared_material_categories', verbose_name=_('Restaurant'))
+    title = models.CharField(_('Title'), max_length=128, default=_('No title'))
+
+    class Meta:
+        verbose_name = _('Prepared material category')
+        verbose_name_plural = _('Prepared material categories')
+
+    def __str__(self):
+        return f'{self.restaurant} - {self.title}'
+
+    def get_recipes(self):
+        return self.material_recipes.filter(is_active=True)
+
+
 # Recipes model
 class Recipe(BaseModel):
     category = models.ForeignKey(RecipesCategory, on_delete=models.CASCADE, related_name='recipes', verbose_name=_('Category'), null=True, blank=True)
+    prepared_category = models.ForeignKey(PreparedMaterialCategory, on_delete=models.CASCADE, related_name='material_recipes', verbose_name=_('Prepared category'), null=True, blank=True)
     title = models.CharField(_('Title'), max_length=128, default=_('No title'))
     preparation = models.TextField(_('How to prepare'), null=True, blank=True)
 
@@ -192,7 +212,12 @@ class Recipe(BaseModel):
     def calculate_results(self, save=True):
         self.calc_final_price(calc_others=False)
 
-        self.service_price = self.final_price * (self.category.restaurant.services_fee / 100)  # Calculate services_price
+        # Calculate services_price
+        if self.category:
+            self.service_price = self.final_price * (self.category.restaurant.services_fee / 100)
+        else:
+            self.service_price = self.final_price * (self.prepared_category.restaurant.services_fee / 100)
+
         self.price_with_factor = int(self.final_price * self.factor)  # Calculate price_with_factor
         if self.menu_price:
             self.item_profit = self.menu_price - self.service_price - self.final_price  # Calculate item_profit

@@ -27,6 +27,8 @@ urlpatterns = [
     path('recipes/<int:pk>/get-price/', preparations.GetPreparationFinalPriceView.as_view(), name='get_recipe_final_price'),
 
     path('preparations/', preparations.PreparationsView.as_view(), name='preparations'),
+    path('preparations/category/add/', preparations.AddPreparationCategoryView.as_view(), name='add_preparation_category'),
+    path('preparations/category/delete/', preparations.DeletePreparationCategoryView.as_view(), name='delete_preparation_category'),
     path('preparations/add/', preparations.AddPreparationView.as_view(), name='add_preparation'),
     path('preparations/delete/', preparations.DeletePreparationView.as_view(), name='delete_preparation'),
     path('preparations/<int:pk>/', preparations.PreparationDetailsView.as_view(), name='preparation_details'),
