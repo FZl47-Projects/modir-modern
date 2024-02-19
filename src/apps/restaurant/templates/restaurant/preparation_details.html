@@ -38,9 +38,9 @@
                         <div class="text-white pt-1">
                             <label class="d-flex align-items-end gap-2 form-label">
                                 <span>دسته: </span>
-                                <select name="category" class="form-select form-select-sm s-input">
-                                    {% for obj in restaurant.get_recipes_categories %}
-                                        <option value="{{ obj.id }}" {% if obj.title == object.category.title %}selected{% endif %}>{{ obj.title }}</option>
+                                <select name="prepared_category" class="form-select form-select-sm s-input">
+                                    {% for obj in restaurant.get_prepared_material_categories %}
+                                        <option value="{{ obj.id }}" {% if obj.title == object.prepared_category.title %}selected{% endif %}>{{ obj.title }}</option>
                                     {% endfor %}
                                 </select>
                             </label>

@@ -8,7 +8,7 @@ from django.contrib import messages
 
 from apps.subscription.mixinx import SubscriptionRequiredMixin
 from persian_tools import digits, separator
-from ..models import (Restaurant, RawMaterial, RecipesCategory, Recipe, RecipeMaterial)
+from ..models import (Restaurant, RawMaterial, PreparedMaterialCategory, Recipe, RecipeMaterial)
 from .. import forms
 
 
@@ -19,7 +19,7 @@ class PreparationsView(LoginRequiredMixin, TemplateView):
     def filter(self, objects):
         cat_filter = self.request.GET.get('filter')
         if cat_filter:
-            objects = objects.filter(category__title=cat_filter)
+            objects = objects.filter(prepared_category__title=cat_filter)
 
         q = self.request.GET.get('q')
         if q:
@@ -32,7 +32,7 @@ class PreparationsView(LoginRequiredMixin, TemplateView):
         restaurant = Restaurant.objects.get(user=self.request.user)
 
         # Get items and filter them
-        objects = Recipe.objects.filter(category__restaurant=restaurant, is_material=True)
+        objects = Recipe.objects.filter(prepared_category__restaurant=restaurant, is_material=True)
         objects = self.filter(objects)
 
         context.update({
@@ -43,6 +43,49 @@ class PreparationsView(LoginRequiredMixin, TemplateView):
         return context
 
 
+# Add PreparationCategory view
+class AddPreparationCategoryView(SubscriptionRequiredMixin, FormView):
+    template_name = 'restaurant/preparations.html'
+    form_class = forms.PreparedMaterialCategoryForm
+    success_url = reverse_lazy('restaurant:preparations')
+
+    def get_form(self, form_class=None):
+        data = self.request.POST.copy()
+        data.update({'restaurant': Restaurant.objects.get(user=self.request.user)})
+        form_class = forms.PreparedMaterialCategoryForm(data=data)
+
+        return form_class
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, _('Category successfully added'))
+        return super().form_valid(form)
+
+
+# Delete PreparationCategory view
+class DeletePreparationCategoryView(SubscriptionRequiredMixin, View):
+    """ Delete prepared material categories based on given title. """
+    def post(self, request):
+        title = request.POST.get('title')
+
+        try:
+            restaurant = Restaurant.objects.get(user=request.user)
+            category = PreparedMaterialCategory.objects.get(restaurant=restaurant, title=title)
+            recipes = Recipe.objects.filter(prepared_category=category)
+
+            category.delete()
+
+            for recipe in recipes:
+                recipe.calc_final_price()
+
+            messages.success(request, _('Category successfully deleted'))
+
+        except (PreparedMaterialCategory.DoesNotExist, Restaurant.DoesNotExist, Restaurant.MultipleObjectsReturned):
+            messages.error(request, _('There is an issue. please try again'))
+
+        return redirect('restaurant:preparations')
+
+
 # Add Preparation view
 class AddPreparationView(SubscriptionRequiredMixin, FormView):
     template_name = 'restaurant/preparations.html'
@@ -50,11 +93,11 @@ class AddPreparationView(SubscriptionRequiredMixin, FormView):
     success_url = reverse_lazy('restaurant:preparations')
 
     def form_valid(self, form):
-        category = form.cleaned_data.get('category')
+        category = form.cleaned_data.get('prepared_category')
 
-        if not RecipesCategory.objects.filter(restaurant__user=self.request.user, id=category.id).exists():
+        if not PreparedMaterialCategory.objects.filter(restaurant__user=self.request.user, id=category.id).exists():
             messages.error(self.request, _('There is an issue. please try again'))
-            return redirect('restaurant:recipes')
+            return redirect('restaurant:preparations')
 
         form.save(commit=False)
 
@@ -67,7 +110,7 @@ class DeletePreparationView(SubscriptionRequiredMixin, View):
     """ Delete material preparation based on given pk """
     def post(self, request):
         pk = self.request.POST.get('pk')
-        obj = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=pk, is_material=True)
+        obj = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=pk, is_material=True)
         obj.delete()
 
         messages.success(request, _('Item successfully deleted'))
@@ -90,7 +133,7 @@ class PreparationDetailsView(SubscriptionRequiredMixin, DetailView):
         return context
 
     def get_object(self, queryset=None):
-        materials = Recipe.objects.filter(category__restaurant__user=self.request.user, is_material=True)
+        materials = Recipe.objects.filter(prepared_category__restaurant__user=self.request.user, is_material=True)
         obj = get_object_or_404(materials, pk=self.kwargs.get('pk'))
         return obj
 
@@ -123,7 +166,7 @@ class AddPreparationMaterialsView(SubscriptionRequiredMixin, View):
 
     def post(self, request):
         post = request.POST.copy()
-        recipe = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=post.get('pk'), is_material=True)
+        recipe = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=post.get('pk'), is_material=True)
 
         try:
             materials = post.getlist('raw_material', [])
@@ -149,7 +192,7 @@ class DeletePreparationMaterialView(SubscriptionRequiredMixin, View):
     """ Delete raw_material from preparation based on given ID. """
     def post(self, request, pk):
         material_id = request.POST.get('id')
-        recipe = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=pk)
+        recipe = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=pk)
 
         material = get_object_or_404(RecipeMaterial, recipe=recipe, id=material_id)
         material.delete()
@@ -163,7 +206,7 @@ class GetPreparationFinalPriceView(SubscriptionRequiredMixin, View):
     """ Return final price of prepared materials based on given id. """
 
     def get(self, request, pk):
-        recipe = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=pk)
+        recipe = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=pk)
         final_price = digits.convert_to_fa(recipe.calc_final_price())
 
         return JsonResponse({'price': separator.add(final_price)}, status=200)

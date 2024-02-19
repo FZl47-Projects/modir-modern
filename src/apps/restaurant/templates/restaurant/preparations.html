@@ -16,11 +16,11 @@
     <!-- .End Sidebar menu -->
 
     <!-- Start add category modal -->
-    {% include 'restaurant/components/recipes/add_category.html' %}
+    {% include 'restaurant/components/preparations/add_category.html' %}
     <!-- .End add category modal -->
 
     <!-- Start delete category modal -->
-    {% include 'restaurant/components/recipes/delete_category.html' %}
+    {% include 'restaurant/components/preparations/delete_category.html' %}
     <!-- .End delete category modal -->
 
     <!-- Start add preparation material modal -->
@@ -50,7 +50,7 @@
                             همه
                         </a>
                     </div>
-                    {% for obj in restaurant.get_recipes_categories %}
+                    {% for obj in restaurant.get_prepared_material_categories %}
                         <div class="swiper-slide">
                             <a href="?filter={{ obj.title }}" class="btn category-btn
                                 {% if request.GET.filter == obj.title %}btn-warning{% else %}btn-outline-warning{% endif %}">
