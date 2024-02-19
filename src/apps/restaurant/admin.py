@@ -56,6 +56,15 @@ class RecipeCategoryAdmin(admin.ModelAdmin):
     search_fields = ('restaurant__user__profile__place_name', 'restaurant__user__phone_number')
 
 
+# Register PreparedMaterialCategory model admin
+@admin.register(models.PreparedMaterialCategory)
+class PreparedMaterialCategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'restaurant', 'title', 'created_at')
+    list_display_links = ('id', 'restaurant', 'title')
+    readonly_fields = ('created_at', 'updated_at')
+    search_fields = ('restaurant__user__profile__place_name', 'restaurant__user__phone_number')
+
+
 # Register RecipeCategory as inline admin
 class RecipeMaterialInline(admin.StackedInline):
     model = models.RecipeMaterial
@@ -67,7 +76,7 @@ class RecipeMaterialInline(admin.StackedInline):
 # Register Recipe model admin
 @admin.register(models.Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'category', 'final_price', 'is_material')
+    list_display = ('id', 'title', 'category', 'prepared_category', 'final_price', 'is_material')
     list_display_links = ('id', 'title',)
     list_filter = ('is_material', 'is_active')
     readonly_fields = ('final_price', 'created_at', 'updated_at')

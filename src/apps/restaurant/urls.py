@@ -24,9 +24,11 @@ urlpatterns = [
     path('recipes/<int:pk>/edit/', recipes.EditRecipeView.as_view(), name='edit_recipe'),
     path('recipes/material/add/', recipes.AddRecipeMaterialsView.as_view(), name='add_recipe_materials'),
     path('recipes/<int:pk>/material/delete/', recipes.DeleteRecipeMaterialView.as_view(), name='delete_recipe_material'),
-    path('recipes/<int:pk>/get-price/', preparations.GetPreparationFinalPriceView.as_view(), name='get_recipe_final_price'),
+    path('recipes/<int:pk>/get-price/', recipes.GetRecipeFinalPriceView.as_view(), name='get_recipe_final_price'),
 
     path('preparations/', preparations.PreparationsView.as_view(), name='preparations'),
+    path('preparations/category/add/', preparations.AddPreparationCategoryView.as_view(), name='add_preparation_category'),
+    path('preparations/category/delete/', preparations.DeletePreparationCategoryView.as_view(), name='delete_preparation_category'),
     path('preparations/add/', preparations.AddPreparationView.as_view(), name='add_preparation'),
     path('preparations/delete/', preparations.DeletePreparationView.as_view(), name='delete_preparation'),
     path('preparations/<int:pk>/', preparations.PreparationDetailsView.as_view(), name='preparation_details'),

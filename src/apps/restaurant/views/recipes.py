@@ -54,10 +54,7 @@ class FoodsRecipesView(LoginRequiredMixin, TemplateView):
 class AddRecipesCategoryView(SubscriptionRequiredMixin, FormView):
     template_name = 'restaurant/foods_recipes.html'
     form_class = forms.RecipesCategoryForm
-
-    def get_success_url(self):
-        referer_url = self.request.META.get('HTTP_REFERER') or reverse('restaurant:recipes')
-        return referer_url
+    success_url = reverse_lazy('restaurant:recipes')
 
     def get_form(self, form_class=None):
         data = self.request.POST.copy()
@@ -93,8 +90,7 @@ class DeleteRecipeCategoryView(SubscriptionRequiredMixin, View):
         except (RecipesCategory.DoesNotExist, Restaurant.DoesNotExist, Restaurant.MultipleObjectsReturned):
             messages.error(request, _('There is an issue. please try again'))
 
-        referer_url = request.META.get('HTTP_REFERER') or reverse('restaurant:recipes')
-        return redirect(referer_url)
+        return redirect('restaurant:recipes')
 
 
 # Add Recipe view
@@ -138,7 +134,7 @@ class RecipeDetailsView(SubscriptionRequiredMixin, DetailView):
         context.update({
             'restaurant': restaurant,
             'raw_materials': RawMaterial.objects.filter(category__restaurant=restaurant),
-            'prepared_materials': Recipe.objects.filter(category__restaurant=restaurant, is_material=True)
+            'prepared_materials': Recipe.objects.filter(prepared_category__restaurant=restaurant, is_material=True)
         })
 
         return context
