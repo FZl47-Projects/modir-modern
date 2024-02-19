@@ -50,7 +50,7 @@ class MenuEngineeringView(LoginRequiredMixin, TemplateView):
                 total_total_sales=Sum('total_sales'),
                 total_total_cost=Sum('total_cost'),
                 total_total_profit=Sum('total_profit'),
-                each_item_profit_avg=Sum('total_profit') / Sum('number_sold'),
+                each_item_profit_avg=Sum('total_profit') / Sum('number_sold') if Sum('number_sold') else 1,
             ),
             'each_item_percentage_share': 0.7 / (objects.count() or 1),
         })
