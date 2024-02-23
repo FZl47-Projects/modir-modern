@@ -25,7 +25,7 @@ def intcomma(value):
 @register.filter
 def suggested_price(value):
     if value:
-        return int(value * 1.5)
+        return int(value * 3)
 
 
 # Return Sales share percentage

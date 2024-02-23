@@ -218,7 +218,7 @@ class Recipe(BaseModel):
         else:
             self.service_price = self.final_price * (self.prepared_category.restaurant.services_fee / 100)
 
-        self.price_with_factor = int(self.final_price * self.factor)  # Calculate price_with_factor
+        self.price_with_factor = int(self.final_price * self.factor) + self.service_price  # Calculate price_with_factor
         if self.menu_price:
             self.item_profit = self.menu_price - self.service_price - self.final_price  # Calculate item_profit
             self.food_cost = (self.final_price / self.menu_price) * 100  # Calculate food_cost

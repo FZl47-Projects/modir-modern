@@ -76,7 +76,7 @@
                         <div class="d-flex align-items-center gap-4">
                             <span>
                                 <span>میانگین سود هر آیتم: </span>
-                                <span class="me-1 convert-digits">{{ objects.each_item_profit_avg|intcomma }}</span>
+                                <span class="me-1 convert-digits">{% each_item_profit_avg objects.total_total_profit objects.total_number_sold %}</span>
                             </span>
                             <span>
                                 <span>درصد سهم هر آیتم: </span>
@@ -176,7 +176,7 @@
                                     </td>
                                     <td>
                                         <label>
-                                            <input type="number" name="menu_price" value="{{ obj.menu_price }}"
+                                            <input type="number" name="menu_price" value="{{ obj.menu_price }}" min="0"
                                                 class="form-control form-control-sm fw-semibold table-input">
                                         </label>
                                     </td>
@@ -192,7 +192,7 @@
                                     </td>
                                     <td>
                                         <label>
-                                            <input type="number" name="number_sold" value="{{ obj.number_sold }}"
+                                            <input type="number" name="number_sold" value="{{ obj.number_sold }}" min="0"
                                                 class="form-control form-control-sm text-center pe-md-3 fw-semibold table-input">
                                         </label>
                                     </td>
@@ -264,7 +264,11 @@
                                     {{ objects.total_item_profit|intcomma }}
                                 </span>
                             </td>
-                            <td>-</td>
+                            <td>
+                                <span class="convert-digits">
+                                    {% avg_food_costs objects.total_food_costs page_obj.paginator.count %}%
+                                </span>
+                            </td>
                             <td>
                                 <span class="text-danger convert-digits">
                                     {{ objects.total_number_sold|intcomma }}
