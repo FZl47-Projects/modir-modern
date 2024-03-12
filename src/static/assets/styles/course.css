@@ -107,7 +107,7 @@ input {
 }
 
 .package-box {
-  max-width: 290px;
+  width: 290px;
   background-color: #f6f6f6;
   border-radius: 0.6rem;
   position: relative;
