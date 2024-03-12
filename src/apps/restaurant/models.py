@@ -90,7 +90,7 @@ class RawMaterial(BaseModel):
         super().save(*args, **kwargs)
 
     def calculate_results(self):
-        """ Calculate obj usable thins and save them. """
+        """ Calculate obj usable things and save them. """
         if self.delivery_weight and self.edible_cleaned_weight:
             self.raw_usable_quantity_cost = (self.price * self.delivery_weight) / self.edible_cleaned_weight
         else:

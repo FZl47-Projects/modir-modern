@@ -76,6 +76,7 @@ class UpdateServicesFeeView(SubscriptionRequiredMixin, View):
         # Update recipes service_prices based on services_fee
         recipes = Recipe.objects.filter(category__restaurant=restaurant, is_material=False)
         recipes.update(service_price=Cast(F('final_price') * (fee / 100), output_field=PositiveIntegerField()))
+        recipes.update(price_with_factor=Cast(F('final_price') * F('factor') + F('service_price'), output_field=PositiveIntegerField()))
 
         messages.success(request, _('Services fee updated'))
         return redirect(self.get_redirect_url(request))  # Redirect with GET parameters
