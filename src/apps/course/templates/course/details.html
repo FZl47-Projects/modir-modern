@@ -112,7 +112,11 @@
                         <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
                             <i class="bi bi-people i-stroke" style="font-size: 32px;"></i>
                             <small>دانشجویان آنلاین:</small>
-                            <span class="convert-digits">{{ object.user_courses.all.count }} نفر</span>
+                            {% if object.payment_type == 'free' %}
+                                <span>-</span>
+                            {% else %}
+                                <span class="convert-digits">{{ object.user_courses.all.count }} نفر</span>
+                            {% endif %}
                         </div>
                         <div class="d-flex flex-column w-50 align-items-center text-center bg-light py-4 rounded-3">
                             <i class="bi bi-stack i-stroke" style="font-size: 32px;"></i>
@@ -142,8 +146,15 @@
                                             {% for episode in session.get_episodes %}
                                                 <div class="d-flex justify-content-between bg-light rounded-1 w-100 px-3 py-2 course-episode">
                                                     <span class="mt-1">{{ episode.title }}</span>
-                                                    <button type="button" data-url="{{ episode.file_url }}" onclick="setVidUrl(this)"
-                                                            class="btn btn-sm btn-success">مشاهده</button>
+                                                    <div class="d-flex gap-1">
+                                                        {% if episode.is_video %}
+                                                            <button type="button" data-url="{{ episode.file_url }}" onclick="setVidUrl(this)"
+                                                                    class="btn btn-sm btn-success">مشاهده
+                                                            </button>
+                                                        {% else %}
+                                                            <a href="{{ episode.file_url }}" download class="bi bi-download btn btn-sm btn-primary"></a>
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
                                             {% endfor %}
                                         </div>

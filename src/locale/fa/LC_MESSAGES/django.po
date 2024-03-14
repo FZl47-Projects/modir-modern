@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 23:07+0330\n"
+"POT-Creation-Date: 2024-03-14 17:26+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,8 @@ msgstr "اطلاعات مجموعه"
 
 #: .\apps\account\admin.py:68 .\apps\account\models.py:133
 #: .\apps\course\admin.py:90 .\apps\payment\admin.py:23
-#: .\apps\restaurant\admin.py:15 .\apps\subscription\admin.py:43
+#: .\apps\restaurant\admin.py:15 .\apps\restaurant\admin.py:40
+#: .\apps\subscription\admin.py:43
 msgid "Place name"
 msgstr "نام مجموعه"
 
@@ -54,10 +55,11 @@ msgid "Account"
 msgstr "حساب ها"
 
 #: .\apps\account\enums.py:7 .\apps\account\models.py:62
-#: .\apps\account\models.py:129 .\apps\course\models.py:162
-#: .\apps\course\models.py:178 .\apps\payment\models.py:14
-#: .\apps\restaurant\models.py:13 .\apps\subscription\models.py:40
-#: .\apps\ticket\models.py:16 .\apps\ticket\models.py:49
+#: .\apps\account\models.py:129 .\apps\course\models.py:169
+#: .\apps\course\models.py:185 .\apps\payment\models.py:14
+#: .\apps\restaurant\admin.py:36 .\apps\restaurant\models.py:13
+#: .\apps\subscription\models.py:40 .\apps\ticket\models.py:16
+#: .\apps\ticket\models.py:49
 msgid "User"
 msgstr "کاربر"
 
@@ -154,8 +156,8 @@ msgstr "نام"
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: .\apps\account\models.py:45 .\apps\course\models.py:66
-#: .\apps\course\models.py:131 .\apps\course\models.py:166
+#: .\apps\account\models.py:45 .\apps\course\models.py:67
+#: .\apps\course\models.py:132 .\apps\course\models.py:173
 #: .\apps\public\models.py:12 .\apps\public\models.py:34
 #: .\apps\restaurant\models.py:16 .\apps\restaurant\models.py:39
 #: .\apps\restaurant\models.py:171 .\apps\subscription\models.py:21
@@ -180,7 +182,7 @@ msgstr "زمان ویرایش"
 msgid "Users"
 msgstr "کاربران"
 
-#: .\apps\account\models.py:90 .\apps\course\models.py:16
+#: .\apps\account\models.py:90 .\apps\course\models.py:17
 msgid "No name"
 msgstr "بدون نام"
 
@@ -297,10 +299,10 @@ msgstr "اطلاعات تکمیلی"
 msgid "Selling price(Rial)"
 msgstr "قیمت فروش (ریال)"
 
-#: .\apps\course\apps.py:8 .\apps\course\models.py:69
-#: .\apps\course\models.py:108 .\apps\course\models.py:124
-#: .\apps\course\models.py:147 .\apps\course\models.py:161
-#: .\apps\course\models.py:179
+#: .\apps\course\apps.py:8 .\apps\course\models.py:70
+#: .\apps\course\models.py:109 .\apps\course\models.py:125
+#: .\apps\course\models.py:154 .\apps\course\models.py:168
+#: .\apps\course\models.py:186
 msgid "Course"
 msgstr "دوره"
 
@@ -324,43 +326,43 @@ msgstr "سمینار"
 msgid "Offline"
 msgstr "غیر حضوری"
 
-#: .\apps\course\models.py:16
+#: .\apps\course\models.py:17
 msgid "Instructor name"
 msgstr "نام مدرس"
 
-#: .\apps\course\models.py:17
+#: .\apps\course\models.py:18
 msgid "Biography"
 msgstr "معرفی کوتاه"
 
-#: .\apps\course\models.py:18
+#: .\apps\course\models.py:19
 msgid "Profile pic"
 msgstr "تصویر پروفایل"
 
-#: .\apps\course\models.py:21
+#: .\apps\course\models.py:22
 msgid "Linkedin url"
 msgstr "آدرس لینکدین"
 
-#: .\apps\course\models.py:22
+#: .\apps\course\models.py:23
 msgid "Instagram url"
 msgstr "آدرس اینستاگرام"
 
-#: .\apps\course\models.py:23
+#: .\apps\course\models.py:24
 msgid "X/Twitter url"
 msgstr "آدرس توییتر/x"
 
-#: .\apps\course\models.py:24
+#: .\apps\course\models.py:25
 msgid "Website url"
 msgstr "آدرس وبسایت"
 
-#: .\apps\course\models.py:27 .\apps\course\models.py:54
+#: .\apps\course\models.py:28 .\apps\course\models.py:55
 msgid "Instructor"
 msgstr "مدرس"
 
-#: .\apps\course\models.py:28
+#: .\apps\course\models.py:29
 msgid "Instructors"
 msgstr "مدرسین"
 
-#: .\apps\course\models.py:49 .\apps\public\models.py:9
+#: .\apps\course\models.py:50 .\apps\public\models.py:9
 #: .\apps\public\models.py:29 .\apps\restaurant\models.py:14
 #: .\apps\restaurant\models.py:38 .\apps\restaurant\models.py:57
 #: .\apps\restaurant\models.py:121 .\apps\restaurant\models.py:137
@@ -368,161 +370,165 @@ msgstr "مدرسین"
 msgid "Title"
 msgstr "عنوان"
 
-#: .\apps\course\models.py:49 .\apps\course\models.py:109
-#: .\apps\course\models.py:126 .\apps\public\models.py:29
+#: .\apps\course\models.py:50 .\apps\course\models.py:110
+#: .\apps\course\models.py:127 .\apps\public\models.py:29
 #: .\apps\restaurant\models.py:14 .\apps\restaurant\models.py:121
 #: .\apps\restaurant\models.py:137 .\apps\restaurant\models.py:154
 #: .\apps\ticket\models.py:17
 msgid "No title"
 msgstr "بدون عنوان"
 
-#: .\apps\course\models.py:50
+#: .\apps\course\models.py:51
 msgid "Slug"
 msgstr ""
 
-#: .\apps\course\models.py:51
+#: .\apps\course\models.py:52
 msgid "Short description"
 msgstr "توضیح کوتاه"
 
-#: .\apps\course\models.py:52 .\apps\public\models.py:30
+#: .\apps\course\models.py:53 .\apps\public\models.py:30
 msgid "Description"
 msgstr "توضیحات"
 
-#: .\apps\course\models.py:53
+#: .\apps\course\models.py:54
 msgid "Course type"
 msgstr "نوع دوره"
 
-#: .\apps\course\models.py:55 .\apps\course\models.py:130
+#: .\apps\course\models.py:56 .\apps\course\models.py:131
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1793
 msgid "Duration"
 msgstr "مدت زمان"
 
-#: .\apps\course\models.py:55
+#: .\apps\course\models.py:56
 msgid "2h, 30m"
 msgstr "۲ ساعت و ۳۰ دقیقه"
 
-#: .\apps\course\models.py:56
+#: .\apps\course\models.py:57
 msgid "Payment type"
 msgstr "نوع پرداخت"
 
-#: .\apps\course\models.py:57 .\apps\restaurant\models.py:58
+#: .\apps\course\models.py:58 .\apps\restaurant\models.py:58
 #: .\apps\subscription\models.py:17
 msgid "Price"
 msgstr "قیمت"
 
-#: .\apps\course\models.py:58 .\apps\subscription\models.py:18
+#: .\apps\course\models.py:59 .\apps\subscription\models.py:18
 msgid "Discount"
 msgstr "تخفیف"
 
-#: .\apps\course\models.py:59 .\apps\subscription\models.py:19
+#: .\apps\course\models.py:60 .\apps\subscription\models.py:19
 msgid "Selling price"
 msgstr "قیمت فروش"
 
-#: .\apps\course\models.py:61
+#: .\apps\course\models.py:62
 msgid "Introduction video"
 msgstr "ویدیو معرفی"
 
-#: .\apps\course\models.py:62
+#: .\apps\course\models.py:63
 msgid "Introduction image"
 msgstr "تصویر معرفی"
 
-#: .\apps\course\models.py:63 .\apps\public\models.py:11
+#: .\apps\course\models.py:64 .\apps\public\models.py:11
 #: .\apps\restaurant\models.py:169
 #: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
 msgid "Image"
 msgstr "تصویر کاور"
 
-#: .\apps\course\models.py:65
+#: .\apps\course\models.py:66
 msgid "Pinned"
 msgstr "پین شده"
 
-#: .\apps\course\models.py:70
+#: .\apps\course\models.py:71
 msgid "Courses"
 msgstr "دوره ها"
 
-#: .\apps\course\models.py:109
+#: .\apps\course\models.py:110
 msgid "Session title"
 msgstr "عنوان جلسه"
 
-#: .\apps\course\models.py:112
+#: .\apps\course\models.py:113
 msgid "Course session"
 msgstr "جلسه دوره"
 
-#: .\apps\course\models.py:113
+#: .\apps\course\models.py:114
 msgid "Course sessions"
 msgstr "جلسات دوره"
 
-#: .\apps\course\models.py:125
+#: .\apps\course\models.py:126
 msgid "Session"
 msgstr "جلسه"
 
-#: .\apps\course\models.py:126
+#: .\apps\course\models.py:127
 msgid "Episode title"
 msgstr "عنوان قسمت"
 
-#: .\apps\course\models.py:127
+#: .\apps\course\models.py:128
 msgid "Episode number"
 msgstr "شماره قسمت"
 
-#: .\apps\course\models.py:128
+#: .\apps\course\models.py:129
 msgid "Video file"
 msgstr "فایل ویدیو"
 
-#: .\apps\course\models.py:129 .\apps\public\models.py:33
-msgid "Video url"
-msgstr "لینک ویدیو"
-
 #: .\apps\course\models.py:130
+msgid "File url"
+msgstr "لینک فایل"
+
+#: .\apps\course\models.py:131
 msgid "Minutes"
 msgstr "دقیقه"
 
-#: .\apps\course\models.py:134
+#: .\apps\course\models.py:135
 msgid "Episode"
 msgstr "قسمت"
 
-#: .\apps\course\models.py:135
+#: .\apps\course\models.py:136
 msgid "Episodes"
 msgstr "قسمت ها"
 
-#: .\apps\course\models.py:148
+#: .\apps\course\models.py:155
 msgid "Question title"
 msgstr "عنوان سوًال"
 
-#: .\apps\course\models.py:149
+#: .\apps\course\models.py:156
 msgid "Answer"
 msgstr "پاسخ"
 
-#: .\apps\course\models.py:152
+#: .\apps\course\models.py:159
 msgid "Frequently asked question"
 msgstr "سوال متداول"
 
-#: .\apps\course\models.py:153
+#: .\apps\course\models.py:160
 msgid "Frequently asked questions"
 msgstr "سوالات متداول"
 
-#: .\apps\course\models.py:165
+#: .\apps\course\models.py:172
 msgid "Verified"
 msgstr "تایید شده"
 
-#: .\apps\course\models.py:169
+#: .\apps\course\models.py:176
 msgid "Course comment"
 msgstr "کامنت"
 
-#: .\apps\course\models.py:170
+#: .\apps\course\models.py:177
 msgid "Course comments"
 msgstr "کامنت‌های دوره"
 
-#: .\apps\course\models.py:180
+#: .\apps\course\models.py:187
 msgid "Is finished"
 msgstr "تمام شده"
 
-#: .\apps\course\models.py:183
+#: .\apps\course\models.py:190
 msgid "User course"
 msgstr "دوره‌ کاربر"
 
-#: .\apps\course\models.py:184
+#: .\apps\course\models.py:191
 msgid "User courses"
 msgstr "دوره‌های کاربران"
+
+#: .\apps\customers\apps.py:8
+msgid "Customers"
+msgstr ""
 
 #: .\apps\notification\apps.py:8 .\apps\notification\models.py:29
 msgid "Notification"
@@ -634,6 +640,10 @@ msgstr "کاور ویدیو"
 msgid "Video"
 msgstr "فایل ویدیو"
 
+#: .\apps\public\models.py:33
+msgid "Video url"
+msgstr "لینک ویدیو"
+
 #: .\apps\public\models.py:37
 msgid "Index video"
 msgstr "ویدیو صفحه اصلی"
@@ -642,19 +652,19 @@ msgstr "ویدیو صفحه اصلی"
 msgid "Index Videos"
 msgstr "ویدیوهای صفحه اصلی"
 
-#: .\apps\restaurant\admin.py:37
+#: .\apps\restaurant\admin.py:46
 msgid "Common info"
 msgstr "اطلاعات عمومی"
 
-#: .\apps\restaurant\admin.py:38
+#: .\apps\restaurant\admin.py:47
 msgid "Weight loss during cleaning"
 msgstr "وزن کاهش یافته در اثر تمیز کردن"
 
-#: .\apps\restaurant\admin.py:39
+#: .\apps\restaurant\admin.py:48
 msgid "Weight loss during baking"
 msgstr "کاهش وزن در خلال پخت"
 
-#: .\apps\restaurant\admin.py:40
+#: .\apps\restaurant\admin.py:49
 msgid "Computational ratios of yield"
 msgstr "نسبت های محاسباتی تست بازده"
 
@@ -897,11 +907,11 @@ msgstr "آیتم با موفقیت حذف شد"
 msgid "Items saved successfully. You can see results down below"
 msgstr "موارد با موفقیت ثبت شد. اکنون می‌توانید نتایج را در زیر مشاهده فرمایید"
 
-#: .\apps\restaurant\views\menu.py:99
+#: .\apps\restaurant\views\menu.py:81
 msgid "Services fee updated"
 msgstr "هزینه خدمات بروزرسانی شد"
 
-#: .\apps\restaurant\views\menu.py:118
+#: .\apps\restaurant\views\menu.py:100
 msgid "Item updated successfully"
 msgstr "آیتم با موفقیت بروزرسانی شد"
 
@@ -1056,7 +1066,7 @@ msgstr "تیکت با موفقیت ارسال شد"
 msgid "Message sent successfully"
 msgstr "پیام با موفقیت شد"
 
-#: .\config\settings\base.py:112
+#: .\config\settings\base.py:113
 msgid "Persian"
 msgstr "فارسی"
 

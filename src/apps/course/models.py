@@ -8,6 +8,7 @@ from .utils import course_video_path, introduction_video_path, course_images_pat
 from .enums import CoursePaymentTypeEnum, CourseTypeEnum
 from apps.core.models import BaseModel
 from tinymce.models import HTMLField
+from os.path import splitext
 User = get_user_model()
 
 
@@ -126,7 +127,7 @@ class Episode(BaseModel):
     title = models.CharField(_('Episode title'), max_length=255, default=_('No title'))
     number = models.PositiveSmallIntegerField(_('Episode number'))
     file = models.FileField(_('Video file'), upload_to=course_video_path, null=True, blank=True)
-    file_url = models.URLField(_('Video url'), null=True, blank=True)
+    file_url = models.URLField(_('File url'), null=True, blank=True)
     duration = models.PositiveSmallIntegerField(_('Duration'), default=0, null=True, blank=True, help_text=_('Minutes'))
     is_active = models.BooleanField(_('Active'), default=True)
 
@@ -140,6 +141,12 @@ class Episode(BaseModel):
     def get_file_url(self):
         if self.file:
             return self.file.url
+
+    @property
+    def is_video(self):
+        name, extension = splitext(self.file_url)
+        if extension in ['.mp4', '.mkv', '.wmv']:
+            return True
 
 
 # Courses FAQs
