@@ -29,8 +29,17 @@ class RawMaterialCategoryAdmin(admin.ModelAdmin):
 # Register RawMaterial model admin
 @admin.register(models.RawMaterial)
 class RawMaterialAdmin(admin.ModelAdmin):
-    list_display = ('id', 'category', 'title', 'use_for')
-    list_display_links = ('id', 'category', 'title')
+    list_display = ('id', 'get_user', 'get_place_name', 'title', 'use_for')
+    list_display_links = ('id', 'get_user', 'title')
+    search_fields = ('user__phone_number', 'user__profile__place_name')
+
+    @admin.display(description=_('User'))
+    def get_user(self, obj):
+        return obj.category.restaurant.user
+
+    @admin.display(description=_('Place name'))
+    def get_place_name(self, obj):
+        return obj.category.restaurant.user.profile.place_name
 
     fieldsets = (
         (None, {'fields': ('category', 'title', 'use_for', 'price',)}),
