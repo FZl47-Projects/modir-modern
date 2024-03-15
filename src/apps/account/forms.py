@@ -135,9 +135,12 @@ class UpdateProfileForm(forms.ModelForm):
     def save(self, commit=True):
         profile = super().save()
         user = profile.user
+        restaurant = user.restaurants
 
         user.phone_number = self.cleaned_data.get('phone_number')
+        restaurant.title = self.cleaned_data.get('place_name')
         if commit:
             user.save()
+            restaurant.save()
 
         return profile
