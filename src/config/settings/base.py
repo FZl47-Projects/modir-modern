@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'apps.course.apps.CourseConfig',
     'apps.payment.apps.PaymentConfig',
     'apps.account.apps.AccountConfig',
+    'apps.customers.apps.CustomersConfig',
     'apps.restaurant.apps.RestaurantConfig',
     'apps.subscription.apps.SubscriptionConfig',
     'apps.notification.apps.NotificationConfig',

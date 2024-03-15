@@ -1,0 +1,138 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | {{ object.title }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/digital-menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start Rate Modal -->
+    <div class="modal fade" tabindex="-1" id="rateModal" aria-labelledby="rateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form method="POST" action="#" style="background-color: #2d2c2c;"
+                  class="modal-content text-white border-white border-1 rounded-3">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title fw-semibold h4">ثبت نظرسنجی</h5>
+                    <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                          style="-webkit-text-stroke: 0.5pt;">
+                    </span>
+                </div>
+                <div class="modal-body">
+                    <div id="rateQuestion1" class="rate-page" style="display: block">
+                        <div class="d-flex flex-column form-group">
+                            <label class="form-label" style="font-size: 15px;">
+                                کیفیت غذا چطور بود؟
+                                <span class="d-flex flex-column gap-3 mt-3">
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="food_quality" value="4" checked class="form-check-input">عالی
+                                    </label>
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="food_quality" value="3" class="form-check-input">خوب
+                                    </label>
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="food_quality" value="2" class="form-check-input">متوسط
+                                    </label>
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="food_quality" value="1" class="form-check-input">بد
+                                    </label>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <div></div>
+                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(2)">بعدی</button>
+                        </div>
+                    </div>
+                    <div id="rateQuestion2" class="rate-page" style="display: none;">
+                        <div class="d-flex flex-column form-group">
+                            <label class="form-label" style="font-size: 15px;">
+                                کیفیت سرویس دهی چطور بود؟
+                                <span class="d-flex flex-column gap-3 mt-3">
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="service_quality" value="4" checked class="form-check-input">عالی
+                                    </label>
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="service_quality" value="3" class="form-check-input">خوب
+                                    </label>
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="service_quality" value="2" class="form-check-input">متوسط
+                                    </label>
+                                    <label class="d-flex gap-1">
+                                        <input type="radio" name="service_quality" value="1" class="form-check-input">بد
+                                    </label>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(1)">
+                                قبلی
+                            </button>
+                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(3)">
+                                بعدی
+                            </button>
+                        </div>
+                    </div>
+                    <div id="rateQuestion3" class="rate-page" style="display: none;">
+                        <div class="d-flex flex-column form-group">
+                            <label class="form-label" style="font-size: 14px;">
+                                شماره تماس:
+                                <input type="text" name="phone_number" class="form form-control mt-1" maxlength="11"
+                                       style="background-color: #fafafa;" placeholder="۰۹۱۳۰۰۰۰۰۰۰" required>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                شماره میز:
+                                <input type="number" name="table_number" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(2)">
+                                قبلی
+                            </button>
+                            <button type="submit" class="btn btn-success fw-semibold">
+                                ثبت
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- .End Rate Modal -->
+
+    <div class="container">
+        <header class="d-flex flex-column align-items-center gap-4">
+            <div class="rate-box">
+                <a role="button" data-bs-toggle="modal" data-bs-target="#rateModal" class="rate-btn" title="نظرسنجی">
+                    <em class="bi bi-star-fill text-white"></em>
+                </a>
+            </div>
+            <img src="{{ object.user.profile.get_image_url }}" alt="Profile pic" class="header-img">
+            <h4 class="fw-semibold text-white">{{ object.title }}</h4>
+        </header>
+        <hr class="text-white">
+
+        <div class="mt-5">
+            <ul class="services d-flex flex-column align-items-center gap-4 me-3">
+                <li class="list-item">
+                    <a href="{% url 'customers:digital_menu' restaurant.pk %}" class="w-100 h-100">
+                        <span>منو دیجیتال</span>
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a role="button" data-bs-toggle="modal" data-bs-target="#rateModal" class="w-100 h-100">
+                        <span>ثبت نظرسنجی</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/digital-menu.js' %}"></script>
+{% endblock %}

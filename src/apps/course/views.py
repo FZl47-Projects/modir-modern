@@ -2,7 +2,6 @@ from azbankgateways import models as bank_models, default_settings as settings
 from django.shortcuts import get_object_or_404, reverse, redirect
 from django.views.generic import ListView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
 from django.http import Http404
 
 from .models import Course, UserCourse

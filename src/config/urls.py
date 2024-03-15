@@ -14,6 +14,7 @@ urlpatterns = [
     path('', include('apps.public.urls', namespace='public')),
     path('course/', include('apps.course.urls', namespace='course')),
     path('ticketing/', include('apps.ticket.urls', namespace='ticket')),
+    path('customers/', include('apps.customers.urls', namespace='customers')),
     path('subscription/', include('apps.subscription.urls', namespace='subscription')),
     path('restaurant/', include('apps.restaurant.urls', namespace='restaurant')),
     path('payment/', include('apps.payment.urls', namespace='payment')),

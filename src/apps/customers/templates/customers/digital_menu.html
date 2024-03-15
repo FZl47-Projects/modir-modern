@@ -1,0 +1,75 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% load filters %}
+
+
+{% block title %}مدیرمدرن | منو دیجیتال {{ restaurant.title }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/digital-menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Start categories filter section -->
+    <div class="swiper category-slider mt-4 px-3">
+        <div class="swiper-wrapper">
+            {% for obj in restaurant.get_recipes_categories %}
+                <div class="swiper-slide">
+                    <a href="?category={{ obj.title }}" class="btn category-btn
+                    {% if request.GET.category == obj.title %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                        {{ obj.title }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <!-- .End categories filter section -->
+
+    <div class="main mt-4 mb-4">
+        <ul class="d-flex flex-column gap-3 w-100">
+            {% for obj in object_list %}
+                <li class="food-item w-100">
+                    <div class="food-img">
+                        <img src="{{ obj.get_image_url }}" alt="Food img">
+                    </div>
+                    <div class="d-flex justify-content-between p-3 w-100">
+                        <div class="d-flex flex-column gap-2 text-white">
+                            <h5 class="fw-semibold">{{ obj.title }}</h5>
+
+                            <div class="food-materials">
+                                <ul>
+                                    {% for item in obj.get_materials %}
+                                        <li>
+                                            <small>{{ item.get_material_title }}</small>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end text-white">
+                            <span class="fw-semibold convert-digits">
+                                {{ obj.menu_price|intcomma }}
+                                <small>تومان</small>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            {% empty %}
+                <div class="d-flex justify-content-center mt-3">
+                    <span class="text-danger fw-semibold">غذایی یافت نشد</span>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="exit-btn">
+        <a href="{% url 'customers:services_list' %}?code={{ restaurant.pk }}" class="btn btn-danger">
+            خروج
+        </a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/digital-menu.js' %}"></script>
+{% endblock %}

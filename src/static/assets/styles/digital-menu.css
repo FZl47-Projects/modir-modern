@@ -1,0 +1,261 @@
+/* ----------------------------- YEKANBAKH ----------------------------- */
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/YEKANBAKH-MEDIUM.eot");
+  src: url("../fonts/YEKANBAKH-MEDIUM.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-MEDIUM.woff") format("woff"), url("../fonts/YEKANBAKH-MEDIUM.woff2") format("woff2"), url("../fonts/YEKANBAKH-MEDIUM.TTF") format("truetype");
+}
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/YEKANBAKH-REGULAR.eot");
+  src: url("../fonts/YEKANBAKH-REGULAR.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-REGULAR.woff") format("woff"), url("../fonts/YEKANBAKH-REGULAR.woff2") format("woff2"), url("../fonts/YEKANBAKH-REGULAR.TTF") format("truetype");
+}
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/YEKANBAKH-BOLD.eot");
+  src: url("../fonts/YEKANBAKH-BOLD.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-BOLD.woff") format("woff"), url("../fonts/YEKANBAKH-BOLD.woff2") format("woff2"), url("../fonts/YEKANBAKH-BOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: YEKANBAKH;
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/YEKANBAKH-LIGHT.eot");
+  src: url("../fonts/YEKANBAKH-LIGHT.eot?#iefix") format("embedded-opentype"), url("../fonts/YEKANBAKH-LIGHT.woff") format("woff"), url("../fonts/YEKANBAKH-LIGHT.woff2") format("woff2"), url("../fonts/YEKANBAKH-LIGHT.TTF") format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  font-family: YEKANBAKH, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+body {
+  background-color: #343434;
+}
+body::-webkit-scrollbar {
+  height: 15px;
+  width: 15px;
+  background-color: #c1c1c1;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #fff;
+  border: 2px solid #c1c1c1;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #fefefe;
+  border: 2px solid #fff;
+}
+
+ol, ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+
+/* #ffc107 */
+
+.container {
+  padding: 1rem;
+}
+
+.rate-box {
+  position: absolute;
+  top: 22px;
+  left: 15px;
+}
+
+.rate-box .rate-btn {
+  background-color: #eab400;
+  border-radius: 50%;
+  padding: 8px 10px 3px 10px;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.rate-btn:hover {
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.header-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+.services .list-item {
+  background-color: white;
+  color: #656565;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 6px;
+  min-width: 280px;
+  height: 70px;
+  transition: all 0.3s;
+}
+
+.services .list-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.services .list-item:hover {
+  box-shadow: 0 0 1px 2px whitesmoke;
+  color: black;
+  scale: 105%;
+}
+
+/* Start digital menu styles */
+
+/* Categories styles */
+.category-slider {
+  position: relative;
+  text-outline: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-btn {
+  min-width: 150px;
+  font-weight: 600;
+}
+
+.category-slider .swiper-button-prev {
+  margin-right: 10px;
+}
+
+.category-slider .swiper-button-next {
+  margin-left: -10px;
+}
+
+.category-slider .swiper-button-prev, .category-slider .swiper-button-next {
+  border-radius: 0.3rem;
+  color: white;
+  padding: 0 0.5rem;
+  scale: 65%;
+  -webkit-text-stroke: 0.2pt;
+}
+
+.category-slider .swiper-button-disabled {
+  opacity: 30%;
+}
+
+/* Food items */
+.main {
+  padding: 1rem;
+}
+
+.food-item {
+  display: flex;
+  gap: 2px;
+  background-color: #DADADA19;
+  border-radius: 8px;
+  max-height: 140px;
+}
+
+.food-item .food-img {
+  background-color: rgba(218, 218, 218, 0.15);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.food-item .food-img img {
+  width: 200px;
+  height: 110px;
+  border-radius: 7px;
+}
+
+.food-materials {
+  display: flex;
+  flex-direction: column;
+}
+
+.food-materials ul {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  list-style-type: disc;
+  margin-right: 14px;
+  height: 83%;
+}
+
+.food-materials ul li {
+  font-size: 12px;
+}
+
+.exit-btn {
+  position: fixed;
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+}
+.exit-btn a {
+  font-weight: 600;
+  width: 60px;
+}
+
+@media (max-width: 320px) {
+  .category-btn {
+    min-width: 140px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 360px) {
+  .services .list-item {
+    min-width: 260px;
+  }
+}
+
+@media (max-width: 440px) {
+  .food-item {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+  }
+
+  .food-item .food-img {
+    display: flex;
+    justify-content: center;
+  }
+  .food-item .food-img img {
+    width: 200px;
+    min-height: 110px;
+    border-radius: 7px;
+  }
+}
