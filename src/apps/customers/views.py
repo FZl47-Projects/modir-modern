@@ -62,6 +62,8 @@ class AddCustomerSurveysView(FormView):
         return referer_url
 
     def form_valid(self, form):
+        form.save()
+
         messages.success(self.request, _('Your rate has been successfully registered'))
         return super().form_valid(form)
 

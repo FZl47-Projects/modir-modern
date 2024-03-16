@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="main-box">
         <header class="d-flex flex-column align-items-center gap-4">
             <div class="rate-box">
                 <a href="{% url 'customers:services_list' %}?code={{ user.restaurants.pk }}" class="btn btn-danger" title="خروج">
@@ -22,8 +22,39 @@
         </header>
         <hr class="text-white">
 
-        <div class="mt-5">
-
+        <div class="d-flex flex-wrap gap-2 mt-5">
+            {% for obj in object_list %}
+                <div class="bg-light col-lg-3 col-md-6 col-12 survey-main">
+                    <div class="d-flex gap-3 survey-img">
+                        <em class="bi bi-person-square"></em>
+                        <div class="d-flex flex-column">
+                            <span class="d-flex gap-1">
+                                <span class="opacity-75">نام:</span>
+                                {{ obj.name|default:'بدون نام' }}
+                            </span>
+                            <span class="d-flex gap-1">
+                                <span class="opacity-75">تلفن:</span>
+                                <span class="convert-digits">{{ obj.phone_number|default:'-' }}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="survey-body">
+                        <div class="d-flex flex-column">
+                            <div class="question-box">
+                                <span>کیفیت غذا: </span>
+                                <span>{{ obj.question1 }}</span>
+                            </div>
+                            <div class="question-box">
+                                <span>کیفیت خدمات: </span>
+                                <span>{{ obj.question2 }}</span>
+                            </div>
+                        </div>
+                        <div class="p-2 mt-3">
+                            <p>{{ obj.comment }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

@@ -246,6 +246,35 @@ a:hover {
   width: 60px;
 }
 
+/* Surveys list styles */
+.main-box {
+  padding: 2rem;
+}
+
+.survey-main {
+  min-height: 310px;
+  border-radius: 0.75rem;
+}
+
+.survey-main .survey-img {
+  padding: 1rem;
+}
+
+.survey-main .survey-img em {
+  font-size: 38px;
+}
+
+.survey-main .survey-body {
+  border-radius: 0.75rem;
+}
+
+.survey-body .question-box {
+  display: flex;
+  justify-content: space-between;
+  background-color: #cecece;
+  padding: 0.5rem 1rem 0.2rem 1rem;
+}
+
 @media (max-width: 320px) {
   .category-btn {
     min-width: 140px;

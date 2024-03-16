@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 17:26+0330\n"
+"POT-Creation-Date: 2024-03-16 19:20+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -159,8 +159,8 @@ msgstr "نام خانوادگی"
 #: .\apps\account\models.py:45 .\apps\course\models.py:67
 #: .\apps\course\models.py:132 .\apps\course\models.py:173
 #: .\apps\public\models.py:12 .\apps\public\models.py:34
-#: .\apps\restaurant\models.py:16 .\apps\restaurant\models.py:39
-#: .\apps\restaurant\models.py:171 .\apps\subscription\models.py:21
+#: .\apps\restaurant\models.py:17 .\apps\restaurant\models.py:40
+#: .\apps\restaurant\models.py:172 .\apps\subscription\models.py:21
 #: .\apps\subscription\models.py:42 .\apps\ticket\models.py:20
 msgid "Active"
 msgstr "فعال"
@@ -255,10 +255,8 @@ msgid "Password changed successfully"
 msgstr "گذرواژه با موفقیت تغییر کرد"
 
 #: .\apps\core\tasks.py:17 .\apps\notification\enums.py:8
-#, fuzzy
-#| msgid "Subscription type"
 msgid "Subscription end warning"
-msgstr "نوع اشتراک"
+msgstr "هشدار پایان اشتراک"
 
 #: .\apps\core\utils.py:59
 #, python-format
@@ -363,17 +361,17 @@ msgid "Instructors"
 msgstr "مدرسین"
 
 #: .\apps\course\models.py:50 .\apps\public\models.py:9
-#: .\apps\public\models.py:29 .\apps\restaurant\models.py:14
-#: .\apps\restaurant\models.py:38 .\apps\restaurant\models.py:57
-#: .\apps\restaurant\models.py:121 .\apps\restaurant\models.py:137
-#: .\apps\restaurant\models.py:154 .\apps\ticket\models.py:17
+#: .\apps\public\models.py:29 .\apps\restaurant\models.py:15
+#: .\apps\restaurant\models.py:39 .\apps\restaurant\models.py:58
+#: .\apps\restaurant\models.py:122 .\apps\restaurant\models.py:138
+#: .\apps\restaurant\models.py:155 .\apps\ticket\models.py:17
 msgid "Title"
 msgstr "عنوان"
 
 #: .\apps\course\models.py:50 .\apps\course\models.py:110
 #: .\apps\course\models.py:127 .\apps\public\models.py:29
-#: .\apps\restaurant\models.py:14 .\apps\restaurant\models.py:121
-#: .\apps\restaurant\models.py:137 .\apps\restaurant\models.py:154
+#: .\apps\restaurant\models.py:15 .\apps\restaurant\models.py:122
+#: .\apps\restaurant\models.py:138 .\apps\restaurant\models.py:155
 #: .\apps\ticket\models.py:17
 msgid "No title"
 msgstr "بدون عنوان"
@@ -407,7 +405,7 @@ msgstr "۲ ساعت و ۳۰ دقیقه"
 msgid "Payment type"
 msgstr "نوع پرداخت"
 
-#: .\apps\course\models.py:58 .\apps\restaurant\models.py:58
+#: .\apps\course\models.py:58 .\apps\restaurant\models.py:59
 #: .\apps\subscription\models.py:17
 msgid "Price"
 msgstr "قیمت"
@@ -429,7 +427,7 @@ msgid "Introduction image"
 msgstr "تصویر معرفی"
 
 #: .\apps\course\models.py:64 .\apps\public\models.py:11
-#: .\apps\restaurant\models.py:169
+#: .\apps\restaurant\models.py:170
 #: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
 msgid "Image"
 msgstr "تصویر کاور"
@@ -529,6 +527,44 @@ msgstr "دوره‌های کاربران"
 #: .\apps\customers\apps.py:8
 msgid "Customers"
 msgstr ""
+
+#: .\apps\customers\models.py:10 .\apps\restaurant\apps.py:8
+#: .\apps\restaurant\models.py:20 .\apps\restaurant\models.py:38
+#: .\apps\restaurant\models.py:121 .\apps\restaurant\models.py:137
+msgid "Restaurant"
+msgstr "رستوران"
+
+#: .\apps\customers\models.py:11
+msgid "Customer phone number"
+msgstr "شماره تلفن مشتری"
+
+#: .\apps\customers\models.py:12
+msgid "Customer name"
+msgstr "نام مشتری"
+
+#: .\apps\customers\models.py:13
+msgid "Customer comment"
+msgstr "کامنت مشتری"
+
+#: .\apps\customers\models.py:15
+msgid "Answer of question 1"
+msgstr "پاسخ سوال ۱"
+
+#: .\apps\customers\models.py:16
+msgid "Answer of question 2"
+msgstr "پاسخ سوال ۲"
+
+#: .\apps\customers\models.py:19
+msgid "Customer survey"
+msgstr "نظرسنجی مشتری"
+
+#: .\apps\customers\models.py:20
+msgid "Customers surveys"
+msgstr "نظرسنجی مشتریان"
+
+#: .\apps\customers\views.py:67
+msgid "Your rate has been successfully registered"
+msgstr "نظر شما با موفقیت ثبت گردید"
 
 #: .\apps\notification\apps.py:8 .\apps\notification\models.py:29
 msgid "Notification"
@@ -668,209 +704,207 @@ msgstr "کاهش وزن در خلال پخت"
 msgid "Computational ratios of yield"
 msgstr "نسبت های محاسباتی تست بازده"
 
-#: .\apps\restaurant\apps.py:8 .\apps\restaurant\models.py:19
-#: .\apps\restaurant\models.py:37 .\apps\restaurant\models.py:120
-#: .\apps\restaurant\models.py:136
-msgid "Restaurant"
-msgstr "رستوران"
-
 #: .\apps\restaurant\forms.py:19
 msgid "This category is already exists"
 msgstr "این دسته بندی وجود دارد"
 
-#: .\apps\restaurant\models.py:15
+#: .\apps\restaurant\models.py:14
+msgid "Code"
+msgstr ""
+
+#: .\apps\restaurant\models.py:16
 msgid "Services fee"
 msgstr "هزینه خدمات"
 
-#: .\apps\restaurant\models.py:20
+#: .\apps\restaurant\models.py:21
 msgid "Restaurants"
 msgstr "رستوران ها"
 
-#: .\apps\restaurant\models.py:38
+#: .\apps\restaurant\models.py:39
 msgid "Test category"
 msgstr "دسته تست"
 
-#: .\apps\restaurant\models.py:42
+#: .\apps\restaurant\models.py:43
 msgid "Raw materials category"
 msgstr "دسته بندی مواد اولیه"
 
-#: .\apps\restaurant\models.py:43
+#: .\apps\restaurant\models.py:44
 msgid "Raw materials categories"
 msgstr "دسته بندی‌های مواد اولیه"
 
-#: .\apps\restaurant\models.py:54 .\apps\restaurant\models.py:152
+#: .\apps\restaurant\models.py:55 .\apps\restaurant\models.py:153
 msgid "Category"
 msgstr "دسته"
 
-#: .\apps\restaurant\models.py:58
+#: .\apps\restaurant\models.py:59
 msgid "Per unit"
 msgstr "به ازای هر واحد"
 
-#: .\apps\restaurant\models.py:59
+#: .\apps\restaurant\models.py:60
 msgid "Use for"
 msgstr "استفاده برای"
 
-#: .\apps\restaurant\models.py:60
+#: .\apps\restaurant\models.py:61
 msgid "Standard quantity per raw press"
 msgstr "مقدار استاندارد در هر پرس خام"
 
-#: .\apps\restaurant\models.py:61
+#: .\apps\restaurant\models.py:62
 msgid "Standard quantity per baked press"
 msgstr "مقدار استاندارد در هر پرس پخته"
 
-#: .\apps\restaurant\models.py:62
+#: .\apps\restaurant\models.py:63
 msgid "Delivery weight"
 msgstr "وزن تحویلی"
 
-#: .\apps\restaurant\models.py:65
+#: .\apps\restaurant\models.py:66
 msgid "Weight loss due to cleaning(usable)"
 msgstr "وزن کاهش یافته در اثر تمیز کردن (قابل استفاده)"
 
-#: .\apps\restaurant\models.py:66
+#: .\apps\restaurant\models.py:67
 msgid "Weight loss due to cleaning(unusable)"
 msgstr "وزن کاهش یافته در اثر تمیز کردن (غیرقابل استفاده)"
 
-#: .\apps\restaurant\models.py:67
+#: .\apps\restaurant\models.py:68
 msgid "Edible cleaned weight"
 msgstr "وزن تمیز شده (قابل خوراک)"
 
-#: .\apps\restaurant\models.py:70
+#: .\apps\restaurant\models.py:71
 msgid "Weight loss due to baking"
 msgstr "کاهش وزن در خلال پخت"
 
-#: .\apps\restaurant\models.py:71
+#: .\apps\restaurant\models.py:72
 msgid "Salable weight(usable)"
 msgstr "وزن قابل فروش (قابل استفاده)"
 
-#: .\apps\restaurant\models.py:74
+#: .\apps\restaurant\models.py:75
 msgid "Cost of raw usable quantity"
 msgstr "هزینه مقدار قابل استفاده خام"
 
-#: .\apps\restaurant\models.py:75
+#: .\apps\restaurant\models.py:76
 msgid "Cost of baked usable quantity"
 msgstr "هزینه مقدار قابل استفاده پخته شده"
 
-#: .\apps\restaurant\models.py:76
+#: .\apps\restaurant\models.py:77
 msgid "Cost of raw usable quantity per press"
 msgstr "هزینه مقدار قابل استفاده خام در هر پرس"
 
-#: .\apps\restaurant\models.py:77
+#: .\apps\restaurant\models.py:78
 msgid "Cost of baked usable quantity per press"
 msgstr "هزینه مقدار قابل استفاده پخته شده در هر پرس"
 
-#: .\apps\restaurant\models.py:78
+#: .\apps\restaurant\models.py:79
 msgid "Number of raw use"
 msgstr "تعداد مورد استفاده خام"
 
-#: .\apps\restaurant\models.py:79
+#: .\apps\restaurant\models.py:80
 msgid "Number of baked use"
 msgstr "تعداد مورد استفاده پخته"
 
-#: .\apps\restaurant\models.py:82 .\apps\restaurant\models.py:236
+#: .\apps\restaurant\models.py:83 .\apps\restaurant\models.py:237
 msgid "Raw material"
 msgstr "ماده اولیه"
 
-#: .\apps\restaurant\models.py:83
+#: .\apps\restaurant\models.py:84
 msgid "Raw materials"
 msgstr "مواد اولیه"
 
-#: .\apps\restaurant\models.py:124
+#: .\apps\restaurant\models.py:125
 msgid "Food recipes category"
 msgstr "دسته رسپی غذا"
 
-#: .\apps\restaurant\models.py:125
+#: .\apps\restaurant\models.py:126
 msgid "Food recipes categories"
 msgstr "دسته بندی‌های رسپی غذا"
 
-#: .\apps\restaurant\models.py:140
+#: .\apps\restaurant\models.py:141
 msgid "Prepared material category"
 msgstr "دسته بندی آماده سازی‌‌ها"
 
-#: .\apps\restaurant\models.py:141
+#: .\apps\restaurant\models.py:142
 msgid "Prepared material categories"
 msgstr "دسته بندی‌های آماده سازی‌ها"
 
-#: .\apps\restaurant\models.py:153
+#: .\apps\restaurant\models.py:154
 msgid "Prepared category"
 msgstr "دسته ماده آماده شده"
 
-#: .\apps\restaurant\models.py:155
+#: .\apps\restaurant\models.py:156
 msgid "How to prepare"
 msgstr "طرز تهیه"
 
-#: .\apps\restaurant\models.py:157 .\apps\restaurant\models.py:239
+#: .\apps\restaurant\models.py:158 .\apps\restaurant\models.py:240
 msgid "Final price"
 msgstr "قیمت نهایی"
 
-#: .\apps\restaurant\models.py:158
+#: .\apps\restaurant\models.py:159
 msgid "Factor coefficient"
 msgstr "ضریب عامل"
 
-#: .\apps\restaurant\models.py:159
+#: .\apps\restaurant\models.py:160
 msgid "Services price"
 msgstr "هزینه خدمات"
 
-#: .\apps\restaurant\models.py:160
+#: .\apps\restaurant\models.py:161
 msgid "Final price with factor"
 msgstr "قیمت نهایی با ضریب"
 
-#: .\apps\restaurant\models.py:161
+#: .\apps\restaurant\models.py:162
 msgid "Menu price"
 msgstr "قیمت درج در منو"
 
-#: .\apps\restaurant\models.py:162
+#: .\apps\restaurant\models.py:163
 msgid "Item profit"
 msgstr "سود آیتم"
 
-#: .\apps\restaurant\models.py:163
+#: .\apps\restaurant\models.py:164
 msgid "Food cost"
 msgstr "فود کاست"
 
-#: .\apps\restaurant\models.py:164
+#: .\apps\restaurant\models.py:165
 msgid "Number sold"
 msgstr "تعداد فروخته شده"
 
-#: .\apps\restaurant\models.py:165
+#: .\apps\restaurant\models.py:166
 msgid "Total sales"
 msgstr "مجموع فروخته شده"
 
-#: .\apps\restaurant\models.py:166
+#: .\apps\restaurant\models.py:167
 msgid "Total cost"
 msgstr "مجموع هزینه‌ها"
 
-#: .\apps\restaurant\models.py:167
+#: .\apps\restaurant\models.py:168
 msgid "Total profit"
 msgstr "مجموع سود"
 
-#: .\apps\restaurant\models.py:170
+#: .\apps\restaurant\models.py:171
 msgid "Is material"
 msgstr "ماده است"
 
-#: .\apps\restaurant\models.py:174
+#: .\apps\restaurant\models.py:175
 msgid "Food recipe"
 msgstr "رسپی غذا"
 
-#: .\apps\restaurant\models.py:175
+#: .\apps\restaurant\models.py:176
 msgid "Food recipes"
 msgstr "رسپی‌های غذاها"
 
-#: .\apps\restaurant\models.py:235
+#: .\apps\restaurant\models.py:236
 msgid "Recipe"
 msgstr "رسپی"
 
-#: .\apps\restaurant\models.py:237
+#: .\apps\restaurant\models.py:238
 msgid "Prepared material"
 msgstr "ماده آماده شده"
 
-#: .\apps\restaurant\models.py:238
+#: .\apps\restaurant\models.py:239
 msgid "Amount"
 msgstr "مقدار"
 
-#: .\apps\restaurant\models.py:242
+#: .\apps\restaurant\models.py:243
 msgid "Recipe material"
 msgstr "ماده رسپی"
 
-#: .\apps\restaurant\models.py:243
+#: .\apps\restaurant\models.py:244
 msgid "Recipe materials"
 msgstr "مواد رسپی"
 
