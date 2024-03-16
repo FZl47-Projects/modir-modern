@@ -228,7 +228,7 @@ a:hover {
   column-gap: 30px;
   list-style-type: disc;
   margin-right: 14px;
-  height: 83%;
+  height: 80px;
 }
 
 .food-materials ul li {
@@ -292,7 +292,7 @@ a:hover {
   .food-item {
     display: flex;
     flex-direction: column;
-    max-height: 300px;
+    max-height: 320px;
   }
 
   .food-item .food-img {
