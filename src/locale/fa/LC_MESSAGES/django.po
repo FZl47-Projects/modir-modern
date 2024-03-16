@@ -526,7 +526,7 @@ msgstr "دوره‌های کاربران"
 
 #: .\apps\customers\apps.py:8
 msgid "Customers"
-msgstr ""
+msgstr "مشتریان"
 
 #: .\apps\customers\models.py:10 .\apps\restaurant\apps.py:8
 #: .\apps\restaurant\models.py:20 .\apps\restaurant\models.py:38
@@ -560,7 +560,7 @@ msgstr "نظرسنجی مشتری"
 
 #: .\apps\customers\models.py:20
 msgid "Customers surveys"
-msgstr "نظرسنجی مشتریان"
+msgstr "نظرسنجی‌های مشتریان"
 
 #: .\apps\customers\views.py:67
 msgid "Your rate has been successfully registered"

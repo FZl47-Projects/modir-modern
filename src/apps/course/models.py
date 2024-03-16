@@ -60,6 +60,7 @@ class Course(BaseModel):
     selling_price = models.PositiveBigIntegerField(_('Selling price'), default=0)
 
     introduction_video = models.FileField(_('Introduction video'), upload_to=introduction_video_path, null=True, blank=True)
+    introduction_video_link = models.URLField(_('Introduction video'), null=True, blank=True)
     introduction_image = models.ImageField(_('Introduction image'), upload_to=course_images_path, null=True, blank=True)
     cover_image = models.ImageField(_('Image'), upload_to=course_images_path, null=True, blank=True)
 
@@ -86,10 +87,6 @@ class Course(BaseModel):
     def get_thumbnail_url(self):
         if self.introduction_image:
             return self.introduction_image.url
-
-    def get_intro_video_url(self):
-        if self.introduction_video:
-            return self.introduction_video.url
 
     def get_episode_count(self):
         return self.episodes.filter(is_active=True).count() or 0

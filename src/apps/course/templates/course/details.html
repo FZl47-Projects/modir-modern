@@ -22,9 +22,9 @@
                 <div class="d-flex flex-column col-lg-9 col-12 main-box">
                     <!-- Start Course video -->
                     <div class="d-flex w-100 vid-box" id="courseVideoSection">
-                        {% if object.introduction_video %}
+                        {% if object.introduction_video_link %}
                             <video id="courseVideo" controls preload="metadata" poster="{{ object.get_thumbnail_url }}" class="w-100 rounded-3">
-                                <source src="{{ object.get_intro_video_url }}">
+                                <source src="{{ object.introduction_video_link }}">
                             </video>
                         {% elif object.introduction_image %}
                             <video id="courseVideo" class="w-100 rounded-3 d-none" controls>
