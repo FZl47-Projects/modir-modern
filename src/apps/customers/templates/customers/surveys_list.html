@@ -1,0 +1,33 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | نظرات مشتریان{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/digital-menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <header class="d-flex flex-column align-items-center gap-4">
+            <div class="rate-box">
+                <a href="{% url 'customers:services_list' %}?code={{ user.restaurants.pk }}" class="btn btn-danger" title="خروج">
+                    بازگشت
+                </a>
+            </div>
+
+            <img src="{{ user.profile.get_image_url }}" alt="Profile pic" class="header-img">
+            <h4 class="fw-semibold text-white">{{ user.profile.place_name }}</h4>
+        </header>
+        <hr class="text-white">
+
+        <div class="mt-5">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/digital-menu.js' %}"></script>
+{% endblock %}

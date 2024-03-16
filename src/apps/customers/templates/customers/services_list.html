@@ -12,9 +12,10 @@
     <!-- Start Rate Modal -->
     <div class="modal fade" tabindex="-1" id="rateModal" aria-labelledby="rateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <form method="POST" action="#" style="background-color: #2d2c2c;"
+            <form method="POST" action="{% url 'customers:add_survey' %}" style="background-color: #2d2c2c;"
                   class="modal-content text-white border-white border-1 rounded-3">
                 {% csrf_token %}
+                <input type="hidden" name="restaurant" value="{{ restaurant.pk }}">
                 <div class="modal-header">
                     <h5 class="modal-title fw-semibold h4">ثبت نظرسنجی</h5>
                     <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
@@ -22,78 +23,82 @@
                     </span>
                 </div>
                 <div class="modal-body">
-                    <div id="rateQuestion1" class="rate-page" style="display: block">
+                    <div id="rateQuestion1" class="rate-page">
                         <div class="d-flex flex-column form-group">
                             <label class="form-label" style="font-size: 15px;">
-                                کیفیت غذا چطور بود؟
+                                کیفیت غذاها چطور بود؟
                                 <span class="d-flex flex-column gap-3 mt-3">
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="food_quality" value="4" checked class="form-check-input">عالی
+                                        <input type="radio" name="question1" value="عالی" checked class="form-check-input">عالی
                                     </label>
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="food_quality" value="3" class="form-check-input">خوب
+                                        <input type="radio" name="question1" value="خوب" class="form-check-input">خوب
                                     </label>
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="food_quality" value="2" class="form-check-input">متوسط
+                                        <input type="radio" name="question1" value="متوسط" class="form-check-input">متوسط
                                     </label>
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="food_quality" value="1" class="form-check-input">بد
+                                        <input type="radio" name="question1" value="بد" class="form-check-input">بد
                                     </label>
                                 </span>
                             </label>
                         </div>
                         <div class="d-flex justify-content-between mt-3">
                             <div></div>
-                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(2)">بعدی</button>
+                            <button type="button" class="btn btn-light fw-semibold w-25" onclick="changeRatePage(2)">بعدی</button>
                         </div>
                     </div>
-                    <div id="rateQuestion2" class="rate-page" style="display: none;">
+                    <div id="rateQuestion2" class="rate-page">
                         <div class="d-flex flex-column form-group">
                             <label class="form-label" style="font-size: 15px;">
-                                کیفیت سرویس دهی چطور بود؟
+                                رفتار پرسنل و خدمات دهی چطور بود؟
                                 <span class="d-flex flex-column gap-3 mt-3">
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="service_quality" value="4" checked class="form-check-input">عالی
+                                        <input type="radio" name="question2" value="عالی" checked class="form-check-input">عالی
                                     </label>
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="service_quality" value="3" class="form-check-input">خوب
+                                        <input type="radio" name="question2" value="خوب" class="form-check-input">خوب
                                     </label>
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="service_quality" value="2" class="form-check-input">متوسط
+                                        <input type="radio" name="question2" value="متوسط" class="form-check-input">متوسط
                                     </label>
                                     <label class="d-flex gap-1">
-                                        <input type="radio" name="service_quality" value="1" class="form-check-input">بد
+                                        <input type="radio" name="question2" value="بد" class="form-check-input">بد
                                     </label>
                                 </span>
                             </label>
                         </div>
                         <div class="d-flex justify-content-between mt-3">
-                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(1)">
+                            <button type="button" class="btn btn-light fw-semibold w-25" onclick="changeRatePage(1)">
                                 قبلی
                             </button>
-                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(3)">
+                            <button type="button" class="btn btn-light fw-semibold w-25" onclick="changeRatePage(3)">
                                 بعدی
                             </button>
                         </div>
                     </div>
-                    <div id="rateQuestion3" class="rate-page" style="display: none;">
+                    <div id="rateQuestion3" class="rate-page">
                         <div class="d-flex flex-column form-group">
-                            <label class="form-label" style="font-size: 14px;">
-                                شماره تماس:
+                            <label class="form-label" style="font-size: 15px;">
+                                نام شما:
+                                <input type="text" name="name" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                            </label>
+                            <label class="form-label" style="font-size: 15px;">
+                                شماره موبایل:
                                 <input type="text" name="phone_number" class="form form-control mt-1" maxlength="11"
                                        style="background-color: #fafafa;" placeholder="۰۹۱۳۰۰۰۰۰۰۰" required>
                             </label>
-                            <label class="form-label" style="font-size: 14px;">
-                                شماره میز:
-                                <input type="number" name="table_number" class="form form-control mt-1"
-                                       style="background-color: #fafafa;" required>
+                            <label class="form-label mt-2" style="font-size: 15px;">
+                                اگر نظر دیگری دارید وارد کنید
+                                <textarea name="comment" class="form form-control mt-1" style="background-color: #fafafa;"></textarea>
                             </label>
                         </div>
                         <div class="d-flex justify-content-between mt-3">
-                            <button type="button" class="btn btn-light fw-semibold" onclick="changeRatePage(2)">
+                            <button type="button" class="btn btn-light fw-semibold w-25" onclick="changeRatePage(2)">
                                 قبلی
                             </button>
-                            <button type="submit" class="btn btn-success fw-semibold">
+                            <button type="submit" class="btn btn-success fw-semibold w-25">
                                 ثبت
                             </button>
                         </div>
@@ -117,7 +122,7 @@
         <hr class="text-white">
 
         <div class="mt-5">
-            <ul class="services d-flex flex-column align-items-center gap-4 me-3">
+            <ul class="services d-flex flex-column align-items-center gap-4 me-2">
                 <li class="list-item">
                     <a href="{% url 'customers:digital_menu' restaurant.pk %}" class="w-100 h-100">
                         <span>منو دیجیتال</span>
@@ -128,6 +133,13 @@
                         <span>ثبت نظرسنجی</span>
                     </a>
                 </li>
+                {% if user.is_authenticated and user.restaurants.pk == restaurant.pk %}
+                    <li class="list-item list-item-b">
+                        <a href="{% url 'customers:surveys_list' %}" class="w-100 h-100">
+                            <span>مشاهده نظرات</span>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

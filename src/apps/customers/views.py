@@ -1,6 +1,11 @@
 from django.views.generic import ListView, FormView, DetailView
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import reverse, get_object_or_404
+from django.utils.translation import gettext as _
+from django.contrib import messages
+
 from apps.restaurant.models import Restaurant, Recipe
+from .models import CustomerSurvey
+from . import forms
 
 
 # Render Customer ServicesList view
@@ -41,3 +46,31 @@ class DigitalMenuView(ListView):
         })
 
         return context
+
+
+# Add CustomerSurveys view
+class AddCustomerSurveysView(FormView):
+    template_name = 'customers/services_list.html'
+    form_class = forms.CustomerSurveyForm
+
+    def get_success_url(self):
+        restaurant = self.request.POST.get('restaurant')
+        if restaurant:
+            return reverse('customers:services_list') + f'?code={restaurant}'
+
+        referer_url = self.request.META.get('HTTP_REFERER')
+        return referer_url
+
+    def form_valid(self, form):
+        messages.success(self.request, _('Your rate has been successfully registered'))
+        return super().form_valid(form)
+
+
+# Render CustomersSurveysList view
+class CustomerSurveysListView(ListView):
+    template_name = 'customers/surveys_list.html'
+    model = CustomerSurvey
+
+    def get_queryset(self):
+        queryset = CustomerSurvey.objects.filter(restaurant__user=self.request.user).reverse()
+        return queryset

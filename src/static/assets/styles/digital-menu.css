@@ -42,8 +42,10 @@ html, body {
 }
 
 body {
-  background-color: #343434;
+  /*background-color: #343434;*/
+  background-image: url("../images/classy_fabric.png");
 }
+
 body::-webkit-scrollbar {
   height: 15px;
   width: 15px;
@@ -107,6 +109,13 @@ a:hover {
   box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
+.rate-page {
+  display: none;
+}
+.rate-page:first-child {
+  display: block;
+}
+
 .header-img {
   width: 200px;
   height: 200px;
@@ -124,6 +133,14 @@ a:hover {
   min-width: 280px;
   height: 70px;
   transition: all 0.3s;
+}
+
+.services .list-item-b {
+  min-width: auto;
+  height: auto;
+  padding: 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .services .list-item a {
