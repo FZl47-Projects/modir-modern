@@ -76,7 +76,9 @@
                         <div class="d-flex align-items-center gap-4">
                             <span>
                                 <span>میانگین سود هر آیتم: </span>
-                                <span class="me-1 convert-digits">{% each_item_profit_avg objects.total_total_profit objects.total_number_sold %}</span>
+                                <span class="me-1 convert-digits">
+                                    {% each_item_profit_avg objects.total_total_profit objects.total_number_sold %}
+                                </span>
                             </span>
                             <span>
                                 <span>درصد سهم هر آیتم: </span>
@@ -218,7 +220,7 @@
                                     </td>
 
                                     {# Add rating part with conclusion template tag #}
-                                    {% rate_item obj objects.total_number_sold objects.each_item_profit_avg each_item_percentage_share %}
+                                    {% rate_item obj objects.total_number_sold objects.total_total_profit each_item_percentage_share %}
                                     {# Add rating part with conclusion template tag #}
 
                                     <td class="print-obj">

@@ -6,10 +6,12 @@ register = template.Library()
 
 # Return rating of item
 @register.inclusion_tag(filename='restaurant/components/menu_engineering/row_cell.html')
-def rate_item(obj, total_sold=0, profit_avg=0, percentage_share=0):
+def rate_item(obj, total_sold=0, total_profit=0, percentage_share=0):
     sales_percentage = 0
+    profit_avg = 0
     if total_sold:
         sales_percentage = (obj.number_sold / total_sold) * 100
+        profit_avg = int(total_profit / total_sold)
 
     popularity_rate = 'H' if sales_percentage and percentage_share and sales_percentage >= percentage_share else 'L'
     profit_rate = 'H' if obj.item_profit and profit_avg and obj.item_profit >= profit_avg else 'L'
