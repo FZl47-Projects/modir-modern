@@ -304,4 +304,8 @@ a:hover {
     min-height: 110px;
     border-radius: 7px;
   }
+
+  .food-materials ul {
+    height: 100px;
+  }
 }

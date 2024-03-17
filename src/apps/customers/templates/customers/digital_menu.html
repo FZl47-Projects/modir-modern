@@ -38,17 +38,17 @@
                             <h5 class="fw-semibold">{{ obj.title }}</h5>
 
                             <div class="food-materials">
-                                <ul>
-                                    {% for item in obj.get_materials %}
-                                        <li>
-                                            <small>{{ item.get_material_title }}</small>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+{#                                <ul>#}
+{#                                    {% for item in obj.get_materials %}#}
+{#                                        <li>#}
+{#                                            <small>{{ item.get_material_title }}</small>#}
+{#                                        </li>#}
+{#                                    {% endfor %}#}
+{#                                </ul>#}
                             </div>
                         </div>
                         <div class="d-flex align-items-end text-white">
-                            <span class="fw-semibold convert-digits">
+                            <span class="fw-semibold convert-digits mt-md-0 mt-5">
                                 {{ obj.menu_price|intcomma }}
                                 <small>تومان</small>
                             </span>
