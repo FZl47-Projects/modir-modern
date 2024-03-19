@@ -1,6 +1,6 @@
 from django.utils.translation import gettext as _
 from django.db import models
-
+from os.path import splitext
 from apps.core.models import BaseModel
 
 
@@ -43,3 +43,9 @@ class IndexVideo(BaseModel):
     def get_cover_url(self):
         if self.cover:
             return self.cover.url
+
+    @property
+    def is_video(self):
+        name, extension = splitext(self.video_url)
+        if extension in ['.mp4', 'm4v', '.mkv']:
+            return True

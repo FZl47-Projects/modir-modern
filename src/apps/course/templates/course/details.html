@@ -148,6 +148,7 @@
                                                     <span class="mt-1">{{ episode.title }}</span>
                                                     <div class="d-flex gap-1">
                                                         {% if episode.is_video %}
+                                                            <a href="{{ episode.file_url }}" download class="bi bi-download btn btn-sm btn-primary"></a>
                                                             <button type="button" data-url="{{ episode.file_url }}" onclick="setVidUrl(this)"
                                                                     class="btn btn-sm btn-success">مشاهده
                                                             </button>
