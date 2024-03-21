@@ -46,4 +46,5 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'TRACKING_CODE_LENGTH': 16,  # Optional
    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader',  # Optional
    'IS_SAFE_GET_GATEWAY_PAYMENT': True,
+   'BANK_PRIORITIES': ['ZARINPAL']
 }
