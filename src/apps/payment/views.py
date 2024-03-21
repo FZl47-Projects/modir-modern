@@ -36,7 +36,7 @@ class CreateBankGatewayView(LoginRequiredMixin, View):
             context = bank.get_gateway()
             return render(request, 'payment/redirect_to_bank.html', context=context)
 
-        except (AZBankGatewaysException, TimeoutError):
+        except AZBankGatewaysException as e:
             messages.error(request, _('There was a problem connecting to the bank gateway. Please try again'))
             return redirect(referer_url) if referer_url else redirect('public:index')
 
