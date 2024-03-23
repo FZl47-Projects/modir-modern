@@ -26,9 +26,9 @@ class DigitalMenuView(ListView):
     def filter(self, restaurant, objects):
         category = self.request.GET.get('category')
         if category:
-            objects = objects.filter(category__title=category)
+            objects = objects.filter(category__title=category, is_material=False)
         else:
-            objects = objects.filter(category=restaurant.recipes_categories.first())
+            objects = objects.filter(category=restaurant.recipes_categories.first(), is_material=False)
 
         return objects
 

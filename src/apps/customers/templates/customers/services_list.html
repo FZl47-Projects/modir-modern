@@ -112,9 +112,15 @@
     <div class="container">
         <header class="d-flex flex-column align-items-center gap-4">
             <div class="rate-box">
-                <a role="button" data-bs-toggle="modal" data-bs-target="#rateModal" class="rate-btn" title="نظرسنجی">
-                    <em class="bi bi-star-fill text-white"></em>
-                </a>
+                {% if user.is_authenticated and user.restaurants.pk == restaurant.pk %}
+                    <a href="{% url 'account:profile_details' %}" class="btn btn-danger" title="خروج">
+                        بازگشت
+                    </a>
+                {% else %}
+                    <a role="button" data-bs-toggle="modal" data-bs-target="#rateModal" class="rate-btn" title="نظرسنجی">
+                        <em class="bi bi-star-fill text-white"></em>
+                    </a>
+                {% endif %}
             </div>
             <img src="{{ object.user.profile.get_image_url }}" alt="Profile pic" class="header-img">
             <h4 class="fw-semibold text-white">{{ object.title }}</h4>
