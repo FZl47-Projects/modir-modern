@@ -142,7 +142,7 @@ class Episode(BaseModel):
     @property
     def is_video(self):
         name, extension = splitext(self.file_url)
-        if extension in ['.mp4', 'm4v', '.mkv']:
+        if extension in ['.mp4', '.m4v', '.mkv']:
             return True
 
 

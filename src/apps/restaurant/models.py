@@ -33,6 +33,9 @@ class Restaurant(BaseModel):
         return self.prepared_material_categories.all()
 
 
+# ----------------------------------------------------------------------
+
+
 # RawMaterialCategories model
 class RawMaterialCategory(BaseModel):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='raw_material_categories', verbose_name=_('Restaurant'))
