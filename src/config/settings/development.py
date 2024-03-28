@@ -1,5 +1,5 @@
 from .base import BASE_DIR
-from os import getenv
+import os
 
 
 # Database
@@ -8,7 +8,7 @@ from os import getenv
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': getenv('SQLITE_PATH', BASE_DIR / 'db.sqlite3'),
+        'NAME': os.getenv('SQLITE_PATH', BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -16,9 +16,9 @@ DATABASES = {
 # Django-q config
 Q_CLUSTER = {
     'name': 'django-q',
-    'workers': int(getenv('Q_CLUSTER_WORKERS', 4)),
-    'recycle': int(getenv('Q_CLUSTER_RECYCLE', 500)),
-    'timeout': int(getenv('Q_CLUSTER_TIMEOUT', 60)),
+    'workers': int(os.getenv('Q_CLUSTER_WORKERS', 4)),
+    'recycle': int(os.getenv('Q_CLUSTER_RECYCLE', 500)),
+    'timeout': int(os.getenv('Q_CLUSTER_TIMEOUT', 60)),
     'compress': True,
     'queue_limit': 500,
     'orm': 'default',
