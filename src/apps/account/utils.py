@@ -17,7 +17,7 @@ def get_raw_phone_number(number):
 
 # Check phone number format(IR)
 def check_phone_number(number):
-    mobile_regex = "^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$"
+    mobile_regex = "^09([0-9]{2}|[0-9]{3})-?[0-9]{3}-?[0-9]{4}$"
     if number and re.search(mobile_regex, number):
         return True
 

@@ -68,7 +68,7 @@
                                 <form method="POST" action="{% url 'course:purchase_course' %}" class="d-flex">
                                     {% csrf_token %}
                                     <input type="hidden" name="pk" value="{{ object.pk }}">
-                                    <button type="submit" class="btn btn-success fw-semibold px-md-5">خرید دوره</button>
+                                    <button type="submit" class="btn btn-success fw-semibold px-md-5" onclick="togglePageLoading('در انقال به درگاه پرداخت، لطفا صبور باشید')">خرید دوره</button>
                                 </form>
                             {% endif %}
                         </div>

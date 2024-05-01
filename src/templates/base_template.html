@@ -11,34 +11,112 @@
 
     {% block extrahead %}
     {% endblock %}
+
+    <style>
+        #page-loading {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(4px);
+            text-align: center;
+            padding: 100px;
+            z-index: 99999999;
+            display: none;
+        }
+
+        #page-loading .loading-content {
+            display: block;
+            position: relative;
+            text-align: center;
+            background: #fff;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 10px 10px #1f1f1f;
+        }
+
+        #page-loading p {
+            margin: 0;
+            font-size: 19px;
+        }
+
+        #page-loading.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            vertical-align: center;
+        }
+
+        .loader {
+            margin-top: 50px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-block;
+            border-top: 4px solid #18e774;
+            border-right: 4px solid transparent;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        .loader::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border-bottom: 4px solid #FF3D00;
+            border-left: 4px solid transparent;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
 </head>
 
 <body dir="rtl" class="{% block body_class %}{% endblock %}">
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 
-    <!-- Scripts -->
-    <script src="{% static 'vendors/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/base.js' %}"></script>
-    <script src="{% static 'vendors/swiper.js' %}"></script>
-    <script src="{% static 'vendors/sweetalert2.all.min.js' %}"></script>
-    <script src="{% static 'vendors/sweetalert-base.js' %}"></script>
-    <script src="{% static 'vendors/jquery_3.7.0.min.js' %}"></script>
-    <script src="{% static 'vendors/select2.min.js' %}"></script>
-    <script src="{% static 'vendors/persian-date.js' %}"></script>
-    <script src="{% static 'vendors/persian-datepicker.js' %}"></script>
+<!-- Scripts -->
+<script src="{% static 'vendors/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/base.js' %}"></script>
+<script src="{% static 'vendors/swiper.js' %}"></script>
+<script src="{% static 'vendors/sweetalert2.all.min.js' %}"></script>
+<script src="{% static 'vendors/sweetalert-base.js' %}"></script>
+<script src="{% static 'vendors/jquery_3.7.0.min.js' %}"></script>
+<script src="{% static 'vendors/select2.min.js' %}"></script>
+<script src="{% static 'vendors/persian-date.js' %}"></script>
+<script src="{% static 'vendors/persian-datepicker.js' %}"></script>
 
-    <!-- Create notify for messages -->
-    <script>
-        {% for message in messages %}
-            Toast.fire({
-                icon: '{{ message.tags }}',
-                title: `{{ message }}`,
-            })
-        {% endfor %}
-    </script>
-    <!-- Extra js -->
-    {% block scripts %}
-    {% endblock %}
+<!-- Create notify for messages -->
+<script>
+    {% for message in messages %}
+        Toast.fire({
+            icon: '{{ message.tags }}',
+            title: `{{ message }}`,
+        })
+    {% endfor %}
+</script>
+<!-- Extra js -->
+{% block scripts %}
+{% endblock %}
+<div id="page-loading">
+    <div class="loading-content">
+        <p class="loading-title"></p>
+        <span class="loader"></span>
+    </div>
+</div>
 </body>
 </html>

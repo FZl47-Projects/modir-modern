@@ -162,3 +162,10 @@ document.querySelectorAll('.click-full-size').forEach(function (el) {
         this.requestFullscreen();
     })
 })
+
+
+function togglePageLoading(title) {
+    let loading = document.getElementById('page-loading')
+    loading.querySelector('.loading-title').innerHTML = title
+    loading.classList.toggle('active')
+}
