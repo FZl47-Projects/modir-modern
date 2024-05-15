@@ -75,6 +75,13 @@ class AddRecipeMaterialForm(forms.ModelForm):
         fields = ('recipe', 'raw_material', 'prepared_material', 'amount')
 
 
+# UpdateRecipeMaterialForm form
+class UpdateRecipeMaterialForm(forms.ModelForm):
+    class Meta:
+        model = RecipeMaterial
+        fields = ('amount',)
+
+
 # -----------------------------------------
 
 # Add PreparedMaterialCategory form

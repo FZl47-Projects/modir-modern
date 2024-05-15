@@ -13,8 +13,20 @@ class NotificationUser:
         pattern = '4qkv8ckgt5332k6'
         send_sms(phone_number, pattern, days=notification.kwargs['days'])
 
+    @classmethod
+    def new_ticket_created(cls, notification, phone_number):
+        pattern = '1tqgkyl63l31fr6'
+        send_sms(phone_number, pattern, user_name=notification.to_user.get_full_name())
+
+    @classmethod
+    def new_ticket_created_admin(cls, notification, phone_number):
+        pattern = 'r1ls00hm3euo09o'  # TODO: must be completed
+        send_sms(phone_number, pattern, user_name=notification.to_user.get_full_name())
+
 
 NOTIFICATION_USER_HANDLERS = {
     'MOBILE_VERIFICATION_CODE': NotificationUser.mobile_verification_code_handler,
     'SUBSCRIPTION_END_WARNING': NotificationUser.subscription_end_warning,
+    'NEW_TICKET_CREATED': NotificationUser.new_ticket_created,
+    'NEW_TICKET_CREATED_ADMIN': NotificationUser.new_ticket_created_admin,
 }

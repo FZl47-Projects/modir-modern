@@ -23,6 +23,7 @@ urlpatterns = [
     path('recipes/<int:pk>/', recipes.RecipeDetailsView.as_view(), name='recipe_details'),
     path('recipes/<int:pk>/edit/', recipes.EditRecipeView.as_view(), name='edit_recipe'),
     path('recipes/material/add/', recipes.AddRecipeMaterialsView.as_view(), name='add_recipe_materials'),
+    path('recipes/material/<int:pk>/edit/', recipes.EditRecipeMaterialsView.as_view(), name='edit_recipe_materials'),
     path('recipes/<int:pk>/material/delete/', recipes.DeleteRecipeMaterialView.as_view(), name='delete_recipe_material'),
     path('recipes/<int:pk>/get-price/', recipes.GetRecipeFinalPriceView.as_view(), name='get_recipe_final_price'),
 
@@ -34,6 +35,7 @@ urlpatterns = [
     path('preparations/<int:pk>/', preparations.PreparationDetailsView.as_view(), name='preparation_details'),
     path('preparations/<int:pk>/edit', preparations.EditPreparationView.as_view(), name='edit_preparation'),
     path('preparations/material/add/', preparations.AddPreparationMaterialsView.as_view(), name='add_preparation_materials'),
+    path('preparations/material/<int:pk>/edit/', preparations.EditPreparationMaterialsView.as_view(), name='edit_preparation_materials'),
     path('preparatoins/<int:pk>/material/delete/', preparations.DeletePreparationMaterialView.as_view(), name='delete_preparation_material'),
     path('preparations/<int:pk>/get-price/', preparations.GetPreparationFinalPriceView.as_view(), name='get_preparation_final_price'),
 

@@ -72,6 +72,7 @@ class AddRecipesCategoryView(SubscriptionRequiredMixin, FormView):
 # Delete RecipeCategory view
 class DeleteRecipeCategoryView(SubscriptionRequiredMixin, View):
     """ Delete recipe categories based on given title. """
+
     def post(self, request):
         title = request.POST.get('title')
 
@@ -114,6 +115,7 @@ class AddRecipeView(SubscriptionRequiredMixin, FormView):
 # Delete Recipe view
 class DeleteRecipeView(SubscriptionRequiredMixin, View):
     """ Delete recipes based on given pk """
+
     def post(self, request):
         pk = self.request.POST.get('pk')
         obj = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=pk)
@@ -198,9 +200,25 @@ class AddRecipeMaterialsView(SubscriptionRequiredMixin, View):
         return redirect(reverse('restaurant:recipe_details', args=[request.POST.get('pk')]))
 
 
+# Edit RecipeMaterials view
+class EditRecipeMaterialsView(SubscriptionRequiredMixin, View):
+    """ Edit recipe materials one by one with django form. """
+
+    def post(self, request, pk):
+        recipe_material = get_object_or_404(RecipeMaterial, recipe__category__restaurant__user=request.user, pk=pk)
+        form = forms.UpdateRecipeMaterialForm(data=request.POST, instance=recipe_material)
+        if not form.is_valid():
+            messages.error(request, _('Please enter field correctly'))
+            return redirect(reverse('restaurant:recipe_details', args=[request.POST.get('pk')]))
+        form.save()
+        messages.success(request, _('Material updated successfully'))
+        return redirect(reverse('restaurant:recipe_details', args=[request.POST.get('pk')]))
+
+
 # Delete RecipeMaterial view
 class DeleteRecipeMaterialView(SubscriptionRequiredMixin, View):
     """ Delete raw_material from recipe based on given ID. """
+
     def post(self, request, pk):
         material_id = request.POST.get('id')
         recipe = get_object_or_404(Recipe, category__restaurant__user=request.user, pk=pk)

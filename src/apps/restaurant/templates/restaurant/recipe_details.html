@@ -32,7 +32,8 @@
                         <div class="text-white pt-1">
                             <label class="d-flex align-items-end gap-2 form-label">
                                 <span>عنوان: </span>
-                                <input type="text" name="title" class="form-control form-control-sm s-input" value="{{ object.title }}">
+                                <input type="text" name="title" class="form-control form-control-sm s-input"
+                                       value="{{ object.title }}">
                             </label>
                         </div>
                         <div class="text-white pt-1">
@@ -40,7 +41,8 @@
                                 <span>دسته: </span>
                                 <select name="category" class="form-select form-select-sm s-input">
                                     {% for obj in restaurant.get_recipes_categories %}
-                                        <option value="{{ obj.id }}" {% if obj.title == object.category.title %}selected{% endif %}>{{ obj.title }}</option>
+                                        <option value="{{ obj.id }}"
+                                                {% if obj.title == object.category.title %}selected{% endif %}>{{ obj.title }}</option>
                                     {% endfor %}
                                 </select>
                             </label>
@@ -71,47 +73,51 @@
                             <span class="convert-digits me-1">{{ object.calc_final_price|intcomma }}</span>
                         </caption>
                         <thead class="text-center">
-                            <tr class="bg-head">
-                                <th>#</th>
-                                <th>عنوان</th>
-                                <th class="text-nowrap">
-                                    <span>مقدار</span>
-                                    <small>(Kg/Num)</small>
-                                </th>
-                                <th class="text-nowrap">
-                                    <span>قیمت</span>
-                                    <small>(به ازای هر واحد)</small>
-                                </th>
-                                <th class="text-nowrap">قیمت نهایی</th>
-                                <th>عملیات</th>
-                            </tr>
+                        <tr class="bg-head">
+                            <th>#</th>
+                            <th>عنوان</th>
+                            <th class="text-nowrap">
+                                <span>مقدار</span>
+                                <small>(Kg/Num)</small>
+                            </th>
+                            <th class="text-nowrap">
+                                <span>قیمت</span>
+                                <small>(به ازای هر واحد)</small>
+                            </th>
+                            <th class="text-nowrap">قیمت نهایی</th>
+                            <th>عملیات</th>
+                        </tr>
                         </thead>
                         <tbody class="text-center table-light">
-                            {% for obj in object.get_materials %}
-                                <tr>
-                                    <td class="convert-digits">{{ forloop.counter }}</td>
-                                    <td>
+                        {% for obj in object.get_materials %}
+                            <tr>
+                                <td class="convert-digits">{{ forloop.counter }}</td>
+                                <td>
                                         <span class="text-nowrap">
                                             {{ obj.get_material_title }}
                                         </span>
-                                    </td>
-                                    <td class="convert-digits">{{ obj.amount }}</td>
-                                    <td>
-                                        <span class="convert-digits">{{ obj.get_base_price|intcomma }}</span>
-                                        <small>ت</small>
-                                    </td>
-                                    <td class="convert-digits">
-                                        <span class="convert-digits">{{ obj.final_price|intcomma }}</span>
-                                        <small>ت</small>
-                                    </td>
-                                    <td>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteMaterial"
-                                                data-id="{{ obj.id }}" data-title="{{ obj.get_material_title }}"
-                                                class="bi bi-trash3 btn btn-sm btn-danger pt-1 pb-0">
-                                        </button>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                                </td>
+                                <td class="convert-digits">{{ obj.amount }}</td>
+                                <td>
+                                    <span class="convert-digits">{{ obj.get_base_price|intcomma }}</span>
+                                    <small>ت</small>
+                                </td>
+                                <td class="convert-digits">
+                                    <span class="convert-digits">{{ obj.final_price|intcomma }}</span>
+                                    <small>ت</small>
+                                </td>
+                                <td>
+                                    <button type="button" data-bs-toggle="modal"
+                                            data-bs-target="#updateMaterial-{{ obj.id }}"
+                                            class="bi bi-pencil btn btn-sm btn-success ed-btn pt-1 pb-0">
+                                    </button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleteMaterial"
+                                            data-id="{{ obj.id }}" data-title="{{ obj.get_material_title }}"
+                                            class="bi bi-trash3 btn btn-sm btn-danger pt-1 pb-0">
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -133,6 +139,42 @@
             </form>
         </main>
     </div>
+
+    {# modals #}
+    {% for material in object.get_materials %}
+        <div class="modal fade" tabindex="-1" id="updateMaterial-{{ material.id }}" aria-labelledby="updateMaterialsLabel" >
+            <div class="modal-dialog w-100">
+                <form method="POST" action="{% url 'restaurant:edit_recipe_materials' pk=material.pk %}"
+                      class="modal-content bg-modal text-white border-white border-1 rounded-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="pk" value="{{ material.pk }}">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-semibold h4">فرم ویرایش ماده افزوده</h5>
+                        <span role="button" class="bi bi-x-lg mt-1 ms-1" data-bs-dismiss="modal" aria-label="Close"
+                              style="-webkit-text-stroke: 0.5pt;"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div id="materialsSection">
+                            <div class="d-flex align-items-end gap-1 border-bottom border-1 border-light mt-1 mb-4 form-child">
+                                <div class="d-flex flex-wrap gap-2 flex-grow-1 form-group">
+                                    <label class="form-label fs-13 flex-grow-1">
+                                        مقدار (کیلوگرم/عدد)
+                                        <input type="number" name="amount" step="any" required
+                                               class="form form-control f-input mt-1" value="{{ material.amount }}">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="submit" class="btn btn-success fw-semibold w-100">ویرایش</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+
+
 {% endblock %}
 
 {% block scripts %}

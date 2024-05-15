@@ -42,7 +42,7 @@ class CreateBankGatewayView(LoginRequiredMixin, View):
 
 
 # Render CallBackSuccess view
-class CallBackSuccessView(OrderRequiredMixin, TemplateView):
+class CallBackSuccessView(TemplateView):
     template_name = 'payment/callback_success.html'
 
 

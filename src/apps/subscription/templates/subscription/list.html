@@ -48,13 +48,15 @@
                                 </span>
                                 <small>تومان</small>
                             </span>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#confirmPurchaseModal" title="خرید اشتراک"
-                                    data-primarykey="{{ obj.pk }}" data-title="{{ obj.get_type_label }}" class="w-100 btn btn-danger mt-1">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#confirmPurchaseModal"
+                                    title="خرید اشتراک"
+                                    data-primarykey="{{ obj.pk }}" data-price="{{ obj.selling_price }}"
+                                    data-title="{{ obj.get_type_label }}" class="w-100 btn btn-danger mt-1">
                                 خرید اشتراک
                             </button>
                         </div>
                     </div>
-                {% empty %}
+                    {% empty %}
                     <div class="w-100 d-flex justify-content-center">
                         <span class="fw-bold text-danger h4">اشتراکی یافت نشد</span>
                     </div>
@@ -66,6 +68,9 @@
 {% endblock %}
 
 {% block scripts %}
+    <script>
+        const _URL_FORM_FREE_SUBS_FREE = '{% url 'subscription:add_free_subscription' %}'
+    </script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script>
         // ---------------------------- Add data to request modal -------------------------- //
@@ -73,10 +78,15 @@
             let button = $(event.relatedTarget);
             let primaryKey = button.data('primarykey');
             let title = button.data('title')
+            let price = parseInt(button.data('price'))
 
             let modal = $(this);
             modal.find('.modal-body #subscriptionId').val(primaryKey);
             modal.find('.modal-body #subscriptionTitle').text(`${title}`);
+            if (price < 1) {
+                modal.find('form').attr('action', _URL_FORM_FREE_SUBS_FREE);
+            }
+
         })
         // ------------------------- Add data to request  modal -------------------------- //
     </script>

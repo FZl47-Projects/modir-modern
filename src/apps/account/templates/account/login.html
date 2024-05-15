@@ -34,7 +34,16 @@
                             <div class="title-content-form">اصول رستوران داری</div>
 
                             <div class="forms mt-2">
+
                                 <form method="POST" action="{% url 'account:login' %}" class="form form-login">
+                                    <div class="d-flex justify-content-center align-items-center py-3 form-text-2 mb-4">
+                                        <a href="{% url 'account:register' %}" class="hover-text" style="font-size: 20px">
+                                            برای ثبت نام
+                                            <b class="text-info">اینجا</b>
+                                            کلیک کنید
+                                        </a>
+                                        <span style="font-size: 18px">هنوز ثبت نام نکرده اید؟</span>
+                                    </div>
                                     {% csrf_token %}
                                     <h4 class="title">ورود</h4>
                                     <div>
@@ -62,11 +71,6 @@
 
                                     <div class="d-flex justify-content-center align-items-center py-3 form-text-1">
                                         <a href="{% url 'account:get_phone_number' %}">رمز عبورم را فراموش کردم</a>
-                                    </div>
-
-                                    <div class="d-flex justify-content-center align-items-center py-3 form-text-2">
-                                        <a href="{% url 'account:register' %}" class="hover-text">همین حالا ثبت نام کنید</a>
-                                        <span>هنوز ثبت نام نکرده اید؟</span>
                                     </div>
                                 </form>
                             </div>

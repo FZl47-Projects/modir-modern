@@ -84,3 +84,20 @@ class AddSubscriptionView(LoginRequiredMixin, View):
         order.save()
 
         return redirect('payment:callback_success')
+
+
+# Add Subscription Free view
+class AddSubscriptionFreeView(LoginRequiredMixin, View):
+
+    def post(self, request):
+        try:
+            subscription_id = request.POST['pk']
+            subscription = Subscription.objects.get(id=subscription_id)
+        except (Subscription.DoesNotExist, KeyError):
+            raise Http404
+
+        # Get user Subscription and add time to it
+        subscribe, created = Subscriber.objects.get_or_create(user=request.user)
+        subscribe.add_time(subscription)
+
+        return redirect('payment:callback_success')

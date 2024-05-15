@@ -1,9 +1,10 @@
 from django.utils.translation import gettext as _
-from django.db.models import IntegerChoices
+from django.db.models import TextChoices
 
 
 # SubscriptionTypes Enum
-class SubscriptionTypesEnum(IntegerChoices):
+class SubscriptionTypesEnum(TextChoices):
+    ONE_WEEK = (1 / 4), _('One week')
     ONE = 1, _('One month')
     TWO = 2, _('Two months')
     THREE = 3, _('Three months')

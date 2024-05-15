@@ -65,6 +65,7 @@ class AddPreparationCategoryView(SubscriptionRequiredMixin, FormView):
 # Delete PreparationCategory view
 class DeletePreparationCategoryView(SubscriptionRequiredMixin, View):
     """ Delete prepared material categories based on given title. """
+
     def post(self, request):
         title = request.POST.get('title')
 
@@ -108,6 +109,7 @@ class AddPreparationView(SubscriptionRequiredMixin, FormView):
 # Delete Preparation view
 class DeletePreparationView(SubscriptionRequiredMixin, View):
     """ Delete material preparation based on given pk """
+
     def post(self, request):
         pk = self.request.POST.get('pk')
         obj = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=pk, is_material=True)
@@ -166,7 +168,8 @@ class AddPreparationMaterialsView(SubscriptionRequiredMixin, View):
 
     def post(self, request):
         post = request.POST.copy()
-        recipe = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=post.get('pk'), is_material=True)
+        recipe = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=post.get('pk'),
+                                   is_material=True)
 
         try:
             materials = post.getlist('raw_material', [])
@@ -187,9 +190,24 @@ class AddPreparationMaterialsView(SubscriptionRequiredMixin, View):
         return redirect('restaurant:preparation_details', request.POST.get('pk'))
 
 
+# Edit PreparationMaterials view
+class EditPreparationMaterialsView(SubscriptionRequiredMixin, View):
+    """ Edit preparation materials one by one with django form """
+    def post(self, request, pk):
+        recipe_material = get_object_or_404(RecipeMaterial, recipe__prepared_category__restaurant__user=request.user, pk=pk)
+        form = forms.UpdateRecipeMaterialForm(data=request.POST, instance=recipe_material)
+        if not form.is_valid():
+            messages.error(request, _('Please enter field correctly'))
+            return redirect('restaurant:preparation_details', request.POST.get('pk'))
+        form.save()
+        messages.success(request, _('Material updated successfully'))
+        return redirect('restaurant:preparation_details', request.POST.get('pk'))
+
+
 # Delete PreparationMaterial view
 class DeletePreparationMaterialView(SubscriptionRequiredMixin, View):
     """ Delete raw_material from preparation based on given ID. """
+
     def post(self, request, pk):
         material_id = request.POST.get('id')
         recipe = get_object_or_404(Recipe, prepared_category__restaurant__user=request.user, pk=pk)

@@ -13,7 +13,7 @@ User = get_user_model()
 class Subscription(BaseModel):
     Types = SubscriptionTypesEnum
 
-    type = models.SmallIntegerField(_('Subscription type'), choices=Types.choices, unique=True)
+    type = models.CharField(_('Subscription type'), choices=Types.choices, unique=True, max_length=6)
     price = models.PositiveIntegerField(_('Price'), default=0)
     discount = models.PositiveIntegerField(_('Discount'), default=0)
     selling_price = models.PositiveIntegerField(_('Selling price'), default=0)
@@ -51,9 +51,9 @@ class Subscriber(BaseModel):
 
     def add_time(self, subscription: Subscription):
         if self.is_active and self.expire_date:
-            self.expire_date += timedelta(days=subscription.type * 30)
+            self.expire_date += timedelta(days=float(subscription.type) * 30)
         else:
-            self.expire_date = datetime.now() + timedelta(days=subscription.type * 30)
+            self.expire_date = datetime.now() + timedelta(days=float(subscription.type) * 30)
             self.is_active = True
 
         self.save()
