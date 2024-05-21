@@ -16,7 +16,8 @@ from secrets import token_hex
 class Access(models.Model):
     ACCESSES = UserAccessEnum
 
-    title = models.CharField(_('Access title'), max_length=32, choices=ACCESSES.choices, default=ACCESSES.USER, unique=True)
+    title = models.CharField(_('Access title'), max_length=32, choices=ACCESSES.choices, default=ACCESSES.USER,
+                             unique=True)
     created_at = models.DateTimeField(_('Creation time'), auto_now_add=True)
 
     object = AccessManager()
@@ -45,6 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_("Active"), default=True)
     is_admin = models.BooleanField(_("Admin"), default=False)
     is_verified = models.BooleanField(_('Verify'), default=False)
+    is_used_free_subs = models.BooleanField(default=False)
 
     # Secret token
     token = models.CharField(_("Secret token"), max_length=64, null=True, blank=True, editable=False)
@@ -127,7 +129,8 @@ class UserProfile(BaseModel):
     GENDERS = UserGenderEnum
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name=_('User'))
-    melli_code = models.CharField(_('Melli code'), max_length=10, validators=[validate_didit_type], null=True, blank=True)
+    melli_code = models.CharField(_('Melli code'), max_length=10, validators=[validate_didit_type], null=True,
+                                  blank=True)
     gender = models.CharField(_('Gender'), max_length=8, choices=GENDERS.choices, null=True, blank=True)
     date_of_birth = models.DateField(_('Date of birth'), null=True, blank=True)
     place_name = models.CharField(_('Place name'), max_length=128, null=True, blank=True)

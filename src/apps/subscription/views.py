@@ -15,7 +15,14 @@ from .models import Subscription, Subscriber
 class SubscriptionListView(LoginRequiredMixin, ListView):
     template_name = 'subscription/list.html'
     model = Subscription
-    queryset = Subscription.objects.filter(is_active=True)
+
+    def get_queryset(self):
+        queryset = Subscription.objects.filter(is_active=True)
+        # check user is used free subs or not
+        user = self.request.user
+        if user.is_used_free_subs:
+            queryset = queryset.exclude(price=0)
+        return queryset
 
 
 # Create SubscriptionOrder view
@@ -90,6 +97,13 @@ class AddSubscriptionView(LoginRequiredMixin, View):
 class AddSubscriptionFreeView(LoginRequiredMixin, View):
 
     def post(self, request):
+
+        # check user is used free subs or not
+        user = request.user
+        if user.is_used_free_subs:
+            messages.error(request, _('You have once used the free subscription.'))
+            return redirect(self.request.META.get('HTTP_REFERER'))
+
         try:
             subscription_id = request.POST['pk']
             subscription = Subscription.objects.get(id=subscription_id)
@@ -99,5 +113,8 @@ class AddSubscriptionFreeView(LoginRequiredMixin, View):
         # Get user Subscription and add time to it
         subscribe, created = Subscriber.objects.get_or_create(user=request.user)
         subscribe.add_time(subscription)
+
+        user.is_used_free_subs = True
+        user.save()
 
         return redirect('payment:callback_success')
