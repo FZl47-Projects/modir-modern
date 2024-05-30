@@ -20,12 +20,19 @@ class NotificationUser:
 
     @classmethod
     def new_ticket_created_admin(cls, notification, phone_number):
-        pattern = 'r1ls00hm3euo09o'  # TODO: must be completed
+        pattern = 'r1ls00hm3euo09o'
+        send_sms(phone_number, pattern, user_name=notification.to_user.get_full_name())
+
+
+    @classmethod
+    def new_subscription_registered_admin(cls, notification, phone_number):
+        pattern = 'mkomyeb4pc763kk'
         send_sms(phone_number, pattern, user_name=notification.to_user.get_full_name())
 
 
 NOTIFICATION_USER_HANDLERS = {
     'MOBILE_VERIFICATION_CODE': NotificationUser.mobile_verification_code_handler,
+    'NEW_SUBSCRIPTION_REGISTERED_ADMIN': NotificationUser.new_subscription_registered_admin,
     'SUBSCRIPTION_END_WARNING': NotificationUser.subscription_end_warning,
     'NEW_TICKET_CREATED': NotificationUser.new_ticket_created,
     'NEW_TICKET_CREATED_ADMIN': NotificationUser.new_ticket_created_admin,

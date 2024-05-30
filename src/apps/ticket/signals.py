@@ -2,7 +2,7 @@ from django.utils.translation import gettext as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from apps.account.models import User
+from apps.notification.utils import create_notify_for_admins
 from apps.notification.models import Notification
 from . import models
 
@@ -17,10 +17,4 @@ def handle_new_ticket_notify(sender, instance, created, **kwargs):
             title=_('New Ticket Submited')
         )
         # create for admin's
-        admins = User.objects.filter(accesses__in=['admin'])
-        for admin in admins:
-            Notification.objects.create(
-                type='NEW_TICKET_CREATED_ADMIN',
-                to_user=admin,
-                title=_('New Ticket Submited')
-            )
+        create_notify_for_admins('NEW_TICKET_CREATED_ADMIN', _('New Ticket Submited'))

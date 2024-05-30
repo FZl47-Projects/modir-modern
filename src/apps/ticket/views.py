@@ -40,7 +40,6 @@ class TicketCreateView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
-
         messages.success(self.request, _('Ticket sent successfully'))
         return super().form_valid(form)
 

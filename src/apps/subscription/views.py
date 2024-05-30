@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import Http404
 
+from apps.notification.utils import create_notify_for_admins
 from apps.payment.models import Order, OrderItem
 from .models import Subscription, Subscriber
 
@@ -90,6 +91,9 @@ class AddSubscriptionView(LoginRequiredMixin, View):
         order.bank_tracking_code = tracking_code
         order.save()
 
+        # create notification for admins
+        create_notify_for_admins('NEW_SUBSCRIPTION_REGISTERED_ADMIN', _('New Subscription Registered'))
+
         return redirect('payment:callback_success')
 
 
@@ -116,5 +120,8 @@ class AddSubscriptionFreeView(LoginRequiredMixin, View):
 
         user.is_used_free_subs = True
         user.save()
+
+        # create notification for admins
+        create_notify_for_admins('NEW_SUBSCRIPTION_REGISTERED_ADMIN', _('New Subscription Registered'))
 
         return redirect('payment:callback_success')
