@@ -6,7 +6,6 @@ from django.contrib import admin
 from .models import User, Access, UserProfile
 from .forms import UserCreationForm
 
-
 # Unregister the Group model from admin.
 admin.site.unregister(Group)
 
@@ -27,7 +26,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('phone_number', 'password',)}),
         (_('Personal info'), {'fields': ('email', 'first_name', 'last_name',)}),
-        (_('Verifications'), {'fields': ('is_active', 'is_verified', 'is_admin', 'is_superuser')}),
+        (_('Verifications'), {'fields': ('is_active', 'is_verified', 'is_admin', 'is_superuser', 'is_used_free_subs')}),
         (_('Permissions'), {'fields': ('user_permissions',)}),
         (_('Accesses'), {'fields': ('accesses',)}),
         (_('Dates'), {'fields': ('last_login', 'created_at',)}),
