@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-30 11:46+0330\n"
+"POT-Creation-Date: 2024-06-27 11:39+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,32 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\apps\account\admin.py:29 .\apps\account\admin.py:64
+#: .\apps\account\admin.py:28 .\apps\account\admin.py:63
 msgid "Personal info"
 msgstr "اطلاعات شخصی"
 
-#: .\apps\account\admin.py:30
+#: .\apps\account\admin.py:29
 msgid "Verifications"
 msgstr "تاییدیه‌ ها"
 
-#: .\apps\account\admin.py:31
+#: .\apps\account\admin.py:30
 msgid "Permissions"
 msgstr "مجوزها"
 
-#: .\apps\account\admin.py:32 .\apps\account\models.py:27
+#: .\apps\account\admin.py:31 .\apps\account\models.py:27
 #: .\apps\account\models.py:45
 msgid "Accesses"
 msgstr "دسترسی ها"
 
-#: .\apps\account\admin.py:33
+#: .\apps\account\admin.py:32
 msgid "Dates"
 msgstr "تاریخ ها"
 
-#: .\apps\account\admin.py:65
+#: .\apps\account\admin.py:64
 msgid "Place info"
 msgstr "اطلاعات مجموعه"
 
-#: .\apps\account\admin.py:68 .\apps\account\models.py:136
+#: .\apps\account\admin.py:67 .\apps\account\models.py:148
 #: .\apps\course\admin.py:90 .\apps\payment\admin.py:23
 #: .\apps\restaurant\admin.py:15 .\apps\restaurant\admin.py:40
 #: .\apps\subscription\admin.py:43
@@ -55,7 +55,7 @@ msgid "Account"
 msgstr "حساب ها"
 
 #: .\apps\account\enums.py:7 .\apps\account\models.py:64
-#: .\apps\account\models.py:131 .\apps\course\models.py:166
+#: .\apps\account\models.py:143 .\apps\course\models.py:166
 #: .\apps\course\models.py:182 .\apps\payment\models.py:14
 #: .\apps\restaurant\admin.py:36 .\apps\restaurant\models.py:13
 #: .\apps\subscription\models.py:40 .\apps\ticket\models.py:16
@@ -129,6 +129,10 @@ msgstr "کاربر باید یک شماره تلفن داشته باشد"
 msgid "You do not have permission to access this page!"
 msgstr "شما اجازه دسترسی به این صفحه را ندارید"
 
+#: .\apps\account\mixinx.py:43
+msgid "You need to complete your profile"
+msgstr "شما باید پروفایل خود را تکمیل کنید"
+
 #: .\apps\account\models.py:19
 msgid "Access title"
 msgstr "عنوان دسترسی"
@@ -181,39 +185,39 @@ msgstr "زمان ویرایش"
 msgid "Users"
 msgstr "کاربران"
 
-#: .\apps\account\models.py:92 .\apps\course\models.py:17
+#: .\apps\account\models.py:104 .\apps\course\models.py:17
 msgid "No name"
 msgstr "بدون نام"
 
-#: .\apps\account\models.py:132
+#: .\apps\account\models.py:144
 msgid "Melli code"
 msgstr "کدملی"
 
-#: .\apps\account\models.py:134
+#: .\apps\account\models.py:146
 msgid "Gender"
 msgstr "جنسیت"
 
-#: .\apps\account\models.py:135
+#: .\apps\account\models.py:147
 msgid "Date of birth"
 msgstr "تاریخ تولد"
 
-#: .\apps\account\models.py:137
+#: .\apps\account\models.py:149
 msgid "Province"
 msgstr "استان"
 
-#: .\apps\account\models.py:138
+#: .\apps\account\models.py:150
 msgid "City"
 msgstr "شهر"
 
-#: .\apps\account\models.py:139
+#: .\apps\account\models.py:151
 msgid "Picture"
 msgstr "تصویر"
 
-#: .\apps\account\models.py:142
+#: .\apps\account\models.py:154
 msgid "User profile"
 msgstr "پروفایل کاربر"
 
-#: .\apps\account\models.py:143
+#: .\apps\account\models.py:155
 msgid "Users profile"
 msgstr "پروفایل کاربران"
 
@@ -1025,7 +1029,7 @@ msgstr "شش ماه"
 msgid "Twelve months"
 msgstr "دوازده ماه"
 
-#: .\apps\subscription\mixinx.py:15
+#: .\apps\subscription\mixinx.py:16
 msgid "You need to purchase subscription to use this service."
 msgstr "شما برای استفاده از این بخش نیازمند تهیه اشتراک هستید."
 
@@ -1049,17 +1053,17 @@ msgstr "مشترک"
 msgid "Subscribers"
 msgstr "مشترکین"
 
-#: .\apps\subscription\views.py:33
+#: .\apps\subscription\views.py:34
 msgid "You cannot active more than 300 days!"
 msgstr "شما نمی‌توانید بیش از ۳۰۰ روز اشتراک فعال داشته باشد!"
 
-#: .\apps\subscription\views.py:95 .\apps\subscription\views.py:125
+#: .\apps\subscription\views.py:96 .\apps\subscription\views.py:126
 #, fuzzy
 #| msgid "Subscription type"
 msgid "New Subscription Registered"
 msgstr "اشتراک جدیدی ثبت شده است"
 
-#: .\apps\subscription\views.py:108
+#: .\apps\subscription\views.py:109
 msgid "You have once used the free subscription."
 msgstr "شما یکبار از اشتراک رایگان استفاده کرده اید"
 
