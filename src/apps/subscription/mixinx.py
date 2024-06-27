@@ -5,6 +5,7 @@ from django.contrib import messages
 
 class SubscriptionRequiredMixin:
     """ Subscription required to access page """
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect('account:login')
@@ -16,3 +17,4 @@ class SubscriptionRequiredMixin:
 
         referer_url = request.META.get('HTTP_REFERER')
         return redirect(referer_url) if referer_url else redirect('public:index')
+

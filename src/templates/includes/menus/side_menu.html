@@ -52,6 +52,16 @@
                         <span class="fw-semibold me-1">تیکت‌ ها</span>
                     </a>
                 </li>
+
+                <li class="item-menu">
+                    <a href="{% url 'public:index' %}?app-course"
+                       class="{% if request.resolver_match.app_name == 'course' %}active{% endif %}">
+                        <span class="d-flex align-items-center" style="margin-right: 12px;">
+                            <i class="bi bi-mortarboard mt-2" style="font-size: 23px;"></i>
+                        </span>
+                        <span class="fw-semibold">آموزش اپ</span>
+                    </a>
+                </li>
                 <li class="item-menu">
                     <a href="{% url 'course:course_list' %}"
                        class="{% if request.resolver_match.app_name == 'course' %}active{% endif %}">
@@ -75,7 +85,7 @@
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
                             <i class="bi bi-cup-hot mt-2" style="font-size: 24px;"></i>
                         </span>
-                        <span class="fw-semibold me-1">رستوران من</span>
+                        <span class="fw-semibold me-1">مدیریت منو</span>
                     </a>
                     <div class="{% if request.resolver_match.app_name == 'restaurant' %}collapsed{% else %}collapse{% endif %}" id="collapseExample">
                         <ul class="menu-sub-item pe-3">

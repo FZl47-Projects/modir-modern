@@ -28,3 +28,19 @@ class AccessRequiredMixin:
 
         referer_url = request.META.get('HTTP_REFERER')
         return redirect(referer_url or '/')
+
+
+class ProfileCompletedRequiredMixin:
+    """ user required to complete profile """
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('account:login')
+
+        if request.user.is_profile_completed:
+            return super().dispatch(request, *args, **kwargs)
+
+        messages.error(request, _('You need to complete your profile'))
+
+        referer_url = request.META.get('HTTP_REFERER')
+        return redirect(referer_url) if referer_url else redirect('public:index')

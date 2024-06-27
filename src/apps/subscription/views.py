@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import Http404
 
+from apps.account.mixinx import ProfileCompletedRequiredMixin
 from apps.notification.utils import create_notify_for_admins
 from apps.payment.models import Order, OrderItem
 from .models import Subscription, Subscriber
@@ -27,7 +28,7 @@ class SubscriptionListView(LoginRequiredMixin, ListView):
 
 
 # Create SubscriptionOrder view
-class CreateSubscriptionOrderView(LoginRequiredMixin, View):
+class CreateSubscriptionOrderView(LoginRequiredMixin, ProfileCompletedRequiredMixin, View):
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.get_subscription_time() >= 300:
             messages.info(self.request, _('You cannot active more than 300 days!'))
@@ -57,7 +58,7 @@ class CreateSubscriptionOrderView(LoginRequiredMixin, View):
 
 
 # Add Subscription view
-class AddSubscriptionView(LoginRequiredMixin, View):
+class AddSubscriptionView(LoginRequiredMixin, ProfileCompletedRequiredMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         tracking_code = request.GET.get(settings.TRACKING_CODE_QUERY_PARAM, None)
@@ -98,7 +99,7 @@ class AddSubscriptionView(LoginRequiredMixin, View):
 
 
 # Add Subscription Free view
-class AddSubscriptionFreeView(LoginRequiredMixin, View):
+class AddSubscriptionFreeView(LoginRequiredMixin,ProfileCompletedRequiredMixin, View):
 
     def post(self, request):
 

@@ -68,6 +68,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.phone_number
 
     @property
+    def is_profile_completed(self):
+        profile = self.profile
+        province = profile.province
+        city = profile.city
+        # melli_cde = profile.melli_code
+        place_name = profile.place_name
+
+        if place_name and (province or city):
+            return True
+        return False
+
+    @property
     def is_staff(self):
         """ Is the user a member of staff? """
         return self.is_admin
