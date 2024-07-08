@@ -33,6 +33,7 @@ class NotificationUser:
 NOTIFICATION_USER_HANDLERS = {
     'MOBILE_VERIFICATION_CODE': NotificationUser.mobile_verification_code_handler,
     'NEW_SUBSCRIPTION_REGISTERED_ADMIN': NotificationUser.new_subscription_registered_admin,
+    # 'NEW_COUNSELING_FORM_SUBMITED': NotificationUser.new_subscription_registered_admin, # TODO: add pattern new sms type
     'SUBSCRIPTION_END_WARNING': NotificationUser.subscription_end_warning,
     'NEW_TICKET_CREATED': NotificationUser.new_ticket_created,
     'NEW_TICKET_CREATED_ADMIN': NotificationUser.new_ticket_created_admin,

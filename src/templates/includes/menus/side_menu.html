@@ -54,8 +54,8 @@
                 </li>
 
                 <li class="item-menu">
-                    <a href="{% url 'public:index' %}?app-course"
-                       class="{% if request.resolver_match.app_name == 'course' %}active{% endif %}">
+                    <a href="{% url 'public:index' %}?app_course"
+                       class="{% if request.GET.app_course == 'course' %}active{% endif %}">
                         <span class="d-flex align-items-center" style="margin-right: 12px;">
                             <i class="bi bi-mortarboard mt-2" style="font-size: 23px;"></i>
                         </span>
@@ -69,6 +69,17 @@
                             <i class="bi bi-mortarboard mt-2" style="font-size: 23px;"></i>
                         </span>
                         <span class="fw-semibold">آموزش ها</span>
+                    </a>
+                </li>
+                 <li class="item-menu">
+                    <a href="{% url 'customers:counseling_add' %}"
+                       class="{% if request.resolver_match.app_name == 'customers' %}active{% endif %}">
+                        <span class="d-flex align-items-center" style="margin-right: 12px;">
+                            <i class="bi bi-clipboard-data mt-2" style="font-size: 23px;"></i>
+                        </span>
+                        <span class="fw-semibold">مشاوره
+                            <b class="badge bg-success m-1">رایگان</b>
+                        </span>
                     </a>
                 </li>
                 <li class="item-menu">

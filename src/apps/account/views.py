@@ -60,9 +60,9 @@ class RegisterView(LogoutRequiredMixin, FormView):
         # Create register token and save it in sessions
         token = user.generate_token()
         self.request.session['secret_token'] = token
-        
+
         return super().form_valid(form)
-        
+
     def form_invalid(self, form):
         toast_form_errors(self.request, form)
         return super().form_invalid(form)
@@ -101,7 +101,7 @@ class SendCodeView(LogoutRequiredMixin, View):
 class VerifyPhoneNumberView(LogoutRequiredMixin, FormView):
     template_name = 'account/verify_phone.html'
     form_class = forms.VerifyPhoneNumberForm
-    success_url = '/'
+    success_url = reverse_lazy('')
 
     def get_form_kwargs(self):
         data = super().get_form_kwargs()
@@ -127,7 +127,7 @@ class VerifyPhoneNumberView(LogoutRequiredMixin, FormView):
 
         messages.success(self.request, _('Register done successful'))
         return redirect('/')
-    
+
     def form_invalid(self, form):
         toast_form_errors(self.request, form)
         return super().form_invalid(form)
@@ -149,7 +149,7 @@ class GetPhoneNumberView(LogoutRequiredMixin, FormView):
         self.request.session['secret_token'] = token
 
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         toast_form_errors(self.request, form)
         return super().form_invalid(form)
@@ -175,7 +175,7 @@ class ResetPassConfirmView(LogoutRequiredMixin, FormView):
         # Delete code from session
         if 'verify_code' in self.request.session:
             del self.request.session['verify_code']
-        
+
         return super().form_valid(form)
 
     def form_invalid(self, form):

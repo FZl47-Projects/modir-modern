@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 11:39+0330\n"
+"POT-Creation-Date: 2024-07-06 14:51+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,10 +56,10 @@ msgstr "حساب ها"
 
 #: .\apps\account\enums.py:7 .\apps\account\models.py:64
 #: .\apps\account\models.py:143 .\apps\course\models.py:166
-#: .\apps\course\models.py:182 .\apps\payment\models.py:14
-#: .\apps\restaurant\admin.py:36 .\apps\restaurant\models.py:13
-#: .\apps\subscription\models.py:40 .\apps\ticket\models.py:16
-#: .\apps\ticket\models.py:49
+#: .\apps\course\models.py:182 .\apps\customers\models.py:36
+#: .\apps\payment\models.py:14 .\apps\restaurant\admin.py:36
+#: .\apps\restaurant\models.py:13 .\apps\subscription\models.py:40
+#: .\apps\ticket\models.py:16 .\apps\ticket\models.py:49
 msgid "User"
 msgstr "کاربر"
 
@@ -529,42 +529,160 @@ msgstr "دوره‌های کاربران"
 msgid "Customers"
 msgstr "مشتریان"
 
-#: .\apps\customers\models.py:10 .\apps\restaurant\apps.py:8
+#: .\apps\customers\enums.py:6
+msgid "Catering"
+msgstr "کترینگ"
+
+#: .\apps\customers\enums.py:7
+#, fuzzy
+#| msgid "Restaurant"
+msgid "Iranian restaurant"
+msgstr "رستوران"
+
+#: .\apps\customers\enums.py:8
+msgid "Non Iranian restaurant"
+msgstr ""
+
+#: .\apps\customers\enums.py:9
+msgid "Coffee Shop"
+msgstr "کافی شاپ"
+
+#: .\apps\customers\enums.py:10
+#, fuzzy
+#| msgid "Restaurant"
+msgid "Cafe Restaurant"
+msgstr "رستوران"
+
+#: .\apps\customers\enums.py:14
+msgid "Morning"
+msgstr ""
+
+#: .\apps\customers\enums.py:15
+msgid "Noon"
+msgstr ""
+
+#: .\apps\customers\enums.py:16
+msgid "Night"
+msgstr ""
+
+#: .\apps\customers\enums.py:20
+msgid "Yes"
+msgstr ""
+
+#: .\apps\customers\enums.py:21
+msgid "No"
+msgstr ""
+
+#: .\apps\customers\models.py:12 .\apps\restaurant\apps.py:8
 #: .\apps\restaurant\models.py:20 .\apps\restaurant\models.py:41
 #: .\apps\restaurant\models.py:124 .\apps\restaurant\models.py:140
 msgid "Restaurant"
 msgstr "رستوران"
 
-#: .\apps\customers\models.py:11
+#: .\apps\customers\models.py:13
 msgid "Customer phone number"
 msgstr "شماره تلفن مشتری"
 
-#: .\apps\customers\models.py:12
+#: .\apps\customers\models.py:14
 msgid "Customer name"
 msgstr "نام مشتری"
 
-#: .\apps\customers\models.py:13
+#: .\apps\customers\models.py:15
 msgid "Customer comment"
 msgstr "کامنت مشتری"
 
-#: .\apps\customers\models.py:15
+#: .\apps\customers\models.py:17
 msgid "Answer of question 1"
 msgstr "پاسخ سوال ۱"
 
-#: .\apps\customers\models.py:16
+#: .\apps\customers\models.py:18
 msgid "Answer of question 2"
 msgstr "پاسخ سوال ۲"
 
-#: .\apps\customers\models.py:19
+#: .\apps\customers\models.py:21
 msgid "Customer survey"
 msgstr "نظرسنجی مشتری"
 
-#: .\apps\customers\models.py:20
+#: .\apps\customers\models.py:22
 msgid "Customers surveys"
 msgstr "نظرسنجی‌های مشتریان"
 
-#: .\apps\customers\views.py:67
+#: .\apps\customers\models.py:37
+msgid "Field of Activity"
+msgstr ""
+
+#: .\apps\customers\models.py:38
+msgid "Work Experience"
+msgstr ""
+
+#: .\apps\customers\models.py:39
+msgid "Work Shift"
+msgstr ""
+
+#: .\apps\customers\models.py:40
+#, fuzzy
+#| msgid "Number of raw use"
+msgid "Number of staff"
+msgstr "تعداد مورد استفاده خام"
+
+#: .\apps\customers\models.py:41
+msgid "Capacity"
+msgstr ""
+
+#: .\apps\customers\models.py:42
+msgid "Personnel Training Detail"
+msgstr ""
+
+#: .\apps\customers\models.py:43
+msgid "Business Concerns Detail"
+msgstr ""
+
+#: .\apps\customers\models.py:44
+msgid "Accounting Software"
+msgstr ""
+
+#: .\apps\customers\models.py:46
+msgid "Conduct Inventory Reconciliation"
+msgstr ""
+
+#: .\apps\customers\models.py:49
+msgid "Has Control Cost System"
+msgstr ""
+
+#: .\apps\customers\models.py:52
+msgid "Has Book of Regulations"
+msgstr ""
+
+#: .\apps\customers\models.py:55
+msgid "Has Tasks Written"
+msgstr ""
+
+#: .\apps\customers\models.py:58
+msgid "Has Recipes Written"
+msgstr ""
+
+#: .\apps\customers\models.py:61
+#, fuzzy
+#| msgid "Introduction video"
+msgid "Has Instructions Written"
+msgstr "ویدیو معرفی"
+
+#: .\apps\customers\models.py:64
+msgid "Counseling"
+msgstr ""
+
+#: .\apps\customers\models.py:65
+msgid "Counselings"
+msgstr ""
+
+#: .\apps\customers\views.py:68
 msgid "Your rate has been successfully registered"
+msgstr "نظر شما با موفقیت ثبت گردید"
+
+#: .\apps\customers\views.py:98
+#, fuzzy
+#| msgid "Your rate has been successfully registered"
+msgid "Your counseling form has been successfully submited"
 msgstr "نظر شما با موفقیت ثبت گردید"
 
 #: .\apps\notification\apps.py:8 .\apps\notification\models.py:29
@@ -1128,7 +1246,7 @@ msgstr "تیکت با موفقیت ارسال شد"
 msgid "Message sent successfully"
 msgstr "پیام با موفقیت شد"
 
-#: .\config\settings\base.py:112
+#: .\config\settings\base.py:113
 msgid "Persian"
 msgstr "فارسی"
 

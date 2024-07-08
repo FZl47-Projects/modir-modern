@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیرمدرن | دلایل استفاده از مدیرمدرن</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <style>
+
+
+        @font-face {
+            font-family: YEKANBAKH;
+            font-style: normal;
+            font-weight: 500;
+            src: url("/static/fonts/YEKANBAKH-REGULAR.eot");
+            src: url("/static/fonts/YEKANBAKH-REGULAR.eot?#iefix") format("embedded-opentype"), url("/static/fonts/YEKANBAKH-REGULAR.woff") format("woff"), url("/static/fonts/YEKANBAKH-REGULAR.woff2") format("woff2"), url("/static/fonts/YEKANBAKH-REGULAR.TTF") format("truetype");
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            position: relative;
+            height: 100%;
+            font-family: YEKANBAKH;
+        }
+
+        body {
+            background-color: #060606;
+            font-size: 14px;
+            color: #dddddd;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(288deg, rgba(155, 103, 25, 0.9) 46%, rgba(163, 128, 98, 0) 46%);
+            font-family: YEKANBAKH;
+
+        }
+
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background-color: #060606;
+            display: flex;
+            flex-wrap: wrap;
+
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .inner-slide {
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+
+        }
+
+        .inner-slide img {
+            width: 100%;
+            height: 100% !important;
+            object-fit: cover;
+        }
+
+        .next-btn button {
+            background-color: #e1b000;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 120%;
+            border-radius: 20px;
+            border: none;
+        }
+
+        .swiper-pagination-bullet {
+            background-color: #fff;
+            opacity: 1;
+            width: 40px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+        }
+
+        .swiper-pagination-bullet.swiper-pagination-bullet-active {
+            background-color: #e1b000;
+            opacity: 1;
+            width: 20px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+        }
+
+        .title span {
+            font-size: 42px;
+        }
+
+        .text-bold {
+            color: #e1b000;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .inner-slide {
+                height: 50%;
+            }
+
+            .title span {
+                font-size: 35px;
+            }
+
+            .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+                bottom: 48%;
+                left: 0;
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body style="height: 100%;">
+<div class="swiper" id="slider-main">
+    <div class="swiper-wrapper">
+        <!-- START ITEM SLIDER -->
+        <div class="swiper-slide">
+            <div class="col-12 col-md-5 inner-slide">
+                <img src="{% static 'images/welcome/2.webp' %}" alt="">
+            </div>
+            <div class="col-12 col-md-7 inner-slide">
+                <div class="title p-2 ">
+                    <span>قیمت تمام شده هر آیتم منو</span><br>
+                    <span>متناسب با قیمت <span class="text-bold">مواد غذایی روز</span></span>
+                    <span></span>
+                </div>
+                <div class="col-12 col-md-8 p-4 next-btn">
+                    <button class="w-100" id="btn-one">بعدی</button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="col-12 col-md-5 inner-slide" style="background-color: green;">
+                <img src="{% static 'images/welcome/3.webp' %}" alt="">
+            </div>
+            <div class="col-12 col-md-7 inner-slide">
+                <div class="title p-5 ">
+                    <span>رسیدن به یک منوی </span><br>
+                    <span>اصولی و <span class="text-bold">سود آور</span></span>
+                    <span></span>
+                </div>
+                <div class="col-12 col-md-8 p-4 next-btn">
+                    <button class="w-100" id="btn-two">بعدی</button>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div class="col-12 col-md-5 inner-slide">
+                <img src="{% static 'images/welcome/1.webp' %}" alt="">
+            </div>
+            <div class="col-12 col-md-7 inner-slide">
+                <div class="title p-5 ">
+                    <span>رستورانت رو
+                    </span>
+                    <span class="text-bold">بشناس </span>
+                    <br>
+                </div>
+                <div class="col-12 col-md-8 p-4 next-btn">
+                    <a href="{% url 'customers:counseling_add' %}">
+                        <button class="w-100" id="btn-tree">فرم مشاوره</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- END ITEM SLIDER -->
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+
+<!-- SWIPER -->
+<script src="{% static 'vendors/swiper.js' %}"></script>
+
+<!-- MAIN JS -->
+<script>
+    const swiper = new Swiper('#slider-main', {
+        // Default parameters
+        slidesPerView: 1,
+        spaceBetween: 10,
+
+        // Responsive breakpoints
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: false
+        },
+
+
+    })
+
+    let btnone = document.querySelector("#btn-one");
+    btnone.addEventListener("click", () => {
+        swiper.slideTo(1);
+    });
+    let btntwo = document.querySelector("#btn-two");
+    btntwo.addEventListener("click", () => {
+        swiper.slideTo(2);
+    });
+
+
+</script>
+</body>
+</html>
+

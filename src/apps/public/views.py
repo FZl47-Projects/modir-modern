@@ -18,3 +18,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
         })
 
         return context
+
+
+class WelcomeView(TemplateView):
+    template_name = 'public/welcome.html'

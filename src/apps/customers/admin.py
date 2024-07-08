@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomerSurvey
+from .models import CustomerSurvey, Counseling
 
 
 # Register CustomerSurveys admin
@@ -9,3 +9,10 @@ class CustomerSurveyAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name', 'restaurant')
     list_filter = ('question1', 'question2')
     search_fields = ('phone_number', 'restaurant__title')
+
+
+# Register Counseling admin
+@admin.register(Counseling)
+class CounselingAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user')
+    search_fields = ('user__phone_number',)

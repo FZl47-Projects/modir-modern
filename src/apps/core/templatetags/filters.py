@@ -1,4 +1,5 @@
 from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy
 from django import template
 
 register = template.Library()
@@ -33,3 +34,8 @@ def suggested_price(value):
 def sales_percentage(obj, total):
     if total:
         return (obj.number_sold / total) * 100
+
+
+@register.filter
+def translate(text):
+    return gettext_lazy(text)
