@@ -38,175 +38,188 @@
 
                 <!-- Start ticket messages section -->
                 <div class="d-flex flex-column gap-4 text-white w-100 mt-md-0 mt-2 ticket-detail-main">
-                    <div class="d-block">
-                        <span class="fw-semibold h2 d-block text-center">فرم مشاوره</span>
-                        <span class="d-block text-center" style="color: #d5d5d5">مدیریت محترم خواهشمند است جهت بهره مندی از خدمات مشاوره بیزنس کوچینگ مجموعه های غذایی، اطلاعات، سوالات عمومی و تخصصی فرم پیش رو را با دقت تکمیل نمایید تا بتوانیم در راستای رشد و موفقیت مجموعه شما قدم مثبتی برداریم.</span>
-                    </div>
-
-                    <form method="POST" enctype="multipart/form-data"
-                          class=" text-white col-12 text-center">
-                        <input type="hidden" name="user" value="{{ request.user.id }}">
-                        {% csrf_token %}
-                        <div class="row col-12 mx-auto">
-                            <label class="form-label col-12 col-md-6">
-                                <span>زمینه فعالیت</span>
-                                <select name="field_of_activity" class="form-select mt-1">
-                                    {% for FIELD in Counseling.FIELDS.choices %}
-                                        <option value="{{ FIELD.0 }}">{{ FIELD.1|translate }}</option>
-                                    {% endfor %}
-                                </select>
-                            </label>
-                            <label class="form-label col-12 col-md-6">
+                    {% if user.get_counselings_form %}
+                        <div class="d-block">
+                            <span class="fw-semibold h2 d-block text-center">فرم مشاوره</span>
+                            <span class="d-block text-center" style="color: #d5d5d5">مدیریت محترم خواهشمند است جهت بهره مندی از خدمات مشاوره بیزنس کوچینگ مجموعه های غذایی، اطلاعات، سوالات عمومی و تخصصی فرم پیش رو را با دقت تکمیل نمایید تا بتوانیم در راستای رشد و موفقیت مجموعه شما قدم مثبتی برداریم.</span>
+                        </div>
+                        <form method="POST" enctype="multipart/form-data"
+                              class=" text-white col-12 text-center">
+                            <input type="hidden" name="user" value="{{ request.user.id }}">
+                            {% csrf_token %}
+                            <div class="row col-12 mx-auto">
+                                <label class="form-label col-12 col-md-6">
+                                    <span>زمینه فعالیت</span>
+                                    <select name="field_of_activity" class="form-select mt-1">
+                                        {% for FIELD in Counseling.FIELDS.choices %}
+                                            <option value="{{ FIELD.0 }}">{{ FIELD.1|translate }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">میزان سابقه فعالیت
                                 (ماه)
                             </span>
-                                <input type="text" name="work_experience" class="form-control mt-1" required
-                                       placeholder="20 ماه">
-                            </label>
-                        </div>
-                        <div class="row col-12 mx-auto">
-                            <label class="form-label col-12 col-md-6">
+                                    <input type="text" name="work_experience" class="form-control mt-1" required
+                                           placeholder="20 ماه">
+                                </label>
+                            </div>
+                            <div class="row col-12 mx-auto">
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">تعداد پرسنل مجموعه در هر شیفت کاری
                             </span>
-                                <input type="number" name="number_of_staff" class="form-control mt-1" required
-                                       placeholder="10">
-                            </label>
-                            <label class="form-label col-12 col-md-6">
+                                    <input type="number" name="number_of_staff" class="form-control mt-1" required
+                                           placeholder="10">
+                                </label>
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">ظرفیت پذیرایی از میهمانان در مجموعه(نفر)
                             </span>
-                                <input type="number" name="capacity" class="form-control mt-1" required
-                                       placeholder="10">
-                            </label>
-                        </div>
-                        <div class="row col-12 mx-auto">
-                            <label class="form-label col-12 col-md-6">
+                                    <input type="number" name="capacity" class="form-control mt-1" required
+                                           placeholder="10">
+                                </label>
+                            </div>
+                            <div class="row col-12 mx-auto">
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">پرسنل شما تاکنون چه آموزش هایی دیده اند و توسط چه اساتیدی ؟
                             </span>
-                                <textarea name="personnel_training" class="form-control"
-                                          placeholder="اینجا بنویسید"></textarea>
-                            </label>
-                            <label class="form-label col-12 col-md-6">
+                                    <textarea name="personnel_training" class="form-control"
+                                              placeholder="اینجا بنویسید"></textarea>
+                                </label>
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">دغدغه اصلی شما در کسب و کارتون چیست ؟
                             </span>
-                                <textarea name="business_concerns" class="form-control"
-                                          placeholder="اینجا بنویسید"></textarea>
-                            </label>
-                        </div>
-                        <div class="row col-12 mx-auto">
-                            <label class="form-label col-12 col-md-6">
+                                    <textarea name="business_concerns" class="form-control"
+                                              placeholder="اینجا بنویسید"></textarea>
+                                </label>
+                            </div>
+                            <div class="row col-12 mx-auto">
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">نام نرم افزار صندوق ؟ حسابداری؟
                             </span>
-                                <input type="text" name="accounting_software" class="form-control mt-1" required
-                                       placeholder="اینجا بنویسید">
-                            </label>
-                            <label class="form-label col-12 col-md-6">
+                                    <input type="text" name="accounting_software" class="form-control mt-1" required
+                                           placeholder="اینجا بنویسید">
+                                </label>
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">هر چند روز یکبار انبارگردانی انجام میدهید ؟
                             </span>
-                                <input type="text" name="conduct_inventory_reconciliation" class="form-control mt-1"
-                                       required
-                                       placeholder="اینجا بنویسید">
-                            </label>
-                        </div>
-                        <div class="row col-12 mx-auto">
-                            <div class="form-label col-12 col-md-12">
-                                <span class="text-end d-block">چند شیفت کاری فعالیت دارید ؟</span>
-                                <div class="bg-white p-2 px-4 mt-1 text-end" style="border-radius: 10px;color: #111">
-                                    {% for FIELD in Counseling.WORK_SHIFTS.choices %}
-                                        <div class="form-check">
-                                            <label class="d-flex justify-content-between my-2" dir="ltr">
-                                                <input type="checkbox" class="form-check-input" name="work_shift"
-                                                       value="{{ FIELD.0 }}">
-                                                <span>{{ FIELD.1|translate }}</span>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
+                                    <input type="text" name="conduct_inventory_reconciliation" class="form-control mt-1"
+                                           required
+                                           placeholder="اینجا بنویسید">
+                                </label>
+                            </div>
+                            <div class="row col-12 mx-auto">
+                                <div class="form-label col-12 col-md-12">
+                                    <span class="text-end d-block">چند شیفت کاری فعالیت دارید ؟</span>
+                                    <div class="bg-white p-2 px-4 mt-1 text-end"
+                                         style="border-radius: 10px;color: #111">
+                                        {% for FIELD in Counseling.WORK_SHIFTS.choices %}
+                                            <div class="form-check">
+                                                <label class="d-flex justify-content-between my-2" dir="ltr">
+                                                    <input type="checkbox" class="form-check-input" name="work_shift"
+                                                           value="{{ FIELD.0 }}">
+                                                    <span>{{ FIELD.1|translate }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row col-12 mx-auto">
-                            <div class="form-label col-12 col-md-6">
-                                <span class="text-end d-block">سیستم کاست کنترل(کنترل هزینه) و انبار دارید ؟</span>
-                                <div class="bg-white p-2 px-4 mt-1 text-end" style="border-radius: 10px;color: #111">
-                                    {% for FIELD in Counseling.CONTROL_COST_SYSTEM.choices %}
-                                        <div class="form-check">
-                                            <label class="d-flex justify-content-between my-2" dir="ltr">
-                                                <input type="radio" class="form-check-input"
-                                                       name="has_control_cost_system"
-                                                       value="{{ FIELD.0 }}">
-                                                <span>{{ FIELD.1|translate }}</span>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
+                            <div class="row col-12 mx-auto">
+                                <div class="form-label col-12 col-md-6">
+                                    <span class="text-end d-block">سیستم کاست کنترل(کنترل هزینه) و انبار دارید ؟</span>
+                                    <div class="bg-white p-2 px-4 mt-1 text-end"
+                                         style="border-radius: 10px;color: #111">
+                                        {% for FIELD in Counseling.CONTROL_COST_SYSTEM.choices %}
+                                            <div class="form-check">
+                                                <label class="d-flex justify-content-between my-2" dir="ltr">
+                                                    <input type="radio" class="form-check-input"
+                                                           name="has_control_cost_system"
+                                                           value="{{ FIELD.0 }}">
+                                                    <span>{{ FIELD.1|translate }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-label col-12 col-md-6">
+                                    <span class="text-end d-block">کتابچه راهنمای کارکنان و کتابچه قوانین و مقررات دارید ؟</span>
+                                    <div class="bg-white p-2 px-4 mt-1 text-end"
+                                         style="border-radius: 10px;color: #111">
+                                        {% for FIELD in Counseling.BOOK_OF_REGULATIONS.choices %}
+                                            <div class="form-check">
+                                                <label class="d-flex justify-content-between my-2" dir="ltr">
+                                                    <input type="radio" class="form-check-input"
+                                                           name="has_book_of_regulations"
+                                                           value="{{ FIELD.0 }}">
+                                                    <span>{{ FIELD.1|translate }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-label col-12 col-md-6">
-                                <span class="text-end d-block">کتابچه راهنمای کارکنان و کتابچه قوانین و مقررات دارید ؟</span>
-                                <div class="bg-white p-2 px-4 mt-1 text-end" style="border-radius: 10px;color: #111">
-                                    {% for FIELD in Counseling.BOOK_OF_REGULATIONS.choices %}
-                                        <div class="form-check">
-                                            <label class="d-flex justify-content-between my-2" dir="ltr">
-                                                <input type="radio" class="form-check-input"
-                                                       name="has_book_of_regulations"
-                                                       value="{{ FIELD.0 }}">
-                                                <span>{{ FIELD.1|translate }}</span>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
+                            <div class="row col-12 mx-auto">
+                                <div class="form-label col-12 col-md-6">
+                                    <span class="text-end d-block">ایا شرح وظایف ها مشخص و مکتوب است ؟</span>
+                                    <div class="bg-white p-2 px-4 mt-1 text-end"
+                                         style="border-radius: 10px;color: #111">
+                                        {% for FIELD in Counseling.TASKS_WRITTEN.choices %}
+                                            <div class="form-check">
+                                                <label class="d-flex justify-content-between my-2" dir="ltr">
+                                                    <input type="radio" class="form-check-input"
+                                                           name="has_tasks_written"
+                                                           value="{{ FIELD.0 }}">
+                                                    <span>{{ FIELD.1|translate }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-label col-12 col-md-6">
+                                    <span class="text-end d-block">ایا رسپی غذاها و نوشیدنی ها مشخص و مکتوب شده است ؟</span>
+                                    <div class="bg-white p-2 px-4 mt-1 text-end"
+                                         style="border-radius: 10px;color: #111">
+                                        {% for FIELD in Counseling.RECIPES_WRITTEN.choices %}
+                                            <div class="form-check">
+                                                <label class="d-flex justify-content-between my-2" dir="ltr">
+                                                    <input type="radio" class="form-check-input"
+                                                           name="has_recipes_written"
+                                                           value="{{ FIELD.0 }}">
+                                                    <span>{{ FIELD.1|translate }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row col-12 mx-auto">
-                            <div class="form-label col-12 col-md-6">
-                                <span class="text-end d-block">ایا شرح وظایف ها مشخص و مکتوب است ؟</span>
-                                <div class="bg-white p-2 px-4 mt-1 text-end" style="border-radius: 10px;color: #111">
-                                    {% for FIELD in Counseling.TASKS_WRITTEN.choices %}
-                                        <div class="form-check">
-                                            <label class="d-flex justify-content-between my-2" dir="ltr">
-                                                <input type="radio" class="form-check-input" name="has_tasks_written"
-                                                       value="{{ FIELD.0 }}">
-                                                <span>{{ FIELD.1|translate }}</span>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
+                            <div class="row col-12 mx-auto">
+                                <div class="form-label col-12 col-md-12">
+                                    <span class="text-end d-block">ایا استاندارد ها و دستور العمل های اجرایی نوشته شده است ؟</span>
+                                    <div class="bg-white p-2 px-4 mt-1 text-end"
+                                         style="border-radius: 10px;color: #111">
+                                        {% for FIELD in Counseling.INSTRUCTION_WRITTEN.choices %}
+                                            <div class="form-check">
+                                                <label class="d-flex justify-content-between my-2" dir="ltr">
+                                                    <input type="radio" class="form-check-input"
+                                                           name="has_instructions_written"
+                                                           value="{{ FIELD.0 }}">
+                                                    <span>{{ FIELD.1|translate }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-label col-12 col-md-6">
-                                <span class="text-end d-block">ایا رسپی غذاها و نوشیدنی ها مشخص و مکتوب شده است ؟</span>
-                                <div class="bg-white p-2 px-4 mt-1 text-end" style="border-radius: 10px;color: #111">
-                                    {% for FIELD in Counseling.RECIPES_WRITTEN.choices %}
-                                        <div class="form-check">
-                                            <label class="d-flex justify-content-between my-2" dir="ltr">
-                                                <input type="radio" class="form-check-input" name="has_recipes_written"
-                                                       value="{{ FIELD.0 }}">
-                                                <span>{{ FIELD.1|translate }}</span>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
-                                </div>
+                            <div class="text-start col-12">
+                                <button type="submit"
+                                        class="btn btn-warning fw-semibold col-12 col-md-6 col-lg-3 col-xl-1 mt-4">ثبت
+                                    فرم
+                                </button>
                             </div>
-                        </div>
-                        <div class="row col-12 mx-auto">
-                            <div class="form-label col-12 col-md-12">
-                                <span class="text-end d-block">ایا استاندارد ها و دستور العمل های اجرایی نوشته شده است ؟</span>
-                                <div class="bg-white p-2 px-4 mt-1 text-end" style="border-radius: 10px;color: #111">
-                                    {% for FIELD in Counseling.INSTRUCTION_WRITTEN.choices %}
-                                        <div class="form-check">
-                                            <label class="d-flex justify-content-between my-2" dir="ltr">
-                                                <input type="radio" class="form-check-input" name="has_instructions_written"
-                                                       value="{{ FIELD.0 }}">
-                                                <span>{{ FIELD.1|translate }}</span>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-start col-12">
-                            <button type="submit"
-                                    class="btn btn-warning fw-semibold col-12 col-md-6 col-lg-3 col-xl-1 mt-4">ثبت فرم
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    {% else %}
+                        <h2 class="text-center text-warning pt-3">شما یکبار از مشاوره استفاده کرده اید</h2>
+                    {% endif %}
                 </div>
                 <!-- .End ticket messages section -->
 

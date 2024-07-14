@@ -34,7 +34,7 @@ class Counseling(models.Model):
     RECIPES_WRITTEN = enums.YesOrNoTypeEnum
     INSTRUCTION_WRITTEN = enums.YesOrNoTypeEnum
 
-    user = models.OneToOneField('account.User', on_delete=models.CASCADE, verbose_name=_('User'))
+    user = models.ForeignKey('account.User', on_delete=models.CASCADE, verbose_name=_('User'))
     field_of_activity = models.CharField(max_length=25, choices=FIELDS.choices, verbose_name=_('Field of Activity'))
     work_experience = models.CharField(max_length=20, verbose_name=_('Work Experience'))
     work_shift = models.CharField(max_length=50, verbose_name=_('Work Shift'))

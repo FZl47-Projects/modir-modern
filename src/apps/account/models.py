@@ -1,15 +1,16 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.utils.translation import gettext as _
-from django.templatetags.static import static
-from django.shortcuts import reverse
-from django.db import models
+from datetime import datetime
+from secrets import token_hex
 
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.db import models
+from django.shortcuts import reverse
+from django.templatetags.static import static
+from django.utils.translation import gettext as _
+
+from apps.core.models import BaseModel
 from .enums import UserAccessEnum, UserGenderEnum
 from .managers import UserManager, AccessManager
 from .validators import validate_didit_type
-from apps.core.models import BaseModel
-from datetime import datetime
-from secrets import token_hex
 
 
 # Accesses model
@@ -134,6 +135,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_courses(self):
         return self.courses.all()
+
+    def get_counselings_form(self):
+        return self.counseling_set.all()
+
+    def get_profile(self):
+        try:
+            return self.restaurantprofile
+        except (AttributeError,):
+            return None
 
 
 # UserProfiles model

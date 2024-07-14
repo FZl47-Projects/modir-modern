@@ -1,0 +1,382 @@
+{% extends 'base_template.html' %}
+{% load templatetags %}
+{% load filters %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | برآورد فروش و هزینه ها{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/menu-engineering.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+    <style>
+
+
+        .bg-profit {
+            padding: 4px;
+            background: rgba(182, 250, 205, 0.5);
+            color: #034818;
+            border-radius: 5px;
+        }
+
+        .bg-loss {
+            padding: 4px;
+            background: rgba(255, 208, 216, 0.5);
+            color: #79071c;
+            border-radius: 5px;
+        }
+
+        .tb-ltr td {
+            direction: ltr;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% with user.restaurantprofile as profile %}
+        <!-- Start Sidebar menu -->
+        {% include 'includes/menus/side_menu.html' %}
+        <!-- .End Sidebar menu -->
+
+
+        <div class="container-fluid col-md-10 pb-4">
+            <main class="main w-100 p-md-4 p-2">
+                <h3 class="fw-semibold text-white text-md-end text-center mt-2 mb-3">برآورد فروش</h3>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-white">کارکرد و آمار</h5>
+                            <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#addIncome">
+                                افزودن کارکرد
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                        <div class="table-responsive mt-2">
+                            <table class="table table-hover overflow-hidden table-bordered rounded-1">
+                                <caption class="bg-white text-end fw-semibold px-4">
+                                    <div class="d-flex align-items-center gap-4">
+                                        <span>
+                                            <span>مالیات : </span>
+                                            <span class="me-1">
+                                                %{{ profile.tax }}
+                                            </span>
+                                        </span>
+                                        <span>
+                                            <span>کاست غذا : </span>
+                                            <span class="me-1">
+                                                %{{ profile.food_cost }}
+                                            </span>
+                                        </span>
+                                        <span>
+                                            <span>هزینه های جاری: </span>
+                                            <span class="me-1 price-el">
+                                                {{ profile.get_ongoing_costs_total_price }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </caption>
+                                <thead class="text-center">
+                                <tr class="bg-head">
+                                    <th>
+                                        <span>تعداد کارکرد درماه(روز)</span>
+                                    </th>
+                                    <th>
+                                        <span>تعداد صندلی</span>
+                                    </th>
+                                    <th>
+                                        <span>میانگین خرید هر نفر</span>
+                                    </th>
+                                    <th>
+                                        <span>میانگین پرشدن صندلی(درصد)</span>
+                                    </th>
+                                    <th>
+                                        <span>برآورد فروش</span>
+                                    </th>
+                                    <th>
+                                        <span>مواد اولیه</span>
+                                    </th>
+                                    <th>
+                                        <span>سود/زیان بدون احتساب مالیات</span>
+                                    </th>
+                                    <th>
+                                        <span>سود/زیان خالص</span>
+                                    </th>
+                                    <th class="print-obj">
+                                        <span>عملیات</span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center table-light tb-ltr">
+                                {% for income_costs in profile.get_income_and_costs %}
+                                    <tr>
+                                        <td>
+                                            <span>{{ income_costs.duration }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ income_costs.number_of_seats }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="price-el">{{ income_costs.avg_purchase }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ income_costs.avg_seat_occupancy }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="price-el">{{ income_costs.get_sales_estimate }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="price-el">{{ income_costs.get_raw_materials_estimate }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="profit-or-loss-bg price-el"
+                                                  data-val="{{ income_costs.get_profit_estimate }}">{{ income_costs.get_profit_estimate }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="profit-or-loss-bg price-el"
+                                                  data-val="{{ income_costs.get_profit_with_tax_estimate }}">{{ income_costs.get_profit_with_tax_estimate }}</span>
+                                        </td>
+                                        <td class="print-obj">
+                                            <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteIncomeCostProfile-{{ income_costs.id }}">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                            <button class="btn btn-outline-success " type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#updateIncomeCostProfile-{{ income_costs.id }}">
+                                                ویرایش
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12 mx-auto">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-white">نتایج کلی</h5>
+                        </div>
+                        <div class="table-responsive mt-2">
+                            <table class="table table-hover overflow-hidden table-bordered rounded-1">
+                                <thead class="text-center">
+                                <tr class="bg-head">
+                                    <th>
+                                        <span>برآورد فروش کل</span>
+                                    </th>
+                                    <th>
+                                        <span>مواد اولیه کل</span>
+                                    </th>
+                                    <th>
+                                        <span>سود/زیان کل</span>
+                                    </th>
+                                    <th>
+                                        <span>سود/زیان خالص کل</span>
+                                    </th>
+                                    <th>
+                                        <span>نقطه سر به سر فروش</span>
+                                    </th>
+                                    <th>
+                                        <span>نقطه سر به سر درصد پر شدن صندلی</span>
+                                    </th>
+                                    <th>
+                                        <span>دوره بازگشت سرمایه(ماه)</span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center table-light tb-ltr">
+
+                                <tr style="vertical-align: middle;">
+                                    <td>
+                                        <span class="price-el profit-or-loss-bg">{{ profile.get_sales_estimate_total }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="price-el profit-or-loss-bg">{{ profile.get_raw_materials_estimate_total }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="price-el profit-or-loss-bg">{{ profile.get_profit_estimate_total }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="price-el profit-or-loss-bg">{{ profile.get_profit_with_tax_estimate_total }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="price-el profit-or-loss-bg">{{ profile.get_p2p_sales }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ profile.get_p2p_fill_seats|default:'-' }}</span>
+                                    </td>
+                                    <td>
+                                        {% if profile.get_return_of_investment > 0 %}
+                                            <span>{{ profile.get_return_of_investment|default:'-' }}</span>
+                                        {% elif profile.get_return_of_investment < 0 %}
+                                            <span class="bg-loss">ضرر مطلق(نامشخص)</span>
+                                        {% else %}
+                                            <span class="bg-profit">
+                                                تبریک شما به اصل سرمایه خود رسیده اید
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+
+        <div class="modal fade" tabindex="-1" id="addIncome"
+             aria-labelledby="addFixedCost" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" action="{% url 'restaurant:add_income_profile' %}"
+                      style="background-color: #2d2c2c;"
+                      class="modal-content text-white border-white border-1 rounded-3">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-semibold h4">
+                            افزودن کارکرد دوره ای
+                        </h5>
+                        <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                              style="-webkit-text-stroke: 0.5pt;"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column form-group">
+                            <label class="form-label" style="font-size: 14px;">
+                                تعداد کارکرد در ماه(بر اساس روز)
+                                <input type="number" name="duration" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                تعداد صندلی
+                                <input type="number" name="number_of_seats" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                میانگین پر شدن صندلی(درصد)
+                                <input type="number" name="avg_seat_occupancy" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                میانگین خرید هر نفر
+                                <input type="number" name="avg_purchase" id="avg_purchase"
+                                       class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                                <p class="small text-start m-0 mt-2"></p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% for income_costs in profile.get_income_and_costs %}
+            <div class="modal fade" tabindex="-1" id="updateIncomeCostProfile-{{ income_costs.id }}"
+                 aria-labelledby="updateIncomeCostProfile-{{ income_costs.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" action="{% url 'restaurant:update_income_profile' pk=income_costs.id %}"
+                          style="background-color: #2d2c2c;"
+                          class="modal-content text-white border-white border-1 rounded-3">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-semibold h4">
+                                ویرایش کارکرد
+                            </h5>
+                            <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                                  style="-webkit-text-stroke: 0.5pt;"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column form-group">
+                                <label class="form-label" style="font-size: 14px;">
+                                    تعداد کارکرد در ماه(بر اساس روز)
+                                    <input type="number" name="duration" class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ income_costs.duration }}">
+                                </label>
+                                <label class="form-label" style="font-size: 14px;">
+                                    تعداد صندلی
+                                    <input type="number" name="number_of_seats" class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ income_costs.number_of_seats }}">
+                                </label>
+                                <label class="form-label" style="font-size: 14px;">
+                                    میانگین پر شدن صندلی(درصد)
+                                    <input type="number" name="avg_seat_occupancy" class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ income_costs.avg_seat_occupancy }}">
+                                </label>
+                                <label class="form-label" style="font-size: 14px;">
+                                    میانگین خرید هر نفر
+                                    <input type="number" name="avg_purchase" id="avg_purchase-{{ income_costs.id }}"
+                                           class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ income_costs.avg_purchase }}">
+                                    <p class="small text-start m-0 mt-2"></p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal fade" tabindex="-1" id="deleteIncomeCostProfile-{{ income_costs.id }}"
+                 aria-labelledby="updateIncomeCostProfile-{{ income_costs.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" action="{% url 'restaurant:delete_income_profile' pk=income_costs.id %}"
+                          style="background-color: #2d2c2c;"
+                          class="modal-content text-white border-white border-1 rounded-3">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-semibold h4">
+                                حذف کارکرد
+                            </h5>
+                            <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                                  style="-webkit-text-stroke: 0.5pt;"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column form-group text-danger">
+                                <h5>ایا از حذف کارکرد اطمینان دارید؟ پس از حذف امکان بازگشت وجود نخواهد داشت</h5>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="submit" class="btn btn-danger fw-semibold 0">بله حذف</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    {% endwith %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+
+        document.querySelectorAll('input[name="avg_purchase"]').forEach(function (el) {
+            let input_sel = el.getAttribute('id')
+            setPriceSpreadInput(`#${input_sel}`, `#${input_sel} + p`, document.querySelector(`#${input_sel}`).value)
+        })
+        setPriceSpreadInput('#avg_purchase', '#avg_purchase + p', document.querySelector('#avg_purchase').value)
+
+        document.querySelectorAll('.profit-or-loss-bg').forEach(function (el) {
+            let val = parseInt(el.getAttribute('data-val')) || parseInt(el.getAttribute('price-val'))
+            if (val > 0) {
+                el.classList.add('bg-profit')
+            } else {
+                el.classList.add('bg-loss')
+            }
+        })
+
+    </script>
+    <script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

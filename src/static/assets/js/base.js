@@ -1,3 +1,5 @@
+CURRENCY_SYMBOL = 'تومان'
+
 function redirect(url) {
     window.location.href = url
 }
@@ -153,7 +155,7 @@ overalyRequestUnit.forEach((item, index) => {
 document.querySelectorAll('.price-el').forEach((el) => {
     let p = el.innerText
     el.setAttribute('price-val', p)
-    el.innerHTML = numberWithCommas(p)
+    el.innerHTML = `${numberWithCommas(p)} ${CURRENCY_SYMBOL}`
 })
 
 // full size element
@@ -168,4 +170,26 @@ function togglePageLoading(title) {
     let loading = document.getElementById('page-loading')
     loading.querySelector('.loading-title').innerHTML = title
     loading.classList.toggle('active')
+}
+
+
+function setPriceSpreadInput(input_selector, field_selector, default_val = '0', empty_val = '0') {
+    let field = document.querySelector(field_selector)
+    let input = document.querySelector(input_selector)
+    set_default(field)
+    input.addEventListener('input', function () {
+        if (input.value) {
+            field.innerText = `${numberWithCommas(input.value)} ${CURRENCY_SYMBOL} `
+        } else {
+            set_empty(field)
+        }
+    })
+
+    function set_default(field) {
+        field.innerText = `${numberWithCommas(default_val)} ${CURRENCY_SYMBOL} `
+    }
+
+    function set_empty(field) {
+        field.innerText = `${numberWithCommas(empty_val)} ${CURRENCY_SYMBOL} `
+    }
 }

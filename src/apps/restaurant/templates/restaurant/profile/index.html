@@ -1,0 +1,367 @@
+{% extends 'base_template.html' %}
+{% load templatetags %}
+{% load filters %}
+{% load static %}
+
+
+{% block title %}مدیرمدرن | مدیریت سرمایه و هزینه{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/menu-engineering.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% with user.restaurantprofile as profile %}
+        <!-- Start Sidebar menu -->
+        {% include 'includes/menus/side_menu.html' %}
+        <!-- .End Sidebar menu -->
+
+        {% if profile %}
+            <div class="container-fluid col-md-10 pb-4">
+                <main class="main w-100 p-md-4 p-2">
+                    <h3 class="fw-semibold text-white text-md-end text-center mt-2 mb-3">مدیریت سرمایه و هزینه</h3>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h5 class="text-white">پروفایل و ضریب ها</h5>
+                            <div class="table-responsive mt-2">
+                                <table class="table table-hover overflow-hidden table-bordered rounded-1">
+                                    <thead class="text-center">
+                                    <tr class="bg-head">
+                                        <th>
+                                            <span>سرمایه اولیه</span>
+                                        </th>
+                                        <th>
+                                            <span>هزینه خرید مواد اولیه</span>
+                                        </th>
+                                        <th>
+                                            <span>درصد کاست غذا</span>
+                                        </th>
+                                        <th>
+                                            <span>درصد مالیات از سود</span>
+                                        </th>
+                                        <th class="print-obj">
+                                            <span>عملیات</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-center table-light">
+
+                                    <tr style="vertical-align: middle;">
+                                        <td>
+                                            <span class="price-el">{{ profile.initial_investment }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="price-el">{{ profile.cost_of_raw_materials }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ profile.food_cost }}%</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ profile.tax }}%</span>
+                                        </td>
+                                        <td class="print-obj">
+                                            <button class="btn btn-outline-success" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#updateProfile">ویرایش
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 col-md-6 mx-auto">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-white">هزینه های ثابت</h5>
+                                <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#addFixedCost">
+                                    افزودن هزینه ثابت
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                            <div class="table-responsive mt-2">
+                                <table class="table table-hover overflow-hidden table-bordered rounded-1">
+                                    <caption class="bg-white text-end fw-semibold px-4">
+                                        <div class="d-flex align-items-center gap-4">
+                                            <span>
+                                                <span>جمع هزینه های ثابت بدون هزینه مواد اولیه: </span>
+                                                <span class="me-1 price-el">
+                                                    {{ profile.get_fixed_costs_price }}
+                                                </span>
+                                            </span>
+                                            <span>
+                                                <span>جمع هزینه های ثابت کامل : </span>
+                                                <span class="me-1 price-el">
+                                                    {{ profile.get_fixed_costs_total_price }}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </caption>
+                                    <thead class="text-center">
+                                    <tr class="bg-head">
+                                        <th>#</th>
+                                        <th>عنوان</th>
+                                        <th>
+                                            <span>توضیحات</span>
+                                        </th>
+                                        <th>
+                                            <span>هزینه</span>
+                                        </th>
+                                        <th class="print-obj">
+                                            <span>عملیات</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-center table-light">
+                                    {% for obj in profile.get_fixed_costs %}
+                                        <tr style="vertical-align: middle;">
+                                            <td>
+                                                <span class="fw-semibold">{{ forloop.counter }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ obj.name }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ obj.description|default:'-' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="price-el">{{ obj.price }}</span>
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'restaurant:delete_fixed_cost' pk=obj.id %}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <button class="btn btn-outline-danger">
+                                                        <i class="bi bi-trash3-fill small"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 mx-auto">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-white">هزینه های جاری</h5>
+                                <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#addOngoingCost">
+                                    افزودن هزینه جاری
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                            <div class="table-responsive mt-2">
+                                <table class="table table-hover overflow-hidden table-bordered rounded-1">
+                                    <caption class="bg-white text-end fw-semibold px-4">
+                                        <div class="d-flex align-items-center gap-4">
+                                            <span>
+                                                <span>جمع هزینه ها : </span>
+                                                <span class="me-1 price-el">
+                                                    {{ profile.get_ongoing_costs_total_price }}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </caption>
+                                    <thead class="text-center">
+                                    <tr class="bg-head">
+                                        <th>#</th>
+                                        <th>عنوان</th>
+                                        <th>
+                                            <span>توضیحات</span>
+                                        </th>
+                                        <th>
+                                            <span>هزینه</span>
+                                        </th>
+                                        <th class="print-obj">
+                                            <span>عملیات</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="text-center table-light">
+                                    {% for obj in profile.get_ongoing_costs %}
+                                        <tr style="vertical-align: middle;">
+                                            <td>
+                                                <span class="fw-semibold">{{ forloop.counter }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ obj.name }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ obj.description|default:'-' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="price-el">{{ obj.price }}</span>
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'restaurant:delete_ongoing_cost' pk=obj.id %}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <button class="btn btn-outline-danger">
+                                                        <i class="bi bi-trash3-fill small"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        {% endif %}
+
+        <div {% if not profile %}class="modal fade show" style="display: block"
+             {% else %}class="modal fade"{% endif %} tabindex="-1" id="updateProfile"
+             aria-labelledby="updateProfile" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" action="{% url 'restaurant:add_or_update_profile' %}"
+                      style="background-color: #2d2c2c;"
+                      class="modal-content text-white border-white border-1 rounded-3">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-semibold h4">
+                            {% if profile %}
+                                ویرایش
+                            {% else %}
+                                ایجاد
+                            {% endif %}
+                            پروفایل رستوران</h5>
+                        <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                              style="-webkit-text-stroke: 0.5pt;"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column form-group">
+                            <label class="form-label" style="font-size: 14px;">
+                                سرمایه اولیه
+                                <input type="number" name="initial_investment" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required
+                                       value="{{ profile.initial_investment|default:'' }}">
+                                <p class="small text-start m-0 mt-2"></p>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                هزینه خرید مواد اولیه
+                                <input type="number" name="cost_of_raw_materials" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required
+                                       value="{{ profile.cost_of_raw_materials|default:'' }}">
+                                <p class="small text-start m-0 mt-2"></p>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                درصد کاست غذا
+                                <input type="number" name="food_cost" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required
+                                       value="{{ profile.food_cost|default:'' }}" min="0" max="100">
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                درصد مالیات از سود
+                                <input type="number" name="tax" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required min="0" max="100"
+                                       value="{{ profile.tax|default:'' }}">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal fade" tabindex="-1" id="addFixedCost"
+             aria-labelledby="addFixedCost" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" action="{% url 'restaurant:add_fixed_cost' %}"
+                      style="background-color: #2d2c2c;"
+                      class="modal-content text-white border-white border-1 rounded-3">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-semibold h4">
+                            افزودن هزینه ثابت
+                        </h5>
+                        <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                              style="-webkit-text-stroke: 0.5pt;"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column form-group">
+                            <label class="form-label" style="font-size: 14px;">
+                                نام
+                                <input type="text" name="name" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                توضیحات
+                                <textarea name="description" class="form-control mt-1 form"></textarea>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                هزینه
+                                <input type="number" name="price" id="fixed_cost_price_inp"
+                                       class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                                <p class="small text-start m-0 mt-2"></p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal fade" tabindex="-1" id="addOngoingCost"
+             aria-labelledby="addOngoingCost" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" action="{% url 'restaurant:add_ongoing_cost' %}"
+                      style="background-color: #2d2c2c;"
+                      class="modal-content text-white border-white border-1 rounded-3">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-semibold h4">
+                            افزودن هزینه جاری
+                        </h5>
+                        <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                              style="-webkit-text-stroke: 0.5pt;"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column form-group">
+                            <label class="form-label" style="font-size: 14px;">
+                                نام
+                                <input type="text" name="name" class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                توضیحات
+                                <textarea name="description" class="form-control mt-1 form"></textarea>
+                            </label>
+                            <label class="form-label" style="font-size: 14px;">
+                                هزینه
+                                <input type="number" name="price" id="ongoing_cost_price_inp"
+                                       class="form form-control mt-1"
+                                       style="background-color: #fafafa;" required>
+                                <p class="small text-start m-0 mt-2"></p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endwith %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        setPriceSpreadInput('input[name="initial_investment"]', 'input[name="initial_investment"] + p', document.querySelector('input[name="initial_investment"]').value)
+        setPriceSpreadInput('input[name="cost_of_raw_materials"]', 'input[name="cost_of_raw_materials"] + p', document.querySelector('input[name="cost_of_raw_materials"]').value)
+
+        setPriceSpreadInput('#fixed_cost_price_inp', '#fixed_cost_price_inp + p', document.querySelector('#fixed_cost_price_inp').value)
+        setPriceSpreadInput('#ongoing_cost_price_inp', '#ongoing_cost_price_inp + p', document.querySelector('#ongoing_cost_price_inp').value)
+    </script>
+    <script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}

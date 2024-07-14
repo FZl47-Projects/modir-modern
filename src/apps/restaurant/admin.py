@@ -90,3 +90,6 @@ class RecipeAdmin(admin.ModelAdmin):
     list_filter = ('is_material', 'is_active')
     readonly_fields = ('final_price', 'created_at', 'updated_at')
     inlines = [RecipeMaterialInline]
+
+
+admin.site.register(models.RestaurantProfile)

@@ -2,7 +2,10 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from django import forms
 
-from .models import (RawMaterialCategory, RawMaterial, RecipesCategory, PreparedMaterialCategory, Recipe, RecipeMaterial)
+from .models import (RawMaterialCategory, RawMaterial, RecipesCategory, PreparedMaterialCategory, Recipe,
+                     RecipeMaterial, RestaurantProfile,
+                     FixedCosts, OngoingCosts, IncomeAndCostsProfile
+                     )
 
 
 # AddMaterialCategory form
@@ -126,3 +129,33 @@ class UpdateRecipeForm(forms.ModelForm):
         obj.save()
 
         return obj
+
+
+class RestaurantProfileForm(forms.ModelForm):
+    class Meta:
+        model = RestaurantProfile
+        fields = '__all__'
+
+
+class AddFixedCostForm(forms.ModelForm):
+    class Meta:
+        model = FixedCosts
+        fields = '__all__'
+
+
+class AddOngoingCostForm(forms.ModelForm):
+    class Meta:
+        model = OngoingCosts
+        fields = '__all__'
+
+
+class AddIncomeProfile(forms.ModelForm):
+    class Meta:
+        model = IncomeAndCostsProfile
+        fields = '__all__'
+
+
+class UpdateIncomeProfile(forms.ModelForm):
+    class Meta:
+        model = IncomeAndCostsProfile
+        exclude = ('restaurant_profile',)

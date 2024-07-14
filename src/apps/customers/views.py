@@ -1,6 +1,6 @@
-from django.views.generic import ListView, FormView, DetailView
+from django.views.generic import ListView, FormView, DetailView, TemplateView
+from django.shortcuts import reverse, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import reverse, get_object_or_404
 from django.utils.translation import gettext as _
 from django.contrib import messages
 
@@ -82,20 +82,26 @@ class CustomerSurveysListView(ListView):
 
 
 # Add Counseling view
-class CounselingAddView(LoginRequiredMixin, FormView):
+class CounselingAddView(LoginRequiredMixin, TemplateView):
     template_name = 'customers/counseling/add.html'
-    form_class = forms.CounselingForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['Counseling'] = models.Counseling
         return context
 
-    def get_success_url(self):
+    def get_redirect_url(self):
         referer_url = self.request.META.get('HTTP_REFERER')
         return referer_url
 
-    def form_valid(self, form):
+    def post(self, request):
+        data = self.request.POST.copy()
+        work_shifts = ' | '.join(data.getlist('work_shift', []))
+        data['work_shift'] = work_shifts
+        form = forms.CounselingForm(data, files=self.request.FILES)
+        if not form.is_valid():
+            messages.error(self.request, _('Please enter fields correctly'))
+            return redirect(self.get_redirect_url())
         obj = form.save()
         # create notification for user
         Notification.objects.create(
@@ -110,4 +116,4 @@ class CounselingAddView(LoginRequiredMixin, FormView):
             _('New counseling form submited')
         )
         messages.success(self.request, _('Your counseling form has been successfully submited'))
-        return super().form_valid(form)
+        return redirect(self.get_redirect_url())
