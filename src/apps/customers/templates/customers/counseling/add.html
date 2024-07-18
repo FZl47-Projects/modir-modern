@@ -38,7 +38,7 @@
 
                 <!-- Start ticket messages section -->
                 <div class="d-flex flex-column gap-4 text-white w-100 mt-md-0 mt-2 ticket-detail-main">
-                    {% if user.get_counselings_form %}
+                    {% if not user.get_counselings_form %}
                         <div class="d-block">
                             <span class="fw-semibold h2 d-block text-center">فرم مشاوره</span>
                             <span class="d-block text-center" style="color: #d5d5d5">مدیریت محترم خواهشمند است جهت بهره مندی از خدمات مشاوره بیزنس کوچینگ مجموعه های غذایی، اطلاعات، سوالات عمومی و تخصصی فرم پیش رو را با دقت تکمیل نمایید تا بتوانیم در راستای رشد و موفقیت مجموعه شما قدم مثبتی برداریم.</span>
