@@ -53,9 +53,11 @@ urlpatterns = [
 
     path('profile/add-or-update', profile.AddOrUpdateProfileView.as_view(), name='add_or_update_profile'),
     path('profile/fixed-costs/add', profile.AddFixedCostView.as_view(), name='add_fixed_cost'),
+    path('profile/fixed-costs/<int:pk>/update', profile.UpdateFixedCostProfileView.as_view(), name='update_fixed_cost'),
     path('profile/fixed-costs/<int:pk>/delete', profile.DeleteFixedCostView.as_view(), name='delete_fixed_cost'),
 
     path('profile/ongoing-costs/add', profile.AddOngoingCostView.as_view(), name='add_ongoing_cost'),
+    path('profile/ongoing-costs/<int:pk>/update', profile.UpdateOngoingCostView.as_view(), name='update_ongoing_cost'),
     path('profile/ongoing-costs/<int:pk>/delete', profile.DeleteOngoingCostView.as_view(), name='delete_ongoing_cost'),
 
     path('profile/sales-estimate', profile.SalesEstimateView.as_view(), name='profile_sales_estimate'),

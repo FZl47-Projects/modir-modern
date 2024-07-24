@@ -143,10 +143,22 @@ class AddFixedCostForm(forms.ModelForm):
         fields = '__all__'
 
 
+class UpdateFixedCostProfile(forms.ModelForm):
+    class Meta:
+        model = FixedCosts
+        exclude = ('restaurant_profile',)
+
+
 class AddOngoingCostForm(forms.ModelForm):
     class Meta:
         model = OngoingCosts
         fields = '__all__'
+
+
+class UpdateOngoingCostForm(forms.ModelForm):
+    class Meta:
+        model = OngoingCosts
+        exclude = ('restaurant_profile',)
 
 
 class AddIncomeProfile(forms.ModelForm):

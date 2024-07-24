@@ -130,13 +130,16 @@
                                                 <span class="price-el">{{ obj.price }}</span>
                                             </td>
                                             <td>
-                                                <form action="{% url 'restaurant:delete_fixed_cost' pk=obj.id %}"
-                                                      method="post">
-                                                    {% csrf_token %}
-                                                    <button class="btn btn-outline-danger">
-                                                        <i class="bi bi-trash3-fill small"></i>
-                                                    </button>
-                                                </form>
+                                                <button class="btn btn-outline-success" type="button"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#updateFixedCostProfile-{{ obj.id }}">
+                                                    ویرایش
+                                                </button>
+                                                <button class="btn btn-outline-danger" type="button"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteFixedCostProfile-{{ obj.id }}">
+                                                    حذف
+                                                </button>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -196,13 +199,16 @@
                                                 <span class="price-el">{{ obj.price }}</span>
                                             </td>
                                             <td>
-                                                <form action="{% url 'restaurant:delete_ongoing_cost' pk=obj.id %}"
-                                                      method="post">
-                                                    {% csrf_token %}
-                                                    <button class="btn btn-outline-danger">
-                                                        <i class="bi bi-trash3-fill small"></i>
-                                                    </button>
-                                                </form>
+                                                <button class="btn btn-outline-success" type="button"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#updateOngoingCostProfile-{{ obj.id }}">
+                                                    ویرایش
+                                                </button>
+                                                <button class="btn btn-outline-danger" type="button"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteOngoingCostProfile-{{ obj.id }}">
+                                                    حذف
+                                                </button>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -352,6 +358,148 @@
                 </form>
             </div>
         </div>
+        {% for fixed_cost in profile.get_fixed_costs %}
+            <div class="modal fade" tabindex="-1" id="updateFixedCostProfile-{{ fixed_cost.id }}"
+                 aria-labelledby="updateFixedCostProfile-{{ fixed_cost.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" action="{% url 'restaurant:update_fixed_cost' pk=fixed_cost.id %}"
+                          style="background-color: #2d2c2c;"
+                          class="modal-content text-white border-white border-1 rounded-3">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-semibold h4">
+                                ویرایش هزینه ثابت
+                            </h5>
+                            <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                                  style="-webkit-text-stroke: 0.5pt;"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column form-group">
+                                <label class="form-label" style="font-size: 14px;">
+                                    عنوان
+                                    <input type="text" name="name" class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ fixed_cost.name }}">
+                                </label>
+                                <label class="form-label" style="font-size: 14px;">
+                                    توضیحات
+                                    <textarea name="description"
+                                              class="form form-control mt-1">{{ fixed_cost.description|default:'' }}</textarea>
+                                </label>
+                                <label class="form-label" style="font-size: 14px;">
+                                    هزینه
+                                    <input type="number" name="price"
+                                           id="inp-update-fixed_cost-price-{{ fixed_cost.id }}"
+                                           class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ fixed_cost.price }}">
+                                    <p class="small text-start m-0 mt-2"></p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal fade" tabindex="-1" id="deleteFixedCostProfile-{{ fixed_cost.id }}"
+                 aria-labelledby="deleteFixedCostProfile-{{ fixed_cost.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" action="{% url 'restaurant:delete_fixed_cost' pk=fixed_cost.id %}"
+                          style="background-color: #2d2c2c;"
+                          class="modal-content text-white border-white border-1 rounded-3">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-semibold h4">
+                                حذف هزینه ثابت
+                            </h5>
+                            <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                                  style="-webkit-text-stroke: 0.5pt;"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column form-group text-danger">
+                                <h5>ایا از حذف هزینه ثابت اطمینان دارید؟ پس از حذف امکان بازگشت وجود نخواهد داشت</h5>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="submit" class="btn btn-danger fw-semibold 0">بله حذف</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        {% for ongoing_cost in profile.get_ongoing_costs %}
+            <div class="modal fade" tabindex="-1" id="updateOngoingCostProfile-{{ ongoing_cost.id }}"
+                 aria-labelledby="updateOngoingCostProfile-{{ ongoing_cost.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" action="{% url 'restaurant:update_ongoing_cost' pk=ongoing_cost.id %}"
+                          style="background-color: #2d2c2c;"
+                          class="modal-content text-white border-white border-1 rounded-3">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-semibold h4">
+                                ویرایش هزینه جاری
+                            </h5>
+                            <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                                  style="-webkit-text-stroke: 0.5pt;"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column form-group">
+                                <label class="form-label" style="font-size: 14px;">
+                                    عنوان
+                                    <input type="text" name="name" class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ ongoing_cost.name }}">
+                                </label>
+                                <label class="form-label" style="font-size: 14px;">
+                                    توضیحات
+                                    <textarea name="description"
+                                              class="form form-control mt-1">{{ ongoing_cost.description|default:'' }}</textarea>
+                                </label>
+                                <label class="form-label" style="font-size: 14px;">
+                                    هزینه
+                                    <input type="number" name="price"
+                                           id="inp-update-fixed_cost-price-{{ ongoing_cost.id }}"
+                                           class="form form-control mt-1"
+                                           style="background-color: #fafafa;" required
+                                           value="{{ ongoing_cost.price }}">
+                                    <p class="small text-start m-0 mt-2"></p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="submit" class="btn btn-success fw-semibold w-100">ذخیره</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal fade" tabindex="-1" id="deleteOngoingCostProfile-{{ ongoing_cost.id }}"
+                 aria-labelledby="deleteOngoingCostProfile-{{ ongoing_cost.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" action="{% url 'restaurant:delete_ongoing_cost' pk=ongoing_cost.id %}"
+                          style="background-color: #2d2c2c;"
+                          class="modal-content text-white border-white border-1 rounded-3">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-semibold h4">
+                                حذف هزینه جاری
+                            </h5>
+                            <span role="button" class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"
+                                  style="-webkit-text-stroke: 0.5pt;"></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column form-group text-danger">
+                                <h5>ایا از حذف هزینه جاری اطمینان دارید؟ پس از حذف امکان بازگشت وجود نخواهد داشت</h5>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0">
+                            <button type="submit" class="btn btn-danger fw-semibold 0">بله حذف</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
     {% endwith %}
 {% endblock %}
 
@@ -362,6 +510,11 @@
 
         setPriceSpreadInput('#fixed_cost_price_inp', '#fixed_cost_price_inp + p', document.querySelector('#fixed_cost_price_inp').value)
         setPriceSpreadInput('#ongoing_cost_price_inp', '#ongoing_cost_price_inp + p', document.querySelector('#ongoing_cost_price_inp').value)
+
+        document.querySelectorAll('input[name="price"]').forEach(function (el) {
+            let input_sel = el.getAttribute('id')
+            setPriceSpreadInput(`#${input_sel}`, `#${input_sel} + p`, document.querySelector(`#${input_sel}`).value)
+        })
     </script>
     <script src="{% static 'js/menu.js' %}"></script>
 {% endblock %}

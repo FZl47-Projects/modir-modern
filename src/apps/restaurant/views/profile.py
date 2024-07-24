@@ -53,6 +53,23 @@ class AddFixedCostView(SubscriptionRequiredMixin, View):
         return redirect(self.get_redirect_url())
 
 
+class UpdateFixedCostProfileView(SubscriptionRequiredMixin, View):
+
+    def get_redirect_url(self):
+        return self.request.META.get('HTTP_REFERER')
+
+    def post(self, request, pk):
+        data = request.POST.copy()
+        obj = get_object_or_404(models.FixedCosts, id=pk, restaurant_profile__user=request.user)
+        f = forms.UpdateFixedCostProfile(data, files=request.FILES, instance=obj)
+        if not f.is_valid():
+            messages.error(request, _('Please enter fields correctly'))
+            return redirect(self.get_redirect_url())
+        f.save()
+        messages.success(request, _('Operation completed successfully'))
+        return redirect(self.get_redirect_url())
+
+
 class DeleteFixedCostView(SubscriptionRequiredMixin, View):
 
     def get_redirect_url(self):
@@ -75,6 +92,23 @@ class AddOngoingCostView(SubscriptionRequiredMixin, View):
         # additional values
         data['restaurant_profile'] = request.user.get_profile()
         f = forms.AddOngoingCostForm(data, files=request.FILES)
+        if not f.is_valid():
+            messages.error(request, _('Please enter fields correctly'))
+            return redirect(self.get_redirect_url())
+        f.save()
+        messages.success(request, _('Operation completed successfully'))
+        return redirect(self.get_redirect_url())
+
+
+class UpdateOngoingCostView(SubscriptionRequiredMixin, View):
+
+    def get_redirect_url(self):
+        return self.request.META.get('HTTP_REFERER')
+
+    def post(self, request, pk):
+        data = request.POST.copy()
+        obj = get_object_or_404(models.OngoingCosts, id=pk, restaurant_profile__user=request.user)
+        f = forms.UpdateOngoingCostForm(data, files=request.FILES, instance=obj)
         if not f.is_valid():
             messages.error(request, _('Please enter fields correctly'))
             return redirect(self.get_redirect_url())
