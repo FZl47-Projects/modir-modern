@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-14 18:10+0330\n"
+"POT-Creation-Date: 2024-07-29 18:14+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,45 +76,50 @@ msgstr "مرد"
 msgid "Female"
 msgstr "زن"
 
-#: .\apps\account\forms.py:16 .\apps\account\models.py:42
+#: .\apps\account\forms.py:17 .\apps\account\models.py:42
 msgid "Phone number"
 msgstr "شماره تلفن"
 
-#: .\apps\account\forms.py:17
+#: .\apps\account\forms.py:18
 msgid "Password"
 msgstr "گذرواژه"
 
-#: .\apps\account\forms.py:18
+#: .\apps\account\forms.py:19
 msgid "Password repeat"
 msgstr "تکرار گذرواژه"
 
-#: .\apps\account\forms.py:30 .\apps\account\forms.py:67
-#: .\apps\account\forms.py:102
+#: .\apps\account\forms.py:31 .\apps\account\forms.py:118
 msgid "Enter a valid phone number"
 msgstr "یک شماره تلفن معتبر وارد کنید"
 
-#: .\apps\account\forms.py:40 .\apps\account\forms.py:122
+#: .\apps\account\forms.py:41 .\apps\account\forms.py:138
 msgid "Passwords are not match."
 msgstr "گذروازه یکسان نیست."
 
-#: .\apps\account\forms.py:56
+#: .\apps\account\forms.py:57
 msgid "09__"
 msgstr "09__"
 
-#: .\apps\account\forms.py:72
+#: .\apps\account\forms.py:86
+#, fuzzy
+#| msgid "Enter a valid value."
+msgid "Enter a valid username"
+msgstr "یک مقدار معتبر وارد کنید."
+
+#: .\apps\account\forms.py:88
 msgid "Username or password is not correct"
 msgstr "نام کاربری یا رمزعبور نادرست است"
 
-#: .\apps\account\forms.py:87 .\apps\account\views.py:85
+#: .\apps\account\forms.py:103 .\apps\account\views.py:85
 #: .\apps\account\views.py:199
 msgid "There is an issue! please try again"
 msgstr "خطایی رخ داده است! لطفا مجدد تلاش کنید"
 
-#: .\apps\account\forms.py:90
+#: .\apps\account\forms.py:106
 msgid "Entered code is not correct"
 msgstr "کد وارد شده صحیح نیست."
 
-#: .\apps\account\forms.py:106
+#: .\apps\account\forms.py:122
 msgid "No user found with this phone number"
 msgstr "کاربری با این شماره موبایل یافت نشد"
 
@@ -550,7 +555,6 @@ msgstr "رستوران غیر ایرانی"
 msgid "Coffee Shop"
 msgstr "کافی شاپ"
 
-
 #: .\apps\customers\enums.py:10
 msgid "Cafe Restaurant"
 msgstr "کافه رستوران"
@@ -667,7 +671,6 @@ msgstr "رسپی ها نوشته شده اند"
 msgid "Has Instructions Written"
 msgstr "دستور عمل ها نوشته شده اند"
 
-
 #: .\apps\customers\models.py:65
 msgid "Counseling"
 msgstr "مشاوره"
@@ -681,9 +684,10 @@ msgid "Your rate has been successfully registered"
 msgstr "نظر شما با موفقیت ثبت گردید"
 
 #: .\apps\customers\views.py:103 .\apps\restaurant\views\profile.py:31
-#: .\apps\restaurant\views\profile.py:49 .\apps\restaurant\views\profile.py:79
-#: .\apps\restaurant\views\profile.py:121
-#: .\apps\restaurant\views\profile.py:138
+#: .\apps\restaurant\views\profile.py:49 .\apps\restaurant\views\profile.py:66
+#: .\apps\restaurant\views\profile.py:96 .\apps\restaurant\views\profile.py:113
+#: .\apps\restaurant\views\profile.py:155
+#: .\apps\restaurant\views\profile.py:172
 msgid "Please enter fields correctly"
 msgstr "لطفا فیلد هارا به درستی پر نمایید"
 
@@ -1149,10 +1153,12 @@ msgid "Material updated successfully"
 msgstr "مواد با موفقیت افزوده شدند"
 
 #: .\apps\restaurant\views\profile.py:34 .\apps\restaurant\views\profile.py:52
-#: .\apps\restaurant\views\profile.py:64 .\apps\restaurant\views\profile.py:82
-#: .\apps\restaurant\views\profile.py:94 .\apps\restaurant\views\profile.py:124
-#: .\apps\restaurant\views\profile.py:141
-#: .\apps\restaurant\views\profile.py:153
+#: .\apps\restaurant\views\profile.py:69 .\apps\restaurant\views\profile.py:81
+#: .\apps\restaurant\views\profile.py:99 .\apps\restaurant\views\profile.py:116
+#: .\apps\restaurant\views\profile.py:128
+#: .\apps\restaurant\views\profile.py:158
+#: .\apps\restaurant\views\profile.py:175
+#: .\apps\restaurant\views\profile.py:187
 #, fuzzy
 #| msgid "Changes committed successfully"
 msgid "Operation completed successfully"
@@ -1315,9 +1321,6 @@ msgstr "جنگو ادمین"
 
 #~ msgid "Messages"
 #~ msgstr "پیام‌ها"
-
-#~ msgid "Enter a valid value."
-#~ msgstr "یک مقدار معتبر وارد کنید."
 
 #~ msgid "Enter a valid URL."
 #~ msgstr "یک آدرس معتبر وارد کنید."

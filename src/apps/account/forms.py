@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.utils.translation import gettext as _
 from django.contrib.auth import authenticate
 from django import forms
@@ -53,7 +54,7 @@ class UserCreationForm(forms.ModelForm):
 
 # Login form
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=11, required=True, widget=forms.TextInput(attrs={'placeholder': _('09__')}))
+    username = forms.CharField(max_length=64, required=True, widget=forms.TextInput(attrs={'placeholder': _('09__')}))
     password = forms.CharField(max_length=128, required=True, widget=forms.PasswordInput)
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 
@@ -62,12 +63,27 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         username = digits.convert_to_en(username)
 
-        # Check username format (username is phone number here)
-        if not check_phone_number(username):
-            raise ValidationError(_('Enter a valid phone number'), code='BAD-USERNAME')
-
-        # Authenticate user and return it
-        user = authenticate(username=username, password=password)
+        # Check username format (username is phone number or email)
+        user = None
+        username_is_email = False
+        try:
+            validate_email(username)
+            username_is_email = True
+        except ValidationError:
+            pass
+        if username_is_email:
+            # Authenticate user with email and return it
+            try:
+                user = User.objects.get(email=username)
+                if not user.check_password(password):
+                    user = None
+            except User.DoesNotExist:
+                pass
+        elif check_phone_number(username):
+            # Authenticate user and return it
+            user = authenticate(username=username, password=password)
+        else:
+            raise ValidationError(_('Enter a valid username'), code='BAD-USERNAME')
         if not user:
             raise ValidationError(_('Username or password is not correct'), code='USER-NOT-FOUND')
 
