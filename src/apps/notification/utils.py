@@ -3,7 +3,7 @@ from .models import Notification
 
 
 def create_notify_for_admins(type, title):
-    admins = User.objects.filter(accesses__title__in=['admin'])
+    admins = User.objects.filter(is_admin=True)
     for admin in admins:
         Notification.objects.create(
             type=type,
