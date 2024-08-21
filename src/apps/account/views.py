@@ -8,6 +8,7 @@ from django.contrib import messages
 
 from apps.core.utils import toast_form_errors, validate_form
 from apps.notification.models import Notification
+from apps.notification.utils import create_notify_for_admins
 from .mixinx import LogoutRequiredMixin
 from .models import User
 from . import forms
@@ -60,7 +61,7 @@ class RegisterView(LogoutRequiredMixin, FormView):
         # Create register token and save it in sessions
         token = user.generate_token()
         self.request.session['secret_token'] = token
-
+        create_notify_for_admins('NEW_USER_ADMIN', _('A new user has been registered'))
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -126,7 +127,7 @@ class VerifyPhoneNumberView(LogoutRequiredMixin, FormView):
             del self.request.session['verify_code']
 
         messages.success(self.request, _('Register done successful'))
-        return redirect('/')
+        return redirect('public:welcome')
 
     def form_invalid(self, form):
         toast_form_errors(self.request, form)
