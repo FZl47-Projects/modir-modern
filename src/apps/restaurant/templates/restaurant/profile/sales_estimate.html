@@ -180,9 +180,6 @@
                                         <span>نقطه سر به سر فروش</span>
                                     </th>
                                     <th>
-                                        <span>نقطه سر به سر درصد پر شدن صندلی</span>
-                                    </th>
-                                    <th>
                                         <span>دوره بازگشت سرمایه(ماه)</span>
                                     </th>
                                 </tr>
@@ -204,9 +201,6 @@
                                     </td>
                                     <td>
                                         <span class="price-el profit-or-loss-bg">{{ profile.get_p2p_sales }}</span>
-                                    </td>
-                                    <td>
-                                        <span>{{ profile.get_p2p_fill_seats|default:'-' }}</span>
                                     </td>
                                     <td>
                                         {% if profile.get_return_of_investment > 0 %}
