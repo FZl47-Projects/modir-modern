@@ -8,6 +8,7 @@ class ActivityFieldsTypeEnum(TextChoices):
     NON_IRANIAN_RESTAURANT = 'non_iranian_restaurant', _('Non Iranian restaurant')
     COFFEE_SHOP = 'coffee_shop', _('Coffee Shop')
     CAFE_RESTAURANT = 'cafe_restaurant', _('Cafe Restaurant')
+    OTHER = 'other', _('Other')
 
 
 class WorkShiftsTypeEnum(TextChoices):
@@ -19,4 +20,3 @@ class WorkShiftsTypeEnum(TextChoices):
 class YesOrNoTypeEnum(TextChoices):
     YES = 'yes ', _('Yes')
     NO = 'no ', _('No')
-
