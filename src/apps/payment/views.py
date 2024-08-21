@@ -32,6 +32,8 @@ class CreateBankGatewayView(LoginRequiredMixin, View):
             bank.set_mobile_number(user_mobile_number)
 
             bank_record = bank.ready()
+            bank_record.extra_information = "user: `%s`" % user_mobile_number
+            bank_record.save()
 
             context = bank.get_gateway()
             return render(request, 'payment/redirect_to_bank.html', context=context)
