@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-29 18:14+0330\n"
+"POT-Creation-Date: 2024-08-21 06:49+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,8 +110,8 @@ msgstr "یک مقدار معتبر وارد کنید."
 msgid "Username or password is not correct"
 msgstr "نام کاربری یا رمزعبور نادرست است"
 
-#: .\apps\account\forms.py:103 .\apps\account\views.py:85
-#: .\apps\account\views.py:199
+#: .\apps\account\forms.py:103 .\apps\account\views.py:86
+#: .\apps\account\views.py:200
 msgid "There is an issue! please try again"
 msgstr "خطایی رخ داده است! لطفا مجدد تلاش کنید"
 
@@ -178,6 +178,10 @@ msgstr "فعال"
 msgid "Verify"
 msgstr "تایید شده"
 
+#: .\apps\account\models.py:50
+msgid "Is used free subs"
+msgstr "از اشتراک رایگان استفاده شده است ؟"
+
 #: .\apps\account\models.py:53
 msgid "Secret token"
 msgstr "توکن"
@@ -231,35 +235,41 @@ msgstr "پروفایل کاربران"
 msgid "Entered value must be number"
 msgstr "مقدار وارد شده باید عدد باشد"
 
-#: .\apps\account\views.py:43
+#: .\apps\account\views.py:44
 msgid "Login successful"
 msgstr "ورود موفق"
 
-#: .\apps\account\views.py:90
+#: .\apps\account\views.py:64
+#, fuzzy
+#| msgid "Your rate has been successfully registered"
+msgid "A new user has been registered"
+msgstr "نظر شما با موفقیت ثبت گردید"
+
+#: .\apps\account\views.py:91
 msgid "Phone number verification code"
 msgstr "کد تایید شماره موبایل"
 
-#: .\apps\account\views.py:96
+#: .\apps\account\views.py:97
 msgid "Code sent to you"
 msgstr "کد تایید برای شما ارسال شد"
 
-#: .\apps\account\views.py:128
+#: .\apps\account\views.py:129
 msgid "Register done successful"
 msgstr "ثبت نام با موفقیت انجام شد"
 
-#: .\apps\account\views.py:207
+#: .\apps\account\views.py:208
 msgid "Password successfully reset"
 msgstr "گذرواژه با موفقیت تغییر کرد"
 
-#: .\apps\account\views.py:224
+#: .\apps\account\views.py:225
 msgid "Profile updated successfully"
 msgstr "پروفایل با موفقیت بروزرسانی شد"
 
-#: .\apps\account\views.py:235
+#: .\apps\account\views.py:236
 msgid "Password is not correct"
 msgstr "رمزعبور صحیح نمی‌باشد"
 
-#: .\apps\account\views.py:242
+#: .\apps\account\views.py:243
 msgid "Password changed successfully"
 msgstr "گذرواژه با موفقیت تغییر کرد"
 
@@ -559,23 +569,27 @@ msgstr "کافی شاپ"
 msgid "Cafe Restaurant"
 msgstr "کافه رستوران"
 
-#: .\apps\customers\enums.py:14
+#: .\apps\customers\enums.py:11
+msgid "Other"
+msgstr "سایر"
+
+#: .\apps\customers\enums.py:15
 msgid "Morning"
 msgstr "صبح"
 
-#: .\apps\customers\enums.py:15
+#: .\apps\customers\enums.py:16
 msgid "Noon"
 msgstr "ظهر"
 
-#: .\apps\customers\enums.py:16
+#: .\apps\customers\enums.py:17
 msgid "Night"
 msgstr "شب"
 
-#: .\apps\customers\enums.py:20
+#: .\apps\customers\enums.py:21
 msgid "Yes"
 msgstr "بله"
 
-#: .\apps\customers\enums.py:21
+#: .\apps\customers\enums.py:22
 msgid "No"
 msgstr "نه"
 
@@ -783,7 +797,7 @@ msgstr "آیتم سفارش"
 msgid "Order items"
 msgstr "آیتم‌های سفارش"
 
-#: .\apps\payment\views.py:22 .\apps\payment\views.py:40
+#: .\apps\payment\views.py:22 .\apps\payment\views.py:42
 msgid "There was a problem connecting to the bank gateway. Please try again"
 msgstr "مشکلی در اتصال به درگاه بانک رخ داد. لطفا دوباره تلاش کنید"
 
