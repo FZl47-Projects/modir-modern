@@ -24,6 +24,21 @@
         .form-check {
             border-bottom: 1px solid #eee;
         }
+
+        .field-required {
+            color: #ff3030;
+            font-size: 17px;
+        }
+
+        .btn-link-warning{
+            background: #e1b000;
+            box-shadow: 0 10px 5px rgba(70, 62, 15, 0.5);
+            padding: 11px;
+            text-align: center;
+            width: 140px;
+            border-radius: 12px;
+            font-size: 115%;
+        }
     </style>
 {% endblock %}
 
@@ -40,8 +55,11 @@
                 <div class="d-flex flex-column gap-4 text-white w-100 mt-md-0 mt-2 ticket-detail-main">
                     {% if not user.get_counselings_form %}
                         <div class="d-block">
-                            <span class="fw-semibold h2 d-block text-center">فرم مشاوره</span>
-                            <span class="d-block text-center" style="color: #d5d5d5">مدیریت محترم خواهشمند است جهت بهره مندی از خدمات مشاوره بیزنس کوچینگ مجموعه های غذایی، اطلاعات، سوالات عمومی و تخصصی فرم پیش رو را با دقت تکمیل نمایید تا بتوانیم در راستای رشد و موفقیت مجموعه شما قدم مثبتی برداریم.</span>
+                            <div class="d-flex justify-content-between align-items-center col-12">
+                                <span class="fw-semibold h1 d-block text-center">فرم مشاوره</span>
+                                <a href="{% url 'public:index' %}?app_course" class="btn-link-warning">اموزش اپ</a>
+                            </div>
+                            <span class="d-block text-center h5 mt-4" style="color: #d5d5d5">مدیریت محترم خواهشمند است جهت بهره مندی از خدمات مشاوره بیزنس کوچینگ مجموعه های غذایی، اطلاعات، سوالات عمومی و تخصصی فرم پیش رو را با دقت تکمیل نمایید تا بتوانیم در راستای رشد و موفقیت مجموعه شما قدم مثبتی برداریم.</span>
                         </div>
                         <form method="POST" enctype="multipart/form-data"
                               class=" text-white col-12 text-center">
@@ -49,8 +67,10 @@
                             {% csrf_token %}
                             <div class="row col-12 mx-auto">
                                 <label class="form-label col-12 col-md-6">
-                                    <span>زمینه فعالیت</span>
-                                    <select name="field_of_activity" class="form-select mt-1">
+                                    <span>زمینه فعالیت
+                                        <span class="field-required">*</span>
+                                    </span>
+                                    <select name="field_of_activity" class="form-select mt-1" required>
                                         {% for FIELD in Counseling.FIELDS.choices %}
                                             <option value="{{ FIELD.0 }}">{{ FIELD.1|translate }}</option>
                                         {% endfor %}
@@ -59,6 +79,7 @@
                                 <label class="form-label col-12 col-md-6">
                             <span class="me-1">میزان سابقه فعالیت
                                 (ماه)
+                                              <span class="field-required">*</span>
                             </span>
                                     <input type="text" name="work_experience" class="form-control mt-1" required
                                            placeholder="20 ماه">
@@ -67,12 +88,14 @@
                             <div class="row col-12 mx-auto">
                                 <label class="form-label col-12 col-md-6">
                             <span class="me-1">تعداد پرسنل مجموعه در هر شیفت کاری
+                                              <span class="field-required">*</span>
                             </span>
                                     <input type="number" name="number_of_staff" class="form-control mt-1" required
                                            placeholder="10">
                                 </label>
                                 <label class="form-label col-12 col-md-6">
                             <span class="me-1">ظرفیت پذیرایی از میهمانان در مجموعه(نفر)
+                                              <span class="field-required">*</span>
                             </span>
                                     <input type="number" name="capacity" class="form-control mt-1" required
                                            placeholder="10">
@@ -80,30 +103,32 @@
                             </div>
                             <div class="row col-12 mx-auto">
                                 <label class="form-label col-12 col-md-6">
+                            <span class="me-1">دغدغه اصلی شما در کسب و کارتون چیست ؟
+                                              <span class="field-required">*</span>
+                            </span>
+                                    <textarea name="business_concerns" class="form-control" required
+                                              placeholder="اینجا بنویسید"></textarea>
+                                </label>
+                                <label class="form-label col-12 col-md-6">
                             <span class="me-1">پرسنل شما تاکنون چه آموزش هایی دیده اند و توسط چه اساتیدی ؟
                             </span>
                                     <textarea name="personnel_training" class="form-control"
                                               placeholder="اینجا بنویسید"></textarea>
                                 </label>
-                                <label class="form-label col-12 col-md-6">
-                            <span class="me-1">دغدغه اصلی شما در کسب و کارتون چیست ؟
-                            </span>
-                                    <textarea name="business_concerns" class="form-control"
-                                              placeholder="اینجا بنویسید"></textarea>
-                                </label>
+
                             </div>
                             <div class="row col-12 mx-auto">
                                 <label class="form-label col-12 col-md-6">
                             <span class="me-1">نام نرم افزار صندوق ؟ حسابداری؟
                             </span>
-                                    <input type="text" name="accounting_software" class="form-control mt-1" required
+                                    <input type="text" name="accounting_software" class="form-control mt-1"
                                            placeholder="اینجا بنویسید">
                                 </label>
                                 <label class="form-label col-12 col-md-6">
                             <span class="me-1">هر چند روز یکبار انبارگردانی انجام میدهید ؟
                             </span>
                                     <input type="text" name="conduct_inventory_reconciliation" class="form-control mt-1"
-                                           required
+
                                            placeholder="اینجا بنویسید">
                                 </label>
                             </div>
