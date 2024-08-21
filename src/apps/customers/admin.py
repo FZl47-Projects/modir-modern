@@ -11,7 +11,6 @@ class CustomerSurveyAdmin(admin.ModelAdmin):
     search_fields = ('phone_number', 'restaurant__title')
 
 
-# Register Counseling admin
 @admin.register(Counseling)
 class CounselingAdmin(admin.ModelAdmin):
     list_display = ('id', 'user')
