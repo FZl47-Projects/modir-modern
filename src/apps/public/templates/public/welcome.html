@@ -134,6 +134,24 @@
             }
         }
 
+        .section-detail-text {
+            font-size: 20px !important;
+            color: #888;
+            display: block;
+            text-align: justify;
+            direction: rtl;
+            width: 80%;
+            line-height: 34px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .btn-link-warning{
+            background: none!important;
+            color: #e1b000!important;
+            border: 1px solid #e1b000!important;
+        }
+
     </style>
 </head>
 <body style="height: 100%;">
@@ -148,7 +166,10 @@
                 <div class="title p-2 ">
                     <span>قیمت تمام شده هر آیتم منو</span><br>
                     <span>متناسب با قیمت <span class="text-bold">مواد غذایی روز</span></span>
-                    <span></span>
+                    <span class="section-detail-text">
+                        به اپلیکیشن مدیریت منو خوش آمدید
+                        درآوردن دقیق قیمت تمام شده هر آیتم منو بعلاوه قیمت فروش و سود هرآیتم فقط با این اپلیکیشن مقدور میباشد.
+                    </span>
                 </div>
                 <div class="col-12 col-md-8 p-4 next-btn">
                     <button class="w-100" id="btn-one">بعدی</button>
@@ -163,7 +184,9 @@
                 <div class="title p-5 ">
                     <span>رسیدن به یک منوی </span><br>
                     <span>اصولی و <span class="text-bold">سود آور</span></span>
-                    <span></span>
+                    <span class="section-detail-text">
+                        یک منوی اصولی و سود آور یعنی منویی که همه آیتم های آن محبوب و سود بالایی داشته باشند.
+                    </span>
                 </div>
                 <div class="col-12 col-md-8 p-4 next-btn">
                     <button class="w-100" id="btn-two">بعدی</button>
@@ -181,10 +204,17 @@
                     <span class="text-bold">بشناس </span>
                     <br>
                 </div>
-                <div class="col-12 col-md-8 p-4 next-btn">
-                    <a href="{% url 'customers:counseling_add' %}">
-                        <button class="w-100" id="btn-tree">فرم مشاوره</button>
-                    </a>
+                <div class="col-12 col-md-8 ">
+                    <div class="p-3 next-btn">
+                        <a href="{% url 'public:index' %}?app_course">
+                            <button class="w-100 btn-link-warning" id="btn-tree">آموزش اپ</button>
+                        </a>
+                    </div>
+                    <div class="p-3 next-btn">
+                        <a href="{% url 'customers:counseling_add' %}">
+                            <button class="w-100" id="btn-tree">فرم مشاوره و آنالیز رایگان</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
