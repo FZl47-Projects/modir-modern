@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from django.contrib import messages
 
 from apps.restaurant.models import Restaurant, Recipe
+from apps.account.forms import UpdateProfileForm
 from apps.notification.models import Notification
 from apps.notification.utils import create_notify_for_admins
 from .models import CustomerSurvey
@@ -98,6 +99,15 @@ class CounselingAddView(LoginRequiredMixin, TemplateView):
         data = self.request.POST.copy()
         work_shifts = ' | '.join(data.getlist('work_shift', []))
         data['work_shift'] = work_shifts
+
+        user = request.user
+        if not user.is_profile_completed:
+            form_user = UpdateProfileForm(data, instance=user.profile)
+            if not form_user.is_valid():
+                messages.error(self.request, _('Please enter fields correctly'))
+                return redirect(self.get_redirect_url())
+            form_user.save()
+
         form = forms.CounselingForm(data, files=self.request.FILES)
         if not form.is_valid():
             messages.error(self.request, _('Please enter fields correctly'))
