@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-21 06:49+0330\n"
+"POT-Creation-Date: 2024-08-23 17:41+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -552,8 +552,6 @@ msgid "Catering"
 msgstr "کترینگ"
 
 #: .\apps\customers\enums.py:7
-#, fuzzy
-#| msgid "Restaurant"
 msgid "Iranian restaurant"
 msgstr "رستوران ایرانی"
 
@@ -577,12 +575,21 @@ msgstr "سایر"
 msgid "Morning"
 msgstr "صبح"
 
+msgid "morning"
+msgstr "صبح"
+
 #: .\apps\customers\enums.py:16
 msgid "Noon"
 msgstr "ظهر"
 
+msgid "noon"
+msgstr "ظهر"
+
 #: .\apps\customers\enums.py:17
 msgid "Night"
+msgstr "شب"
+
+msgid "night"
 msgstr "شب"
 
 #: .\apps\customers\enums.py:21
@@ -693,29 +700,26 @@ msgstr "مشاوره"
 msgid "Counselings"
 msgstr "مشاوره ها"
 
-#: .\apps\customers\views.py:70
+#: .\apps\customers\views.py:71
 msgid "Your rate has been successfully registered"
 msgstr "نظر شما با موفقیت ثبت گردید"
 
-#: .\apps\customers\views.py:103 .\apps\restaurant\views\profile.py:31
-#: .\apps\restaurant\views\profile.py:49 .\apps\restaurant\views\profile.py:66
-#: .\apps\restaurant\views\profile.py:96 .\apps\restaurant\views\profile.py:113
+#: .\apps\customers\views.py:107 .\apps\customers\views.py:113
+#: .\apps\restaurant\views\profile.py:31 .\apps\restaurant\views\profile.py:49
+#: .\apps\restaurant\views\profile.py:66 .\apps\restaurant\views\profile.py:96
+#: .\apps\restaurant\views\profile.py:113
 #: .\apps\restaurant\views\profile.py:155
 #: .\apps\restaurant\views\profile.py:172
 msgid "Please enter fields correctly"
 msgstr "لطفا فیلد هارا به درستی پر نمایید"
 
-#: .\apps\customers\views.py:109 .\apps\customers\views.py:118
-#, fuzzy
-#| msgid "Your rate has been successfully registered"
-msgid "Your counseling form has been successfully submited"
-msgstr "نظر شما با موفقیت ثبت گردید"
-
-#: .\apps\customers\views.py:116 .\apps\notification\enums.py:9
-#, fuzzy
-#| msgid "Your rate has been successfully registered"
+#: .\apps\customers\views.py:119 .\apps\notification\enums.py:9
 msgid "New counseling form submited"
-msgstr "نظر شما با موفقیت ثبت گردید"
+msgstr "مشاوره جدیدی ثبت شده است"
+
+#: .\apps\customers\views.py:121
+msgid "Your counseling form has been successfully submited"
+msgstr "فرم مشاوره شما با موفقیت ثبت شد"
 
 #: .\apps\notification\apps.py:8 .\apps\notification\models.py:29
 msgid "Notification"
