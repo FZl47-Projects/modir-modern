@@ -122,7 +122,7 @@ class CounselingAddView(LoginRequiredMixin, TemplateView):
         )
         # create notification for admin's
         create_notify_for_admins(
-            Notification.TYPES.NEW_COUNSELING_FORM_SUBMITED,
+            Notification.TYPES.NEW_COUNSELING_FORM_SUBMITED_ADMIN,
             _('New counseling form submited')
         )
         messages.success(self.request, _('Your counseling form has been successfully submited'))
