@@ -113,13 +113,6 @@ class CounselingAddView(LoginRequiredMixin, TemplateView):
             messages.error(self.request, _('Please enter fields correctly'))
             return redirect(self.get_redirect_url())
         obj = form.save()
-        # create notification for user
-        Notification.objects.create(
-            type=Notification.TYPES.NEW_COUNSELING_FORM_SUBMITED,
-            title=_('Your counseling form has been successfully submited'),
-            to_user=obj.user,
-            send_notify=True
-        )
         # create notification for admin's
         create_notify_for_admins(
             Notification.TYPES.NEW_COUNSELING_FORM_SUBMITED_ADMIN,
