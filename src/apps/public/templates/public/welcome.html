@@ -108,7 +108,7 @@
             -o-border-radius: 10px;
         }
 
-        .title span {
+        .title span:not(.section-detail-text) {
             font-size: 42px;
         }
 
@@ -120,22 +120,36 @@
 
         @media only screen and (max-width: 768px) {
             .inner-slide {
-                height: 50%;
+                height: 40%;
             }
 
-            .title span {
+            .title span:not(.section-detail-text) {
                 font-size: 35px;
             }
 
             .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
-                bottom: 48%;
+                bottom: 60%;
                 left: 0;
                 width: 100%;
             }
         }
 
+        @media only screen and (max-width: 490px) {
+            .title{
+                padding: 15px!important;
+            }
+
+            .title span:not(.section-detail-text){
+               font-size: 28px;
+            }
+
+            .section-detail-text{
+                font-size: 17px!important;
+            }
+        }
+
         .section-detail-text {
-            font-size: 20px !important;
+            font-size: 20px;
             color: #888;
             display: block;
             text-align: justify;
@@ -163,7 +177,7 @@
                 <img src="{% static 'images/welcome/2.webp' %}" alt="">
             </div>
             <div class="col-12 col-md-7 inner-slide">
-                <div class="title p-2 ">
+                <div class="title p-4 ">
                     <span>قیمت تمام شده هر آیتم منو</span><br>
                     <span>متناسب با قیمت <span class="text-bold">مواد غذایی روز</span></span>
                     <span class="section-detail-text">
@@ -181,7 +195,7 @@
                 <img src="{% static 'images/welcome/3.webp' %}" alt="">
             </div>
             <div class="col-12 col-md-7 inner-slide">
-                <div class="title p-5 ">
+                <div class="title p-4 ">
                     <span>رسیدن به یک منوی </span><br>
                     <span>اصولی و <span class="text-bold">سود آور</span></span>
                     <span class="section-detail-text">
@@ -198,7 +212,7 @@
                 <img src="{% static 'images/welcome/1.webp' %}" alt="">
             </div>
             <div class="col-12 col-md-7 inner-slide">
-                <div class="title p-5 ">
+                <div class="title p-4 ">
                     <span>رستورانت رو
                     </span>
                     <span class="text-bold">بشناس </span>
