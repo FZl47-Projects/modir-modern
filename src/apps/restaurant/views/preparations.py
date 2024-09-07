@@ -67,11 +67,10 @@ class DeletePreparationCategoryView(SubscriptionRequiredMixin, View):
     """ Delete prepared material categories based on given title. """
 
     def post(self, request):
-        title = request.POST.get('title')
-
+        obj_id = request.POST.get('id')
         try:
             restaurant = Restaurant.objects.get(user=request.user)
-            category = PreparedMaterialCategory.objects.get(restaurant=restaurant, title=title)
+            category = PreparedMaterialCategory.objects.get(restaurant=restaurant, id=obj_id)
             recipes = Recipe.objects.filter(prepared_category=category)
 
             category.delete()

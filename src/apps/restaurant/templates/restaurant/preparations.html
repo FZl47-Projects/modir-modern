@@ -53,8 +53,8 @@
                     </div>
                     {% for obj in restaurant.get_prepared_material_categories %}
                         <div class="swiper-slide">
-                            <a href="?filter={{ obj.title }}" class="btn category-btn
-                                {% if request.GET.filter == obj.title %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                            <a href="?filter={{ obj.title }}&filter_id={{ obj.id }}" class="btn category-btn
+                                {% if request.GET.filter_id == obj.id|stringformat:'i' %}btn-warning{% else %}btn-outline-warning{% endif %}">
                                 {{ obj.title }}
                             </a>
                         </div>
@@ -73,7 +73,7 @@
                     </button>
                     {% if request.GET.filter %}
                         <button type="button" data-bs-toggle="modal" data-bs-target="#deleteCategory"
-                                data-title="{{ request.GET.filter }}"
+                                data-obj-id="{{ request.GET.filter_id }}" data-title="{{ request.GET.filter }}"
                                 class="btn btn-sm btn-danger fw-semibold">
                             حذف دسته بندی
                         </button>

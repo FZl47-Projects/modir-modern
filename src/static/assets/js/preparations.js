@@ -30,9 +30,10 @@ let categorySwiper= new Swiper(".category-slider", {
 $('#deleteCategory').on('show.bs.modal', function (event) {
     let button = $(event.relatedTarget);
     let title = button.data('title');
+    let id = button.data('obj-id');
 
     let modal = $(this);
-    modal.find('.modal-body #categoryId').val(title);
+    modal.find('.modal-body #categoryId').val(id);
     modal.find('.modal-body #categoryTitle').text(`${title}`);
 })
 // ------------------------- Add data to delete category modal -------------------------- //
