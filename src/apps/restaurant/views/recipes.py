@@ -74,11 +74,11 @@ class DeleteRecipeCategoryView(SubscriptionRequiredMixin, View):
     """ Delete recipe categories based on given title. """
 
     def post(self, request):
-        title = request.POST.get('title')
+        obj_id = request.POST.get('id')
 
         try:
             restaurant = Restaurant.objects.get(user=request.user)
-            category = RecipesCategory.objects.get(restaurant=restaurant, title=title)
+            category = RecipesCategory.objects.get(restaurant=restaurant, id=obj_id)
             recipes = Recipe.objects.filter(category=category)
 
             category.delete()
